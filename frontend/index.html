@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="sw" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ElewaSTEM — Mwalimu wa Sayansi na Hesabu</title>
+  <meta name="description" content="Mwalimu wa AI wa STEM kwa watoto barani Afrika. Jifunze sayansi kwa Kiswahili na Kiingereza bila hofu.">
+  <meta name="theme-color" content="#10b981">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b'
+            },
+            accent: {
+              yellow: '#f59e0b',
+              orange: '#f97316',
+              purple: '#8b5cf6'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col h-screen overflow-hidden font-sans antialiased">
+
+  <!-- TOP HEADER -->
+  <header class="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between shadow-sm flex-shrink-0">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-xl shadow-md">
+        🌱
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <h1 class="font-black text-lg text-slate-900 tracking-tight">Elewa<span class="text-brand-600">STEM</span></h1>
+          <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800">AI Tutor</span>
+        </div>
+        <p class="text-xs text-slate-500 font-medium">Usimeze, Elewa! • Learn STEM in Your Language</p>
+      </div>
+    </div>
+
+    <!-- Controls: Network status & Language Switcher -->
+    <div class="flex items-center space-x-2 sm:space-x-3">
+      <!-- Network indicator with simulate toggle -->
+      <button id="networkBadge" onclick="toggleSimulateOffline()" title="Bonyeza kujaribu hali ya bila mtandao (Simulate Offline)" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 transition-all hover:scale-105">
+        <span id="networkDot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="networkText">Mtandaoni</span>
+      </button>
+
+      <!-- Language selector -->
+      <div class="relative">
+        <select id="langSelect" onchange="changeLanguage(this.value)" class="appearance-none bg-slate-100 border border-slate-300 text-slate-800 text-xs font-bold py-1.5 pl-3 pr-7 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer">
+          <option value="swahili">🇰🇪 Kiswahili</option>
+          <option value="english">🇬🇧 English</option>
+          <option value="sheng">💬 Sheng (Mix)</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-600">
+          <svg class="fill-current h-3 w-3" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="bg-white border-b border-slate-200 px-4 py-1.5 flex space-x-2 overflow-x-auto no-scrollbar flex-shrink-0 text-xs font-semibold">
+    <button onclick="switchTab('chat')" id="tabBtn-chat" class="tab-btn active-tab flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-brand-700 bg-brand-50 border border-brand-200">
+      <span>💬</span>
+      <span data-i18n="tab_chat">Mwalimu Chat</span>
+    </button>
+    <button onclick="switchTab('vault')" id="tabBtn-vault" class="tab-btn flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 border border-transparent">
+      <span>📦</span>
+      <span data-i18n="tab_vault">Offline Vault (Masomo)</span>
+      <span class="bg-brand-600 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">4</span>
+    </button>
+    <button onclick="switchTab('mastery')" id="tabBtn-mastery" class="tab-btn flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 border border-transparent">
+      <span>🏆</span>
+      <span data-i18n="tab_mastery">Maendeleo & Beji</span>
+      <span id="badgeCount" class="bg-amber-500 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">1</span>
+    </button>
+  </nav>
+
+  <!-- MAIN CONTAINER (SWAP TABS) -->
+  <main class="flex-1 flex flex-col overflow-hidden relative">
+
+    <!-- 1. CHAT VIEW -->
+    <section id="chatSection" class="flex-1 flex flex-col overflow-hidden">
+      <!-- Chat Messages Scroll Area -->
+      <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 max-w-4xl w-full mx-auto">
+        <!-- Welcome Message -->
+        <div class="flex items-start space-x-3">
+          <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-white text-sm flex-shrink-0 shadow">
+            🌱
+          </div>
+          <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%] text-sm text-slate-800 space-y-2">
+            <p class="font-bold text-brand-700 text-base">Hujambo! Mimi ni ElewaSTEM 🌟</p>
+            <p id="welcomeText">
+              Mimi ni mwalimu wako wa Sayansi, Teknolojia na Hesabu. Unaweza kuniuliza chochote kwa <b>Kiswahili</b>, <b>English</b>, au hata <b>Sheng</b>! Nitakueleza kwa mifano rahisi ya nyumbani na majaribio unayoweza kufanya mwenyewe.
+            </p>
+            <div class="pt-2">
+              <p class="text-xs font-semibold text-slate-500 mb-1.5">💡 Jaribu kubonyeza mada moja hapa chini:</p>
+              <div class="flex flex-wrap gap-1.5">
+                <button onclick="sendQuickPrompt('Eleza usanisinuru (photosynthesis) inavyofanya kazi kwa mimea ya mahindi')" class="quick-chip bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full text-xs hover:bg-emerald-100">🌿 Usanisinuru (Photosynthesis)</button>
+                <button onclick="sendQuickPrompt('Eleza umeme, volteji na saketi kama mfereji wa maji')" class="quick-chip bg-amber-50 text-amber-700 border border-amber-200 px-2.5 py-1 rounded-full text-xs hover:bg-amber-100">⚡ Umeme & Saketi</button>
+                <button onclick="sendQuickPrompt('Kwa nini embe likidondoka huanguka chini? Eleza Grabiti na Msuguano')" class="quick-chip bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-full text-xs hover:bg-blue-100">🍎 Grabiti & Msuguano</button>
+                <button onclick="sendQuickPrompt('Nifundishe Fractions (sehemu za nambari) kwa kugawana chapati')" class="quick-chip bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-full text-xs hover:bg-purple-100">🍕 Fractions za Chapati</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Prompt Chips Bar -->
+      <div id="quickChipsBar" class="px-4 py-1.5 bg-slate-100 border-t border-slate-200 flex items-center justify-between text-xs max-w-4xl w-full mx-auto">
+        <span class="text-slate-500 font-medium hidden sm:inline">⚡ Mada za haraka:</span>
+        <div class="flex space-x-1.5 overflow-x-auto no-scrollbar py-0.5">
+          <button onclick="sendQuickPrompt('Nieleze kwa mifano rahisi sana')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">💡 Rahisisha Zaidi</button>
+          <button onclick="sendQuickPrompt('Nipe jaribio rahisi la kufanya nyumbani')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">🧪 Jaribio la Nyumbani</button>
+          <button onclick="sendQuickPrompt('Nipe swali la mtihani la kujipima')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">🎯 Swali la Jaribio</button>
+        </div>
+      </div>
+
+      <!-- Chat Input Bar -->
+      <div class="p-3 bg-white border-t border-slate-200 flex-shrink-0 shadow-lg">
+        <form id="chatForm" onsubmit="handleChatSubmit(event)" class="max-w-4xl mx-auto flex items-center space-x-2">
+          <!-- Voice Record Button -->
+          <button type="button" id="voiceBtn" onclick="toggleVoiceInput()" title="Ongea kwa sauti (Voice Input)" class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 border border-slate-300 flex items-center justify-center text-lg hover:bg-slate-200 transition-all flex-shrink-0">
+            🎤
+          </button>
+          
+          <!-- Text Input -->
+          <div class="relative flex-1">
+            <input type="text" id="userInput" placeholder="Uliza swali la sayansi au hesabu hapa..." autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-xl py-2.5 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all">
+          </div>
+
+          <!-- Send Button -->
+          <button type="submit" id="sendBtn" class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center hover:bg-brand-700 active:scale-95 transition-all shadow-md flex-shrink-0">
+            <svg class="w-5 h-5 transform rotate-90" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 2. OFFLINE KNOWLEDGE VAULT VIEW -->
+    <section id="vaultSection" class="hidden flex-1 overflow-y-auto p-4 max-w-4xl w-full mx-auto space-y-4">
+      <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center justify-between">
+        <div>
+          <h2 class="font-bold text-emerald-900 text-base">📦 Hifadhi ya Masomo (Offline Knowledge Vault)</h2>
+          <p class="text-xs text-emerald-700">Masomo haya yamehifadhiwa kwenye simu/kifaa chako. Unaweza kuyasoma na kufanya majaribio hata ukiwa **bila mtandao kabisa (0 KB)**.</p>
+        </div>
+        <span class="text-2xl">⚡</span>
+      </div>
+
+      <div id="vaultModulesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Dynamic Offline Cards injected by app.js -->
+      </div>
+    </section>
+
+    <!-- 3. STUDENT MASTERY & BADGES VIEW -->
+    <section id="masterySection" class="hidden flex-1 overflow-y-auto p-4 max-w-4xl w-full mx-auto space-y-4">
+      <!-- Profile Header -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col sm:flex-row items-center sm:items-start space-y-3 sm:space-y-0 sm:space-x-4">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-400 to-orange-500 flex items-center justify-center text-white text-3xl shadow-md">
+          🎓
+        </div>
+        <div class="flex-1 text-center sm:text-left">
+          <div class="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-3">
+            <h2 id="profileName" class="text-lg font-black text-slate-900">Mwanafunzi Hodari</h2>
+            <span class="bg-brand-100 text-brand-800 text-xs font-bold px-2 py-0.5 rounded-full inline-block">Grade 6</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Memory Bank inafuatilia mada unazoelewa vizuri na maeneo ya kuongeza juhudi.</p>
+        </div>
+      </div>
+
+      <!-- Badges Earned -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+        <h3 class="font-bold text-slate-900 text-sm mb-3 flex items-center space-x-2">
+          <span>🏅</span>
+          <span>Beji Ulizoshinda (Badges Earned)</span>
+        </h3>
+        <div id="badgesContainer" class="flex flex-wrap gap-2">
+          <!-- Dynamic badges -->
+        </div>
+      </div>
+
+      <!-- Topic Mastery Progress -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-3">
+        <h3 class="font-bold text-slate-900 text-sm flex items-center space-x-2">
+          <span>📊</span>
+          <span>Kiwango cha Uelewa kwa Mada (Concept Mastery Graph)</span>
+        </h3>
+        <div id="masteryGraphContainer" class="space-y-3">
+          <!-- Dynamic topic bars -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE QUIZ MODAL -->
+  <div id="quizModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 animate-scale-up">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">🎯</span>
+          <h3 class="font-black text-slate-900 text-base" id="quizModalTitle">Swali la Kujipima</h3>
+        </div>
+        <button onclick="closeQuizModal()" class="text-slate-400 hover:text-slate-600 font-bold text-lg p-1">&times;</button>
+      </div>
+
+      <p id="quizQuestion" class="font-bold text-slate-800 text-sm leading-relaxed"></p>
+
+      <div id="quizOptions" class="space-y-2">
+        <!-- Dynamic options -->
+      </div>
+
+      <div id="quizFeedback" class="hidden p-3 rounded-xl text-xs font-semibold leading-relaxed"></div>
+
+      <div class="flex justify-end pt-2">
+        <button onclick="closeQuizModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-2 rounded-xl transition-all">Funga</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+  <script>
+    // Register Service Worker for Offline PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('ElewaSTEM PWA ServiceWorker active:', reg.scope))
+          .catch(err => console.log('ServiceWorker error:', err));
+      });
+    }
+  </script>
+</body>
+</html>
