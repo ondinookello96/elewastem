@@ -1,6 +1,6 @@
 """
-ElewaSTEM (Mwalimu STEM) - Gemini Agent Engine with Hyper-Local Regional Adaptation
-Orchestrates Gemini 2.5/3.5 Flash models with Socratic pedagogy, code-switching, and regional eco-zone context.
+ElewaSTEM (Mwalimu STEM) - Gemini Agent Engine with Hyper-Local Regional Adaptation & Universal Accessibility
+Orchestrates Gemini 2.5/3.5 Flash models with Socratic pedagogy, code-switching, regional eco-zone context, and special needs support.
 """
 
 import os
@@ -26,28 +26,27 @@ Help African students truly understand (Elewa) complex Science, Technology, Engi
 
 KEY PEDAGOGICAL & REGIONAL PRINCIPLES:
 1. Multilingual & Code-Switching Mastery:
-   - Fluidly converse in English, Swahili (Kiswahili Sanifu), or natural youth code-switching (Sheng/conversational mix).
+   - Fluidly converse in English, Swahili (Kiswahili Sanifu), Sheng, Yoruba, Hausa, Igbo, Amharic, Oromo, Somali, isiZulu, Kinyarwanda, Luganda, or Lingala.
    - If asked in Swahili, explain in warm, clear Swahili, but ALWAYS highlight key English scientific terms (e.g. "Usanisinuru (Photosynthesis)").
-   - If asked in English, explain clearly and provide the Swahili terms and analogies for deeper conceptual grounding.
+   - If asked in English, explain clearly and provide the local terms and analogies for deeper conceptual grounding.
 
 2. Hyper-Local Regional Adaptation (Geo-Context):
    Tailor your examples, crops, physical phenomena, and analogies to the student's specific geographic region:
    * COASTAL (Pwani): Use coconut palms (minazi), mangroves (mikoko), ocean tides & gravity, solar evaporation in salt pans, sea breezes.
    * HIGHLANDS (Nyanda za Juu): Use tea/maize farming, cascading mountain rivers, hydroelectric dams, terracing against soil erosion, cool mountain climates.
-   * LAKE BASIN (Ziwa Victoria): Use lake breeze convection, tilapia/fish oxygenation, lake transport, flash thunderstorms.
+   * LAKE BASIN (Ziwa Victoria / Kisumu): Use fish operculum gills (Ngege/Mbuta), water hyacinth (Akech), indigenous greens (Osuga/Mitoo), lake breeze convection, 12V night-fishing lantern circuits.
    * ARID & PASTORALIST (Ukame / ASAL): Use intense solar PV energy, borehole water pumping, acacia/cactus drought adaptations, camel heat regulation.
    * URBAN (Mijini): Use solar streetlights, vehicle friction & tire treads, electronics in matatus, stormwater drainage.
 
-3. Socratic & Encouraging Tone:
-   - Be patient, celebratory ("Hongera sana!", "Vizuri mno!", "Great thinking!"), and never dismissive.
-   - Break down complex formulas into easy intuitive steps.
-   - Suggest safe, hands-on mini-experiments using everyday household items.
+3. Universal Accessibility (Blind, Deaf, Dyslexic Support):
+   - Include tactile descriptions (how physical objects feel, textures, shape) to assist visually impaired children.
+   - Include clear visual analogies for deaf learners.
 
 4. Output Format:
    Always structure your response cleanly with:
    - Main Explanation (conversational, engaging, formatted with bolding and bullet points).
    - "💡 Mfano Halisi wa Eneo Lako / Local Analogy" (the relatable regional metaphor).
-   - "📚 Kamusi ya Sayansi / Science Glossary" (Key English terms with Swahili explanations).
+   - "📚 Kamusi ya Sayansi / Science Glossary" (Key terms with local explanations).
    - "🧪 Jaribu Hili Nyumbani / Try This At Home" (a safe 2-minute experiment).
    - "🎯 Swali la Jaribio / Quick Check" (a fun question to test their understanding).
 """
@@ -68,12 +67,13 @@ class ElewaAgent:
         student_id: str,
         message: str,
         target_language: str = "swahili",
-        region: str = "highlands",
+        region: str = "lake_basin",
         simplify: bool = False
     ) -> Dict[str, Any]:
         """Generates an adaptive, multilingual, region-specific response."""
         profile = student_memory.get_or_create_profile(student_id, language=target_language, region=region)
-        region_info = REGIONS.get(region, REGIONS["highlands"])
+        region_info = REGIONS.get(region, REGIONS["lake_basin"])
+        topic_data = find_offline_topic(message)
         
         # Build student context memory
         mastery_summary = ", ".join([f"{k} ({v.mastery_score}% mastery)" for k, v in profile.mastery_graph.items()]) or "New student"
@@ -129,6 +129,9 @@ Provide a comprehensive, empathetic, and culturally rich STEM explanation ground
                     "region": region,
                     "topic": detected_topic["topic"],
                     "subject": detected_topic["subject"],
+                    "tactile_description": topic_data.get("tactile_audio_description_sw", ""),
+                    "sign_cues": topic_data.get("sign_language_visual_cues_sw", ""),
+                    "quiz_data": topic_data.get("quiz"),
                     "student_profile": student_memory.get_or_create_profile(student_id).model_dump()
                 }
             except Exception as e:
@@ -140,9 +143,9 @@ Provide a comprehensive, empathetic, and culturally rich STEM explanation ground
     def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool) -> Dict[str, Any]:
         """Generates rich, pre-compiled educational responses adapted to the learner's region."""
         topic_data = find_offline_topic(message)
-        region_key = region if region in topic_data.get("regional_analogies", {}) else "highlands"
-        region_info = REGIONS.get(region, REGIONS["highlands"])
-        is_sw = (language.lower() != "english")
+        region_key = region if region in topic_data.get("regional_analogies", {}) else "lake_basin"
+        region_info = REGIONS.get(region, REGIONS["lake_basin"])
+        is_sw = (language.lower() != "en" and language.lower() != "english")
 
         title = topic_data["title_sw"] if is_sw else topic_data["title_en"]
         summary = topic_data["summary_sw"] if is_sw else topic_data["summary_en"]
@@ -166,7 +169,7 @@ Provide a comprehensive, empathetic, and culturally rich STEM explanation ground
 ---
 
 #### 💡 Mfano Halisi wa Eneo Lako ({region_info['icon']} {region_info['name_sw'] if is_sw else region_info['name_en']})
-{analogy}
+${analogy}
 
 ---
 
@@ -203,13 +206,17 @@ Provide a comprehensive, empathetic, and culturally rich STEM explanation ground
             "region": region,
             "topic": topic_data["title_en"],
             "subject": topic_data["subject"],
+            "tactile_description": topic_data.get("tactile_audio_description_sw", ""),
+            "sign_cues": topic_data.get("sign_language_visual_cues_sw", ""),
             "quiz_data": quiz,
             "student_profile": student_memory.get_or_create_profile(student_id).model_dump()
         }
 
     def _extract_topic(self, user_msg: str, bot_response: str) -> Dict[str, str]:
         combined = (user_msg + " " + bot_response).lower()
-        if any(w in combined for w in ["plant", "mmea", "leaf", "jani", "photo", "cell", "uhai", "biology"]):
+        if any(w in combined for w in ["fish", "samaki", "gills", "mashavu", "lake", "ziwa", "ngege", "mbuta"]):
+            return {"topic": "Aquatic Biology & Respiration", "subject": "Biology"}
+        elif any(w in combined for w in ["plant", "mmea", "leaf", "jani", "photo", "cell", "uhai", "biology"]):
             return {"topic": "Photosynthesis & Plant Biology", "subject": "Biology"}
         elif any(w in combined for w in ["electric", "umeme", "circuit", "saketi", "wire", "battery", "betri"]):
             return {"topic": "Electricity & Circuits", "subject": "Physics"}

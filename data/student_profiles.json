@@ -154,5 +154,68 @@
         "language": "swahili"
       }
     ]
+  },
+  "cosmas_tester": {
+    "student_id": "cosmas_tester",
+    "name": "Mwanafunzi",
+    "grade_level": "Grade 6 (Upper Primary)",
+    "preferred_language": "sw",
+    "current_region": "lake_basin",
+    "gps_coordinates": null,
+    "learning_style": "analogies_and_experiments",
+    "created_at": "2026-08-27T16:39:39.841649",
+    "mastery_graph": {
+      "Photosynthesis: How Plants Make Food": {
+        "topic": "Photosynthesis: How Plants Make Food",
+        "subject": "Biology",
+        "mastery_score": 35,
+        "times_explored": 3,
+        "last_studied": "2026-08-27T16:41:13.365986",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      }
+    },
+    "badges": [
+      "🌟 Mwanzo Bora (Great Start)"
+    ],
+    "recent_interactions": [
+      {
+        "timestamp": "2026-08-27T16:39:39.846455",
+        "role": "user",
+        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-27T16:39:39.850318",
+        "role": "assistant",
+        "content": "### 🔬 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\n\nHabari kutoka **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Hebu tuchunguze hili pamoja:\n\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n---\n\n#### 💡 Mfano Halisi wa Eneo Lako (🏞️ Bonde la Ziwa (Kisumu & Lake Victoria))\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n---\n\n#### 📚 Kamusi ya Sayansi (Key Science Terms)\n• **Chlorophyll** ➔ Klorofili (Rangi ya kijani inayovuta mwangaza)\n• **Carbon Dioxide** ➔ Gesi ya Kaboni Dioksidi\n• **Oxygen** ➔ Hewa Safi ya Oksijeni\n• **Transpiration** ➔ Mvukizo wa maji kupitia majani\n\n---\n\n#### 🧪 Jaribu Hili Nyumbani (Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako)\n**Vifaa:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n**Hatua:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n---\n\n#### 🎯 Swali la Haraka (Quick Check)\n**Kwa nini mimea kama mboga za Osuga (Kisumu) au mnazi (Pwani) inahitaji mwangaza wa jua?**\nA) Kutengeneza chakula (glukosi) kupitia usanisinuru\nB) Ili ibadilishe rangi kuwa nyekundu\nC) Kukausha udongo mzima\nD) Ili kuzuia upepo\n",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-27T16:40:25.137157",
+        "role": "user",
+        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-27T16:40:25.149700",
+        "role": "assistant",
+        "content": "### 🔬 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\n\nHabari kutoka **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Hebu tuchunguze hili pamoja:\n\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n---\n\n#### 💡 Mfano Halisi wa Eneo Lako (🏞️ Bonde la Ziwa (Kisumu & Lake Victoria))\n$Kule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n---\n\n#### 📚 Kamusi ya Sayansi (Key Science Terms)\n• **Chlorophyll** ➔ Klorofili (Rangi ya kijani inayovuta mwangaza)\n• **Carbon Dioxide** ➔ Gesi ya Kaboni Dioksidi\n• **Oxygen** ➔ Hewa Safi ya Oksijeni\n• **Transpiration** ➔ Mvukizo wa maji kupitia majani\n\n---\n\n#### 🧪 Jaribu Hili Nyumbani (Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako)\n**Vifaa:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n**Hatua:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n---\n\n#### 🎯 Swali la Haraka (Quick Check)\n**Kwa nini mimea kama mboga za Osuga (Kisumu) au mnazi (Pwani) inahitaji mwangaza wa jua?**\nA) Kutengeneza chakula (glukosi) kupitia usanisinuru\nB) Ili ibadilishe rangi kuwa nyekundu\nC) Kukausha udongo mzima\nD) Ili kuzuia upepo\n",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-27T16:41:13.353475",
+        "role": "user",
+        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-27T16:41:13.359664",
+        "role": "assistant",
+        "content": "### 🔬 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\n\nHabari kutoka **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Hebu tuchunguze hili pamoja:\n\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n---\n\n#### 💡 Mfano Halisi wa Eneo Lako (🏞️ Bonde la Ziwa (Kisumu & Lake Victoria))\n$Kule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n---\n\n#### 📚 Kamusi ya Sayansi (Key Science Terms)\n• **Chlorophyll** ➔ Klorofili (Rangi ya kijani inayovuta mwangaza)\n• **Carbon Dioxide** ➔ Gesi ya Kaboni Dioksidi\n• **Oxygen** ➔ Hewa Safi ya Oksijeni\n• **Transpiration** ➔ Mvukizo wa maji kupitia majani\n\n---\n\n#### 🧪 Jaribu Hili Nyumbani (Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako)\n**Vifaa:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n**Hatua:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n---\n\n#### 🎯 Swali la Haraka (Quick Check)\n**Kwa nini mimea kama mboga za Osuga (Kisumu) au mnazi (Pwani) inahitaji mwangaza wa jua?**\nA) Kutengeneza chakula (glukosi) kupitia usanisinuru\nB) Ili ibadilishe rangi kuwa nyekundu\nC) Kukausha udongo mzima\nD) Ili kuzuia upepo\n",
+        "language": "sw"
+      }
+    ]
   }
 }
