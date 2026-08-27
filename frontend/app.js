@@ -1,6 +1,6 @@
 /**
- * ElewaSTEM Frontend Application Logic with Deep Localized Context & Kenya DPA 2019 Privacy Compliance
- * Handles Offline PWA Caching, Bilingual Switching, Explicit GPS Consent, Regional Eco-Zones, and Mastery Graphs.
+ * ElewaSTEM Frontend Application Logic with Voice-First Accessibility & Kenya DPA 2019 Privacy Compliance
+ * Features: High-Accessibility Speech-to-Text (STT), Auto-Read Aloud (TTS), Offline PWA, GPS Geo-Context, and Mastery Graphs.
  */
 
 // Application State
@@ -8,10 +8,13 @@ const STATE = {
   studentId: 'demo_student',
   language: 'swahili', // 'swahili', 'english', 'sheng'
   region: 'lake_basin', // Defaulting to Lake Victoria Basin (Kisumu)
+  autoSpeak: true, // Voice-first auto-read for learners with reading challenges
   gpsCoords: null,
   dpaConsent: false,
   simulatedOffline: false,
   activeTab: 'chat',
+  activeSpeechUtterance: null,
+  activeSpeechRecognition: null,
   offlineModules: [],
   regionsMeta: {
     lake_basin: { name_sw: 'Kisumu & Ziwa Victoria', name_en: 'Lake Victoria Basin (Kisumu)', icon: '🏞️', desc_sw: 'Kisumu, Mwanza, Entebbe • Samaki Ngege & Mbuta, Magugu Maji (Akech), Osuga & Mitoo' },
@@ -36,7 +39,7 @@ const I18N = {
     tab_chat: 'Mwalimu Chat',
     tab_vault: 'Offline Vault (Masomo)',
     tab_mastery: 'Maendeleo & Beji',
-    input_placeholder: 'Uliza swali la sayansi au hesabu hapa...',
+    input_placeholder: 'Ongea kwa kipaza sauti au andika swali lako...',
     online_text: 'Mtandaoni',
     offline_text: 'Nje ya Mtandao (0 KB)',
     listen_btn: '🔊 Sikiliza',
@@ -47,7 +50,7 @@ const I18N = {
     tab_chat: 'Tutor Chat',
     tab_vault: 'Offline Vault (Lessons)',
     tab_mastery: 'Mastery & Badges',
-    input_placeholder: 'Ask any STEM question here...',
+    input_placeholder: 'Speak using the microphone or type your question...',
     online_text: 'Online',
     offline_text: 'Offline (0 KB)',
     listen_btn: '🔊 Listen',
@@ -58,7 +61,7 @@ const I18N = {
     tab_chat: 'Msee wa STEM',
     tab_vault: 'Masomo Offline',
     tab_mastery: 'Level Yangu & Badges',
-    input_placeholder: 'Uliza swali ya science au math hapa...',
+    input_placeholder: 'Bonga na mic au type swali yako hapa...',
     online_text: 'Online',
     offline_text: 'Offline (Zero Data)',
     listen_btn: '🔊 Sikiza',
@@ -104,12 +107,13 @@ const REGIONAL_PROMPT_CHIPS = {
 // Initialize Application
 document.addEventListener('DOMContentLoaded', async () => {
   initNetworkListeners();
-  loadSavedConsentAndRegion();
+  loadSavedPreferences();
   await loadOfflinePack();
   await refreshProfile();
   renderRegionUI();
   renderVault();
   updateUIStrings();
+  updateAutoSpeakUI();
 });
 
 // Network Connectivity & Offline Simulation
@@ -151,12 +155,45 @@ function toggleSimulateOffline() {
   appendSystemNotice(msg);
 }
 
-// Data Protection & Explicit Consent Handlers (Kenya DPA 2019)
-function loadSavedConsentAndRegion() {
+// Voice Auto-Speak Accessibility Toggle
+function toggleAutoSpeak() {
+  STATE.autoSpeak = !STATE.autoSpeak;
+  localStorage.setItem('elewa_auto_speak', STATE.autoSpeak ? 'true' : 'false');
+  updateAutoSpeakUI();
+
+  if (STATE.autoSpeak) {
+    speakText('Sauti imewashwa! Mwalimu atakusomea majibu kiotomatiki.');
+  } else {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  }
+}
+
+function updateAutoSpeakUI() {
+  const btn = document.getElementById('autoSpeakBtn');
+  const icon = document.getElementById('autoSpeakIcon');
+  const text = document.getElementById('autoSpeakText');
+
+  if (STATE.autoSpeak) {
+    btn.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-bold bg-purple-100 text-purple-900 border border-purple-400 hover:bg-purple-200 transition-all';
+    icon.innerText = '🔊';
+    text.innerText = 'Sauti: Washa';
+  } else {
+    btn.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-500 border border-slate-300 hover:bg-slate-200 transition-all';
+    icon.innerText = '🔇';
+    text.innerText = 'Sauti: Zima';
+  }
+}
+
+// Data Protection & Preferences Handlers
+function loadSavedPreferences() {
   STATE.dpaConsent = (localStorage.getItem('elewa_dpa_consent') === 'granted');
-  const saved = localStorage.getItem('elewa_user_region');
-  if (saved && STATE.regionsMeta[saved]) {
-    STATE.region = saved;
+  const savedRegion = localStorage.getItem('elewa_user_region');
+  if (savedRegion && STATE.regionsMeta[savedRegion]) {
+    STATE.region = savedRegion;
+  }
+  const savedAutoSpeak = localStorage.getItem('elewa_auto_speak');
+  if (savedAutoSpeak !== null) {
+    STATE.autoSpeak = (savedAutoSpeak === 'true');
   }
 }
 
@@ -390,6 +427,7 @@ async function executeAgentQuery(query, simplify = false) {
       removeLoadingIndicator(loadingId);
       const localResponse = generateLocalOfflineAnswer(query, simplify);
       appendAssistantMessage(localResponse);
+      if (STATE.autoSpeak) speakText(localResponse.text);
     }, 400);
     return;
   }
@@ -417,14 +455,17 @@ async function executeAgentQuery(query, simplify = false) {
       if (data.student_profile) {
         STATE.profile = data.student_profile;
       }
+      if (STATE.autoSpeak) speakText(data.text);
     } else {
       const localFallback = generateLocalOfflineAnswer(query, simplify);
       appendAssistantMessage(localFallback);
+      if (STATE.autoSpeak) speakText(localFallback.text);
     }
   } catch (err) {
     removeLoadingIndicator(loadingId);
     const localFallback = generateLocalOfflineAnswer(query, simplify);
     appendAssistantMessage(localFallback);
+    if (STATE.autoSpeak) speakText(localFallback.text);
   }
 }
 
@@ -522,18 +563,21 @@ function appendAssistantMessage(data) {
       </div>
       <div class="stem-card leading-relaxed space-y-2">${formattedHtml}</div>
       
-      <!-- Action Toolbar -->
+      <!-- Action Toolbar with Accessible Audio Play/Pause -->
       <div class="pt-2 border-t border-slate-100 flex flex-wrap gap-2 text-xs font-semibold">
-        <button onclick="speakText('${encodeURIComponent(data.text)}')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 flex items-center space-x-1 transition-all">
+        <button onclick="speakText('${encodeURIComponent(data.text)}')" class="px-2.5 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 flex items-center space-x-1 transition-all">
           <span>🔊</span>
-          <span>Sikiliza (TTS)</span>
+          <span>Sikiliza kwa Sauti (TTS)</span>
         </button>
-        <button onclick="executeAgentQuery('Eleza hili tena kwa mifano rahisi sana ya eneo langu', true)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 flex items-center space-x-1 transition-all">
+        <button onclick="stopSpeech()" class="px-2 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center space-x-1 transition-all" title="Simamisha Sauti">
+          <span>⏹️</span>
+        </button>
+        <button onclick="executeAgentQuery('Eleza hili tena kwa mifano rahisi sana ya eneo langu', true)" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 flex items-center space-x-1 transition-all">
           <span>💡</span>
           <span>Rahisisha</span>
         </button>
         ${data.quiz_data ? `
-        <button onclick="openQuizModal('${quizDataJson}', '${escapeHtml(data.topic || 'STEM')}')" class="px-2.5 py-1 rounded-lg bg-brand-600 hover:bg-brand-700 text-white flex items-center space-x-1 shadow-sm transition-all">
+        <button onclick="openQuizModal('${quizDataJson}', '${escapeHtml(data.topic || 'STEM')}')" class="px-2.5 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white flex items-center space-x-1 shadow-sm transition-all">
           <span>🎯</span>
           <span>Fanya Jaribio</span>
         </button>` : ''}
@@ -606,59 +650,128 @@ function escapeHtml(text) {
     .replace(/'/g, '&#039;');
 }
 
-// Speech Synthesis (TTS)
-function speakText(encodedText) {
-  const text = decodeURIComponent(encodedText)
-    .replace(/###/g, '')
-    .replace(/####/g, '')
-    .replace(/\*\*/g, '')
-    .replace(/---/g, '')
-    .replace(/•/g, '');
-
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.95;
-    utterance.pitch = 1.0;
-    utterance.lang = STATE.language === 'english' ? 'en-US' : 'sw-KE';
-    window.speechSynthesis.speak(utterance);
-  } else {
-    alert('Kifaa chako hakitumii sauti (Speech synthesis is not supported on this browser).');
-  }
-}
-
-// Speech Recognition (Voice Input)
-function toggleVoiceInput() {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRecognition) {
-    alert('Voice input is not supported in this browser. Please type your question.');
+// High-Accessibility Speech Synthesis (TTS) - Works 100% Offline
+function speakText(rawText) {
+  if (!('speechSynthesis' in window)) {
+    console.log('Speech synthesis is not supported on this device.');
     return;
   }
 
-  const voiceBtn = document.getElementById('voiceBtn');
-  const recognition = new SpeechRecognition();
-  recognition.lang = STATE.language === 'english' ? 'en-US' : 'sw-KE';
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
+  // Cancel existing audio
+  window.speechSynthesis.cancel();
 
-  voiceBtn.classList.add('bg-red-500', 'text-white', 'animate-pulse');
+  // Clean Markdown for smooth natural spoken speech
+  let cleanText = decodeURIComponent(rawText)
+    .replace(/#{1,6}\s?/g, '')
+    .replace(/\*\*/g, '')
+    .replace(/\*/g, '')
+    .replace(/---/g, '')
+    .replace(/•/g, '')
+    .replace(/\[.*?\]\(.*?\)/g, '')
+    .replace(/https?:\/\/\S+/g, '')
+    .replace(/➔/g, 'ambayo kwa kiingereza ni')
+    .trim();
 
-  recognition.start();
+  // Shorten for very long outputs if needed
+  if (cleanText.length > 500) {
+    cleanText = cleanText.substring(0, 500) + '... Unaweza kuuliza swali zaidi!';
+  }
 
-  recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript;
-    document.getElementById('userInput').value = transcript;
-    voiceBtn.classList.remove('bg-red-500', 'text-white', 'animate-pulse');
-    handleChatSubmit();
-  };
+  const utterance = new SpeechSynthesisUtterance(cleanText);
+  utterance.rate = 0.95; // Slightly slower for clarity in children
+  utterance.pitch = 1.05; // Slightly warmer/friendlier tone
 
-  recognition.onerror = () => {
-    voiceBtn.classList.remove('bg-red-500', 'text-white', 'animate-pulse');
-  };
+  // Voice Language matching
+  if (STATE.language === 'english') {
+    utterance.lang = 'en-US';
+  } else {
+    utterance.lang = 'sw-KE';
+  }
 
-  recognition.onend = () => {
-    voiceBtn.classList.remove('bg-red-500', 'text-white', 'animate-pulse');
-  };
+  STATE.activeSpeechUtterance = utterance;
+  window.speechSynthesis.speak(utterance);
+}
+
+function stopSpeech() {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
+}
+
+// High-Accessibility Speech Recognition (STT / Voice Input)
+function toggleVoiceInput() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    alert('Kifaa hiki hakina huduma ya sauti ya mtandao. Tafadhali andika swali lako.');
+    return;
+  }
+
+  const overlay = document.getElementById('voiceOverlayModal');
+  const transcriptEl = document.getElementById('voiceLiveTranscript');
+  overlay.classList.remove('hidden');
+  transcriptEl.innerText = '"Ninasubiri sauti yako... Ongea sasa!"';
+
+  try {
+    const recognition = new SpeechRecognition();
+    recognition.lang = STATE.language === 'english' ? 'en-US' : 'sw-KE';
+    recognition.interimResults = true;
+    recognition.continuous = false;
+
+    STATE.activeSpeechRecognition = recognition;
+
+    recognition.onresult = (event) => {
+      let interim = '';
+      let final = '';
+
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          final += event.results[i][0].transcript;
+        } else {
+          interim += event.results[i][0].transcript;
+        }
+      }
+
+      if (interim) {
+        transcriptEl.innerText = `"${interim}..."`;
+      }
+
+      if (final) {
+        transcriptEl.innerText = `"${final}"`;
+        document.getElementById('userInput').value = final;
+        setTimeout(() => {
+          overlay.classList.add('hidden');
+          handleChatSubmit();
+        }, 500);
+      }
+    };
+
+    recognition.onerror = (err) => {
+      console.log('Voice recognition notice:', err);
+      transcriptEl.innerText = 'Sauti haijasikika vizuri. Tafadhali bonyeza tena au andika.';
+      setTimeout(() => overlay.classList.add('hidden'), 1500);
+    };
+
+    recognition.onend = () => {
+      // Auto-hide if nothing was captured
+      setTimeout(() => {
+        if (!overlay.classList.contains('hidden')) {
+          overlay.classList.add('hidden');
+        }
+      }, 2000);
+    };
+
+    recognition.start();
+  } catch (err) {
+    console.error('Speech recognition error:', err);
+    overlay.classList.add('hidden');
+  }
+}
+
+function cancelVoiceRecognition() {
+  if (STATE.activeSpeechRecognition) {
+    try { STATE.activeSpeechRecognition.stop(); } catch (e) {}
+  }
+  document.getElementById('voiceOverlayModal').classList.add('hidden');
 }
 
 // Offline Vault Rendering
@@ -689,6 +802,9 @@ function renderVault() {
           <button onclick="openOfflineModuleInChat('${m.id}')" class="flex-1 bg-brand-50 hover:bg-brand-100 text-brand-800 text-xs font-bold py-2 rounded-xl text-center transition-all">
             Soma Somo
           </button>
+          <button onclick="speakText('${encodeURIComponent((isSw ? m.summary_sw : m.summary_en) + ' Mfano: ' + localAnalogy)}')" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 text-xs font-bold px-3 py-2 rounded-xl transition-all" title="Sikiliza kwa Sauti">
+            🔊
+          </button>
           <button onclick="openQuizModal('${JSON.stringify(m.quiz).replace(/"/g, '&quot;')}', '${escapeHtml(m.title_en)}')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition-all">
             🎯 Quiz
           </button>
@@ -704,6 +820,7 @@ function openOfflineModuleInChat(moduleId) {
   switchTab('chat');
   const answer = generateLocalOfflineAnswer(mod.id, false);
   appendAssistantMessage(answer);
+  if (STATE.autoSpeak) speakText(answer.text);
 }
 
 // Student Profile & Mastery Graph
@@ -745,7 +862,7 @@ function renderMastery() {
     const topics = Object.values(graph);
     if (topics.length === 0) {
       graphContainer.innerHTML = `
-        <p class="text-xs text-slate-500 italic">Bado hujaanza majaribio. Uliza maswali na ufanye quizzes ili kukuza kiwango chako cha uelewa!</p>
+        <p class="text-xs text-slate-500 italic">Bado hujaanza majaribio. Uliza maswali kwa sauti na ufanye quizzes ili kukuza kiwango chako cha uelewa!</p>
       `;
     } else {
       graphContainer.innerHTML = topics.map(t => `
@@ -763,7 +880,7 @@ function renderMastery() {
   }
 }
 
-// Interactive Quiz Modal
+// Interactive Quiz Modal with Spoken Audio Feedback
 function openQuizModal(quizJsonStr, topicName) {
   try {
     const quiz = JSON.parse(quizJsonStr.replace(/&quot;/g, '"'));
@@ -777,6 +894,11 @@ function openQuizModal(quizJsonStr, topicName) {
     title.innerText = `🎯 Swali: ${topicName}`;
     const isSw = STATE.language !== 'english';
     question.innerText = isSw ? quiz.question_sw : quiz.question_en;
+
+    // Read question aloud for learners with reading challenges
+    if (STATE.autoSpeak) {
+      speakText((isSw ? 'Swali la kujipima: ' : 'Quiz Question: ') + (isSw ? quiz.question_sw : quiz.question_en));
+    }
 
     const opts = isSw ? quiz.options_sw : quiz.options_en;
     feedback.className = 'hidden';
@@ -803,12 +925,21 @@ function handleQuizAnswer(selectedIndex) {
   const feedback = document.getElementById('quizFeedback');
   feedback.classList.remove('hidden');
 
+  const feedbackSpokenText = isCorrect 
+    ? (isSw ? `Hongera sana! Uko sahihi kabisa! ${quiz.explanation_sw}` : `Awesome! That is correct! ${quiz.explanation_en}`)
+    : (isSw ? `Uko karibu! Jaribu tena. ${quiz.explanation_sw}` : `Almost! Try again. ${quiz.explanation_en}`);
+
   if (isCorrect) {
     feedback.className = 'p-3 rounded-xl text-xs font-semibold leading-relaxed bg-emerald-100 text-emerald-900 border border-emerald-300';
     feedback.innerHTML = `🎉 <b>${isSw ? 'Hongera sana! Uko sahihi!' : 'Awesome! That is correct!'}</b><br>${isSw ? quiz.explanation_sw : quiz.explanation_en}`;
   } else {
     feedback.className = 'p-3 rounded-xl text-xs font-semibold leading-relaxed bg-amber-100 text-amber-900 border border-amber-300';
     feedback.innerHTML = `💡 <b>${isSw ? 'Uko karibu! Jaribu tena:' : 'Almost! Try again:'}</b><br>${isSw ? quiz.explanation_sw : quiz.explanation_en}`;
+  }
+
+  // Voice feedback for child accessibility
+  if (STATE.autoSpeak) {
+    speakText(feedbackSpokenText);
   }
 
   // Record quiz result
@@ -833,4 +964,5 @@ function handleQuizAnswer(selectedIndex) {
 function closeQuizModal() {
   document.getElementById('quizModal').classList.add('hidden');
   STATE.currentQuiz = null;
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
 }
