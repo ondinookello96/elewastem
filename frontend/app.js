@@ -1,18 +1,19 @@
 /**
- * ElewaSTEM Frontend Application Logic with Voice-First Accessibility & Kenya DPA 2019 Privacy Compliance
- * Features: High-Accessibility Speech-to-Text (STT), Auto-Read Aloud (TTS), Offline PWA, GPS Geo-Context, and Mastery Graphs.
+ * ElewaSTEM Frontend Application Logic with Multi-Stakeholder Hub & Voice-First Accessibility
+ * Stakeholders: Learners, Parents (SMS digests & home challenges), Teachers (CBC lesson plans), Community Mentors.
  */
 
 // Application State
 const STATE = {
   studentId: 'demo_student',
-  language: 'swahili', // 'swahili', 'english', 'sheng'
-  region: 'lake_basin', // Defaulting to Lake Victoria Basin (Kisumu)
-  autoSpeak: true, // Voice-first auto-read for learners with reading challenges
+  language: 'swahili',
+  region: 'lake_basin',
+  autoSpeak: true,
   gpsCoords: null,
   dpaConsent: false,
   simulatedOffline: false,
   activeTab: 'chat',
+  activeStakeholderSubTab: 'parents',
   activeSpeechUtterance: null,
   activeSpeechRecognition: null,
   offlineModules: [],
@@ -36,9 +37,9 @@ const STATE = {
 // UI Translations
 const I18N = {
   swahili: {
-    tab_chat: 'Mwalimu Chat',
+    tab_chat: 'Mwanafunzi Chat',
     tab_vault: 'Offline Vault (Masomo)',
-    tab_mastery: 'Maendeleo & Beji',
+    tab_mastery: 'Maendeleo',
     input_placeholder: 'Ongea kwa kipaza sauti au andika swali lako...',
     online_text: 'Mtandaoni',
     offline_text: 'Nje ya Mtandao (0 KB)',
@@ -47,7 +48,7 @@ const I18N = {
     quiz_btn: '🎯 Fanya Jaribio'
   },
   english: {
-    tab_chat: 'Tutor Chat',
+    tab_chat: 'Learner Chat',
     tab_vault: 'Offline Vault (Lessons)',
     tab_mastery: 'Mastery & Badges',
     input_placeholder: 'Speak using the microphone or type your question...',
@@ -60,7 +61,7 @@ const I18N = {
   sheng: {
     tab_chat: 'Msee wa STEM',
     tab_vault: 'Masomo Offline',
-    tab_mastery: 'Level Yangu & Badges',
+    tab_mastery: 'Level Yangu',
     input_placeholder: 'Bonga na mic au type swali yako hapa...',
     online_text: 'Online',
     offline_text: 'Offline (Zero Data)',
@@ -114,6 +115,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderVault();
   updateUIStrings();
   updateAutoSpeakUI();
+  loadTeacherLessonPlan('photosynthesis');
+  renderCommunityActivities();
 });
 
 // Network Connectivity & Offline Simulation
@@ -149,7 +152,7 @@ function toggleSimulateOffline() {
   updateNetworkUI();
   const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
   const msg = STATE.simulatedOffline 
-    ? (STATE.language === 'swahili' ? `🔴 Umeingia hali ya Nje ya Mtandao (Offline). Mifano ya ${reg.name_sw} inafanya kazi 100% bila mtandao kupitia Local Vault!` : `🔴 Offline simulation enabled. Tutor for ${reg.name_en} running from local offline vault!`)
+    ? (STATE.language === 'swahili' ? `🔴 Umeingia hali ya Nje ya Mtandao (Offline). Masomo na miongozo ya ${reg.name_sw} inafanya kazi 100% bila mtandao!` : `🔴 Offline simulation enabled. Hub for ${reg.name_en} running from local offline vault!`)
     : (STATE.language === 'swahili' ? '🟢 Umerudi Mtandaoni (Online). Gemini 2.5 Flash imeunganishwa tena!' : '🟢 Back Online! Connected to Gemini 2.5 Flash backend.');
   
   appendSystemNotice(msg);
@@ -222,7 +225,7 @@ function revokeLocationConsent() {
   localStorage.removeItem('elewa_dpa_consent');
   STATE.gpsCoords = null;
   closePrivacyModal();
-  appendSystemNotice('🛡️ <b>Data Protection Act:</b> Idhini ya GPS imefutwa. Hakuna data ya kijiografia itakayosomwa.');
+  appendSystemNotice('🛡️ <b>Data Protection Act:</b> Idhini ya GPS imefutwa.');
 }
 
 function openPrivacyModal() {
@@ -236,7 +239,7 @@ function closePrivacyModal() {
 // GPS Execution (Edge calculation on device)
 function executeGPSScan() {
   if (!('geolocation' in navigator)) {
-    alert('Kifaa chako hakina GPS (Geolocation is not supported).');
+    alert('Kifaa chako hakina GPS.');
     return;
   }
 
@@ -250,7 +253,6 @@ function executeGPSScan() {
       const lon = position.coords.longitude;
       STATE.gpsCoords = { lat, lon };
 
-      // Map latitude & longitude to African eco-regions (100% on-device offline calculation)
       const detectedRegion = mapCoordinatesToEcoRegion(lat, lon);
       selectRegion(detectedRegion);
 
@@ -267,25 +269,11 @@ function executeGPSScan() {
   );
 }
 
-// On-device coordinate to African eco-region mapper
 function mapCoordinatesToEcoRegion(lat, lon) {
-  // Lake Victoria Basin (Kisumu, Homa Bay, Busia, Mwanza, Entebbe)
-  if (lon >= 31.0 && lon <= 35.2 && lat >= -3.5 && lat <= 2.5) {
-    return 'lake_basin';
-  }
-  // Coastal Strip (Mombasa, Kilifi, Kwale, Lamu, Dar es Salaam, Zanzibar)
-  if (lon > 38.5 && lat < 1.0 && lat > -11.0) {
-    return 'coastal';
-  }
-  // Arid & Pastoralist Belt (Northern Kenya: Turkana, Garissa, Marsabit, Wajir, Central Tanzania)
-  if ((lat > 1.2 && lon > 35.0) || (lat < -4.5 && lon < 37.0 && lon > 34.0)) {
-    return 'arid';
-  }
-  // Major Urban Centers (Nairobi metropolitan area)
-  if (lat >= -1.45 && lat <= -1.15 && lon >= 36.65 && lon <= 37.10) {
-    return 'urban';
-  }
-  // Highlands & Agricultural Belt (Nakuru, Mt. Kenya, Eldoret, Kericho)
+  if (lon >= 31.0 && lon <= 35.2 && lat >= -3.5 && lat <= 2.5) return 'lake_basin';
+  if (lon > 38.5 && lat < 1.0 && lat > -11.0) return 'coastal';
+  if ((lat > 1.2 && lon > 35.0) || (lat < -4.5 && lon < 37.0 && lon > 34.0)) return 'arid';
+  if (lat >= -1.45 && lat <= -1.15 && lon >= 36.65 && lon <= 37.10) return 'urban';
   return 'highlands';
 }
 
@@ -304,6 +292,9 @@ function selectRegion(regionKey) {
   closeRegionModal();
   renderRegionUI();
   renderVault();
+  loadTeacherLessonPlan(document.getElementById('teacherTopicSelect')?.value || 'photosynthesis');
+  renderCommunityActivities();
+  updateParentDigestPreview();
 
   const reg = STATE.regionsMeta[regionKey];
   const isSw = STATE.language !== 'english';
@@ -330,7 +321,6 @@ function renderRegionUI() {
   if (vaultIcon) vaultIcon.innerText = reg.icon;
   if (profilePill) profilePill.innerText = `📍 Eneo: ${reg.icon} ${isSw ? reg.name_sw : reg.name_en}`;
 
-  // Render regional prompt chips
   const chipsContainer = document.getElementById('quickLocationChips');
   if (chipsContainer) {
     const chips = REGIONAL_PROMPT_CHIPS[STATE.region] || REGIONAL_PROMPT_CHIPS.lake_basin;
@@ -365,7 +355,7 @@ function updateUIStrings() {
 // Navigation Tabs
 function switchTab(tabId) {
   STATE.activeTab = tabId;
-  ['chat', 'vault', 'mastery'].forEach(t => {
+  ['chat', 'vault', 'mastery', 'stakeholders'].forEach(t => {
     const section = document.getElementById(`${t}Section`);
     const btn = document.getElementById(`tabBtn-${t}`);
     if (t === tabId) {
@@ -378,6 +368,125 @@ function switchTab(tabId) {
   });
 
   if (tabId === 'mastery') refreshProfile();
+  if (tabId === 'stakeholders') updateParentDigestPreview();
+}
+
+// Stakeholders Sub-Tab Navigation
+function switchStakeholderTab(subTab) {
+  STATE.activeStakeholderSubTab = subTab;
+  ['parents', 'teachers', 'community'].forEach(s => {
+    const view = document.getElementById(`stakeholderView-${s}`);
+    const btn = document.getElementById(`subTab-${s}`);
+    if (s === subTab) {
+      view.classList.remove('hidden');
+      btn.className = 'px-3.5 py-2 rounded-xl bg-indigo-50 text-indigo-900 border border-indigo-200';
+    } else {
+      view.classList.add('hidden');
+      btn.className = 'px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200';
+    }
+  });
+}
+
+// Stakeholder 1: Parents Digest
+function updateParentDigestPreview() {
+  const smsEl = document.getElementById('parentSmsPreview');
+  if (!smsEl) return;
+  const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
+  const mastery = STATE.profile.mastery_graph || {};
+  const count = Object.keys(mastery).length || 1;
+
+  smsEl.innerText = `ElewaSTEM Ripoti ya Mzazi: Mwanafunzi amechunguza mada ${count} za Sayansi kwa mifano ya ${reg.name_sw}. Jaribio la wiki hii: Chunguza Oksijeni ya mimea ya jikoni na mtoto wako!`;
+}
+
+function copySmsDigest() {
+  const text = document.getElementById('parentSmsPreview').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Ujumbe wa SMS umenakiliwa! Unaweza kuutuma kwa simu ya mzazi.');
+  }).catch(() => {
+    alert('Nakili maandishi haya: ' + text);
+  });
+}
+
+// Stakeholder 2: Teacher CBC Lesson Plan
+function loadTeacherLessonPlan(topicId) {
+  const card = document.getElementById('teacherLessonPlanCard');
+  if (!card) return;
+
+  const mod = STATE.offlineModules.find(m => m.id === topicId) || STATE.offlineModules[0];
+  if (!mod) return;
+
+  const regKey = STATE.region;
+  const regMeta = STATE.regionsMeta[regKey] || STATE.regionsMeta.lake_basin;
+  const regionalDict = mod.regional_analogies ? (mod.regional_analogies[regKey] || mod.regional_analogies.lake_basin) : {};
+
+  card.innerHTML = `
+    <div class="space-y-3">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded">${mod.cbc_strand || 'CBC Science & Technology'}</span>
+          <h4 class="font-black text-slate-900 text-sm mt-1">${mod.title_sw} (${mod.title_en})</h4>
+        </div>
+        <span class="text-xs font-bold text-slate-500">Grade 5 & 6</span>
+      </div>
+
+      <div>
+        <p class="font-bold text-slate-800 mb-1">🎯 Matokeo ya Kujifunza (Learning Outcomes):</p>
+        <ul class="list-disc pl-4 space-y-0.5 text-slate-600">
+          <li>Mwanafunzi aweze kueleza dhana ya <b>${mod.title_sw}</b> kwa kutumia mazingira ya <b>${regMeta.name_sw}</b>.</li>
+          <li>Kutambua msamiati wa kisayansi katika Kiswahili na Kiingereza.</li>
+          <li>Kufanya jaribio la vitendo darasani kwa kutumia vifaa vya bure vya mazingira.</li>
+        </ul>
+      </div>
+
+      <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl">
+        <p class="font-bold text-emerald-900 mb-0.5">💡 Zana ya Kufundishia ya Eneo (Local Teaching Aid):</p>
+        <p class="text-emerald-950 italic">${regionalDict.analogy_sw || mod.analogy_sw}</p>
+      </div>
+
+      <div>
+        <p class="font-bold text-slate-800 mb-1">🧪 Shughuli ya Darasani / Jaribio:</p>
+        <p class="text-slate-600"><b>Vifaa:</b> ${mod.experiment.materials_sw}</p>
+        <p class="text-slate-600"><b>Hatua:</b> ${mod.experiment.steps_sw.replace(/\n/g, ' ')}</p>
+      </div>
+
+      <div class="bg-indigo-50 border border-indigo-200 p-3 rounded-xl">
+        <p class="font-bold text-indigo-900 mb-1">📝 Swali la Mtihani wa Kujipima (Diagnostic Quiz):</p>
+        <p class="text-indigo-950 font-medium">${mod.quiz.question_sw}</p>
+        <p class="text-xs text-indigo-800 mt-1"><b>Jibu Sahihi:</b> ${mod.quiz.options_sw[mod.quiz.correct_index]}</p>
+      </div>
+    </div>
+  `;
+}
+
+// Stakeholder 3: Community Mentors Activities
+function renderCommunityActivities() {
+  const grid = document.getElementById('communityProjectsGrid');
+  if (!grid) return;
+  const regMeta = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
+
+  grid.innerHTML = `
+    <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-2">
+      <div class="flex items-center justify-between">
+        <h5 class="font-bold text-slate-900 text-xs">💧 Mradi wa Chujio la Maji (${regMeta.name_sw})</h5>
+        <span class="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded">Mazingira</span>
+      </div>
+      <p class="text-[11px] text-slate-600 leading-relaxed">
+        <b>Vifaa:</b> Chupa ya plastiki, mchanga wa mto, makaa ya jikoni, pamba.<br>
+        <b>Lengo:</b> Watoto wanajionea jinsi uchafu unavyochujwa kutoka kwa maji ya mvua/mto.
+      </p>
+    </div>
+
+    <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-2">
+      <div class="flex items-center justify-between">
+        <h5 class="font-bold text-slate-900 text-xs">☀️ Mradi wa Kukausha Mboga kwa Jua (Solar Dryer)</h5>
+        <span class="text-[9px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">Nishati</span>
+      </div>
+      <p class="text-[11px] text-slate-600 leading-relaxed">
+        <b>Vifaa:</b> Sanduku la kadibodi, foil ya alumini, karatasi ya nailoni safi.<br>
+        <b>Lengo:</b> Kutumia jua kukausha mboga za kienyeji (kama managu/osuga) kwa ajili ya kuhifadhi.
+      </p>
+    </div>
+  `;
 }
 
 // Offline Pack Management
@@ -421,7 +530,6 @@ function sendQuickPrompt(text) {
 async function executeAgentQuery(query, simplify = false) {
   const loadingId = appendLoadingIndicator();
 
-  // If offline or simulated offline -> execute locally from cached vault
   if (!isEffectivelyOnline()) {
     setTimeout(() => {
       removeLoadingIndicator(loadingId);
@@ -432,7 +540,6 @@ async function executeAgentQuery(query, simplify = false) {
     return;
   }
 
-  // If online -> send to backend API with region & GPS context
   try {
     const res = await fetch('/api/chat', {
       method: 'POST',
@@ -563,11 +670,10 @@ function appendAssistantMessage(data) {
       </div>
       <div class="stem-card leading-relaxed space-y-2">${formattedHtml}</div>
       
-      <!-- Action Toolbar with Accessible Audio Play/Pause -->
       <div class="pt-2 border-t border-slate-100 flex flex-wrap gap-2 text-xs font-semibold">
         <button onclick="speakText('${encodeURIComponent(data.text)}')" class="px-2.5 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 flex items-center space-x-1 transition-all">
           <span>🔊</span>
-          <span>Sikiliza kwa Sauti (TTS)</span>
+          <span>Sikiliza kwa Sauti</span>
         </button>
         <button onclick="stopSpeech()" class="px-2 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center space-x-1 transition-all" title="Simamisha Sauti">
           <span>⏹️</span>
@@ -627,7 +733,6 @@ function removeLoadingIndicator(id) {
   if (el) el.remove();
 }
 
-// Markdown Parser Helper
 function parseMarkdownToHtml(markdown) {
   if (!markdown) return '';
   return markdown
@@ -650,17 +755,11 @@ function escapeHtml(text) {
     .replace(/'/g, '&#039;');
 }
 
-// High-Accessibility Speech Synthesis (TTS) - Works 100% Offline
 function speakText(rawText) {
-  if (!('speechSynthesis' in window)) {
-    console.log('Speech synthesis is not supported on this device.');
-    return;
-  }
+  if (!('speechSynthesis' in window)) return;
 
-  // Cancel existing audio
   window.speechSynthesis.cancel();
 
-  // Clean Markdown for smooth natural spoken speech
   let cleanText = decodeURIComponent(rawText)
     .replace(/#{1,6}\s?/g, '')
     .replace(/\*\*/g, '')
@@ -672,16 +771,14 @@ function speakText(rawText) {
     .replace(/➔/g, 'ambayo kwa kiingereza ni')
     .trim();
 
-  // Shorten for very long outputs if needed
   if (cleanText.length > 500) {
     cleanText = cleanText.substring(0, 500) + '... Unaweza kuuliza swali zaidi!';
   }
 
   const utterance = new SpeechSynthesisUtterance(cleanText);
-  utterance.rate = 0.95; // Slightly slower for clarity in children
-  utterance.pitch = 1.05; // Slightly warmer/friendlier tone
+  utterance.rate = 0.95;
+  utterance.pitch = 1.05;
 
-  // Voice Language matching
   if (STATE.language === 'english') {
     utterance.lang = 'en-US';
   } else {
@@ -693,12 +790,9 @@ function speakText(rawText) {
 }
 
 function stopSpeech() {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-  }
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
 }
 
-// High-Accessibility Speech Recognition (STT / Voice Input)
 function toggleVoiceInput() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRecognition) {
@@ -731,9 +825,7 @@ function toggleVoiceInput() {
         }
       }
 
-      if (interim) {
-        transcriptEl.innerText = `"${interim}..."`;
-      }
+      if (interim) transcriptEl.innerText = `"${interim}..."`;
 
       if (final) {
         transcriptEl.innerText = `"${final}"`;
@@ -745,24 +837,19 @@ function toggleVoiceInput() {
       }
     };
 
-    recognition.onerror = (err) => {
-      console.log('Voice recognition notice:', err);
+    recognition.onerror = () => {
       transcriptEl.innerText = 'Sauti haijasikika vizuri. Tafadhali bonyeza tena au andika.';
       setTimeout(() => overlay.classList.add('hidden'), 1500);
     };
 
     recognition.onend = () => {
-      // Auto-hide if nothing was captured
       setTimeout(() => {
-        if (!overlay.classList.contains('hidden')) {
-          overlay.classList.add('hidden');
-        }
+        if (!overlay.classList.contains('hidden')) overlay.classList.add('hidden');
       }, 2000);
     };
 
     recognition.start();
   } catch (err) {
-    console.error('Speech recognition error:', err);
     overlay.classList.add('hidden');
   }
 }
@@ -880,7 +967,7 @@ function renderMastery() {
   }
 }
 
-// Interactive Quiz Modal with Spoken Audio Feedback
+// Interactive Quiz Modal
 function openQuizModal(quizJsonStr, topicName) {
   try {
     const quiz = JSON.parse(quizJsonStr.replace(/&quot;/g, '"'));
@@ -895,7 +982,6 @@ function openQuizModal(quizJsonStr, topicName) {
     const isSw = STATE.language !== 'english';
     question.innerText = isSw ? quiz.question_sw : quiz.question_en;
 
-    // Read question aloud for learners with reading challenges
     if (STATE.autoSpeak) {
       speakText((isSw ? 'Swali la kujipima: ' : 'Quiz Question: ') + (isSw ? quiz.question_sw : quiz.question_en));
     }
@@ -937,12 +1023,8 @@ function handleQuizAnswer(selectedIndex) {
     feedback.innerHTML = `💡 <b>${isSw ? 'Uko karibu! Jaribu tena:' : 'Almost! Try again:'}</b><br>${isSw ? quiz.explanation_sw : quiz.explanation_en}`;
   }
 
-  // Voice feedback for child accessibility
-  if (STATE.autoSpeak) {
-    speakText(feedbackSpokenText);
-  }
+  if (STATE.autoSpeak) speakText(feedbackSpokenText);
 
-  // Record quiz result
   if (isEffectivelyOnline()) {
     fetch('/api/quiz-result', {
       method: 'POST',
@@ -957,6 +1039,7 @@ function handleQuizAnswer(selectedIndex) {
       if (d.mastery_graph) STATE.profile.mastery_graph = d.mastery_graph;
       if (d.badges) STATE.profile.badges = d.badges;
       renderMastery();
+      updateParentDigestPreview();
     }).catch(err => console.log('Quiz sync notice:', err));
   }
 }

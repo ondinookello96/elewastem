@@ -1,6 +1,6 @@
 """
-ElewaSTEM Specialized Agent Tools with Deep Hyper-Local African Ecosystems
-Provides localized STEM analogies, experiments, and offline modules specifically adapted to localities (e.g. Kisumu / Lake Basin, Mombasa / Coast, Nakuru / Highlands, Turkana / Arid, Nairobi / Urban).
+ElewaSTEM Specialized Agent Tools with Deep Hyper-Local African Ecosystems & Stakeholder Resources
+Provides localized STEM analogies, experiments, offline modules, teacher lesson plans, parent digests, and community club guides.
 """
 
 from typing import Dict, List, Any
@@ -91,10 +91,10 @@ OFFLINE_STEM_VAULT = [
         "title_en": "Photosynthesis: How Plants Make Food",
         "title_sw": "Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula",
         "subject": "Biology",
+        "cbc_strand": "Living Things & Life Processes (Grade 5/6 Science)",
         "summary_en": "Plants use sunlight, water, and carbon dioxide from the air to produce glucose energy and release fresh oxygen.",
         "summary_sw": "Mimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.",
         
-        # Deeply localized regional analogies
         "regional_analogies": {
             "lake_basin": {
                 "analogy_sw": "Kule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!",
@@ -146,6 +146,7 @@ OFFLINE_STEM_VAULT = [
         "title_en": "Aquatic Respiration & Fish Biology (Lake Ecosystem)",
         "title_sw": "Upumuaji wa Samaki na Uhai Ziwani (Mfano wa Ziwa Victoria)",
         "subject": "Biology",
+        "cbc_strand": "Animals & Environmental Adaptations (Grade 5/6 Science)",
         "summary_en": "Fish like Tilapia (Ngege) and Nile Perch (Mbuta) breathe underwater using specialized gills that extract dissolved oxygen from water.",
         "summary_sw": "Samaki kama Ngege (Tilapia) na Mbuta (Nile Perch) wanapumua ndani ya maji kwa kutumia yavuyavu (gills/mashavu) zinazochuja oksijeni iliyoyeyushwa kwenye maji ya ziwa.",
         "regional_analogies": {
@@ -199,6 +200,7 @@ OFFLINE_STEM_VAULT = [
         "title_en": "Electric Current & Circuits",
         "title_sw": "Mkondo wa Umeme na Saketi",
         "subject": "Physics",
+        "cbc_strand": "Energy & Force (Grade 6 Science & Technology)",
         "summary_en": "Electric current is the continuous flow of charges through a closed circuit wire.",
         "summary_sw": "Mkondo wa umeme ni mwendo wa chembe ndogo za chaji zinazosafiri kwenye waya uliounganishwa bila kukatika.",
         "regional_analogies": {
@@ -252,6 +254,7 @@ OFFLINE_STEM_VAULT = [
         "title_en": "Gravity & Friction: The Earth's Forces",
         "title_sw": "Mvuto wa Ardhi (Grabiti) na Msuguano",
         "subject": "Physics",
+        "cbc_strand": "Forces & Motion (Grade 5/6 Science)",
         "summary_en": "Gravity pulls mass toward the center of the Earth. Friction opposes motion between contacting surfaces.",
         "summary_sw": "Mvuto wa ardhi (Grabiti) huvuta vitu chini ardhini. Msuguano huzuia au kupunguza mwendo vitu vinapogusana.",
         "regional_analogies": {
@@ -305,6 +308,7 @@ OFFLINE_STEM_VAULT = [
         "title_en": "Fractions: Fair Sharing in Real Life",
         "title_sw": "Sehemu za Nambari: Mgawanyo Sawa Kwenye Maisha",
         "subject": "Mathematics",
+        "cbc_strand": "Numbers & Operations (Grade 5/6 Mathematics)",
         "summary_en": "A fraction represents equal parts of a whole quantity (Numerator / Denominator).",
         "summary_sw": "Sehemu (Fraction) huonyesha vipande vilivyogawanywa sawasawa kutoka kwa kitu kizima kimoja.",
         "regional_analogies": {
@@ -354,6 +358,72 @@ OFFLINE_STEM_VAULT = [
         }
     }
 ]
+
+
+# --- STAKEHOLDER RESOURCES ---
+
+# 1. Teachers: CBC-Aligned Lesson Plans & Classroom Diagnostics
+def generate_teacher_lesson_plan(topic_id: str, region: str) -> Dict[str, Any]:
+    topic = find_offline_topic(topic_id)
+    reg_info = REGIONS.get(region, REGIONS["lake_basin"])
+    regional_analogy = topic["regional_analogies"].get(region, topic["regional_analogies"]["lake_basin"])
+
+    return {
+        "curriculum_strand": topic.get("cbc_strand", "CBC Science & Technology"),
+        "grade_level": "Grade 5 & 6 (Upper Primary / Junior School)",
+        "lesson_title": topic["title_sw"] + f" ({topic['title_en']})",
+        "eco_zone": reg_info["name_sw"],
+        "locality": reg_info["locality_name"],
+        "learning_outcomes": [
+            f"Mwanafunzi aweze kueleza dhana ya {topic['title_sw']} kwa kutumia mifano ya eneo la {reg_info['locality_name']}.",
+            "Mwanafunzi aweze kutaja msamiati wa Kiingereza unaolingana na maneno ya Kiswahili.",
+            "Kufanya jaribio salama la kisayansi kwa kutumia vifaa vya nyumbani/shuleni."
+        ],
+        "local_teaching_aid": regional_analogy["analogy_sw"],
+        "in_class_activity": topic["experiment"],
+        "diagnostic_quiz": topic["quiz"],
+        "dpa_privacy_note": "Hakuna data ya kibinafsi ya mtoto inayohitajika kufanya somo hili darasani."
+    }
+
+
+# 2. Parents: Weekly Progress Digest & At-Home Science Challenges
+def generate_parent_digest(student_profile: Dict[str, Any], region: str) -> Dict[str, Any]:
+    reg_info = REGIONS.get(region, REGIONS["lake_basin"])
+    mastery = student_profile.get("mastery_graph", {})
+    mastered_count = sum(1 for m in mastery.values() if m.get("mastery_score", 0) >= 50)
+
+    return {
+        "student_name": student_profile.get("name", "Mwanafunzi"),
+        "grade": student_profile.get("grade_level", "Grade 6"),
+        "region_name": reg_info["name_sw"],
+        "topics_explored_count": len(mastery),
+        "concepts_mastered_count": mastered_count,
+        "badges_earned": student_profile.get("badges", ["🌟 Mwanzo Bora"]),
+        "sms_digest_text": f"ElewaSTEM Ripoti ya Mzazi: {student_profile.get('name', 'Mwanafunzi')} ameelewa mada {mastered_count} za sayansi kwa mifano ya {reg_info['locality_name']}. Jaribio la wiki hii: Chunguza Oksijeni ya mimea jikoni!",
+        "home_activity_for_parent": {
+            "title": f"Jaribio la Jioni Nyumbani: Mimea na Maji ({reg_info['locality_name']})",
+            "instructions": "Chukua jani bichi (kama sukuma au managu) na chupa ya maji. Weka juani na mtoto wako muhesabu viputo vya oksijeni vinavyotoka!"
+        }
+    }
+
+
+# 3. Community STEM Mentors & Village Centers
+def get_community_club_projects(region: str) -> List[Dict[str, Any]]:
+    reg_info = REGIONS.get(region, REGIONS["lake_basin"])
+    return [
+        {
+            "project_name": f"Klabu ya Mazingira & Maji Safi ({reg_info['locality_name']})",
+            "materials": "Chupa za plastiki zilizotumika, mchanga safi, makaa ya jikoni, maji.",
+            "objective": "Kutengeneza chujio rahisi la maji na kujifunza jinsi chembe ndogo zinavyochujwa.",
+            "impact": "Inafundisha sayansi ya uchujaji (filtration) na uhifadhi wa vyanzo vya maji vya jamii."
+        },
+        {
+            "project_name": f"Mradi wa Nishati ya Jua (Solar Cooker / Dryer)",
+            "materials": "Karatasi ya alumini/foil, sanduku la kadibodi, kioo au nailoni safi.",
+            "objective": "Kutumia nguvu ya jua kukausha mboga au kupasha maji joto.",
+            "impact": "Inawafundisha watoto nishati mbadala (Renewable Solar Energy) bila gharama."
+        }
+    ]
 
 
 def get_offline_starter_pack() -> List[Dict[str, Any]]:

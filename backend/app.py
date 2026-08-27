@@ -1,6 +1,6 @@
 """
-ElewaSTEM FastAPI Server with Geo-Location Adaptation
-Serves the Bilingual AI STEM Tutor API, Regional Eco-Zones, Offline Caching Pack, SMS/USSD Gateway, and Static PWA Frontend.
+ElewaSTEM FastAPI Server with Multi-Stakeholder Ecosystem Support
+Serves Learners (PWA, Voice, Quizzes), Teachers (CBC Lesson Plans), Parents (SMS Digests), Community Mentors, and Curriculum Bodies.
 """
 
 import os
@@ -13,12 +13,19 @@ from pydantic import BaseModel
 
 from agent import elewa_agent
 from memory import student_memory
-from tools import get_offline_starter_pack, get_available_regions, find_offline_topic
+from tools import (
+    get_offline_starter_pack,
+    get_available_regions,
+    find_offline_topic,
+    generate_teacher_lesson_plan,
+    generate_parent_digest,
+    get_community_club_projects
+)
 
 app = FastAPI(
-    title="ElewaSTEM API",
-    description="Multilingual Adaptive AI STEM Tutor for African Children with Geo-Context",
-    version="1.1.0"
+    title="ElewaSTEM Multi-Stakeholder API",
+    description="Multilingual Adaptive AI STEM Tutor for African Children with Parent, Teacher, and Community Stakeholder Hubs",
+    version="1.2.0"
 )
 
 # CORS middleware
@@ -38,7 +45,7 @@ class ChatRequest(BaseModel):
     student_id: str = "demo_student"
     message: str
     language: str = "swahili"  # "swahili", "english", "sheng"
-    region: str = "highlands"  # "coastal", "highlands", "lake_basin", "arid", "urban"
+    region: str = "lake_basin"
     gps_coordinates: Optional[Dict[str, float]] = None
     simplify: bool = False
 
@@ -58,15 +65,22 @@ class QuizResultRequest(BaseModel):
     score: int = 100
 
 
-# --- API Routes ---
+# --- Core Learner Endpoints ---
 
 @app.get("/api/health")
 async def health_check():
     return {
         "status": "healthy",
         "app": "ElewaSTEM",
-        "version": "1.1.0",
-        "features": ["multilingual", "offline_pwa", "geo_adaptive_context", "gps_offline_mapping"],
+        "version": "1.2.0",
+        "features": [
+            "multilingual",
+            "offline_pwa",
+            "voice_accessibility_tts_stt",
+            "geo_adaptive_context",
+            "dpa_2019_consent",
+            "stakeholders_parents_teachers_mentors"
+        ],
         "gemini_connected": elewa_agent.client is not None
     }
 
@@ -82,7 +96,6 @@ async def chat_with_agent(req: ChatRequest):
     if not req.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty")
     
-    # Update GPS if passed
     if req.gps_coordinates:
         student_memory.update_geo_location(
             req.student_id,
@@ -125,12 +138,11 @@ async def update_profile(student_id: str, req: ProfileUpdateRequest):
 
 @app.get("/api/offline-pack")
 async def download_offline_pack():
-    """Returns bundled starter STEM lessons, regional analogies, experiments, and quizzes for full offline caching."""
     modules = get_offline_starter_pack()
     regions = get_available_regions()
     return {
         "pack_name": "ElewaSTEM Regional Offline Knowledge Vault",
-        "version": "1.1",
+        "version": "1.2",
         "module_count": len(modules),
         "regions": regions,
         "modules": modules
@@ -153,27 +165,45 @@ async def submit_quiz_result(req: QuizResultRequest):
     }
 
 
+# --- Stakeholder Hub Endpoints ---
+
+@app.get("/api/teacher/lesson-plan")
+async def get_teacher_lesson_plan(topic: str = "photosynthesis", region: str = "lake_basin"):
+    """Returns a CBC-aligned STEM lesson plan with local African analogies and diagnostics."""
+    return generate_teacher_lesson_plan(topic, region)
+
+
+@app.get("/api/parent/digest/{student_id}")
+async def get_parent_progress_digest(student_id: str, region: str = "lake_basin"):
+    """Returns a simplified progress digest and SMS alert for parents on feature phones."""
+    profile = student_memory.get_or_create_profile(student_id).model_dump()
+    return generate_parent_digest(profile, region)
+
+
+@app.get("/api/community/activities")
+async def get_community_activities(region: str = "lake_basin"):
+    """Returns low-cost STEM club projects for village community centers and mentors."""
+    return get_community_club_projects(region)
+
+
+# --- SMS Gateway ---
+
 @app.post("/api/sms", response_class=PlainTextResponse)
 async def sms_gateway(
     from_: str = Form(None, alias="from"),
     text: str = Form(None),
     phoneNumber: str = Form(None)
 ):
-    """
-    SMS/USSD Webhook endpoint (Africa's Talking format).
-    """
     user_phone = phoneNumber or from_ or "sms_user"
     user_msg = text or ""
     
     if not user_msg:
-        return "Karibu ElewaSTEM! Tuma swali lako la Sayansi (mfano: 'eleza umeme pwani' au 'what is photosynthesis')."
+        return "Karibu ElewaSTEM! Tuma swali lako la Sayansi (mfano: 'eleza umeme kisumu' au 'what is photosynthesis')."
 
-    # Detect language
     is_sw = any(w in user_msg.lower() for w in ["eleza", "nini", "kwa nini", "jinsi", "sayansi", "mmea", "umeme", "hesabu"])
     lang = "swahili" if is_sw else "english"
 
-    # Detect region keyword if present
-    region = "highlands"
+    region = "lake_basin"
     if any(w in user_msg.lower() for w in ["pwani", "mombasa", "coast", "bahari", "dar"]):
         region = "coastal"
     elif any(w in user_msg.lower() for w in ["ziwa", "victoria", "kisumu", "mwanza", "samaki"]):
@@ -196,7 +226,7 @@ async def sms_gateway(
     return sms_reply
 
 
-# --- Serve Frontend Static Files ---
+# --- Serve Static Frontend ---
 if os.path.exists(FRONTEND_DIR):
     app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 

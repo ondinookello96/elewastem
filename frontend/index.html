@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ElewaSTEM — Mwalimu wa Sayansi (Voice-First & Multilingual)</title>
-  <meta name="description" content="Mwalimu wa AI wa STEM kwa watoto barani Afrika anayetumia sauti na kuongea kwa Kiswahili kwa watoto wasiojua kusoma au kuandika vizuri.">
+  <title>ElewaSTEM — Mwalimu wa Sayansi (Multi-Stakeholder STEM Platform)</title>
+  <meta name="description" content="Jukwaa la AI la STEM kwa Wanafunzi, Wazazi, Walimu na Vilabu vya Sayansi barani Afrika.">
   <meta name="theme-color" content="#10b981">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
@@ -42,16 +42,16 @@
       <div>
         <div class="flex items-center space-x-1.5">
           <h1 class="font-black text-base sm:text-lg text-slate-900 tracking-tight">Elewa<span class="text-brand-600">STEM</span></h1>
-          <span class="text-[9px] sm:text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800">Voice AI</span>
+          <span class="text-[9px] sm:text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800">Ecosystem AI</span>
         </div>
-        <p class="text-[10px] sm:text-xs text-slate-500 font-medium hidden sm:block">Usimeze, Elewa! • Voice Recognition & Speech for All Children</p>
+        <p class="text-[10px] sm:text-xs text-slate-500 font-medium hidden sm:block">Wanafunzi • Wazazi • Walimu • Jamii • CBC Aligned</p>
       </div>
     </div>
 
     <!-- Controls: Voice Auto-Read, GPS/Region, Network, Language -->
     <div class="flex items-center space-x-1.5 sm:space-x-2">
       <!-- Auto-Speak Toggle for Low Literacy -->
-      <button onclick="toggleAutoSpeak()" id="autoSpeakBtn" title="Washa usomaji wa sauti kiotomatiki (Auto-Read aloud for young learners)" class="flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-bold bg-purple-50 text-purple-900 border border-purple-300 hover:bg-purple-100 transition-all">
+      <button onclick="toggleAutoSpeak()" id="autoSpeakBtn" title="Washa usomaji wa sauti kiotomatiki" class="flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-bold bg-purple-50 text-purple-900 border border-purple-300 hover:bg-purple-100 transition-all">
         <span id="autoSpeakIcon">🔊</span>
         <span id="autoSpeakText" class="hidden md:inline">Sauti: Washa</span>
       </button>
@@ -91,19 +91,28 @@
   <!-- NAVIGATION TABS -->
   <nav class="bg-white border-b border-slate-200 px-4 py-1.5 flex items-center justify-between overflow-x-auto no-scrollbar flex-shrink-0 text-xs font-semibold">
     <div class="flex space-x-2">
+      <!-- 1. Learner -->
       <button onclick="switchTab('chat')" id="tabBtn-chat" class="tab-btn active-tab flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-brand-700 bg-brand-50 border border-brand-200">
         <span>💬</span>
-        <span data-i18n="tab_chat">Mwalimu Chat</span>
+        <span data-i18n="tab_chat">Mwanafunzi Chat</span>
       </button>
+      <!-- 2. Offline Vault -->
       <button onclick="switchTab('vault')" id="tabBtn-vault" class="tab-btn flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 border border-transparent">
         <span>📦</span>
-        <span data-i18n="tab_vault">Offline Vault (Masomo)</span>
+        <span data-i18n="tab_vault">Offline Vault</span>
         <span class="bg-brand-600 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">5</span>
       </button>
+      <!-- 3. Student Mastery -->
       <button onclick="switchTab('mastery')" id="tabBtn-mastery" class="tab-btn flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 border border-transparent">
         <span>🏆</span>
-        <span data-i18n="tab_mastery">Maendeleo & Beji</span>
+        <span data-i18n="tab_mastery">Maendeleo</span>
         <span id="badgeCount" class="bg-amber-500 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">1</span>
+      </button>
+      <!-- 4. Stakeholders Hub -->
+      <button onclick="switchTab('stakeholders')" id="tabBtn-stakeholders" class="tab-btn flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 border border-transparent">
+        <span>👥</span>
+        <span>Kituo cha Wadau (Stakeholders)</span>
+        <span class="bg-indigo-600 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">Wazazi/Walimu</span>
       </button>
     </div>
 
@@ -117,9 +126,8 @@
   <!-- MAIN CONTAINER -->
   <main class="flex-1 flex flex-col overflow-hidden relative">
 
-    <!-- 1. CHAT VIEW -->
+    <!-- 1. CHAT VIEW (LEARNER) -->
     <section id="chatSection" class="flex-1 flex flex-col overflow-hidden">
-      <!-- Chat Messages Scroll Area -->
       <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 max-w-4xl w-full mx-auto">
         <!-- Welcome Message -->
         <div class="flex items-start space-x-3">
@@ -132,7 +140,7 @@
               <span id="welcomeEcoPill" class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📍 Eneo: Kisumu & Ziwa Victoria</span>
             </div>
             <p id="welcomeText">
-              Mimi ni mwalimu wako wa Sayansi na Hesabu. <b>Huna haja ya kuandika au kusoma herufi ngumu!</b> Unaweza kubonyeza kitufe kikubwa cha kipaza sauti (🎤) kuongea nami, nami nitakusomea majibu kwa sauti ya Kiswahili au Kiingereza!
+              Mimi ni mwalimu wako wa Sayansi na Hesabu. <b>Huna haja ya kuandika au kusoma herufi ngumu!</b> Unaweza kubonyeza kitufe cha kipaza sauti (🎤) kuongea nami, nami nitakusomea majibu kwa sauti ya Kiswahili au Kiingereza!
             </p>
             <div class="pt-2">
               <p class="text-xs font-semibold text-slate-500 mb-1.5">💡 Jaribu kubonyeza mada ya kusikiliza:</p>
@@ -156,17 +164,14 @@
       <!-- Chat Input Bar with High-Accessibility Voice Button -->
       <div class="p-3 bg-white border-t border-slate-200 flex-shrink-0 shadow-lg">
         <form id="chatForm" onsubmit="handleChatSubmit(event)" class="max-w-4xl mx-auto flex items-center space-x-2">
-          <!-- Voice Record Button (Large & Accessible) -->
           <button type="button" id="voiceBtn" onclick="toggleVoiceInput()" title="Bonyeza hapa kuongea kwa sauti (Speak your question)" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 text-white flex items-center justify-center text-xl hover:from-brand-700 hover:to-emerald-600 active:scale-95 transition-all shadow-md flex-shrink-0">
             🎤
           </button>
           
-          <!-- Text Input -->
           <div class="relative flex-1">
             <input type="text" id="userInput" placeholder="Ongea kwa kipaza sauti au andika swali lako hapa..." autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-xl py-3 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all">
           </div>
 
-          <!-- Send Button -->
           <button type="submit" id="sendBtn" class="w-12 h-12 rounded-2xl bg-brand-600 text-white flex items-center justify-center hover:bg-brand-700 active:scale-95 transition-all shadow-md flex-shrink-0">
             <svg class="w-5 h-5 transform rotate-90" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
           </button>
@@ -220,6 +225,130 @@
       </div>
     </section>
 
+    <!-- 4. STAKEHOLDERS HUB (PARENTS, TEACHERS, COMMUNITY MENTORS) -->
+    <section id="stakeholdersSection" class="hidden flex-1 overflow-y-auto p-4 max-w-4xl w-full mx-auto space-y-6">
+      
+      <!-- Stakeholder Header Banner -->
+      <div class="bg-gradient-to-r from-indigo-900 to-purple-800 rounded-3xl p-6 text-white shadow-lg space-y-2">
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">👥</span>
+          <h2 class="text-lg font-black tracking-tight">Kituo cha Wadau wa Elimu ya STEM</h2>
+        </div>
+        <p class="text-xs text-indigo-200 leading-relaxed">
+          Kuunganisha <b>Wazazi</b>, <b>Walimu</b>, na <b>Viongozi wa Jamii</b> ili kumwezesha kila mtoto kuelewa sayansi kupitia mitaala ya CBC/NECTA na mazingira yao.
+        </p>
+      </div>
+
+      <!-- Stakeholder Sub-Navigation -->
+      <div class="flex space-x-2 border-b border-slate-200 pb-2 overflow-x-auto no-scrollbar text-xs font-bold">
+        <button onclick="switchStakeholderTab('parents')" id="subTab-parents" class="px-3.5 py-2 rounded-xl bg-indigo-50 text-indigo-900 border border-indigo-200">
+          👨‍👩‍👧 Wazazi na Walezi (Parents)
+        </button>
+        <button onclick="switchStakeholderTab('teachers')" id="subTab-teachers" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200">
+          👩‍🏫 Walimu (Teachers & CBC)
+        </button>
+        <button onclick="switchStakeholderTab('community')" id="subTab-community" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200">
+          🤝 Vilabu vya Jamii (Mentors)
+        </button>
+      </div>
+
+      <!-- 4A. PARENTS VIEW -->
+      <div id="stakeholderView-parents" class="space-y-4">
+        <!-- Parent Weekly Progress Digest -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="font-black text-slate-900 text-sm flex items-center space-x-2">
+              <span>📱</span>
+              <span>Ripoti ya Maendeleo ya Mtoto kwa Mzazi</span>
+            </h3>
+            <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">SMS / WhatsApp Ready</span>
+          </div>
+
+          <p class="text-xs text-slate-600">
+            Kama mzazi, pata muhtasari rahisi wa masomo mtoto wako aliyofanya, bila maneno magumu ya kitaalamu:
+          </p>
+
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs font-mono text-slate-800 space-y-2">
+            <p class="font-bold text-indigo-900">📲 Mfano wa Ujumbe wa SMS kwa Mzazi:</p>
+            <p id="parentSmsPreview" class="bg-white p-3 rounded-lg border border-slate-200 text-slate-700 italic">
+              "ElewaSTEM Ripoti: Mwanafunzi amechunguza mada za Usanisinuru (Photosynthesis) na Upumuaji wa Samaki kwa kutumia mifano ya Ziwa Victoria. Ameshinda beji ya 'Mvumbuzi Chipukizi'!"
+            </p>
+            <button onclick="copySmsDigest()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
+              📋 Nakili Ujumbe wa SMS (Copy SMS)
+            </button>
+          </div>
+        </div>
+
+        <!-- At-Home Science Challenge for Parents -->
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 space-y-2">
+          <h4 class="font-black text-amber-900 text-sm flex items-center space-x-2">
+            <span>🧪</span>
+            <span>Jaribio la Pamoja Nyumbani (Weekend Parent-Child Challenge)</span>
+          </h4>
+          <p class="text-xs text-amber-800 leading-relaxed">
+            <b>Mada ya Wiki:</b> Jinsi mimea ya jikoni (kama majani ya sukuma au managu) inavyotoa oksijeni.<br>
+            <b>Vifaa:</b> Jani moja bichi na chupa ya maji safi.<br>
+            <b>Mwongozo:</b> Weka jani ndani ya chupa juani kwa saa 1. Wewe na mtoto wako muhesabu viputo vidogo vya hewa vinavyojitokeza!
+          </p>
+        </div>
+      </div>
+
+      <!-- 4B. TEACHERS VIEW -->
+      <div id="stakeholderView-teachers" class="hidden space-y-4">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="font-black text-slate-900 text-sm flex items-center space-x-2">
+              <span>📚</span>
+              <span>CBC Lesson Plan Generator (Mwongozo wa Mwalimu)</span>
+            </h3>
+            <span class="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">KICD / CBC Aligned</span>
+          </div>
+
+          <p class="text-xs text-slate-600">
+            Tengeneza somo lililooanishwa na mtaala wa CBC (Grade 5/6 Science) likiwa na mifano ya mazingira ya shule yako:
+          </p>
+
+          <!-- Lesson Plan Selector -->
+          <div class="flex space-x-2">
+            <select id="teacherTopicSelect" onchange="loadTeacherLessonPlan(this.value)" class="bg-slate-50 border border-slate-300 text-xs font-bold p-2.5 rounded-xl flex-1 focus:ring-2 focus:ring-brand-500">
+              <option value="photosynthesis">Usanisinuru (Photosynthesis in Local Plants)</option>
+              <option value="aquatic_biology_kisumu">Upumuaji wa Samaki (Lake Victoria Ecology)</option>
+              <option value="electricity_circuits">Mkondo wa Umeme & Saketi (Circuits)</option>
+              <option value="gravity_forces">Mvuto wa Ardhi & Msuguano (Gravity & Friction)</option>
+              <option value="fractions_math">Sehemu za Nambari (Fractions in Daily Life)</option>
+            </select>
+          </div>
+
+          <!-- Lesson Plan Card Rendered Dynamically -->
+          <div id="teacherLessonPlanCard" class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs space-y-3">
+            <!-- Dynamic Content -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 4C. COMMUNITY MENTORS VIEW -->
+      <div id="stakeholderView-community" class="hidden space-y-4">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="font-black text-slate-900 text-sm flex items-center space-x-2">
+              <span>🏕️</span>
+              <span>Miradi ya Vilabu vya Sayansi vya Jamii (STEM Club Guides)</span>
+            </h3>
+            <span class="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">Zero Budget Materials</span>
+          </div>
+
+          <p class="text-xs text-slate-600">
+            Miradi ya vitendo inayotumia vifaa vilivyopo kijijini kwa ajili ya vituo vya watoto, makanisa, misikiti na kumbi za jamii:
+          </p>
+
+          <div id="communityProjectsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+    </section>
+
   </main>
 
   <!-- VOICE LISTENING OVERLAY MODAL -->
@@ -231,7 +360,6 @@
       <h3 class="font-black text-slate-900 text-lg">Mwalimu Anasikiliza...</h3>
       <p class="text-xs text-slate-500 font-medium">Ongea sasa kwa Kiswahili au Kiingereza!</p>
       
-      <!-- Audio Wave Visualizer -->
       <div class="flex items-center justify-center space-x-1.5 h-8">
         <span class="wave-bar"></span>
         <span class="wave-bar"></span>
