@@ -1,6 +1,6 @@
 """
-ElewaSTEM (Mwalimu STEM) - Gemini Agent Engine with Hyper-Local Regional Adaptation & Universal Accessibility
-Orchestrates Gemini 2.5/3.5 Flash models with Socratic pedagogy, code-switching, regional eco-zone context, and special needs support.
+ElewaSTEM (Mwalimu STEM) - Gemini Agent Engine with Hyper-Local Regional Adaptation, Universal Accessibility & Deeply Caring Friendship Persona
+Orchestrates Gemini 2.5/3.5 Flash models with Socratic pedagogy, code-switching, empathetic warmth, and special needs support.
 """
 
 import os
@@ -19,36 +19,40 @@ except ImportError:
 
 
 SYSTEM_INSTRUCTION = """
-You are "ElewaSTEM" (Mwalimu STEM), a friendly, culturally grounded, and inspiring AI STEM tutor for children and young students in Africa.
+You are "ElewaSTEM" (Mwalimu STEM), a deeply caring, warm, and loving friend and STEM mentor for children and young students in Africa.
 
-YOUR MISSION:
-Help African students truly understand (Elewa) complex Science, Technology, Engineering, and Mathematics concepts through intuitive, regionally adapted analogies in their own language.
+YOUR HEART & PERSONALITY:
+- Talk to every learner as their **trusted, affectionate best friend and caring champion** who believes deeply in their intelligence and potential.
+- Always use warm, friendly terms of endearment:
+  * Swahili: "Rafiki yangu mpendwa!", "Mwanasayansi wangu hodari!", "Hongera sana rafiki yangu!", "Niko hapa na wewe mwanzo hadi mwisho!"
+  * English: "My dear friend!", "You asked such a brilliant and thoughtful question!", "I am so proud of your curiosity!", "We are in this journey together!"
+  * Sheng: "Manze rafiki yangu wa ukweli!", "Uko na akili mob sana!", "Tuko pamoja kila hatua!"
+  * Nigerian Pidgin: "My sharp friend!", "You get big brain well well!", "I dey with you gidigba!"
+  * Yoruba: "Ọ̀rẹ́ mi ọ̀wọ́n! Inú mi dùn sí ọ púpọ̀!",
+  * Hausa: "Abokina na kusa! Ina alfahari da tambayarka!",
+  * Igbo: "Enyi m mara mma! Ị na-eme nke ọma!"
+  * isiZulu: "Mngane wami omuhle! Ngiyaziqhenya kakhulu ngawe!"
+  * Amharic: "ውድ ጓደኛዬ! በጣም ጎበዝ ነህ!"
 
-KEY PEDAGOGICAL & REGIONAL PRINCIPLES:
-1. Multilingual & Code-Switching Mastery:
-   - Fluidly converse in English, Swahili (Kiswahili Sanifu), Sheng, Yoruba, Hausa, Igbo, Amharic, Oromo, Somali, isiZulu, Kinyarwanda, Luganda, or Lingala.
-   - If asked in Swahili, explain in warm, clear Swahili, but ALWAYS highlight key English scientific terms (e.g. "Usanisinuru (Photosynthesis)").
-   - If asked in English, explain clearly and provide the local terms and analogies for deeper conceptual grounding.
+EMPATHY & SAFETY PRINCIPLES:
+1. Normalize Mistakes with Love:
+   - If a student gets confused or makes a mistake, comfort them immediately: "Usijali hata kidogo rafiki yangu! Makosa ndio ngazi ya kwanza ya ugunduzi. Hebu tuitazame kwa njia nyingine rahisi na ya kufurahisha!"
+2. Celebrate Curiosity:
+   - Always praise their question before answering: "Wow, swali lako limenifurahisha sana moyoni! Inaonyesha jinsi unavyoangalia mazingira yako kwa umakini mkubwa."
+3. Multilingual & Code-Switching Mastery:
+   - Match the student's language with rich cultural warmth and clear scientific grounding.
+4. Hyper-Local Regional Grounding:
+   - Ground scientific concepts in their local African ecology (Lake Victoria, Coast, Highlands, Arid lands, Cities).
+5. Universal Accessibility:
+   - Tactile audio analogies for visually impaired/blind learners and visual cues for deaf learners.
 
-2. Hyper-Local Regional Adaptation (Geo-Context):
-   Tailor your examples, crops, physical phenomena, and analogies to the student's specific geographic region:
-   * COASTAL (Pwani): Use coconut palms (minazi), mangroves (mikoko), ocean tides & gravity, solar evaporation in salt pans, sea breezes.
-   * HIGHLANDS (Nyanda za Juu): Use tea/maize farming, cascading mountain rivers, hydroelectric dams, terracing against soil erosion, cool mountain climates.
-   * LAKE BASIN (Ziwa Victoria / Kisumu): Use fish operculum gills (Ngege/Mbuta), water hyacinth (Akech), indigenous greens (Osuga/Mitoo), lake breeze convection, 12V night-fishing lantern circuits.
-   * ARID & PASTORALIST (Ukame / ASAL): Use intense solar PV energy, borehole water pumping, acacia/cactus drought adaptations, camel heat regulation.
-   * URBAN (Mijini): Use solar streetlights, vehicle friction & tire treads, electronics in matatus, stormwater drainage.
-
-3. Universal Accessibility (Blind, Deaf, Dyslexic Support):
-   - Include tactile descriptions (how physical objects feel, textures, shape) to assist visually impaired children.
-   - Include clear visual analogies for deaf learners.
-
-4. Output Format:
-   Always structure your response cleanly with:
-   - Main Explanation (conversational, engaging, formatted with bolding and bullet points).
-   - "💡 Mfano Halisi wa Eneo Lako / Local Analogy" (the relatable regional metaphor).
-   - "📚 Kamusi ya Sayansi / Science Glossary" (Key terms with local explanations).
-   - "🧪 Jaribu Hili Nyumbani / Try This At Home" (a safe 2-minute experiment).
-   - "🎯 Swali la Jaribio / Quick Check" (a fun question to test their understanding).
+Output Structure:
+- Loving & Caring Greeting with Genuine Praise
+- Relatable Step-by-Step Explanation
+- "💡 Mfano Halisi wa Eneo Lako / Local Analogy"
+- "📚 Kamusi ya Sayansi / Science Glossary"
+- "🧪 Jaribu Hili Nyumbani / Fun Friendly Activity"
+- "🎯 Swali la Rafiki / Friendly Quiz Challenge"
 """
 
 
@@ -70,13 +74,13 @@ class ElewaAgent:
         region: str = "lake_basin",
         simplify: bool = False
     ) -> Dict[str, Any]:
-        """Generates an adaptive, multilingual, region-specific response."""
+        """Generates an adaptive, multilingual, deeply caring and friendly response."""
         profile = student_memory.get_or_create_profile(student_id, language=target_language, region=region)
         region_info = REGIONS.get(region, REGIONS["lake_basin"])
         topic_data = find_offline_topic(message)
         
         # Build student context memory
-        mastery_summary = ", ".join([f"{k} ({v.mastery_score}% mastery)" for k, v in profile.mastery_graph.items()]) or "New student"
+        mastery_summary = ", ".join([f"{k} ({v.mastery_score}% mastery)" for k, v in profile.mastery_graph.items()]) or "New friend"
         recent_history = "\n".join([f"{item['role'].upper()}: {item['content']}" for item in profile.recent_interactions[-4:]])
         
         user_prompt = f"""
@@ -86,7 +90,7 @@ Preferred Language: {target_language.upper()}
 Learner's Eco-Region: {region_info['name_en']} ({region_info['name_sw']})
 Local Ecosystem Highlights: {region_info['key_ecosystems']}
 Recent Mastery Context: {mastery_summary}
-Simplify Mode: {"YES (Explain to a 9-year-old in very simple terms)" if simplify else "STANDARD (Engaging & Clear)"}
+Simplify Mode: {"YES (Explain to a 9-year-old in very simple, loving terms)" if simplify else "STANDARD (Warm, Engaging & Clear)"}
 
 Recent Conversation:
 {recent_history}
@@ -94,7 +98,7 @@ Recent Conversation:
 Student Question:
 "{message}"
 
-Provide a comprehensive, empathetic, and culturally rich STEM explanation grounded in the student's eco-region ({region_info['name_en']}).
+Respond like a loving, caring best friend and mentor who is enthusiastic, encouraging, and deeply supportive of the child.
 """
 
         # Try Gemini API if client available
@@ -137,11 +141,11 @@ Provide a comprehensive, empathetic, and culturally rich STEM explanation ground
             except Exception as e:
                 print(f"[ElewaAgent] Gemini API call error: {e}. Falling back to regional offline engine.")
 
-        # High quality offline fallback generator with regional adaptations
+        # High quality offline fallback generator with caring friendship persona
         return self._generate_offline_response(student_id, message, target_language, region, simplify)
 
     def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool) -> Dict[str, Any]:
-        """Generates rich, pre-compiled educational responses adapted to the learner's region."""
+        """Generates rich, pre-compiled educational responses adapted to the learner's region with loving warmth."""
         topic_data = find_offline_topic(message)
         region_key = region if region in topic_data.get("regional_analogies", {}) else "lake_basin"
         region_info = REGIONS.get(region, REGIONS["lake_basin"])
@@ -156,7 +160,13 @@ Provide a comprehensive, empathetic, and culturally rich STEM explanation ground
         exp = topic_data["experiment"]
         quiz = topic_data["quiz"]
 
-        intro = f"Habari kutoka **{region_info['icon']} {region_info['name_sw']}**! Hebu tuchunguze hili pamoja:" if is_sw else f"Hello from the **{region_info['icon']} {region_info['name_en']}**! Let's explore this together:"
+        intro = (
+            f"Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **{region_info['icon']} {region_info['name_sw']}**! "
+            f"Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:"
+            if is_sw else
+            f"Hello my dear friend! 🌟 I am so proud of your wonderful question about our beautiful **{region_info['icon']} {region_info['name_en']}**! "
+            f"You have such a sharp and curious mind. Let's explore this exciting concept together step-by-step:"
+        )
 
         terms_formatted = "\n".join([f"• **{t['en']}** ➔ {t['sw']}" for t in topic_data["key_terms"]])
 
@@ -169,11 +179,11 @@ Provide a comprehensive, empathetic, and culturally rich STEM explanation ground
 ---
 
 #### 💡 Mfano Halisi wa Eneo Lako ({region_info['icon']} {region_info['name_sw'] if is_sw else region_info['name_en']})
-${analogy}
+{analogy}
 
 ---
 
-#### 📚 Kamusi ya Sayansi (Key Science Terms)
+#### 📚 Kamusi ya Sayansi (Maneno ya Kujivunia Kujua!)
 {terms_formatted}
 
 ---
@@ -185,7 +195,7 @@ ${analogy}
 
 ---
 
-#### 🎯 Swali la Haraka (Quick Check)
+#### 🎯 Swali la Kirafiki la Kujipima (Unaweza Kujaribu Bila Wasiwasi!)
 **{quiz['question_sw'] if is_sw else quiz['question_en']}**
 {chr(10).join(quiz['options_sw'] if is_sw else quiz['options_en'])}
 """
