@@ -1,51 +1,86 @@
 """
-ElewaSTEM Specialized Agent Tools with Hyper-Local Regional Ecosystems
-Provides localized STEM analogies, experiments, and offline modules adapted to regional ecologies (Coastal, Highlands, Lake Basin, Arid, Urban).
+ElewaSTEM Specialized Agent Tools with Deep Hyper-Local African Ecosystems
+Provides localized STEM analogies, experiments, and offline modules specifically adapted to localities (e.g. Kisumu / Lake Basin, Mombasa / Coast, Nakuru / Highlands, Turkana / Arid, Nairobi / Urban).
 """
 
 from typing import Dict, List, Any
 
-# Regional Eco-Zones definition
+# Regional Eco-Zones & Localities definition
 REGIONS = {
+    "lake_basin": {
+        "id": "lake_basin",
+        "name_sw": "Bonde la Ziwa (Kisumu & Lake Victoria)",
+        "name_en": "Lake Victoria Basin (Kisumu, Mwanza, Entebbe)",
+        "locality_name": "Kisumu / Ziwa Victoria",
+        "icon": "🏞️",
+        "local_species": [
+            "Samaki Ngege (Tilapia)",
+            "Mbuta (Nile Perch)",
+            "Magugu Maji / Akech (Water Hyacinth)",
+            "Mboga za kienyeji: Osuga (Managu) & Mitoo",
+            "Mianzi ya Papyrus ya Dunga Beach",
+            "Mti wa Yago (Kigelia africana)"
+        ],
+        "key_ecosystems": "Ziwa Victoria, Samaki Ngege & Mbuta, Magugu Maji (Water Hyacinth), Mboga za kienyeji (Osuga & Mitoo), Upepo wa Ziwani"
+    },
     "coastal": {
         "id": "coastal",
-        "name_sw": "Pwani na Bahari (Coastal)",
-        "name_en": "Coastal & Ocean Zone",
-        "examples": "Mombasa, Dar es Salaam, Zanzibar, Kilifi, Tanga",
+        "name_sw": "Pwani na Bahari (Mombasa, Kilifi, Zanzibar)",
+        "name_en": "Coastal & Ocean Zone (Mombasa, Malindi, Dar)",
+        "locality_name": "Mombasa & Pwani",
         "icon": "🌊",
-        "key_ecosystems": "Minazi (Coconuts), Mikoko (Mangroves), Bahari, Uvukizaji wa Chumvi (Salt Pans), Upepo wa Bahari"
+        "local_species": [
+            "Minazi (Coconut Palms)",
+            "Mikoko (Mangrove Trees with breathing roots)",
+            "Miti ya Mbuyu (Baobab)",
+            "Miamba ya Matumbawe (Coral Reefs)",
+            "Mkorosho (Cashew Nuts)"
+        ],
+        "key_ecosystems": "Minazi, Mikoko yenye mizizi ya kupumulia (Pneumatophores), Bahari ya Hindi, Mashamba ya Chumvi, Upepo wa Bahari"
     },
     "highlands": {
         "id": "highlands",
-        "name_sw": "Nyanda za Juu & Kilimo (Highlands)",
-        "name_en": "Highlands & Agricultural Belt",
-        "examples": "Nakuru, Mt. Kenya, Arusha, Eldoret, Kisii, Meru",
+        "name_sw": "Nyanda za Juu & Kilimo (Nakuru, Mt. Kenya, Eldoret)",
+        "name_en": "Highlands & Agricultural Belt (Eldoret, Kericho, Arusha)",
+        "locality_name": "Nakuru / Eldoret / Mt. Kenya",
         "icon": "⛰️",
-        "key_ecosystems": "Mashamba ya Mahindi & Chai, Milima, Mito inayotiririka, Mvua nyingi, Udongo wa Volkano"
-    },
-    "lake_basin": {
-        "id": "lake_basin",
-        "name_sw": "Bonde la Ziwa (Lake Victoria Basin)",
-        "name_en": "Lake Victoria Basin",
-        "examples": "Kisumu, Mwanza, Entebbe, Homa Bay, Musoma",
-        "icon": "🏞️",
-        "key_ecosystems": "Ziwa Victoria, Samaki (Tilapia & Sangara), Magugu Maji (Water Hyacinth), Mvua za radi, Upepo wa ziwa"
+        "local_species": [
+            "Majani ya Chai (Tea bushes)",
+            "Mahindi & Maharagwe (Legume Nitrogen fixers)",
+            "Miti ya Grevillea & Cypress",
+            "Udongo mwekundu wa Volkano",
+            "Mito ya Milima (Mountain streams)"
+        ],
+        "key_ecosystems": "Mashamba ya Chai & Mahindi, Milima, Mito inayotiririka, Mvua nyingi, Udongo wa Volkano"
     },
     "arid": {
         "id": "arid",
-        "name_sw": "Maeneo Kavu & Ukame (Arid & Pastoralist)",
-        "name_en": "Arid & Semi-Arid Lands (ASAL)",
-        "examples": "Turkana, Garissa, Kajiado, Marsabit, Dodoma, Wajir",
+        "name_sw": "Maeneo Kavu & Ukame (Turkana, Garissa, Marsabit)",
+        "name_en": "Arid & Pastoralist ASAL (Turkana, Garissa, Wajir)",
+        "locality_name": "Turkana / Garissa / Wajir",
         "icon": "☀️",
-        "key_ecosystems": "Jua kali, Mbigili & Miti ya Mibabakhi (Acacia), Ngamia, Visima vya maji ya ardhini, Nishati ya Jua (Solar)"
+        "local_species": [
+            "Mshikio / Mgunga (Acacia tortilis with 30m taproots)",
+            "Ngamia (Camels with water-retaining blood cells)",
+            "Mbuyu (Water-storing Baobab)",
+            "Mimea ya Mkonge (Sisal) & Ukwaju (Tamarind)",
+            "Visima vya Maji ya Ardhini (Aquifer boreholes)"
+        ],
+        "key_ecosystems": "Jua kali, Miti ya Acacia yenye nta, Ngamia, Visima vya maji ya ardhini, Nishati ya Solar"
     },
     "urban": {
         "id": "urban",
-        "name_sw": "Mijini (Urban Centers)",
-        "name_en": "Urban & Metropolitan Centers",
-        "examples": "Nairobi, Kampala, Lagos, Dar es Salaam, Kigali",
+        "name_sw": "Mijini (Nairobi, Kampala, Dar es Salaam)",
+        "name_en": "Urban & Metropolitan (Nairobi, Kampala, Lagos)",
+        "locality_name": "Nairobi & Mijini",
         "icon": "🏙️",
-        "key_ecosystems": "Taa za barabarani za Solar, Matatu electronics, Majengo, Mifereji ya maji ya mvua, Karakana"
+        "local_species": [
+            "Miti ya Jacaranda & Nandi Flame",
+            "Mimea ya bustani za mijini (Urban balcony gardens)",
+            "Ndege wa Korongo (Marabou Storks)",
+            "Taa za barabarani za Solar PV"
+        ],
+        "key_ecosystems": "Miti ya jiji inayofyonza moshi wa magari, Taa za barabarani za solar, Matatu electronics, Barabara za lami"
     }
 }
 
@@ -59,27 +94,27 @@ OFFLINE_STEM_VAULT = [
         "summary_en": "Plants use sunlight, water, and carbon dioxide from the air to produce glucose energy and release fresh oxygen.",
         "summary_sw": "Mimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.",
         
-        # Region-adaptive analogies
+        # Deeply localized regional analogies
         "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!",
+                "analogy_en": "In Kisumu along Lake Victoria, look at the broad leaves of Water Hyacinth (Akech) and indigenous greens like Osuga (Managu) and Mitoo! Their rich green chlorophyll absorbs bright equatorial lake sunlight and water to synthesize nutrients while oxygenating the water for tilapia fish (Ngege)!"
+            },
             "coastal": {
-                "analogy_sw": "Fikiria mnazi kule Pwani! Majani yake makubwa yaliyotandazwa kuelekea jua la pwani yanafanya kazi kama paneli za jua, yakifyonza maji ya ardhini na jua kupika maji matamu ya dafu!",
-                "analogy_en": "Think of a coconut palm on the coast! Its broad fronds act like solar panels absorbing intense tropical coastal sun to brew sweet coconut water inside the fruit!"
+                "analogy_sw": "Kule Mombasa na Kilifi, tazama minazi na mikoko (mangroves)! Majani marefu ya mnazi yanafanya kazi kama paneli kubwa za jua za kijani, yakifyonza unyevu wa bahari na mwangaza wa jua la pwani ili kutengeneza maji matamu ya dafu na nyama ya nazi!",
+                "analogy_en": "In Mombasa and Kilifi, observe the tall coconut palms and coastal mangroves! The palm fronds act as giant green solar panels, harnessing coastal sunshine and soil moisture to produce sweet coconut water!"
             },
             "highlands": {
-                "analogy_sw": "Fikiria shamba la mahindi au majani ya chai kule milimani. Kila jani la kijani ni kama jiko dogo linalotumia unyevu wa ukungu wa asubuhi na mwangaza wa jua kutengeneza punje za mahindi!",
-                "analogy_en": "Think of lush maize or tea farms in the cool highlands. Each green leaf is a tiny kitchen utilizing morning mountain mist and bright sunlight to synthesize nutrients!"
-            },
-            "lake_basin": {
-                "analogy_sw": "Tazama magugu maji au mimea kando ya Ziwa Victoria. Inachukua maji mengi ya ziwani na mwanga mkali wa jua kutengeneza majani mazito na kutoa oksijeni inayosaidia samaki kupumua!",
-                "analogy_en": "Look at the reeds and flora along Lake Victoria. They absorb lake moisture and intense equatorial sun to fuel rapid growth while infusing the water with dissolved oxygen for tilapia!"
+                "analogy_sw": "Kule Nakuru, Eldoret au Kericho, fikiria shamba la majani ya chai au mahindi! Kila jani la kijani linatumia unyevu wa ukungu wa asubuhi milimani na mwangaza wa jua kupika glukosi inayokuza mahindi makubwa!",
+                "analogy_en": "In the highlands of Nakuru, Eldoret, or Kericho, picture lush tea bushes and maize stalks. Each leaf uses morning highland mist and sunlight to brew glucose and fuel corn development!"
             },
             "arid": {
-                "analogy_sw": "Kule Turkana au Garissa, miti ya mshikio (acacia) na mikakasi ina majani madogo sana yenye nta ili isipoteze maji, huku mizizi mirefu ikitafuta maji chini kabisa ya ardhi ili kupika chakula wakati wa jua kali!",
-                "analogy_en": "In arid regions like Turkana or Garissa, acacia trees have tiny waxy leaves that minimize evaporation, while deep taproots pull groundwater to power photosynthesis under blazing sunlight!"
+                "analogy_sw": "Kule Turkana na Garissa, miti ya Mgunga/Mshikio (Acacia) ina majani madogo sana yenye tabaka la nta ili kuzuia maji yasipotee kwa mvuke (transpiration), huku mizizi mirefu ikivuta maji chini ya ardhi ili kupika chakula chini ya jua kali!",
+                "analogy_en": "In arid regions like Turkana or Garissa, acacia trees have tiny waxy leaves that prevent moisture loss from transpiration, while taproots reach deep water aquifers to power photosynthesis under intense heat!"
             },
             "urban": {
-                "analogy_sw": "Fikiria miti iliyopandwa kando ya barabara za jiji. Majani yake yanafyonza hewa chafu ya kaboni inayotoka kwenye moshi wa magari na kuibadilisha kuwa hewa safi ya oksijeni kwa wakazi wa jiji!",
-                "analogy_en": "Think of urban trees lining city avenues. Their leaves scrub carbon emissions from vehicle exhaust and convert it into crisp, oxygenated air for city dwellers!"
+                "analogy_sw": "Kwenye jiji kama Nairobi, miti ya kando ya barabara (kama Jacaranda) inafyonza hewa ya moshi wa magari (Carbon Dioxide) na kuibadilisha kuwa hewa safi ya oksijeni kwa wakazi wa jiji!",
+                "analogy_en": "In cities like Nairobi, avenue trees like Jacaranda absorb vehicle exhaust fumes (Carbon Dioxide) and convert it into fresh oxygen for urban residents!"
             }
         },
         "key_terms": [
@@ -89,21 +124,74 @@ OFFLINE_STEM_VAULT = [
             {"en": "Transpiration", "sw": "Mvukizo wa maji kupitia majani"}
         ],
         "experiment": {
-            "title_sw": "Jaribio: Kushuhudia Oksijeni ya Mmea",
-            "title_en": "Experiment: Seeing Plant Oxygen in Action",
-            "materials_sw": "Jani bichi la eneo lako (mnazi, mahindi, au mti wa kawaida), chupa ya maji, jua.",
-            "materials_en": "A fresh leaf from your local area, a clear glass or transparent bottle with water, sunlight.",
-            "steps_sw": "1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi!",
-            "steps_en": "1. Submerge the leaf inside the bottle of water.\n2. Place it in direct sunlight for 1 hour.\n3. Watch tiny gas bubbles gather on the leaf surface - that is pure Oxygen!"
+            "title_sw": "Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako",
+            "title_en": "Experiment: Observing Plant Oxygen in Your Locality",
+            "materials_sw": "Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.",
+            "materials_en": "A fresh local leaf (Osuga/Managu in Kisumu, coconut leaf at Coast, maize in Highlands), clear bottle with water, sunlight.",
+            "steps_sw": "1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!",
+            "steps_en": "1. Submerge the leaf inside the clear bottle of water.\n2. Place it in direct sunlight for 1 hour.\n3. Watch tiny bubbles form on the leaf surface - that is pure Oxygen released by your local plant!"
         },
         "quiz": {
-            "question_sw": "Ni kipi mmea unachotoa hewani baada ya usanisinuru (photosynthesis)?",
-            "question_en": "What do plants release into the atmosphere after photosynthesis?",
-            "options_sw": ["A) Oksijeni safi", "B) Moshi", "C) Mchanga", "D) Maji ya chumvi"],
-            "options_en": ["A) Pure Oxygen", "B) Smoke", "C) Sand", "D) Salt Water"],
+            "question_sw": "Kwa nini mimea kama mboga za Osuga (Kisumu) au mnazi (Pwani) inahitaji mwangaza wa jua?",
+            "question_en": "Why do local plants require direct sunlight?",
+            "options_sw": ["A) Kutengeneza chakula (glukosi) kupitia usanisinuru", "B) Ili ibadilishe rangi kuwa nyekundu", "C) Kukausha udongo mzima", "D) Ili kuzuia upepo"],
+            "options_en": ["A) To synthesize food energy (glucose) via photosynthesis", "B) To turn red", "C) To dry up all soil", "D) To block wind"],
             "correct_index": 0,
-            "explanation_sw": "Sahihi! Mimea hutoa gesi ya oksijeni ambayo wanadamu na wanyama huivuta ili kuishi.",
-            "explanation_en": "Correct! Plants produce oxygen, which humans and animals breathe to survive."
+            "explanation_sw": "Sahihi kabisa! Mwangaza wa jua ndio chanzo cha nishati inayowezesha mmea kupika chakula chake.",
+            "explanation_en": "Exactly right! Sunlight provides the fundamental energy needed to power photosynthesis."
+        }
+    },
+    {
+        "id": "aquatic_biology_kisumu",
+        "title_en": "Aquatic Respiration & Fish Biology (Lake Ecosystem)",
+        "title_sw": "Upumuaji wa Samaki na Uhai Ziwani (Mfano wa Ziwa Victoria)",
+        "subject": "Biology",
+        "summary_en": "Fish like Tilapia (Ngege) and Nile Perch (Mbuta) breathe underwater using specialized gills that extract dissolved oxygen from water.",
+        "summary_sw": "Samaki kama Ngege (Tilapia) na Mbuta (Nile Perch) wanapumua ndani ya maji kwa kutumia yavuyavu (gills/mashavu) zinazochuja oksijeni iliyoyeyushwa kwenye maji ya ziwa.",
+        "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Dunga Beach au Luanda Kotieno kando ya Ziwa Victoria, unapoangalia samaki Ngege (Tilapia), mashavu yake yakifunguka na kufunga, yanafanya kazi kama chujio maalum (filter) linalofyonza oksijeni kutoka majini na kuingiza kwenye damu yake!",
+                "analogy_en": "At Dunga Beach in Kisumu, when you watch a fresh Tilapia (Ngege), its operculum gills flap to pump lake water across gill filaments that filter dissolved oxygen directly into its bloodstream!"
+            },
+            "coastal": {
+                "analogy_sw": "Kule Pwani, samaki wa baharini kama Changwa au Taa wanatumia mashavu yao kuchuja oksijeni kwenye maji yenye chumvi ya Bahari ya Hindi!",
+                "analogy_en": "At the coast, marine fish filter dissolved oxygen through gill lamellae in Indian Ocean saltwater!"
+            },
+            "highlands": {
+                "analogy_sw": "Kwenye mabwawa ya samaki ya milimani au mito ya Nakuru, samaki wa maji baridi (Trout na Tilapia) wanahitaji maji yanayotiririka yenye oksijeni tele!",
+                "analogy_en": "In highland coldwater fish farms, Trout and Tilapia thrive in oxygen-rich cascading mountain streams!"
+            },
+            "arid": {
+                "analogy_sw": "Kule Ziwa Turkana au mabwawa ya Garissa, samaki aina ya Mudfish (Kamongo) wana uwezo wa kipekee wa kupumua hewa ya kawaida wakati maji yanapokauka!",
+                "analogy_en": "In Lake Turkana and seasonal ASAL pans, Lungfish (Kamongo) have modified swim bladders allowing them to breathe atmospheric air during droughts!"
+            },
+            "urban": {
+                "analogy_sw": "Kwenye mabwawa ya samaki ya mjini (aquariums au urban fish farming), pampu ya hewa (aerator) hupuliza viputo ili kuongeza oksijeni kwenye maji ya samaki!",
+                "analogy_en": "In urban fish farms, water aerators inject air bubbles to maintain dissolved oxygen levels for fish health!"
+            }
+        },
+        "key_terms": [
+            {"en": "Gills (Operculum)", "sw": "Mashavu / Yavuyavu ya samaki"},
+            {"en": "Dissolved Oxygen", "sw": "Oksijeni iliyoyeyuka majini"},
+            {"en": "Ecosystem", "sw": "Mfumo wa ikolojia ya viumbe hai"},
+            {"en": "Invasive Species", "sw": "Mimea vamizi (kama Magugu Maji / Akech)"}
+        ],
+        "experiment": {
+            "title_sw": "Jaribio: Kuona Oksijeni Ndani ya Maji ya Kunywa",
+            "title_en": "Experiment: Demonstrating Dissolved Air in Water",
+            "materials_sw": "Glasi safi ya maji ya baridi.",
+            "materials_en": "Clear glass of cold tap/well water.",
+            "steps_sw": "1. Jaza glasi na maji ya baridi kisha uiache mezani kwa saa 3 bila kuitikisa.\n2. Utaona viputo vidogo vya hewa vikijitokeza pembeni ya glasi.\n3. Hiyo ndiyo hewa ya oksijeni ambayo samaki Ngege anaitumia kupumua!",
+            "steps_en": "1. Fill a clear glass with cold water and leave it undisturbed for 3 hours.\n2. Observe tiny air bubbles forming on the glass sides.\n3. That is dissolved oxygen warming and separating—the exact oxygen fish breathe!"
+        },
+        "quiz": {
+            "question_sw": "Samaki aina ya Ngege (Tilapia) kule Kisumu anatumia kiungo gani kupumua ndani ya maji?",
+            "question_en": "What organ does a Tilapia fish use to breathe underwater in Lake Victoria?",
+            "options_sw": ["A) Yavuyavu / Mashavu (Gills)", "B) Mapafu kama ya binadamu", "C) Mkia", "D) Macho"],
+            "options_en": ["A) Gills (Yavuyavu)", "B) Human-like lungs", "C) Tail fin", "D) Eyes"],
+            "correct_index": 0,
+            "explanation_sw": "Hodari sana! Samaki hutumia yavuyavu (gills) kuchuja oksijeni moja kwa moja kutoka kwenye maji ya ziwa.",
+            "explanation_en": "Brilliant! Fish use their gills to extract dissolved oxygen directly from water."
         }
     },
     {
@@ -114,25 +202,25 @@ OFFLINE_STEM_VAULT = [
         "summary_en": "Electric current is the continuous flow of charges through a closed circuit wire.",
         "summary_sw": "Mkondo wa umeme ni mwendo wa chembe ndogo za chaji zinazosafiri kwenye waya uliounganishwa bila kukatika.",
         "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Kisumu na Ziwa Victoria, fikiria taa za betri za kuvulia dagaa usiku ziwani! Betri ya 12V inasukuma mkondo wa umeme kupitia nyaya zilizofungwa vizuri ili taa iwake gizani ziwani kuvuta samaki. Saketi ikikatika taa inazima mara moja!",
+                "analogy_en": "In Kisumu on Lake Victoria, think of battery-powered lanterns used by night fishermen. The 12V battery pushes current through insulated wiring to illuminate the dark waters. If the circuit breaks, the light instantly goes out!"
+            },
             "coastal": {
-                "analogy_sw": "Kama pampu ya maji inayosukuma maji ya bahari kwenye mashamba ya chumvi kule Gongoni/Malindi, voltage ni shinikizo la pampu na current ni kiasi cha maji yanayotiririka!",
-                "analogy_en": "Like water pumps pushing brine into coastal salt evaporating beds, voltage is the pump pressure and current is the volume of flow through the pipes!"
+                "analogy_sw": "Kule Pwani, kama pampu ya maji inayosukuma maji ya bahari kwenye mashamba ya chumvi kule Gongoni/Malindi, voltage ni shinikizo la pampu na current ni kiasi cha maji yanayotiririka!",
+                "analogy_en": "Like water pumps pushing brine into coastal salt evaporating beds in Malindi, voltage is the pump pressure and current is the volume of flow through the pipes!"
             },
             "highlands": {
-                "analogy_sw": "Fikiria mtambo wa umeme wa maji (hydroelectric dam) kule Masinga au Sondu Miriu. Maji yanayoanguka kutoka juu milimani yana shinikizo kubwa (Voltage) linalosukuma jenereta kuzunguka!",
-                "analogy_en": "Think of hydroelectric power stations in the highlands. High-altitude dam reservoirs build intense pressure (Voltage) that drives turbine current through the power grid!"
-            },
-            "lake_basin": {
-                "analogy_sw": "Fikiria injini ya mashua ya wavuvi kule ziwani. Betri ya 12V inasukuma mkondo wa umeme kwenye taa ya kuvulia usiku (taa ya dagaa). Saketi ikikatika taa inazima mara moja!",
-                "analogy_en": "Think of a night fisherman's lantern powered by a 12V battery on Lake Victoria. Current flows through waterproof insulated wires to keep the lights beaming for fish tracking!"
+                "analogy_sw": "Kule Nakuru au Mt. Kenya, fikiria mitambo ya umeme wa maji (hydroelectric dams). Maji yanayoanguka kutoka juu milimani yana shinikizo kubwa (Voltage) linalosukuma jenereta kuzunguka!",
+                "analogy_en": "In the highlands, think of hydroelectric power stations where high-altitude mountain reservoir pressure (Voltage) drives generator current through power lines!"
             },
             "arid": {
                 "analogy_sw": "Kule Turkana na Garissa, paneli ya jua (Solar PV) inavuna mwangaza wa jua na kuutuma kwenye betri. Shinikizo la volteji linasukuma umeme kwenye pampu ya kisima cha maji (borehole solar pump)!",
-                "analogy_en": "In sun-drenched pastoralist areas like Garissa, solar PV panels convert sunlight into voltage that drives deep borehole water pumps for communities and livestock!"
+                "analogy_en": "In arid lands like Garissa and Turkana, solar PV panels convert sunlight into voltage that drives deep borehole water pumps for communities and livestock!"
             },
             "urban": {
-                "analogy_sw": "Kwenye mji kama Nairobi au Dar, fikiria jinsi taa za barabarani za solar au betri ya matatu inavyosambaza umeme kwenye taa na muziki kupitia mtandao wa nyaya!",
-                "analogy_en": "In cities, think of solar smart streetlights and vehicle circuits channeling current to lighting systems and audio amplifiers through closed loop wiring!"
+                "analogy_sw": "Kwenye mji kama Nairobi, fikiria jinsi taa za barabarani za solar au betri ya matatu inavyosambaza umeme kwenye taa na muziki kupitia mtandao wa nyaya!",
+                "analogy_en": "In Nairobi, think of solar smart streetlights and matatu vehicle circuits channeling current to lighting systems and audio amplifiers through closed loop wiring!"
             }
         },
         "key_terms": [
@@ -167,17 +255,17 @@ OFFLINE_STEM_VAULT = [
         "summary_en": "Gravity pulls mass toward the center of the Earth. Friction opposes motion between contacting surfaces.",
         "summary_sw": "Mvuto wa ardhi (Grabiti) huvuta vitu chini ardhini. Msuguano huzuia au kupunguza mwendo vitu vinapogusana.",
         "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Kisumu bandarini, mvuvi anaporusha nanga nzito ya chuma ya mashua, nguvu ya grabiti inalivuta chuma kuzama chini ya maji ya Ziwa Victoria!",
+                "analogy_en": "At Kisumu pier, when a fisherman drops a heavy iron anchor, Earth's gravity pulls it rapidly through Lake Victoria's waters to moor the boat!"
+            },
             "coastal": {
                 "analogy_sw": "Kwenye fukwe za pwani, mnazi ukiangusha dafu, grabiti inalivuta chini kwenye mchanga. Kukokota mashua kwenye mchanga mkavu kuna msuguano mkubwa kuliko kwenye maji laini!",
-                "analogy_en": "On sandy beaches, falling coconuts drop straight down due to gravity. Dragging a wooden dhow boat over dry sand encounters high friction, while floating on water has minimal friction!"
+                "analogy_en": "On coastal beaches, falling coconuts drop straight down due to gravity. Dragging a wooden dhow boat over dry sand encounters high friction, while floating on water has minimal friction!"
             },
             "highlands": {
                 "analogy_sw": "Unapoendesha baiskeli ikiteremka mlima mwinuko, grabiti inakuvuta kwa kasi kuelekea chini. Unapobonyeza breki kwenye barabara ya vumbi nyekundu, msuguano ndio unaosimamishe baiskeli!",
                 "analogy_en": "Coasting a bicycle down a steep highland ridge, gravity accelerates you downhill. Clamping your rubber brake pads against the wheels creates friction against the red earth road to stop you!"
-            },
-            "lake_basin": {
-                "analogy_sw": "Mvuvi anaporusha nanga nzito ya chuma ziwani, inazama chini ya maji kwa sababu ya mvuto wa grabiti!",
-                "analogy_en": "When a fisherman casts a heavy iron anchor into Lake Victoria, Earth's gravity pulls it rapidly to the lake bed to moor the boat securely!"
             },
             "arid": {
                 "analogy_sw": "Kwenye maeneo yenye mchanga na upepo kama Chalbi, upepo mkali unasukuma mchanga, lakini chembe nzito za miamba hazipeperuki kwa sababu ya nguvu ya grabiti!",
@@ -203,10 +291,10 @@ OFFLINE_STEM_VAULT = [
             "steps_en": "1. Tilt smooth book to see coin slide quickly.\n2. Add cloth/sand and slide again.\n3. Rough surfaces increase friction and slow it down!"
         },
         "quiz": {
-            "question_sw": "Kwa nini embe au dafu lililoiva huanguka chini ardhini badala ya kupaa angani?",
-            "question_en": "Why does a ripe fruit fall to the ground instead of floating into the clouds?",
-            "options_sw": ["A) Kwa sababu ya nguvu ya mvuto wa ardhi (Grabiti)", "B) Kwa sababu ya upepo", "C) Kwa sababu ya jua", "D) Kwa sababu limebadilika rangi"],
-            "options_en": ["A) Earth's gravitational pull", "B) Wind gusts", "C) Sunlight", "D) Color change"],
+            "question_sw": "Kwa nini embe au nanga ya mashua ya ziwani huanguka kuelekea chini?",
+            "question_en": "Why does a boat anchor or ripe fruit accelerate downward?",
+            "options_sw": ["A) Kwa sababu ya nguvu ya mvuto wa ardhi (Grabiti)", "B) Kwa sababu ya upepo", "C) Kwa sababu ya jua", "D) Kwa sababu ya rangi yake"],
+            "options_en": ["A) Earth's gravitational pull", "B) Wind gusts", "C) Sunlight", "D) Color"],
             "correct_index": 0,
             "explanation_sw": "Sahihi! Grabiti inavuta vitu vyote vyenye uzito kuelekea katikati ya dunia.",
             "explanation_en": "Spot on! Gravity accelerates all massive bodies toward Earth's center."
@@ -220,6 +308,10 @@ OFFLINE_STEM_VAULT = [
         "summary_en": "A fraction represents equal parts of a whole quantity (Numerator / Denominator).",
         "summary_sw": "Sehemu (Fraction) huonyesha vipande vilivyogawanywa sawasawa kutoka kwa kitu kizima kimoja.",
         "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Kisumu bandarini ukinunua kapu lenye samaki 10 wa Ngege (Tilapia) na ukapika samaki 5 kwa chakula cha jioni, umepika 5/10 ya samaki wote, ambayo ikirahisishwa ni nusu kamili (1/2) ya samaki!",
+                "analogy_en": "At Kisumu fish landing pier, buying a basket of 10 Tilapia and cooking 5 of them means you used 5/10, which simplifies to exactly 1/2 of your total fish!"
+            },
             "coastal": {
                 "analogy_sw": "Kule pwani ukipasua dafu na nazi ikagawanywa kwa watoto wawili sawa, kila mmoja anapata nusu (1/2). Ukigawa samaki mmoja kwa sahani 4 sawa za biriani, kila sahani ina robo (1/4)!",
                 "analogy_en": "On the coast, splitting a fresh coconut between two siblings gives each exactly one half (1/2). Dividing a large fish across 4 equal plates gives each 1/4 of the catch!"
@@ -227,10 +319,6 @@ OFFLINE_STEM_VAULT = [
             "highlands": {
                 "analogy_sw": "Shambani ukivuna gunia la viazi na kugawa katika vikapu vitatu vilivyo sawa, kila kikapu kimepata theluthi (1/3) ya mavuno yote!",
                 "analogy_en": "On a highland farm, dividing a potato harvest into 3 equal crates means each crate contains exactly one-third (1/3) of the total harvest!"
-            },
-            "lake_basin": {
-                "analogy_sw": "Ukinunua kapu lenye samaki 10 ziwani na ukapika samaki 5, umepika 5/10 ya samaki wote, ambayo ikirahisishwa ni nusu kamili (1/2)!",
-                "analogy_en": "Buying a basket of 10 fresh tilapia at the lake pier and cooking 5 of them means you used 5/10, which simplifies to exactly 1/2 of your total fish!"
             },
             "arid": {
                 "analogy_sw": "Kwenye kisima cha maji, ikiwa una dumu la lita 20 na ukachota lita 5 tu, umepata 5/20 ya dumu zima, ambayo ni sawa na robo (1/4) ya maji!",
@@ -256,13 +344,13 @@ OFFLINE_STEM_VAULT = [
             "steps_en": "1. Fold once = two halves (1/2 each).\n2. Fold again = four quarters (1/4 each).\n3. Observe how 2/4 occupies the identical area as 1/2!"
         },
         "quiz": {
-            "question_sw": "Ikiwa unagawia marafiki 4 machungwa 8 kwa usawa, kila rafiki anapata machungwa mangapi (sehemu gani)?",
-            "question_en": "If you distribute 8 oranges equally among 4 friends, how many does each receive?",
-            "options_sw": ["A) Machungwa 2 (kila mmoja 1/4 ya jumla)", "B) Chungwa 1", "C) Machungwa 4", "D) Chungwa 0"],
-            "options_en": ["A) 2 oranges (1/4 of total each)", "B) 1 orange", "C) 4 oranges", "D) 0 oranges"],
+            "question_sw": "Ikiwa mvuvi kule Kisumu ana samaki 8 wa Ngege na akagawia marafiki 4 kwa usawa, kila rafiki anapata samaki wangapi (sehemu gani)?",
+            "question_en": "If a fisherman in Kisumu distributes 8 Tilapia equally among 4 friends, how many does each receive?",
+            "options_sw": ["A) Samaki 2 (kila mmoja 1/4 ya jumla)", "B) Samaki 1", "C) Samaki 4", "D) Samaki 0"],
+            "options_en": ["A) 2 fish (1/4 of total each)", "B) 1 fish", "C) 4 fish", "D) 0 fish"],
             "correct_index": 0,
-            "explanation_sw": "Hongera! 8 yakigawanywa kwa 4 ni 2. Kila mmoja anapata robo (1/4) ya machungwa yote, yaani machungwa 2.",
-            "explanation_en": "Great! 8 divided by 4 is 2. Each friend receives 1/4 of the total pool, which is 2 oranges."
+            "explanation_sw": "Hongera! 8 yakigawanywa kwa 4 ni 2. Kila mmoja anapata robo (1/4) ya samaki wote, yaani samaki 2.",
+            "explanation_en": "Great! 8 divided by 4 is 2. Each friend receives 1/4 of the total pool, which is 2 fish."
         }
     }
 ]

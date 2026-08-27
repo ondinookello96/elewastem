@@ -1,28 +1,29 @@
 /**
- * ElewaSTEM Frontend Application Logic with Geo-Adaptive Context & Offline GPS Detection
- * Handles Offline PWA Caching, Bilingual Switching, GPS Coordinates, Regional Eco-Zones, and Mastery Graphs.
+ * ElewaSTEM Frontend Application Logic with Deep Localized Context & Kenya DPA 2019 Privacy Compliance
+ * Handles Offline PWA Caching, Bilingual Switching, Explicit GPS Consent, Regional Eco-Zones, and Mastery Graphs.
  */
 
 // Application State
 const STATE = {
   studentId: 'demo_student',
   language: 'swahili', // 'swahili', 'english', 'sheng'
-  region: 'highlands', // 'coastal', 'highlands', 'lake_basin', 'arid', 'urban'
+  region: 'lake_basin', // Defaulting to Lake Victoria Basin (Kisumu)
   gpsCoords: null,
+  dpaConsent: false,
   simulatedOffline: false,
   activeTab: 'chat',
   offlineModules: [],
   regionsMeta: {
-    coastal: { name_sw: 'Pwani na Bahari', name_en: 'Coastal & Ocean', icon: '🌊', desc_sw: 'Pwani (Mombasa, Dar, Zanzibar)' },
-    highlands: { name_sw: 'Nyanda za Juu', name_en: 'Highlands & Farms', icon: '⛰️', desc_sw: 'Nyanda za Juu (Nakuru, Mt. Kenya, Arusha)' },
-    lake_basin: { name_sw: 'Bonde la Ziwa', name_en: 'Lake Victoria Basin', icon: '🏞️', desc_sw: 'Bonde la Ziwa (Kisumu, Mwanza, Entebbe)' },
-    arid: { name_sw: 'Maeneo Kavu', name_en: 'Arid & Pastoralist', icon: '☀️', desc_sw: 'Maeneo Kavu (Turkana, Garissa, Kajiado)' },
-    urban: { name_sw: 'Mijini', name_en: 'Urban Centers', icon: '🏙️', desc_sw: 'Mijini (Nairobi, Kampala, Dar, Lagos)' }
+    lake_basin: { name_sw: 'Kisumu & Ziwa Victoria', name_en: 'Lake Victoria Basin (Kisumu)', icon: '🏞️', desc_sw: 'Kisumu, Mwanza, Entebbe • Samaki Ngege & Mbuta, Magugu Maji (Akech), Osuga & Mitoo' },
+    coastal: { name_sw: 'Pwani na Bahari', name_en: 'Coastal & Ocean (Mombasa)', icon: '🌊', desc_sw: 'Mombasa, Kilifi, Zanzibar • Minazi, mikoko ya kupumulia, chumvi' },
+    highlands: { name_sw: 'Nyanda za Juu & Kilimo', name_en: 'Highlands & Farms', icon: '⛰️', desc_sw: 'Nakuru, Eldoret, Mt. Kenya • Mashamba ya chai & mahindi, mito ya milima' },
+    arid: { name_sw: 'Maeneo Kavu & Ukame', name_en: 'Arid & Pastoralist', icon: '☀️', desc_sw: 'Turkana, Garissa, Kajiado • Miti ya acacia yenye nta, ngamia, solar boreholes' },
+    urban: { name_sw: 'Mijini', name_en: 'Urban Centers', icon: '🏙️', desc_sw: 'Nairobi, Kampala, Dar, Lagos • Taa za solar, matatu electronics, miti ya jiji' }
   },
   profile: {
     name: 'Mwanafunzi Hodari',
     grade_level: 'Grade 6',
-    current_region: 'highlands',
+    current_region: 'lake_basin',
     mastery_graph: {},
     badges: ['🌟 Mwanzo Bora (Great Start)']
   },
@@ -66,8 +67,14 @@ const I18N = {
   }
 };
 
-// Regional Quick Prompt Templates
+// Regional Quick Prompt Templates (Deeply Localized)
 const REGIONAL_PROMPT_CHIPS = {
+  lake_basin: [
+    { title: '🐟 Samaki Ngege & Upumuaji Ziwani', query: 'Eleza jinsi samaki Ngege (Tilapia) na Mbuta kule Kisumu wanavyotumia yavuyavu (gills) kupumua oksijeni ya Ziwa Victoria' },
+    { title: '🌿 Magugu Maji (Akech) & Photosynthesis', query: 'Eleza jinsi magugu maji ya Ziwa Victoria na mboga za Osuga/Mitoo zinavyofanya usanisinuru (photosynthesis) kwa jua la ziwani' },
+    { title: '⚡ Taa za Betri za Kuvulia Dagaa', query: 'Eleza saketi ya umeme kwa mfano wa betri ya 12V na taa ya kuvulia samaki usiku ziwani' },
+    { title: '🐠 Kapu la Samaki 10 (Fractions)', query: 'Nifundishe fractions kwa mfano wa kupika samaki 5 kati ya 10 waliovuliwa Ziwa Victoria' }
+  ],
   coastal: [
     { title: '🌴 Minazi & Usanisinuru Pwani', query: 'Eleza jinsi minazi ya Pwani inavyotumia mwangaza wa jua kutengeneza maji ya dafu (photosynthesis)' },
     { title: '⚡ Pampu za Chumvi & Umeme', query: 'Eleza volteji na mkondo wa umeme (current) kwa mfano wa pampu za maji ya chumvi baharini' },
@@ -79,12 +86,6 @@ const REGIONAL_PROMPT_CHIPS = {
     { title: '⚡ Umeme wa Maji (Hydroelectric Dams)', query: 'Eleza umeme, volteji na saketi kwa mfano wa mtambo wa maji wa Masinga au Sondu Miriu' },
     { title: '🚲 Grabiti & Breki za Baiskeli', query: 'Kwa nini baiskeli inateremka mlima kwa kasi? Eleza Grabiti na Msuguano wa breki kwenye vumbi' },
     { title: '🥔 Mavuno ya Viazi (Fractions)', query: 'Nifundishe Fractions kwa kugawa vikapu vya mavuno ya viazi shambani' }
-  ],
-  lake_basin: [
-    { title: '🐟 Ziwa Victoria & Oksijeni ya Samaki', query: 'Eleza jinsi mimea ya Ziwa Victoria inavyotengeneza oksijeni inayosaidia samaki kama tilapia kupumua' },
-    { title: '⚡ Taa za Betri za Kuvulia Dagaa', query: 'Eleza saketi ya umeme kwa mfano wa betri ya 12V na taa ya kuvulia samaki usiku ziwani' },
-    { title: '⚓ Nanga ya Chuma & Grabiti Ziwani', query: 'Kwa nini nanga nzito ya mashua inazama chini ya maji ya Ziwa Victoria? Eleza nguvu ya grabiti' },
-    { title: '🐠 Kikapu cha Samaki (Fractions)', query: 'Nifundishe fractions kwa mfano wa kupika samaki 5 kati ya 10 waliovuliwa ziwani' }
   ],
   arid: [
     { title: '☀️ Miti ya Acacia Kwenye Jua Kali', query: 'Eleza jinsi miti ya acacia kule Turkana/Garissa inavyofanya usanisinuru bila kupoteza maji wakati wa ukame' },
@@ -103,7 +104,7 @@ const REGIONAL_PROMPT_CHIPS = {
 // Initialize Application
 document.addEventListener('DOMContentLoaded', async () => {
   initNetworkListeners();
-  loadSavedRegion();
+  loadSavedConsentAndRegion();
   await loadOfflinePack();
   await refreshProfile();
   renderRegionUI();
@@ -142,19 +143,121 @@ function updateNetworkUI() {
 function toggleSimulateOffline() {
   STATE.simulatedOffline = !STATE.simulatedOffline;
   updateNetworkUI();
+  const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
   const msg = STATE.simulatedOffline 
-    ? (STATE.language === 'swahili' ? '🔴 Umeingia hali ya Nje ya Mtandao (Offline). Mifano ya eneo lako inafanya kazi 100% bila mtandao kupitia Local Vault!' : '🔴 Offline simulation enabled. Geo-adaptive tutor running from local offline vault!')
+    ? (STATE.language === 'swahili' ? `🔴 Umeingia hali ya Nje ya Mtandao (Offline). Mifano ya ${reg.name_sw} inafanya kazi 100% bila mtandao kupitia Local Vault!` : `🔴 Offline simulation enabled. Tutor for ${reg.name_en} running from local offline vault!`)
     : (STATE.language === 'swahili' ? '🟢 Umerudi Mtandaoni (Online). Gemini 2.5 Flash imeunganishwa tena!' : '🟢 Back Online! Connected to Gemini 2.5 Flash backend.');
   
   appendSystemNotice(msg);
 }
 
-// Geo-Location & Regional Adaptation
-function loadSavedRegion() {
+// Data Protection & Explicit Consent Handlers (Kenya DPA 2019)
+function loadSavedConsentAndRegion() {
+  STATE.dpaConsent = (localStorage.getItem('elewa_dpa_consent') === 'granted');
   const saved = localStorage.getItem('elewa_user_region');
   if (saved && STATE.regionsMeta[saved]) {
     STATE.region = saved;
   }
+}
+
+function handleGPSButtonClick() {
+  if (STATE.dpaConsent) {
+    executeGPSScan();
+  } else {
+    document.getElementById('consentModal').classList.remove('hidden');
+  }
+}
+
+function grantLocationConsentAndDetect() {
+  STATE.dpaConsent = true;
+  localStorage.setItem('elewa_dpa_consent', 'granted');
+  document.getElementById('consentModal').classList.add('hidden');
+  executeGPSScan();
+}
+
+function declineLocationConsent() {
+  document.getElementById('consentModal').classList.add('hidden');
+  openRegionModal();
+}
+
+function revokeLocationConsent() {
+  STATE.dpaConsent = false;
+  localStorage.removeItem('elewa_dpa_consent');
+  STATE.gpsCoords = null;
+  closePrivacyModal();
+  appendSystemNotice('🛡️ <b>Data Protection Act:</b> Idhini ya GPS imefutwa. Hakuna data ya kijiografia itakayosomwa.');
+}
+
+function openPrivacyModal() {
+  document.getElementById('privacyModal').classList.remove('hidden');
+}
+
+function closePrivacyModal() {
+  document.getElementById('privacyModal').classList.add('hidden');
+}
+
+// GPS Execution (Edge calculation on device)
+function executeGPSScan() {
+  if (!('geolocation' in navigator)) {
+    alert('Kifaa chako hakina GPS (Geolocation is not supported).');
+    return;
+  }
+
+  const gpsBtn = document.getElementById('gpsBtn');
+  if (gpsBtn) gpsBtn.classList.add('bg-amber-400', 'animate-pulse');
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      if (gpsBtn) gpsBtn.classList.remove('bg-amber-400', 'animate-pulse');
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      STATE.gpsCoords = { lat, lon };
+
+      // Map latitude & longitude to African eco-regions (100% on-device offline calculation)
+      const detectedRegion = mapCoordinatesToEcoRegion(lat, lon);
+      selectRegion(detectedRegion);
+
+      const reg = STATE.regionsMeta[detectedRegion];
+      appendSystemNotice(`🎯 <b>GPS Auto-Detect (DPA 2019 Protected):</b> [${lat.toFixed(2)}, ${lon.toFixed(2)}] ➔ ${reg.icon} <b>${reg.name_sw}</b>.`);
+    },
+    (error) => {
+      if (gpsBtn) gpsBtn.classList.remove('bg-amber-400', 'animate-pulse');
+      console.log('GPS notice:', error.message);
+      appendSystemNotice(`📍 Hatujaweza kusoma GPS. Unaweza kuchagua kaunti/eneo lako kwenye orodha!`);
+      openRegionModal();
+    },
+    { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+  );
+}
+
+// On-device coordinate to African eco-region mapper
+function mapCoordinatesToEcoRegion(lat, lon) {
+  // Lake Victoria Basin (Kisumu, Homa Bay, Busia, Mwanza, Entebbe)
+  if (lon >= 31.0 && lon <= 35.2 && lat >= -3.5 && lat <= 2.5) {
+    return 'lake_basin';
+  }
+  // Coastal Strip (Mombasa, Kilifi, Kwale, Lamu, Dar es Salaam, Zanzibar)
+  if (lon > 38.5 && lat < 1.0 && lat > -11.0) {
+    return 'coastal';
+  }
+  // Arid & Pastoralist Belt (Northern Kenya: Turkana, Garissa, Marsabit, Wajir, Central Tanzania)
+  if ((lat > 1.2 && lon > 35.0) || (lat < -4.5 && lon < 37.0 && lon > 34.0)) {
+    return 'arid';
+  }
+  // Major Urban Centers (Nairobi metropolitan area)
+  if (lat >= -1.45 && lat <= -1.15 && lon >= 36.65 && lon <= 37.10) {
+    return 'urban';
+  }
+  // Highlands & Agricultural Belt (Nakuru, Mt. Kenya, Eldoret, Kericho)
+  return 'highlands';
+}
+
+function openRegionModal() {
+  document.getElementById('regionModal').classList.remove('hidden');
+}
+
+function closeRegionModal() {
+  document.getElementById('regionModal').classList.add('hidden');
 }
 
 function selectRegion(regionKey) {
@@ -167,11 +270,11 @@ function selectRegion(regionKey) {
 
   const reg = STATE.regionsMeta[regionKey];
   const isSw = STATE.language !== 'english';
-  appendSystemNotice(`📍 ${isSw ? 'Mazingira ya eneo yamebadilishwa kuwa:' : 'Eco-region switched to:'} <b>${reg.icon} ${isSw ? reg.name_sw : reg.name_en}</b>. Mifano yote ya sayansi itatumia mazingira haya!`);
+  appendSystemNotice(`📍 ${isSw ? 'Mazingira ya eneo yamebadilishwa kuwa:' : 'Eco-region switched to:'} <b>${reg.icon} ${isSw ? reg.name_sw : reg.name_en}</b>.`);
 }
 
 function renderRegionUI() {
-  const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.highlands;
+  const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
   const isSw = STATE.language !== 'english';
 
   const iconEl = document.getElementById('regionIcon');
@@ -193,77 +296,13 @@ function renderRegionUI() {
   // Render regional prompt chips
   const chipsContainer = document.getElementById('quickLocationChips');
   if (chipsContainer) {
-    const chips = REGIONAL_PROMPT_CHIPS[STATE.region] || REGIONAL_PROMPT_CHIPS.highlands;
+    const chips = REGIONAL_PROMPT_CHIPS[STATE.region] || REGIONAL_PROMPT_CHIPS.lake_basin;
     chipsContainer.innerHTML = chips.map(c => `
       <button onclick="sendQuickPrompt('${escapeHtml(c.query)}')" class="quick-chip bg-emerald-50 text-emerald-800 border border-emerald-300 px-2.5 py-1 rounded-full text-xs hover:bg-emerald-100 font-medium transition-all">
         ${c.title}
       </button>
     `).join('');
   }
-}
-
-function detectDeviceGPS() {
-  if (!('geolocation' in navigator)) {
-    alert('Kifaa chako hakina GPS (Geolocation is not supported by your device).');
-    return;
-  }
-
-  const gpsBtn = document.getElementById('gpsBtn');
-  if (gpsBtn) gpsBtn.classList.add('bg-amber-400', 'animate-pulse');
-
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      if (gpsBtn) gpsBtn.classList.remove('bg-amber-400', 'animate-pulse');
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      STATE.gpsCoords = { lat, lon };
-
-      // Map latitude & longitude to African eco-regions (Works 100% offline!)
-      const detectedRegion = mapCoordinatesToEcoRegion(lat, lon);
-      selectRegion(detectedRegion);
-
-      const reg = STATE.regionsMeta[detectedRegion];
-      appendSystemNotice(`🎯 <b>GPS Auto-Detect (Offline GPS):</b> [${lat.toFixed(2)}, ${lon.toFixed(2)}] ➔ ${reg.icon} <b>${reg.name_sw}</b>.`);
-    },
-    (error) => {
-      if (gpsBtn) gpsBtn.classList.remove('bg-amber-400', 'animate-pulse');
-      console.log('GPS notice:', error.message);
-      // Fallback message
-      appendSystemNotice(`📍 Hatujaweza kupata GPS moja kwa moja. Unaweza kuchagua eneo lako kwa kubonyeza kitufe cha Eneo hapo juu!`);
-      openRegionModal();
-    },
-    { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
-  );
-}
-
-// Offline coordinate to eco-region mapper
-function mapCoordinatesToEcoRegion(lat, lon) {
-  // Coastal Strip (Kenya / Tanzania coastline)
-  if (lon > 38.5 && lat < 1.0 && lat > -11.0) {
-    return 'coastal';
-  }
-  // Lake Victoria Basin (Western Kenya, Northern Tanzania, Uganda)
-  if (lon >= 31.0 && lon <= 35.0 && lat >= -3.5 && lat <= 2.5) {
-    return 'lake_basin';
-  }
-  // Arid & Pastoralist Belt (Northern Kenya, Turkana, Garissa, Central Tanzania)
-  if ((lat > 1.2 && lon > 35.0) || (lat < -4.5 && lon < 37.0 && lon > 34.0)) {
-    return 'arid';
-  }
-  // Major Urban Centers (Nairobi approximate bounding box)
-  if (lat >= -1.45 && lat <= -1.15 && lon >= 36.65 && lon <= 37.10) {
-    return 'urban';
-  }
-  // Default to Highlands / Agricultural belt
-  return 'highlands';
-}
-
-function openRegionModal() {
-  document.getElementById('regionModal').classList.remove('hidden');
-}
-
-function closeRegionModal() {
-  document.getElementById('regionModal').classList.add('hidden');
 }
 
 // Language Switching
@@ -399,13 +438,13 @@ function generateLocalOfflineAnswer(query, simplify) {
   ) || STATE.offlineModules[0];
 
   const regKey = STATE.region;
-  const regMeta = STATE.regionsMeta[regKey] || STATE.regionsMeta.highlands;
+  const regMeta = STATE.regionsMeta[regKey] || STATE.regionsMeta.lake_basin;
   const isSw = STATE.language !== 'english';
   
   const title = isSw ? matched.title_sw : matched.title_en;
   const summary = isSw ? matched.summary_sw : matched.summary_en;
 
-  const regionalDict = matched.regional_analogies ? (matched.regional_analogies[regKey] || matched.regional_analogies.highlands) : {};
+  const regionalDict = matched.regional_analogies ? (matched.regional_analogies[regKey] || matched.regional_analogies.lake_basin) : {};
   const analogy = isSw ? (regionalDict.analogy_sw || matched.analogy_sw) : (regionalDict.analogy_en || matched.analogy_en);
   
   const exp = matched.experiment;
@@ -470,7 +509,7 @@ function appendAssistantMessage(data) {
   const isOffline = data.source === 'local_offline_vault' || data.source === 'offline_knowledge_vault';
   const formattedHtml = parseMarkdownToHtml(data.text);
   const quizDataJson = data.quiz_data ? JSON.stringify(data.quiz_data).replace(/"/g, '&quot;') : '';
-  const regMeta = STATE.regionsMeta[data.region || STATE.region] || STATE.regionsMeta.highlands;
+  const regMeta = STATE.regionsMeta[data.region || STATE.region] || STATE.regionsMeta.lake_basin;
 
   div.innerHTML = `
     <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-white text-sm flex-shrink-0 shadow">
@@ -521,7 +560,7 @@ function appendSystemNotice(text) {
 function appendLoadingIndicator() {
   const container = document.getElementById('chatMessages');
   const id = 'loading_' + Date.now();
-  const regMeta = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.highlands;
+  const regMeta = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
   const div = document.createElement('div');
   div.id = id;
   div.className = 'flex items-start space-x-3';
@@ -628,10 +667,10 @@ function renderVault() {
   if (!container) return;
   const isSw = STATE.language !== 'english';
   const regKey = STATE.region;
-  const regMeta = STATE.regionsMeta[regKey] || STATE.regionsMeta.highlands;
+  const regMeta = STATE.regionsMeta[regKey] || STATE.regionsMeta.lake_basin;
 
   container.innerHTML = STATE.offlineModules.map(m => {
-    const regionalDict = m.regional_analogies ? (m.regional_analogies[regKey] || m.regional_analogies.highlands) : {};
+    const regionalDict = m.regional_analogies ? (m.regional_analogies[regKey] || m.regional_analogies.lake_basin) : {};
     const localAnalogy = isSw ? (regionalDict.analogy_sw || m.analogy_sw) : (regionalDict.analogy_en || m.analogy_en);
 
     return `

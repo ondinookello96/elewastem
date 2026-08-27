@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ElewaSTEM — Mwalimu wa Sayansi na Hesabu (Geo-Adaptive)</title>
-  <meta name="description" content="Mwalimu wa AI wa STEM kwa watoto barani Afrika anayebadilika kulingana na eneo lako, lugha yako na GPS hata bila mtandao.">
+  <title>ElewaSTEM — Mwalimu wa Sayansi (Data Protected & Localized)</title>
+  <meta name="description" content="Mwalimu wa AI wa STEM kwa watoto barani Afrika anayebadilika kulingana na eneo lako na kufuata Sheria ya Data Protection Act 2019 kwa ulinzi wa watoto.">
   <meta name="theme-color" content="#10b981">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
@@ -44,7 +44,7 @@
           <h1 class="font-black text-base sm:text-lg text-slate-900 tracking-tight">Elewa<span class="text-brand-600">STEM</span></h1>
           <span class="text-[9px] sm:text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800">Geo AI</span>
         </div>
-        <p class="text-[10px] sm:text-xs text-slate-500 font-medium hidden sm:block">Usimeze, Elewa! • Geo-Adaptive STEM in Your Language</p>
+        <p class="text-[10px] sm:text-xs text-slate-500 font-medium hidden sm:block">Usimeze, Elewa! • Localized STEM with Child Data Privacy (DPA 2019)</p>
       </div>
     </div>
 
@@ -52,14 +52,14 @@
     <div class="flex items-center space-x-1.5 sm:space-x-2">
       <!-- GPS & Region Selector Button -->
       <button onclick="openRegionModal()" id="regionBadge" title="Bonyeza kubadili eneo au kuwasha GPS (Change Location/GPS)" class="flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300 hover:bg-amber-100 transition-all">
-        <span id="regionIcon">⛰️</span>
-        <span id="regionNameText" class="truncate max-w-[90px] sm:max-w-[130px]">Nyanda za Juu</span>
+        <span id="regionIcon">🏞️</span>
+        <span id="regionNameText" class="truncate max-w-[90px] sm:max-w-[130px]">Kisumu & Ziwa</span>
       </button>
 
-      <!-- GPS Quick-Detect Button -->
-      <button onclick="detectDeviceGPS()" id="gpsBtn" title="Tafuta eneo kwa GPS (Inafanya kazi hata bila mtandao!)" class="p-1 sm:px-2 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-brand-50 text-slate-700 hover:text-brand-700 border border-slate-300 flex items-center space-x-1 transition-all">
+      <!-- GPS Quick-Detect Button with Consent Trigger -->
+      <button onclick="handleGPSButtonClick()" id="gpsBtn" title="Tafuta eneo kwa GPS (Inahitaji Idhini ya Faragha - DPA 2019)" class="p-1 sm:px-2 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-brand-50 text-slate-700 hover:text-brand-700 border border-slate-300 flex items-center space-x-1 transition-all">
         <span>📍</span>
-        <span class="hidden md:inline text-[11px]">GPS</span>
+        <span class="hidden md:inline text-[11px]">GPS (Opt-in)</span>
       </button>
 
       <!-- Network status indicator with simulate toggle -->
@@ -83,24 +83,32 @@
   </header>
 
   <!-- NAVIGATION TABS -->
-  <nav class="bg-white border-b border-slate-200 px-4 py-1.5 flex space-x-2 overflow-x-auto no-scrollbar flex-shrink-0 text-xs font-semibold">
-    <button onclick="switchTab('chat')" id="tabBtn-chat" class="tab-btn active-tab flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-brand-700 bg-brand-50 border border-brand-200">
-      <span>💬</span>
-      <span data-i18n="tab_chat">Mwalimu Chat</span>
-    </button>
-    <button onclick="switchTab('vault')" id="tabBtn-vault" class="tab-btn flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 border border-transparent">
-      <span>📦</span>
-      <span data-i18n="tab_vault">Offline Vault (Masomo)</span>
-      <span class="bg-brand-600 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">4</span>
-    </button>
-    <button onclick="switchTab('mastery')" id="tabBtn-mastery" class="tab-btn flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 border border-transparent">
-      <span>🏆</span>
-      <span data-i18n="tab_mastery">Maendeleo & Beji</span>
-      <span id="badgeCount" class="bg-amber-500 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">1</span>
+  <nav class="bg-white border-b border-slate-200 px-4 py-1.5 flex items-center justify-between overflow-x-auto no-scrollbar flex-shrink-0 text-xs font-semibold">
+    <div class="flex space-x-2">
+      <button onclick="switchTab('chat')" id="tabBtn-chat" class="tab-btn active-tab flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-brand-700 bg-brand-50 border border-brand-200">
+        <span>💬</span>
+        <span data-i18n="tab_chat">Mwalimu Chat</span>
+      </button>
+      <button onclick="switchTab('vault')" id="tabBtn-vault" class="tab-btn flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 border border-transparent">
+        <span>📦</span>
+        <span data-i18n="tab_vault">Offline Vault (Masomo)</span>
+        <span class="bg-brand-600 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">5</span>
+      </button>
+      <button onclick="switchTab('mastery')" id="tabBtn-mastery" class="tab-btn flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 border border-transparent">
+        <span>🏆</span>
+        <span data-i18n="tab_mastery">Maendeleo & Beji</span>
+        <span id="badgeCount" class="bg-amber-500 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">1</span>
+      </button>
+    </div>
+
+    <!-- Data Privacy Badge -->
+    <button onclick="openPrivacyModal()" class="hidden md:flex items-center space-x-1 text-[11px] text-slate-500 hover:text-brand-700 font-bold bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">
+      <span>🔒</span>
+      <span>DPA 2019 Privacy</span>
     </button>
   </nav>
 
-  <!-- MAIN CONTAINER (SWAP TABS) -->
+  <!-- MAIN CONTAINER -->
   <main class="flex-1 flex flex-col overflow-hidden relative">
 
     <!-- 1. CHAT VIEW -->
@@ -115,13 +123,13 @@
           <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%] text-sm text-slate-800 space-y-2">
             <div class="flex items-center justify-between">
               <p class="font-bold text-brand-700 text-base">Hujambo! Mimi ni ElewaSTEM 🌟</p>
-              <span id="welcomeEcoPill" class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📍 Eneo: Nyanda za Juu</span>
+              <span id="welcomeEcoPill" class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📍 Eneo: Kisumu & Ziwa Victoria</span>
             </div>
             <p id="welcomeText">
-              Mimi ni mwalimu wako wa Sayansi, Teknolojia na Hesabu. Ninaelewa mazingira ya eneo lako (<b id="welcomeLocationDesc">Nyanda za Juu</b>) na nitakupa mifano inayofanana na mimea, mito na mazingira unayoyaona kila siku!
+              Mimi ni mwalimu wako wa Sayansi na Hesabu. Ninaelewa mazingira ya eneo lako (<b id="welcomeLocationDesc">Bonde la Ziwa Victoria / Kisumu</b>) na mifano yangu inatumia mimea na viumbe vilivyo jirani nawe kama <b>samaki Ngege (Tilapia)</b>, <b>magugu maji (Akech)</b> na <b>mboga za Osuga/Mitoo</b>!
             </p>
             <div class="pt-2">
-              <p class="text-xs font-semibold text-slate-500 mb-1.5">💡 Jaribu kubonyeza mfano unaolingana na eneo lako:</p>
+              <p class="text-xs font-semibold text-slate-500 mb-1.5">💡 Jaribu kubonyeza mfano maalum wa eneo lako:</p>
               <div id="quickLocationChips" class="flex flex-wrap gap-1.5">
                 <!-- Dynamically populated based on region -->
               </div>
@@ -134,7 +142,7 @@
       <div id="quickChipsBar" class="px-4 py-1.5 bg-slate-100 border-t border-slate-200 flex items-center justify-between text-xs max-w-4xl w-full mx-auto">
         <span class="text-slate-500 font-medium hidden sm:inline">⚡ Mada za haraka:</span>
         <div class="flex space-x-1.5 overflow-x-auto no-scrollbar py-0.5">
-          <button onclick="sendQuickPrompt('Nieleze kwa mifano ya eneo langu')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">📍 Mfano wa Eneo Langu</button>
+          <button onclick="sendQuickPrompt('Nieleze kwa mifano ya mimea na wanyama wa eneo langu')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">📍 Mfano wa Eneo Langu</button>
           <button onclick="sendQuickPrompt('Nieleze kwa mifano rahisi sana')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">💡 Rahisisha Zaidi</button>
           <button onclick="sendQuickPrompt('Nipe jaribio rahisi la kufanya nyumbani')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">🧪 Jaribio la Nyumbani</button>
           <button onclick="sendQuickPrompt('Nipe swali la mtihani la kujipima')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">🎯 Swali la Jaribio</button>
@@ -167,9 +175,9 @@
       <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center justify-between">
         <div>
           <h2 class="font-bold text-emerald-900 text-base">📦 Hifadhi ya Masomo (Offline Knowledge Vault)</h2>
-          <p class="text-xs text-emerald-700">Masomo yamebadilishwa kulingana na eneo lako (<b id="vaultRegionNotice">Nyanda za Juu</b>). Fanya majaribio bila mtandao (0 KB).</p>
+          <p class="text-xs text-emerald-700">Masomo yamebadilishwa kulingana na eneo lako (<b id="vaultRegionNotice">Bonde la Ziwa Victoria (Kisumu)</b>). Fanya majaribio bila mtandao (0 KB).</p>
         </div>
-        <span class="text-2xl" id="vaultRegionIcon">⛰️</span>
+        <span class="text-2xl" id="vaultRegionIcon">🏞️</span>
       </div>
 
       <div id="vaultModulesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -179,7 +187,6 @@
 
     <!-- 3. STUDENT MASTERY & BADGES VIEW -->
     <section id="masterySection" class="hidden flex-1 overflow-y-auto p-4 max-w-4xl w-full mx-auto space-y-4">
-      <!-- Profile Header -->
       <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col sm:flex-row items-center sm:items-start space-y-3 sm:space-y-0 sm:space-x-4">
         <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-400 to-orange-500 flex items-center justify-center text-white text-3xl shadow-md">
           🎓
@@ -188,13 +195,12 @@
           <div class="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-3">
             <h2 id="profileName" class="text-lg font-black text-slate-900">Mwanafunzi Hodari</h2>
             <span class="bg-brand-100 text-brand-800 text-xs font-bold px-2 py-0.5 rounded-full inline-block">Grade 6</span>
-            <span id="profileRegionPill" class="bg-slate-100 text-slate-700 text-xs font-bold px-2 py-0.5 rounded-full inline-block">📍 Eneo: Nyanda za Juu</span>
+            <span id="profileRegionPill" class="bg-slate-100 text-slate-700 text-xs font-bold px-2 py-0.5 rounded-full inline-block">📍 Eneo: Kisumu</span>
           </div>
           <p class="text-xs text-slate-500 mt-1">Memory Bank inafuatilia mada unazoelewa vizuri na jinsi unavyotumia mifano ya eneo lako.</p>
         </div>
       </div>
 
-      <!-- Badges Earned -->
       <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
         <h3 class="font-bold text-slate-900 text-sm mb-3 flex items-center space-x-2">
           <span>🏅</span>
@@ -203,7 +209,6 @@
         <div id="badgesContainer" class="flex flex-wrap gap-2"></div>
       </div>
 
-      <!-- Topic Mastery Progress -->
       <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-3">
         <h3 class="font-bold text-slate-900 text-sm flex items-center space-x-2">
           <span>📊</span>
@@ -215,7 +220,49 @@
 
   </main>
 
-  <!-- REGION / LOCATION SELECTOR MODAL -->
+  <!-- 1. EXPLICIT GPS CONSENT MODAL (KENYA DATA PROTECTION ACT 2019 COMPLIANCE) -->
+  <div id="consentModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 animate-scale-up">
+      <div class="flex items-center space-x-3 border-b border-slate-100 pb-3">
+        <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl flex-shrink-0">
+          🛡️
+        </div>
+        <div>
+          <h3 class="font-black text-slate-900 text-base">Idhini ya Eneo & Ulinzi wa Data</h3>
+          <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Kenya Data Protection Act 2019 (Sec. 29)</p>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-600 space-y-2.5 leading-relaxed">
+        <p class="font-semibold text-slate-800">
+          Ili kubadilisha mifano ya sayansi (mfano: samaki Ngege na mboga za Osuga kule Kisumu, au minazi Pwani), ElewaSTEM inaomba idhini ya kutambua mazingira ya eneo lako.
+        </p>
+        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3 space-y-1.5 text-[11px] text-emerald-950 font-medium">
+          <p class="font-bold text-emerald-900 flex items-center space-x-1">
+            <span>🔒</span>
+            <span>Ulinzi wa Faragha ya Mtoto:</span>
+          </p>
+          <ul class="list-disc pl-4 space-y-1">
+            <li><b>100% On-Device:</b> Data ya GPS inasindikwa kwenye simu yako pekee na inafanya kazi hata bila mtandao.</li>
+            <li><b>Hakuna Ufuatiliaji:</b> Data ya eneo haitumiwi kwa matangazo, haihifadhiwi kwenye seva za kigeni, wala kuuzwa.</li>
+            <li><b>Haki ya Kujiondoa:</b> Unaweza kuzima GPS wakati wowote na kuchagua eneo mwenyewe.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex flex-col space-y-2 pt-2">
+        <button onclick="grantLocationConsentAndDetect()" class="w-full bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold py-3 rounded-2xl transition-all shadow-md flex items-center justify-center space-x-2">
+          <span>✅</span>
+          <span>Ninakubali & Washa GPS (I Consent)</span>
+        </button>
+        <button onclick="declineLocationConsent()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 rounded-2xl transition-all text-center">
+          Chagua Eneo kwa Mkono Bila GPS (Manual Selection)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. REGION / LOCATION SELECTOR MODAL -->
   <div id="regionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 animate-scale-up">
       <div class="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -227,16 +274,16 @@
       </div>
 
       <p class="text-xs text-slate-600">
-        ElewaSTEM inabadilisha mifano ya sayansi (photosynthesis, umeme, grabiti) kulingana na mazingira unayoishi. Chagua eneo lako au tumia GPS ya simu:
+        ElewaSTEM inabadilisha mifano ya sayansi kulingana na mazingira unayoishi. Chagua eneo lako au tumia GPS ya simu:
       </p>
 
       <!-- GPS Auto Detect button -->
-      <button onclick="detectDeviceGPS()" class="w-full bg-brand-50 hover:bg-brand-100 border border-brand-300 text-brand-900 p-3 rounded-2xl flex items-center justify-between text-xs font-bold transition-all">
+      <button onclick="handleGPSButtonClick()" class="w-full bg-brand-50 hover:bg-brand-100 border border-brand-300 text-brand-900 p-3 rounded-2xl flex items-center justify-between text-xs font-bold transition-all">
         <div class="flex items-center space-x-2">
           <span class="text-lg">🎯</span>
           <div class="text-left">
             <p>Washa GPS (Auto-Detect Location)</p>
-            <p class="text-[10px] text-brand-700 font-normal">Inafanya kazi hata ukiwa bila mtandao kupitia GPS ya simu</p>
+            <p class="text-[10px] text-brand-700 font-normal">Inafanya kazi bila mtandao • Inalindwa na Sheria ya DPA 2019</p>
           </div>
         </div>
         <span>➜</span>
@@ -244,12 +291,12 @@
 
       <!-- Region List -->
       <div class="space-y-2 max-h-60 overflow-y-auto">
-        <button onclick="selectRegion('highlands')" class="region-opt-btn w-full text-left p-3 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-emerald-50 text-xs font-bold text-slate-800 transition-all flex items-center justify-between">
+        <button onclick="selectRegion('lake_basin')" class="region-opt-btn w-full text-left p-3 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-emerald-50 text-xs font-bold text-slate-800 transition-all flex items-center justify-between">
           <div class="flex items-center space-x-2.5">
-            <span class="text-xl">⛰️</span>
+            <span class="text-xl">🏞️</span>
             <div>
-              <p>Nyanda za Juu & Kilimo (Highlands)</p>
-              <p class="text-[10px] text-slate-500 font-normal">Nakuru, Mt. Kenya, Arusha, Eldoret, Kisii • Mashamba ya mahindi & chai, mito ya milima</p>
+              <p>Bonde la Ziwa (Kisumu & Lake Victoria)</p>
+              <p class="text-[10px] text-slate-500 font-normal">Kisumu, Mwanza, Homa Bay, Entebbe • Samaki Ngege & Mbuta, Magugu maji, Osuga & Mitoo</p>
             </div>
           </div>
         </button>
@@ -258,18 +305,18 @@
           <div class="flex items-center space-x-2.5">
             <span class="text-xl">🌊</span>
             <div>
-              <p>Pwani na Bahari (Coastal Zone)</p>
-              <p class="text-[10px] text-slate-500 font-normal">Mombasa, Dar es Salaam, Zanzibar, Kilifi • Minazi, mikoko, mawimbi ya bahari, chumvi</p>
+              <p>Pwani na Bahari (Mombasa, Kilifi, Zanzibar)</p>
+              <p class="text-[10px] text-slate-500 font-normal">Mombasa, Dar es Salaam, Kilifi, Tanga • Minazi, mikoko yenye mizizi ya kupumulia, chumvi</p>
             </div>
           </div>
         </button>
 
-        <button onclick="selectRegion('lake_basin')" class="region-opt-btn w-full text-left p-3 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-emerald-50 text-xs font-bold text-slate-800 transition-all flex items-center justify-between">
+        <button onclick="selectRegion('highlands')" class="region-opt-btn w-full text-left p-3 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-emerald-50 text-xs font-bold text-slate-800 transition-all flex items-center justify-between">
           <div class="flex items-center space-x-2.5">
-            <span class="text-xl">🏞️</span>
+            <span class="text-xl">⛰️</span>
             <div>
-              <p>Bonde la Ziwa (Lake Victoria Basin)</p>
-              <p class="text-[10px] text-slate-500 font-normal">Kisumu, Mwanza, Entebbe, Homa Bay • Ziwa Victoria, upepo wa ziwani, uvuvi wa samaki</p>
+              <p>Nyanda za Juu & Kilimo (Nakuru, Eldoret, Mt. Kenya)</p>
+              <p class="text-[10px] text-slate-500 font-normal">Nakuru, Eldoret, Kericho, Arusha • Mashamba ya chai & mahindi, mito ya milima, mabwawa</p>
             </div>
           </div>
         </button>
@@ -278,8 +325,8 @@
           <div class="flex items-center space-x-2.5">
             <span class="text-xl">☀️</span>
             <div>
-              <p>Maeneo Kavu & Ukame (Arid / Pastoralist)</p>
-              <p class="text-[10px] text-slate-500 font-normal">Turkana, Garissa, Kajiado, Marsabit, Dodoma • Jua kali, nishati ya solar, visima vya maji</p>
+              <p>Maeneo Kavu & Ukame (Turkana, Garissa, Marsabit)</p>
+              <p class="text-[10px] text-slate-500 font-normal">Turkana, Garissa, Kajiado, Wajir • Miti ya acacia yenye nta, ngamia, nishati ya solar</p>
             </div>
           </div>
         </button>
@@ -288,8 +335,8 @@
           <div class="flex items-center space-x-2.5">
             <span class="text-xl">🏙️</span>
             <div>
-              <p>Mijini (Urban Centers)</p>
-              <p class="text-[10px] text-slate-500 font-normal">Nairobi, Kampala, Lagos, Dar, Kigali • Taa za solar za mitaani, matatu electronics, majengo</p>
+              <p>Mijini (Nairobi, Kampala, Dar es Salaam)</p>
+              <p class="text-[10px] text-slate-500 font-normal">Nairobi, Kampala, Lagos, Dar • Miti ya jiji inayofyonza moshi, taa za solar, matatu</p>
             </div>
           </div>
         </button>
@@ -297,6 +344,35 @@
 
       <div class="flex justify-end pt-2">
         <button onclick="closeRegionModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-2 rounded-xl transition-all">Funga</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. DATA PRIVACY POLICY MODAL -->
+  <div id="privacyModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 animate-scale-up">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">📜</span>
+          <h3 class="font-black text-slate-900 text-base">Ulinzi wa Data & Faragha ya Mtoto</h3>
+        </div>
+        <button onclick="closePrivacyModal()" class="text-slate-400 hover:text-slate-600 font-bold text-lg p-1">&times;</button>
+      </div>
+
+      <div class="text-xs text-slate-700 space-y-3 leading-relaxed max-h-72 overflow-y-auto pr-1">
+        <p><b>Kuzingatia Sheria ya Data Protection Act 2019 (Kenya):</b></p>
+        <p>ElewaSTEM inazingatia kikamilifu kanuni za ulinzi wa data za watoto chini ya Kifungu cha 29 cha Sheria ya Ulinzi wa Data ya Kenya (DPA 2019):</p>
+        <ul class="list-disc pl-4 space-y-1.5 text-slate-600">
+          <li><b>Uchakataji wa Haki na Halali (Lawfulness & Transparency):</b> Data ya eneo (GPS) inatumiwa kwa madhumuni ya kielimu pekee ya kubinafsisha mifano ya sayansi kwa mwanafunzi.</li>
+          <li><b>Kupunguza Data (Data Minimization):</b> Hatukusanyi majina kamili, nambari za vitambulisho, wala nambari za simu za mtoto wakati wa kutumia PWA.</li>
+          <li><b>Uhesabuji wa Kwenye Kifaa (Edge Computing):</b> Uhusiano wa viwianishi vya GPS na mazingira ya kijiografia unafanywa ndani ya simu/kifaa yenyewe.</li>
+          <li><b>Haki za Mhusika wa Data:</b> Mwanafunzi au mzazi ana haki ya kufuta data iliyohifadhiwa au kubadili idhini wakati wowote.</li>
+        </ul>
+      </div>
+
+      <div class="flex justify-between items-center pt-2 border-t border-slate-100">
+        <button onclick="revokeLocationConsent()" class="text-red-600 hover:text-red-800 text-xs font-bold">Futa Idhini ya GPS (Revoke Consent)</button>
+        <button onclick="closePrivacyModal()" class="bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all">Nimeelewa</button>
       </div>
     </div>
   </div>
