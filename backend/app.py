@@ -1,10 +1,10 @@
 """
-ElewaSTEM FastAPI Server
-Serves the Bilingual AI STEM Tutor API, Offline Caching Pack, SMS/USSD Gateway, and Static PWA Frontend.
+ElewaSTEM FastAPI Server with Geo-Location Adaptation
+Serves the Bilingual AI STEM Tutor API, Regional Eco-Zones, Offline Caching Pack, SMS/USSD Gateway, and Static PWA Frontend.
 """
 
 import os
-from typing import Optional, List
+from typing import Optional, List, Dict, Any
 from fastapi import FastAPI, HTTPException, Request, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -13,15 +13,15 @@ from pydantic import BaseModel
 
 from agent import elewa_agent
 from memory import student_memory
-from tools import get_offline_starter_pack, find_offline_topic
+from tools import get_offline_starter_pack, get_available_regions, find_offline_topic
 
 app = FastAPI(
     title="ElewaSTEM API",
-    description="Multilingual Adaptive AI STEM Tutor for African Children",
-    version="1.0.0"
+    description="Multilingual Adaptive AI STEM Tutor for African Children with Geo-Context",
+    version="1.1.0"
 )
 
-# CORS middleware for open accessibility
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -38,6 +38,8 @@ class ChatRequest(BaseModel):
     student_id: str = "demo_student"
     message: str
     language: str = "swahili"  # "swahili", "english", "sheng"
+    region: str = "highlands"  # "coastal", "highlands", "lake_basin", "arid", "urban"
+    gps_coordinates: Optional[Dict[str, float]] = None
     simplify: bool = False
 
 
@@ -45,6 +47,8 @@ class ProfileUpdateRequest(BaseModel):
     name: Optional[str] = None
     grade_level: Optional[str] = None
     preferred_language: Optional[str] = None
+    current_region: Optional[str] = None
+    gps_coordinates: Optional[Dict[str, float]] = None
 
 
 class QuizResultRequest(BaseModel):
@@ -61,9 +65,16 @@ async def health_check():
     return {
         "status": "healthy",
         "app": "ElewaSTEM",
-        "version": "1.0.0",
+        "version": "1.1.0",
+        "features": ["multilingual", "offline_pwa", "geo_adaptive_context", "gps_offline_mapping"],
         "gemini_connected": elewa_agent.client is not None
     }
+
+
+@app.get("/api/regions")
+async def list_regions():
+    """Returns available African eco-regions for localized context."""
+    return get_available_regions()
 
 
 @app.post("/api/chat")
@@ -71,10 +82,20 @@ async def chat_with_agent(req: ChatRequest):
     if not req.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty")
     
+    # Update GPS if passed
+    if req.gps_coordinates:
+        student_memory.update_geo_location(
+            req.student_id,
+            region=req.region,
+            lat=req.gps_coordinates.get("lat"),
+            lon=req.gps_coordinates.get("lon")
+        )
+
     response = elewa_agent.generate_response(
         student_id=req.student_id,
         message=req.message,
         target_language=req.language,
+        region=req.region,
         simplify=req.simplify
     )
     return response
@@ -91,22 +112,27 @@ async def update_profile(student_id: str, req: ProfileUpdateRequest):
     profile = student_memory.get_or_create_profile(
         student_id=student_id,
         name=req.name,
-        language=req.preferred_language
+        language=req.preferred_language,
+        region=req.current_region
     )
     if req.grade_level:
         profile.grade_level = req.grade_level
-        student_memory._save_profiles()
+    if req.gps_coordinates:
+        profile.gps_coordinates = req.gps_coordinates
+    student_memory._save_profiles()
     return profile.model_dump()
 
 
 @app.get("/api/offline-pack")
 async def download_offline_pack():
-    """Returns bundled starter STEM lessons, experiments, and quizzes for full offline caching."""
+    """Returns bundled starter STEM lessons, regional analogies, experiments, and quizzes for full offline caching."""
     modules = get_offline_starter_pack()
+    regions = get_available_regions()
     return {
-        "pack_name": "ElewaSTEM Offline Knowledge Vault",
-        "version": "1.0",
+        "pack_name": "ElewaSTEM Regional Offline Knowledge Vault",
+        "version": "1.1",
         "module_count": len(modules),
+        "regions": regions,
         "modules": modules
     }
 
@@ -134,29 +160,38 @@ async def sms_gateway(
     phoneNumber: str = Form(None)
 ):
     """
-    SMS/USSD Webhook endpoint (compatible with Africa's Talking format).
-    Allows children with basic 2G feature phones (non-smartphones) to text questions.
+    SMS/USSD Webhook endpoint (Africa's Talking format).
     """
     user_phone = phoneNumber or from_ or "sms_user"
     user_msg = text or ""
     
     if not user_msg:
-        return "Karibu ElewaSTEM! Tuma swali lako la Sayansi au Hesabu (mfano: 'eleza umeme' au 'what is photosynthesis')."
+        return "Karibu ElewaSTEM! Tuma swali lako la Sayansi (mfano: 'eleza umeme pwani' au 'what is photosynthesis')."
 
     # Detect language
     is_sw = any(w in user_msg.lower() for w in ["eleza", "nini", "kwa nini", "jinsi", "sayansi", "mmea", "umeme", "hesabu"])
     lang = "swahili" if is_sw else "english"
 
+    # Detect region keyword if present
+    region = "highlands"
+    if any(w in user_msg.lower() for w in ["pwani", "mombasa", "coast", "bahari", "dar"]):
+        region = "coastal"
+    elif any(w in user_msg.lower() for w in ["ziwa", "victoria", "kisumu", "mwanza", "samaki"]):
+        region = "lake_basin"
+    elif any(w in user_msg.lower() for w in ["turkana", "garissa", "kavu", "arid", "jua"]):
+        region = "arid"
+    elif any(w in user_msg.lower() for w in ["jiji", "nairobi", "kampala", "urban", "matatu"]):
+        region = "urban"
+
     response = elewa_agent.generate_response(
         student_id=f"sms_{user_phone}",
         message=user_msg,
         target_language=lang,
+        region=region,
         simplify=True
     )
     
-    # Strip markdown headers for clean SMS display
     clean_text = response["text"].replace("#", "").replace("**", "").replace("---", "").strip()
-    # Format to concise SMS length
     sms_reply = clean_text[:450] + ("..." if len(clean_text) > 450 else "")
     return sms_reply
 

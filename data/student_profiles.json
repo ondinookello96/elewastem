@@ -72,5 +72,42 @@
         "language": "swahili"
       }
     ]
+  },
+  "demo_student": {
+    "student_id": "demo_student",
+    "name": "Mwanafunzi",
+    "grade_level": "Grade 6 (Upper Primary)",
+    "preferred_language": "swahili",
+    "learning_style": "analogies_and_experiments",
+    "created_at": "2026-08-27T12:58:57.967087",
+    "mastery_graph": {
+      "Photosynthesis: How Plants Make Food": {
+        "topic": "Photosynthesis: How Plants Make Food",
+        "subject": "Biology",
+        "mastery_score": 25,
+        "times_explored": 1,
+        "last_studied": "2026-08-27T12:59:20.766839",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      }
+    },
+    "badges": [
+      "🌟 Mwanzo Bora (Great Start)"
+    ],
+    "recent_interactions": [
+      {
+        "timestamp": "2026-08-27T12:59:20.761784",
+        "role": "user",
+        "content": "What is photosynthesis?",
+        "language": "swahili"
+      },
+      {
+        "timestamp": "2026-08-27T12:59:20.764082",
+        "role": "assistant",
+        "content": "### 🔬 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\n\nKaribu kwenye darasa la sayansi! Hebu tuchunguze hili pamoja:\n\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n---\n\n#### 💡 Mfano Halisi (Everyday Analogy)\nFikiria jani la mahindi kama jikoni ndogo ya kijani. Mwangaza wa jua ni moto wa jiko, maji ni maji ya kupikia, na hewa ya kaboni ni unga wa ugali!\n\n---\n\n#### 📚 Kamusi ya Sayansi (Key Science Terms)\n• **Chlorophyll** ➔ Klorofili (Rangi ya kijani inayovuta mwangaza)\n• **Carbon Dioxide** ➔ Gesi ya Kaboni Dioksidi\n• **Oxygen** ➔ Hewa Safi ya Oksijeni\n• **Glucose** ➔ Glukosi (Sukari/Chakula cha mmea)\n\n---\n\n#### 🧪 Jaribu Hili Nyumbani (Jaribio Rahisi: Kushuhudia Oksijeni ya Mmea)\n**Vifaa:** Jani bichi, glasi au chupa ya plastiki yenye maji safi, jua.\n**Hatua:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi!\n\n---\n\n#### 🎯 Swali la Haraka (Quick Check)\n**Ni kipi mmea unachotoa hewani baada ya kutengeneza chakula (usanisinuru)?**\nA) Oksijeni safi\nB) Moshi\nC) Udongo\nD) Maji ya moto\n",
+        "language": "swahili"
+      }
+    ]
   }
 }

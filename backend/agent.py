@@ -1,13 +1,13 @@
 """
-ElewaSTEM (Mwalimu STEM) - Gemini Agent Engine
-Orchestrates Gemini 3.5/2.5 multimodal models with Socratic pedagogy, code-switching, and cultural analogies.
+ElewaSTEM (Mwalimu STEM) - Gemini Agent Engine with Hyper-Local Regional Adaptation
+Orchestrates Gemini 2.5/3.5 Flash models with Socratic pedagogy, code-switching, and regional eco-zone context.
 """
 
 import os
 import json
 from typing import Dict, Any, Optional
 from memory import student_memory, StudentProfile
-from tools import find_offline_topic
+from tools import find_offline_topic, REGIONS
 
 # Optional google-genai SDK import
 try:
@@ -22,31 +22,31 @@ SYSTEM_INSTRUCTION = """
 You are "ElewaSTEM" (Mwalimu STEM), a friendly, culturally grounded, and inspiring AI STEM tutor for children and young students in Africa.
 
 YOUR MISSION:
-Help African students truly understand (Elewa) complex Science, Technology, Engineering, and Mathematics concepts rather than memorizing dry textbook definitions.
+Help African students truly understand (Elewa) complex Science, Technology, Engineering, and Mathematics concepts through intuitive, regionally adapted analogies in their own language.
 
-KEY PEDAGOGICAL PRINCIPLES:
+KEY PEDAGOGICAL & REGIONAL PRINCIPLES:
 1. Multilingual & Code-Switching Mastery:
-   - Fluidly converse in English, Swahili (Kiswahili Sanifu), or natural youth code-switching (Sheng/conversational bilingual mix).
-   - If the student asks in Swahili, explain primarily in warm, clear Swahili, but ALWAYS highlight the key English scientific terms so they can pass formal national exams (e.g. "Usanisinuru (Photosynthesis)").
-   - If the student asks in English, explain in clear English and provide the Swahili terms and analogies for deeper conceptual grounding.
+   - Fluidly converse in English, Swahili (Kiswahili Sanifu), or natural youth code-switching (Sheng/conversational mix).
+   - If asked in Swahili, explain in warm, clear Swahili, but ALWAYS highlight key English scientific terms (e.g. "Usanisinuru (Photosynthesis)").
+   - If asked in English, explain clearly and provide the Swahili terms and analogies for deeper conceptual grounding.
 
-2. Culturally Grounded African Analogies:
-   - Ground abstract concepts in relatable African daily life, agriculture, nature, and everyday technologies:
-     * Current & Voltage -> Water flowing from an elevated tank (tenki la maji) through irrigation pipes.
-     * Heat Transfer & Energy -> Cooking on a jiko, sun drying maize/cassava, solar lanterns.
-     * Biology & Cells -> Bricks forming a homestead, village community roles, acacia trees and drought adaptation.
-     * Gravity & Friction -> Ripened mangoes falling from a tree, braking a bicycle on a red dirt road.
-     * Math & Fractions -> Slicing and sharing chapatis, counting cattle in herds, market trading.
+2. Hyper-Local Regional Adaptation (Geo-Context):
+   Tailor your examples, crops, physical phenomena, and analogies to the student's specific geographic region:
+   * COASTAL (Pwani): Use coconut palms (minazi), mangroves (mikoko), ocean tides & gravity, solar evaporation in salt pans, sea breezes.
+   * HIGHLANDS (Nyanda za Juu): Use tea/maize farming, cascading mountain rivers, hydroelectric dams, terracing against soil erosion, cool mountain climates.
+   * LAKE BASIN (Ziwa Victoria): Use lake breeze convection, tilapia/fish oxygenation, lake transport, flash thunderstorms.
+   * ARID & PASTORALIST (Ukame / ASAL): Use intense solar PV energy, borehole water pumping, acacia/cactus drought adaptations, camel heat regulation.
+   * URBAN (Mijini): Use solar streetlights, vehicle friction & tire treads, electronics in matatus, stormwater drainage.
 
 3. Socratic & Encouraging Tone:
    - Be patient, celebratory ("Hongera sana!", "Vizuri mno!", "Great thinking!"), and never dismissive.
    - Break down complex formulas into easy intuitive steps.
-   - Suggest safe, hands-on mini-experiments using everyday household items (bottles, salt, water, sunlight, coins).
+   - Suggest safe, hands-on mini-experiments using everyday household items.
 
 4. Output Format:
    Always structure your response cleanly with:
    - Main Explanation (conversational, engaging, formatted with bolding and bullet points).
-   - "💡 Mfano Halisi / Everyday Analogy" (the relatable local metaphor).
+   - "💡 Mfano Halisi wa Eneo Lako / Local Analogy" (the relatable regional metaphor).
    - "📚 Kamusi ya Sayansi / Science Glossary" (Key English terms with Swahili explanations).
    - "🧪 Jaribu Hili Nyumbani / Try This At Home" (a safe 2-minute experiment).
    - "🎯 Swali la Jaribio / Quick Check" (a fun question to test their understanding).
@@ -68,10 +68,12 @@ class ElewaAgent:
         student_id: str,
         message: str,
         target_language: str = "swahili",
+        region: str = "highlands",
         simplify: bool = False
     ) -> Dict[str, Any]:
-        """Generates an adaptive, multilingual response for the student."""
-        profile = student_memory.get_or_create_profile(student_id, language=target_language)
+        """Generates an adaptive, multilingual, region-specific response."""
+        profile = student_memory.get_or_create_profile(student_id, language=target_language, region=region)
+        region_info = REGIONS.get(region, REGIONS["highlands"])
         
         # Build student context memory
         mastery_summary = ", ".join([f"{k} ({v.mastery_score}% mastery)" for k, v in profile.mastery_graph.items()]) or "New student"
@@ -81,6 +83,8 @@ class ElewaAgent:
 Student Name: {profile.name}
 Grade Level: {profile.grade_level}
 Preferred Language: {target_language.upper()}
+Learner's Eco-Region: {region_info['name_en']} ({region_info['name_sw']})
+Local Ecosystem Highlights: {region_info['key_ecosystems']}
 Recent Mastery Context: {mastery_summary}
 Simplify Mode: {"YES (Explain to a 9-year-old in very simple terms)" if simplify else "STANDARD (Engaging & Clear)"}
 
@@ -90,13 +94,12 @@ Recent Conversation:
 Student Question:
 "{message}"
 
-Provide a comprehensive, empathetic, and culturally rich STEM explanation following your instructions.
+Provide a comprehensive, empathetic, and culturally rich STEM explanation grounded in the student's eco-region ({region_info['name_en']}).
 """
 
         # Try Gemini API if client available
         if self.client:
             try:
-                # Use Gemini 2.5 Flash for high-speed, cost-effective reasoning
                 response = self.client.models.generate_content(
                     model="gemini-2.5-flash",
                     contents=user_prompt,
@@ -111,7 +114,6 @@ Provide a comprehensive, empathetic, and culturally rich STEM explanation follow
                 student_memory.add_interaction_history(student_id, "user", message, target_language)
                 student_memory.add_interaction_history(student_id, "assistant", response_text, target_language)
                 
-                # Detect topic and update mastery graph
                 detected_topic = self._extract_topic(message, response_text)
                 student_memory.update_topic_interaction(
                     student_id=student_id,
@@ -124,31 +126,34 @@ Provide a comprehensive, empathetic, and culturally rich STEM explanation follow
                     "source": "gemini-2.5-flash",
                     "text": response_text,
                     "language": target_language,
+                    "region": region,
                     "topic": detected_topic["topic"],
                     "subject": detected_topic["subject"],
                     "student_profile": student_memory.get_or_create_profile(student_id).model_dump()
                 }
             except Exception as e:
-                print(f"[ElewaAgent] Gemini API call error: {e}. Falling back to offline engine.")
+                print(f"[ElewaAgent] Gemini API call error: {e}. Falling back to regional offline engine.")
 
-        # High quality offline fallback generator
-        return self._generate_offline_response(student_id, message, target_language, simplify)
+        # High quality offline fallback generator with regional adaptations
+        return self._generate_offline_response(student_id, message, target_language, region, simplify)
 
-    def _generate_offline_response(self, student_id: str, message: str, language: str, simplify: bool) -> Dict[str, Any]:
-        """Generates rich, pre-compiled educational responses for offline / zero-connection mode."""
+    def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool) -> Dict[str, Any]:
+        """Generates rich, pre-compiled educational responses adapted to the learner's region."""
         topic_data = find_offline_topic(message)
-        is_sw = (language.lower() == "swahili")
+        region_key = region if region in topic_data.get("regional_analogies", {}) else "highlands"
+        region_info = REGIONS.get(region, REGIONS["highlands"])
+        is_sw = (language.lower() != "english")
 
         title = topic_data["title_sw"] if is_sw else topic_data["title_en"]
         summary = topic_data["summary_sw"] if is_sw else topic_data["summary_en"]
-        analogy = topic_data["analogy_sw"] if is_sw else topic_data["analogy_en"]
+        
+        regional_dict = topic_data.get("regional_analogies", {}).get(region_key, {})
+        analogy = regional_dict.get("analogy_sw" if is_sw else "analogy_en", topic_data.get("analogy_sw", ""))
+        
         exp = topic_data["experiment"]
         quiz = topic_data["quiz"]
 
-        if simplify:
-            intro = "Habari! Tutaifanya iwe rahisi kabisa:" if is_sw else "Hello! Let's make this super simple:"
-        else:
-            intro = "Karibu kwenye darasa la sayansi! Hebu tuchunguze hili pamoja:" if is_sw else "Welcome to science class! Let's explore this together:"
+        intro = f"Habari kutoka **{region_info['icon']} {region_info['name_sw']}**! Hebu tuchunguze hili pamoja:" if is_sw else f"Hello from the **{region_info['icon']} {region_info['name_en']}**! Let's explore this together:"
 
         terms_formatted = "\n".join([f"• **{t['en']}** ➔ {t['sw']}" for t in topic_data["key_terms"]])
 
@@ -160,7 +165,7 @@ Provide a comprehensive, empathetic, and culturally rich STEM explanation follow
 
 ---
 
-#### 💡 Mfano Halisi (Everyday Analogy)
+#### 💡 Mfano Halisi wa Eneo Lako ({region_info['icon']} {region_info['name_sw'] if is_sw else region_info['name_en']})
 {analogy}
 
 ---
@@ -195,6 +200,7 @@ Provide a comprehensive, empathetic, and culturally rich STEM explanation follow
             "source": "offline_knowledge_vault",
             "text": text,
             "language": language,
+            "region": region,
             "topic": topic_data["title_en"],
             "subject": topic_data["subject"],
             "quiz_data": quiz,
@@ -202,7 +208,6 @@ Provide a comprehensive, empathetic, and culturally rich STEM explanation follow
         }
 
     def _extract_topic(self, user_msg: str, bot_response: str) -> Dict[str, str]:
-        """Identifies STEM subject and topic from text."""
         combined = (user_msg + " " + bot_response).lower()
         if any(w in combined for w in ["plant", "mmea", "leaf", "jani", "photo", "cell", "uhai", "biology"]):
             return {"topic": "Photosynthesis & Plant Biology", "subject": "Biology"}

@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ElewaSTEM — Mwalimu wa Sayansi na Hesabu</title>
-  <meta name="description" content="Mwalimu wa AI wa STEM kwa watoto barani Afrika. Jifunze sayansi kwa Kiswahili na Kiingereza bila hofu.">
+  <title>ElewaSTEM — Mwalimu wa Sayansi na Hesabu (Geo-Adaptive)</title>
+  <meta name="description" content="Mwalimu wa AI wa STEM kwa watoto barani Afrika anayebadilika kulingana na eneo lako, lugha yako na GPS hata bila mtandao.">
   <meta name="theme-color" content="#10b981">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -24,11 +23,6 @@
               700: '#047857',
               800: '#065f46',
               900: '#064e3b'
-            },
-            accent: {
-              yellow: '#f59e0b',
-              orange: '#f97316',
-              purple: '#8b5cf6'
             }
           }
         }
@@ -40,36 +34,48 @@
 <body class="bg-slate-50 text-slate-800 flex flex-col h-screen overflow-hidden font-sans antialiased">
 
   <!-- TOP HEADER -->
-  <header class="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between shadow-sm flex-shrink-0">
-    <div class="flex items-center space-x-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-xl shadow-md">
+  <header class="bg-white border-b border-slate-200 px-3 sm:px-4 py-2 flex items-center justify-between shadow-sm flex-shrink-0">
+    <div class="flex items-center space-x-2 sm:space-x-3">
+      <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-xl shadow-md">
         🌱
       </div>
       <div>
-        <div class="flex items-center space-x-2">
-          <h1 class="font-black text-lg text-slate-900 tracking-tight">Elewa<span class="text-brand-600">STEM</span></h1>
-          <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800">AI Tutor</span>
+        <div class="flex items-center space-x-1.5">
+          <h1 class="font-black text-base sm:text-lg text-slate-900 tracking-tight">Elewa<span class="text-brand-600">STEM</span></h1>
+          <span class="text-[9px] sm:text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800">Geo AI</span>
         </div>
-        <p class="text-xs text-slate-500 font-medium">Usimeze, Elewa! • Learn STEM in Your Language</p>
+        <p class="text-[10px] sm:text-xs text-slate-500 font-medium hidden sm:block">Usimeze, Elewa! • Geo-Adaptive STEM in Your Language</p>
       </div>
     </div>
 
-    <!-- Controls: Network status & Language Switcher -->
-    <div class="flex items-center space-x-2 sm:space-x-3">
-      <!-- Network indicator with simulate toggle -->
-      <button id="networkBadge" onclick="toggleSimulateOffline()" title="Bonyeza kujaribu hali ya bila mtandao (Simulate Offline)" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 transition-all hover:scale-105">
+    <!-- Controls: GPS, Region, Network, Language -->
+    <div class="flex items-center space-x-1.5 sm:space-x-2">
+      <!-- GPS & Region Selector Button -->
+      <button onclick="openRegionModal()" id="regionBadge" title="Bonyeza kubadili eneo au kuwasha GPS (Change Location/GPS)" class="flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300 hover:bg-amber-100 transition-all">
+        <span id="regionIcon">⛰️</span>
+        <span id="regionNameText" class="truncate max-w-[90px] sm:max-w-[130px]">Nyanda za Juu</span>
+      </button>
+
+      <!-- GPS Quick-Detect Button -->
+      <button onclick="detectDeviceGPS()" id="gpsBtn" title="Tafuta eneo kwa GPS (Inafanya kazi hata bila mtandao!)" class="p-1 sm:px-2 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-brand-50 text-slate-700 hover:text-brand-700 border border-slate-300 flex items-center space-x-1 transition-all">
+        <span>📍</span>
+        <span class="hidden md:inline text-[11px]">GPS</span>
+      </button>
+
+      <!-- Network status indicator with simulate toggle -->
+      <button id="networkBadge" onclick="toggleSimulateOffline()" title="Bonyeza kujaribu hali ya bila mtandao (Simulate Offline)" class="flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 transition-all hover:scale-105">
         <span id="networkDot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span id="networkText">Mtandaoni</span>
+        <span id="networkText" class="hidden sm:inline">Mtandaoni</span>
       </button>
 
       <!-- Language selector -->
       <div class="relative">
-        <select id="langSelect" onchange="changeLanguage(this.value)" class="appearance-none bg-slate-100 border border-slate-300 text-slate-800 text-xs font-bold py-1.5 pl-3 pr-7 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer">
+        <select id="langSelect" onchange="changeLanguage(this.value)" class="appearance-none bg-slate-100 border border-slate-300 text-slate-800 text-xs font-bold py-1 sm:py-1.5 pl-2 sm:pl-3 pr-6 sm:pr-7 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer">
           <option value="swahili">🇰🇪 Kiswahili</option>
           <option value="english">🇬🇧 English</option>
-          <option value="sheng">💬 Sheng (Mix)</option>
+          <option value="sheng">💬 Sheng</option>
         </select>
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-600">
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1 sm:px-2 text-slate-600">
           <svg class="fill-current h-3 w-3" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
         </div>
       </div>
@@ -107,17 +113,17 @@
             🌱
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%] text-sm text-slate-800 space-y-2">
-            <p class="font-bold text-brand-700 text-base">Hujambo! Mimi ni ElewaSTEM 🌟</p>
+            <div class="flex items-center justify-between">
+              <p class="font-bold text-brand-700 text-base">Hujambo! Mimi ni ElewaSTEM 🌟</p>
+              <span id="welcomeEcoPill" class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📍 Eneo: Nyanda za Juu</span>
+            </div>
             <p id="welcomeText">
-              Mimi ni mwalimu wako wa Sayansi, Teknolojia na Hesabu. Unaweza kuniuliza chochote kwa <b>Kiswahili</b>, <b>English</b>, au hata <b>Sheng</b>! Nitakueleza kwa mifano rahisi ya nyumbani na majaribio unayoweza kufanya mwenyewe.
+              Mimi ni mwalimu wako wa Sayansi, Teknolojia na Hesabu. Ninaelewa mazingira ya eneo lako (<b id="welcomeLocationDesc">Nyanda za Juu</b>) na nitakupa mifano inayofanana na mimea, mito na mazingira unayoyaona kila siku!
             </p>
             <div class="pt-2">
-              <p class="text-xs font-semibold text-slate-500 mb-1.5">💡 Jaribu kubonyeza mada moja hapa chini:</p>
-              <div class="flex flex-wrap gap-1.5">
-                <button onclick="sendQuickPrompt('Eleza usanisinuru (photosynthesis) inavyofanya kazi kwa mimea ya mahindi')" class="quick-chip bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full text-xs hover:bg-emerald-100">🌿 Usanisinuru (Photosynthesis)</button>
-                <button onclick="sendQuickPrompt('Eleza umeme, volteji na saketi kama mfereji wa maji')" class="quick-chip bg-amber-50 text-amber-700 border border-amber-200 px-2.5 py-1 rounded-full text-xs hover:bg-amber-100">⚡ Umeme & Saketi</button>
-                <button onclick="sendQuickPrompt('Kwa nini embe likidondoka huanguka chini? Eleza Grabiti na Msuguano')" class="quick-chip bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-full text-xs hover:bg-blue-100">🍎 Grabiti & Msuguano</button>
-                <button onclick="sendQuickPrompt('Nifundishe Fractions (sehemu za nambari) kwa kugawana chapati')" class="quick-chip bg-purple-50 text-purple-700 border border-purple-200 px-2.5 py-1 rounded-full text-xs hover:bg-purple-100">🍕 Fractions za Chapati</button>
+              <p class="text-xs font-semibold text-slate-500 mb-1.5">💡 Jaribu kubonyeza mfano unaolingana na eneo lako:</p>
+              <div id="quickLocationChips" class="flex flex-wrap gap-1.5">
+                <!-- Dynamically populated based on region -->
               </div>
             </div>
           </div>
@@ -128,6 +134,7 @@
       <div id="quickChipsBar" class="px-4 py-1.5 bg-slate-100 border-t border-slate-200 flex items-center justify-between text-xs max-w-4xl w-full mx-auto">
         <span class="text-slate-500 font-medium hidden sm:inline">⚡ Mada za haraka:</span>
         <div class="flex space-x-1.5 overflow-x-auto no-scrollbar py-0.5">
+          <button onclick="sendQuickPrompt('Nieleze kwa mifano ya eneo langu')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">📍 Mfano wa Eneo Langu</button>
           <button onclick="sendQuickPrompt('Nieleze kwa mifano rahisi sana')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">💡 Rahisisha Zaidi</button>
           <button onclick="sendQuickPrompt('Nipe jaribio rahisi la kufanya nyumbani')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">🧪 Jaribio la Nyumbani</button>
           <button onclick="sendQuickPrompt('Nipe swali la mtihani la kujipima')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">🎯 Swali la Jaribio</button>
@@ -160,9 +167,9 @@
       <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center justify-between">
         <div>
           <h2 class="font-bold text-emerald-900 text-base">📦 Hifadhi ya Masomo (Offline Knowledge Vault)</h2>
-          <p class="text-xs text-emerald-700">Masomo haya yamehifadhiwa kwenye simu/kifaa chako. Unaweza kuyasoma na kufanya majaribio hata ukiwa **bila mtandao kabisa (0 KB)**.</p>
+          <p class="text-xs text-emerald-700">Masomo yamebadilishwa kulingana na eneo lako (<b id="vaultRegionNotice">Nyanda za Juu</b>). Fanya majaribio bila mtandao (0 KB).</p>
         </div>
-        <span class="text-2xl">⚡</span>
+        <span class="text-2xl" id="vaultRegionIcon">⛰️</span>
       </div>
 
       <div id="vaultModulesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -181,8 +188,9 @@
           <div class="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-3">
             <h2 id="profileName" class="text-lg font-black text-slate-900">Mwanafunzi Hodari</h2>
             <span class="bg-brand-100 text-brand-800 text-xs font-bold px-2 py-0.5 rounded-full inline-block">Grade 6</span>
+            <span id="profileRegionPill" class="bg-slate-100 text-slate-700 text-xs font-bold px-2 py-0.5 rounded-full inline-block">📍 Eneo: Nyanda za Juu</span>
           </div>
-          <p class="text-xs text-slate-500 mt-1">Memory Bank inafuatilia mada unazoelewa vizuri na maeneo ya kuongeza juhudi.</p>
+          <p class="text-xs text-slate-500 mt-1">Memory Bank inafuatilia mada unazoelewa vizuri na jinsi unavyotumia mifano ya eneo lako.</p>
         </div>
       </div>
 
@@ -192,9 +200,7 @@
           <span>🏅</span>
           <span>Beji Ulizoshinda (Badges Earned)</span>
         </h3>
-        <div id="badgesContainer" class="flex flex-wrap gap-2">
-          <!-- Dynamic badges -->
-        </div>
+        <div id="badgesContainer" class="flex flex-wrap gap-2"></div>
       </div>
 
       <!-- Topic Mastery Progress -->
@@ -203,13 +209,97 @@
           <span>📊</span>
           <span>Kiwango cha Uelewa kwa Mada (Concept Mastery Graph)</span>
         </h3>
-        <div id="masteryGraphContainer" class="space-y-3">
-          <!-- Dynamic topic bars -->
-        </div>
+        <div id="masteryGraphContainer" class="space-y-3"></div>
       </div>
     </section>
 
   </main>
+
+  <!-- REGION / LOCATION SELECTOR MODAL -->
+  <div id="regionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 animate-scale-up">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">🌍</span>
+          <h3 class="font-black text-slate-900 text-base">Chagua Mazingira ya Eneo Lako</h3>
+        </div>
+        <button onclick="closeRegionModal()" class="text-slate-400 hover:text-slate-600 font-bold text-lg p-1">&times;</button>
+      </div>
+
+      <p class="text-xs text-slate-600">
+        ElewaSTEM inabadilisha mifano ya sayansi (photosynthesis, umeme, grabiti) kulingana na mazingira unayoishi. Chagua eneo lako au tumia GPS ya simu:
+      </p>
+
+      <!-- GPS Auto Detect button -->
+      <button onclick="detectDeviceGPS()" class="w-full bg-brand-50 hover:bg-brand-100 border border-brand-300 text-brand-900 p-3 rounded-2xl flex items-center justify-between text-xs font-bold transition-all">
+        <div class="flex items-center space-x-2">
+          <span class="text-lg">🎯</span>
+          <div class="text-left">
+            <p>Washa GPS (Auto-Detect Location)</p>
+            <p class="text-[10px] text-brand-700 font-normal">Inafanya kazi hata ukiwa bila mtandao kupitia GPS ya simu</p>
+          </div>
+        </div>
+        <span>➜</span>
+      </button>
+
+      <!-- Region List -->
+      <div class="space-y-2 max-h-60 overflow-y-auto">
+        <button onclick="selectRegion('highlands')" class="region-opt-btn w-full text-left p-3 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-emerald-50 text-xs font-bold text-slate-800 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <span class="text-xl">⛰️</span>
+            <div>
+              <p>Nyanda za Juu & Kilimo (Highlands)</p>
+              <p class="text-[10px] text-slate-500 font-normal">Nakuru, Mt. Kenya, Arusha, Eldoret, Kisii • Mashamba ya mahindi & chai, mito ya milima</p>
+            </div>
+          </div>
+        </button>
+
+        <button onclick="selectRegion('coastal')" class="region-opt-btn w-full text-left p-3 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-emerald-50 text-xs font-bold text-slate-800 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <span class="text-xl">🌊</span>
+            <div>
+              <p>Pwani na Bahari (Coastal Zone)</p>
+              <p class="text-[10px] text-slate-500 font-normal">Mombasa, Dar es Salaam, Zanzibar, Kilifi • Minazi, mikoko, mawimbi ya bahari, chumvi</p>
+            </div>
+          </div>
+        </button>
+
+        <button onclick="selectRegion('lake_basin')" class="region-opt-btn w-full text-left p-3 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-emerald-50 text-xs font-bold text-slate-800 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <span class="text-xl">🏞️</span>
+            <div>
+              <p>Bonde la Ziwa (Lake Victoria Basin)</p>
+              <p class="text-[10px] text-slate-500 font-normal">Kisumu, Mwanza, Entebbe, Homa Bay • Ziwa Victoria, upepo wa ziwani, uvuvi wa samaki</p>
+            </div>
+          </div>
+        </button>
+
+        <button onclick="selectRegion('arid')" class="region-opt-btn w-full text-left p-3 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-emerald-50 text-xs font-bold text-slate-800 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <span class="text-xl">☀️</span>
+            <div>
+              <p>Maeneo Kavu & Ukame (Arid / Pastoralist)</p>
+              <p class="text-[10px] text-slate-500 font-normal">Turkana, Garissa, Kajiado, Marsabit, Dodoma • Jua kali, nishati ya solar, visima vya maji</p>
+            </div>
+          </div>
+        </button>
+
+        <button onclick="selectRegion('urban')" class="region-opt-btn w-full text-left p-3 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-emerald-50 text-xs font-bold text-slate-800 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <span class="text-xl">🏙️</span>
+            <div>
+              <p>Mijini (Urban Centers)</p>
+              <p class="text-[10px] text-slate-500 font-normal">Nairobi, Kampala, Lagos, Dar, Kigali • Taa za solar za mitaani, matatu electronics, majengo</p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="flex justify-end pt-2">
+        <button onclick="closeRegionModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-2 rounded-xl transition-all">Funga</button>
+      </div>
+    </div>
+  </div>
 
   <!-- INTERACTIVE QUIZ MODAL -->
   <div id="quizModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
@@ -223,11 +313,7 @@
       </div>
 
       <p id="quizQuestion" class="font-bold text-slate-800 text-sm leading-relaxed"></p>
-
-      <div id="quizOptions" class="space-y-2">
-        <!-- Dynamic options -->
-      </div>
-
+      <div id="quizOptions" class="space-y-2"></div>
       <div id="quizFeedback" class="hidden p-3 rounded-xl text-xs font-semibold leading-relaxed"></div>
 
       <div class="flex justify-end pt-2">
@@ -238,7 +324,6 @@
 
   <script src="/app.js"></script>
   <script>
-    // Register Service Worker for Offline PWA
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')

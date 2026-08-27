@@ -1,12 +1,12 @@
 """
 ElewaSTEM Persistent Student Memory & Concept Mastery Bank
-Tracks student profile, grade level, language preference, topic mastery, and misconceptions.
+Tracks student profile, grade level, language preference, geo-location region, topic mastery, and misconceptions.
 """
 
 import json
 import os
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 from pydantic import BaseModel, Field
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
@@ -27,8 +27,10 @@ class TopicMastery(BaseModel):
 class StudentProfile(BaseModel):
     student_id: str
     name: str = "Mwanafunzi"
-    grade_level: str = "Grade 6 (Upper Primary)"  # e.g., Grade 4, Grade 6, Grade 8, Form 1
+    grade_level: str = "Grade 6 (Upper Primary)"
     preferred_language: str = "swahili"  # "english", "swahili", "sheng"
+    current_region: str = "highlands"   # "coastal", "highlands", "lake_basin", "arid", "urban"
+    gps_coordinates: Optional[Dict[str, float]] = None  # {"lat": -1.286389, "lon": 36.817223}
     learning_style: str = "analogies_and_experiments"
     created_at: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
     mastery_graph: Dict[str, TopicMastery] = Field(default_factory=dict)
@@ -61,12 +63,19 @@ class MemoryBank:
             data = {k: v.model_dump() for k, v in self.profiles.items()}
             json.dump(data, f, indent=2, ensure_ascii=False)
 
-    def get_or_create_profile(self, student_id: str, name: Optional[str] = None, language: Optional[str] = None) -> StudentProfile:
+    def get_or_create_profile(
+        self,
+        student_id: str,
+        name: Optional[str] = None,
+        language: Optional[str] = None,
+        region: Optional[str] = None
+    ) -> StudentProfile:
         if student_id not in self.profiles:
             profile = StudentProfile(
                 student_id=student_id,
                 name=name or "Mwanafunzi",
                 preferred_language=language or "swahili",
+                current_region=region or "highlands",
                 badges=["🌟 Mwanzo Bora (Great Start)"]
             )
             self.profiles[student_id] = profile
@@ -76,8 +85,17 @@ class MemoryBank:
                 self.profiles[student_id].name = name
             if language:
                 self.profiles[student_id].preferred_language = language
+            if region:
+                self.profiles[student_id].current_region = region
             self._save_profiles()
         return self.profiles[student_id]
+
+    def update_geo_location(self, student_id: str, region: str, lat: Optional[float] = None, lon: Optional[float] = None):
+        profile = self.get_or_create_profile(student_id)
+        profile.current_region = region
+        if lat is not None and lon is not None:
+            profile.gps_coordinates = {"lat": lat, "lon": lon}
+        self._save_profiles()
 
     def update_topic_interaction(self, student_id: str, topic: str, subject: str, score_delta: int = 5, misconception: Optional[str] = None):
         profile = self.get_or_create_profile(student_id)
@@ -124,7 +142,6 @@ class MemoryBank:
             "content": content,
             "language": language
         })
-        # Keep last 15 interactions in persistent state
         if len(profile.recent_interactions) > 15:
             profile.recent_interactions = profile.recent_interactions[-15:]
         self._save_profiles()

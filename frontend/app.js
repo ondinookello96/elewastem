@@ -1,18 +1,28 @@
 /**
- * ElewaSTEM Frontend Application Logic
- * Handles Offline PWA Caching, Bilingual Switching, Speech Synthesis/Recognition, and Mastery Graphs.
+ * ElewaSTEM Frontend Application Logic with Geo-Adaptive Context & Offline GPS Detection
+ * Handles Offline PWA Caching, Bilingual Switching, GPS Coordinates, Regional Eco-Zones, and Mastery Graphs.
  */
 
 // Application State
 const STATE = {
   studentId: 'demo_student',
   language: 'swahili', // 'swahili', 'english', 'sheng'
+  region: 'highlands', // 'coastal', 'highlands', 'lake_basin', 'arid', 'urban'
+  gpsCoords: null,
   simulatedOffline: false,
   activeTab: 'chat',
   offlineModules: [],
+  regionsMeta: {
+    coastal: { name_sw: 'Pwani na Bahari', name_en: 'Coastal & Ocean', icon: '🌊', desc_sw: 'Pwani (Mombasa, Dar, Zanzibar)' },
+    highlands: { name_sw: 'Nyanda za Juu', name_en: 'Highlands & Farms', icon: '⛰️', desc_sw: 'Nyanda za Juu (Nakuru, Mt. Kenya, Arusha)' },
+    lake_basin: { name_sw: 'Bonde la Ziwa', name_en: 'Lake Victoria Basin', icon: '🏞️', desc_sw: 'Bonde la Ziwa (Kisumu, Mwanza, Entebbe)' },
+    arid: { name_sw: 'Maeneo Kavu', name_en: 'Arid & Pastoralist', icon: '☀️', desc_sw: 'Maeneo Kavu (Turkana, Garissa, Kajiado)' },
+    urban: { name_sw: 'Mijini', name_en: 'Urban Centers', icon: '🏙️', desc_sw: 'Mijini (Nairobi, Kampala, Dar, Lagos)' }
+  },
   profile: {
     name: 'Mwanafunzi Hodari',
     grade_level: 'Grade 6',
+    current_region: 'highlands',
     mastery_graph: {},
     badges: ['🌟 Mwanzo Bora (Great Start)']
   },
@@ -56,11 +66,47 @@ const I18N = {
   }
 };
 
+// Regional Quick Prompt Templates
+const REGIONAL_PROMPT_CHIPS = {
+  coastal: [
+    { title: '🌴 Minazi & Usanisinuru Pwani', query: 'Eleza jinsi minazi ya Pwani inavyotumia mwangaza wa jua kutengeneza maji ya dafu (photosynthesis)' },
+    { title: '⚡ Pampu za Chumvi & Umeme', query: 'Eleza volteji na mkondo wa umeme (current) kwa mfano wa pampu za maji ya chumvi baharini' },
+    { title: '🌊 Grabiti & Mawimbi ya Bahari', query: 'Eleza nguvu ya grabiti ya mwezi na jinsi inavyoleta maji kujaa na kupwa baharini' },
+    { title: '🥥 Kugawana Nazi & Samaki (Fractions)', query: 'Nifundishe sehemu za nambari (fractions) kwa kugawana nazi na samaki wa biriani' }
+  ],
+  highlands: [
+    { title: '🌽 Mahindi, Chai & Photosynthesis', query: 'Eleza usanisinuru (photosynthesis) inavyofanya kazi kwa mashamba ya mahindi na majani ya chai milimani' },
+    { title: '⚡ Umeme wa Maji (Hydroelectric Dams)', query: 'Eleza umeme, volteji na saketi kwa mfano wa mtambo wa maji wa Masinga au Sondu Miriu' },
+    { title: '🚲 Grabiti & Breki za Baiskeli', query: 'Kwa nini baiskeli inateremka mlima kwa kasi? Eleza Grabiti na Msuguano wa breki kwenye vumbi' },
+    { title: '🥔 Mavuno ya Viazi (Fractions)', query: 'Nifundishe Fractions kwa kugawa vikapu vya mavuno ya viazi shambani' }
+  ],
+  lake_basin: [
+    { title: '🐟 Ziwa Victoria & Oksijeni ya Samaki', query: 'Eleza jinsi mimea ya Ziwa Victoria inavyotengeneza oksijeni inayosaidia samaki kama tilapia kupumua' },
+    { title: '⚡ Taa za Betri za Kuvulia Dagaa', query: 'Eleza saketi ya umeme kwa mfano wa betri ya 12V na taa ya kuvulia samaki usiku ziwani' },
+    { title: '⚓ Nanga ya Chuma & Grabiti Ziwani', query: 'Kwa nini nanga nzito ya mashua inazama chini ya maji ya Ziwa Victoria? Eleza nguvu ya grabiti' },
+    { title: '🐠 Kikapu cha Samaki (Fractions)', query: 'Nifundishe fractions kwa mfano wa kupika samaki 5 kati ya 10 waliovuliwa ziwani' }
+  ],
+  arid: [
+    { title: '☀️ Miti ya Acacia Kwenye Jua Kali', query: 'Eleza jinsi miti ya acacia kule Turkana/Garissa inavyofanya usanisinuru bila kupoteza maji wakati wa ukame' },
+    { title: '⚡ Nishati ya Solar & Visima vya Maji', query: 'Eleza volteji na saketi kwa mfano wa paneli za jua (Solar PV) zinazoendesha pampu za visima vya maji' },
+    { title: '🌪️ Upepo, Mchanga & Grabiti', query: 'Kwa nini upepo hupeperusha vumbi lakini mawe mazito yanabaki chini? Eleza nguvu ya mvuto wa ardhi' },
+    { title: '💧 Dumu la Maji Kisimani (Fractions)', query: 'Nifundishe fractions kwa mfano wa kuchota lita 5 kwenye dumu la lita 20 kisimani' }
+  ],
+  urban: [
+    { title: '🌿 Miti ya Jiji & Kusafisha Moshi', query: 'Eleza jinsi miti ya kando ya barabara za jiji inavyofyonza hewa ya moshi wa magari na kutoa oksijeni' },
+    { title: '⚡ Taa za Barabarani & Matatu Electronics', query: 'Eleza saketi za umeme kwa mfano wa taa za barabarani za solar na mfumo wa redio wa matatu' },
+    { title: '🚗 Matairi ya Gari & Msuguano wa Lami', query: 'Eleza nguvu ya msuguano kwa mfano wa michirizi ya matairi ya gari kwenye barabara ya lami wakati wa mvua' },
+    { title: '🍕 Chapati na Pizza Mtaani (Fractions)', query: 'Nifundishe fractions kwa mfano wa kukata na kugawa vipande vya chapati au pizza mtaani' }
+  ]
+};
+
 // Initialize Application
 document.addEventListener('DOMContentLoaded', async () => {
   initNetworkListeners();
+  loadSavedRegion();
   await loadOfflinePack();
   await refreshProfile();
+  renderRegionUI();
   renderVault();
   updateUIStrings();
 });
@@ -83,11 +129,11 @@ function updateNetworkUI() {
   const online = isEffectivelyOnline();
 
   if (online) {
-    badge.className = 'flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 transition-all hover:scale-105';
+    badge.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 transition-all hover:scale-105';
     dot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
     text.innerText = I18N[STATE.language].online_text;
   } else {
-    badge.className = 'flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300 transition-all hover:scale-105';
+    badge.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300 transition-all hover:scale-105';
     dot.className = 'w-2 h-2 rounded-full bg-amber-500';
     text.innerText = I18N[STATE.language].offline_text;
   }
@@ -97,10 +143,127 @@ function toggleSimulateOffline() {
   STATE.simulatedOffline = !STATE.simulatedOffline;
   updateNetworkUI();
   const msg = STATE.simulatedOffline 
-    ? (STATE.language === 'swahili' ? '🔴 Umeingia hali ya Nje ya Mtandao (Offline). Majaribio na masomo yatafanya kazi kupitia Local Vault!' : '🔴 Offline simulation enabled. Tutor is running from local offline vault!')
+    ? (STATE.language === 'swahili' ? '🔴 Umeingia hali ya Nje ya Mtandao (Offline). Mifano ya eneo lako inafanya kazi 100% bila mtandao kupitia Local Vault!' : '🔴 Offline simulation enabled. Geo-adaptive tutor running from local offline vault!')
     : (STATE.language === 'swahili' ? '🟢 Umerudi Mtandaoni (Online). Gemini 2.5 Flash imeunganishwa tena!' : '🟢 Back Online! Connected to Gemini 2.5 Flash backend.');
   
   appendSystemNotice(msg);
+}
+
+// Geo-Location & Regional Adaptation
+function loadSavedRegion() {
+  const saved = localStorage.getItem('elewa_user_region');
+  if (saved && STATE.regionsMeta[saved]) {
+    STATE.region = saved;
+  }
+}
+
+function selectRegion(regionKey) {
+  if (!STATE.regionsMeta[regionKey]) return;
+  STATE.region = regionKey;
+  localStorage.setItem('elewa_user_region', regionKey);
+  closeRegionModal();
+  renderRegionUI();
+  renderVault();
+
+  const reg = STATE.regionsMeta[regionKey];
+  const isSw = STATE.language !== 'english';
+  appendSystemNotice(`📍 ${isSw ? 'Mazingira ya eneo yamebadilishwa kuwa:' : 'Eco-region switched to:'} <b>${reg.icon} ${isSw ? reg.name_sw : reg.name_en}</b>. Mifano yote ya sayansi itatumia mazingira haya!`);
+}
+
+function renderRegionUI() {
+  const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.highlands;
+  const isSw = STATE.language !== 'english';
+
+  const iconEl = document.getElementById('regionIcon');
+  const textEl = document.getElementById('regionNameText');
+  const welcomeEcoPill = document.getElementById('welcomeEcoPill');
+  const welcomeDesc = document.getElementById('welcomeLocationDesc');
+  const vaultNotice = document.getElementById('vaultRegionNotice');
+  const vaultIcon = document.getElementById('vaultRegionIcon');
+  const profilePill = document.getElementById('profileRegionPill');
+
+  if (iconEl) iconEl.innerText = reg.icon;
+  if (textEl) textEl.innerText = isSw ? reg.name_sw : reg.name_en;
+  if (welcomeEcoPill) welcomeEcoPill.innerText = `📍 Eneo: ${reg.icon} ${isSw ? reg.name_sw : reg.name_en}`;
+  if (welcomeDesc) welcomeDesc.innerText = isSw ? reg.name_sw : reg.name_en;
+  if (vaultNotice) vaultNotice.innerText = isSw ? reg.name_sw : reg.name_en;
+  if (vaultIcon) vaultIcon.innerText = reg.icon;
+  if (profilePill) profilePill.innerText = `📍 Eneo: ${reg.icon} ${isSw ? reg.name_sw : reg.name_en}`;
+
+  // Render regional prompt chips
+  const chipsContainer = document.getElementById('quickLocationChips');
+  if (chipsContainer) {
+    const chips = REGIONAL_PROMPT_CHIPS[STATE.region] || REGIONAL_PROMPT_CHIPS.highlands;
+    chipsContainer.innerHTML = chips.map(c => `
+      <button onclick="sendQuickPrompt('${escapeHtml(c.query)}')" class="quick-chip bg-emerald-50 text-emerald-800 border border-emerald-300 px-2.5 py-1 rounded-full text-xs hover:bg-emerald-100 font-medium transition-all">
+        ${c.title}
+      </button>
+    `).join('');
+  }
+}
+
+function detectDeviceGPS() {
+  if (!('geolocation' in navigator)) {
+    alert('Kifaa chako hakina GPS (Geolocation is not supported by your device).');
+    return;
+  }
+
+  const gpsBtn = document.getElementById('gpsBtn');
+  if (gpsBtn) gpsBtn.classList.add('bg-amber-400', 'animate-pulse');
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      if (gpsBtn) gpsBtn.classList.remove('bg-amber-400', 'animate-pulse');
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      STATE.gpsCoords = { lat, lon };
+
+      // Map latitude & longitude to African eco-regions (Works 100% offline!)
+      const detectedRegion = mapCoordinatesToEcoRegion(lat, lon);
+      selectRegion(detectedRegion);
+
+      const reg = STATE.regionsMeta[detectedRegion];
+      appendSystemNotice(`🎯 <b>GPS Auto-Detect (Offline GPS):</b> [${lat.toFixed(2)}, ${lon.toFixed(2)}] ➔ ${reg.icon} <b>${reg.name_sw}</b>.`);
+    },
+    (error) => {
+      if (gpsBtn) gpsBtn.classList.remove('bg-amber-400', 'animate-pulse');
+      console.log('GPS notice:', error.message);
+      // Fallback message
+      appendSystemNotice(`📍 Hatujaweza kupata GPS moja kwa moja. Unaweza kuchagua eneo lako kwa kubonyeza kitufe cha Eneo hapo juu!`);
+      openRegionModal();
+    },
+    { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+  );
+}
+
+// Offline coordinate to eco-region mapper
+function mapCoordinatesToEcoRegion(lat, lon) {
+  // Coastal Strip (Kenya / Tanzania coastline)
+  if (lon > 38.5 && lat < 1.0 && lat > -11.0) {
+    return 'coastal';
+  }
+  // Lake Victoria Basin (Western Kenya, Northern Tanzania, Uganda)
+  if (lon >= 31.0 && lon <= 35.0 && lat >= -3.5 && lat <= 2.5) {
+    return 'lake_basin';
+  }
+  // Arid & Pastoralist Belt (Northern Kenya, Turkana, Garissa, Central Tanzania)
+  if ((lat > 1.2 && lon > 35.0) || (lat < -4.5 && lon < 37.0 && lon > 34.0)) {
+    return 'arid';
+  }
+  // Major Urban Centers (Nairobi approximate bounding box)
+  if (lat >= -1.45 && lat <= -1.15 && lon >= 36.65 && lon <= 37.10) {
+    return 'urban';
+  }
+  // Default to Highlands / Agricultural belt
+  return 'highlands';
+}
+
+function openRegionModal() {
+  document.getElementById('regionModal').classList.remove('hidden');
+}
+
+function closeRegionModal() {
+  document.getElementById('regionModal').classList.add('hidden');
 }
 
 // Language Switching
@@ -108,6 +271,7 @@ function changeLanguage(lang) {
   STATE.language = lang;
   updateUIStrings();
   updateNetworkUI();
+  renderRegionUI();
   renderVault();
   renderMastery();
 }
@@ -147,7 +311,6 @@ async function loadOfflinePack() {
     if (cached) {
       STATE.offlineModules = JSON.parse(cached);
     }
-    // Fetch fresh copy from backend if online
     if (navigator.onLine) {
       const res = await fetch('/api/offline-pack');
       if (res.ok) {
@@ -192,7 +355,7 @@ async function executeAgentQuery(query, simplify = false) {
     return;
   }
 
-  // If online -> send to backend API
+  // If online -> send to backend API with region & GPS context
   try {
     const res = await fetch('/api/chat', {
       method: 'POST',
@@ -201,6 +364,8 @@ async function executeAgentQuery(query, simplify = false) {
         student_id: STATE.studentId,
         message: query,
         language: STATE.language,
+        region: STATE.region,
+        gps_coordinates: STATE.gpsCoords,
         simplify: simplify
       })
     });
@@ -233,10 +398,16 @@ function generateLocalOfflineAnswer(query, simplify) {
     m.key_terms.some(k => qLower.includes(k.en.toLowerCase()) || qLower.includes(k.sw.toLowerCase()))
   ) || STATE.offlineModules[0];
 
+  const regKey = STATE.region;
+  const regMeta = STATE.regionsMeta[regKey] || STATE.regionsMeta.highlands;
   const isSw = STATE.language !== 'english';
+  
   const title = isSw ? matched.title_sw : matched.title_en;
   const summary = isSw ? matched.summary_sw : matched.summary_en;
-  const analogy = isSw ? matched.analogy_sw : matched.analogy_en;
+
+  const regionalDict = matched.regional_analogies ? (matched.regional_analogies[regKey] || matched.regional_analogies.highlands) : {};
+  const analogy = isSw ? (regionalDict.analogy_sw || matched.analogy_sw) : (regionalDict.analogy_en || matched.analogy_en);
+  
   const exp = matched.experiment;
   const quiz = matched.quiz;
 
@@ -244,13 +415,13 @@ function generateLocalOfflineAnswer(query, simplify) {
 
   const text = `### 🔬 ${title}
 
-${isSw ? 'Ufafanuzi kutoka kwenye Offline Vault (Bila Mtandao):' : 'Explanation from Local Offline Vault:'}
+${isSw ? `Habari kutoka **${regMeta.icon} ${regMeta.name_sw}** (Offline Vault):` : `Explanation for **${regMeta.icon} ${regMeta.name_en}** (Offline Vault):`}
 
 ${summary}
 
 ---
 
-#### 💡 Mfano Halisi (Everyday Analogy)
+#### 💡 Mfano Halisi wa Eneo Lako (${regMeta.icon} ${isSw ? regMeta.name_sw : regMeta.name_en})
 ${analogy}
 
 ---
@@ -270,6 +441,7 @@ ${isSw ? exp.steps_sw : exp.steps_en}
     source: 'local_offline_vault',
     text: text,
     language: STATE.language,
+    region: STATE.region,
     topic: matched.title_en,
     subject: matched.subject,
     quiz_data: quiz
@@ -298,13 +470,17 @@ function appendAssistantMessage(data) {
   const isOffline = data.source === 'local_offline_vault' || data.source === 'offline_knowledge_vault';
   const formattedHtml = parseMarkdownToHtml(data.text);
   const quizDataJson = data.quiz_data ? JSON.stringify(data.quiz_data).replace(/"/g, '&quot;') : '';
+  const regMeta = STATE.regionsMeta[data.region || STATE.region] || STATE.regionsMeta.highlands;
 
   div.innerHTML = `
     <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-white text-sm flex-shrink-0 shadow">
       🌱
     </div>
     <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%] text-sm text-slate-800 space-y-3">
-      ${isOffline ? '<span class="inline-block bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full mb-1">📦 Imetoka Offline Vault</span>' : '<span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full mb-1">✨ Gemini 2.5 Flash</span>'}
+      <div class="flex items-center space-x-2 flex-wrap gap-1 mb-1">
+        ${isOffline ? '<span class="inline-block bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📦 Offline Vault</span>' : '<span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">✨ Gemini 2.5 Flash</span>'}
+        <span class="inline-block bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full">${regMeta.icon} ${regMeta.name_sw}</span>
+      </div>
       <div class="stem-card leading-relaxed space-y-2">${formattedHtml}</div>
       
       <!-- Action Toolbar -->
@@ -313,7 +489,7 @@ function appendAssistantMessage(data) {
           <span>🔊</span>
           <span>Sikiliza (TTS)</span>
         </button>
-        <button onclick="executeAgentQuery('Eleza hili tena kwa urahisi zaidi kama kwa mtoto wa miaka 9', true)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 flex items-center space-x-1 transition-all">
+        <button onclick="executeAgentQuery('Eleza hili tena kwa mifano rahisi sana ya eneo langu', true)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 flex items-center space-x-1 transition-all">
           <span>💡</span>
           <span>Rahisisha</span>
         </button>
@@ -334,7 +510,7 @@ function appendSystemNotice(text) {
   const div = document.createElement('div');
   div.className = 'flex justify-center my-2';
   div.innerHTML = `
-    <span class="bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-1 rounded-full shadow-inner">
+    <span class="bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-1 rounded-full shadow-inner text-center">
       ${text}
     </span>
   `;
@@ -345,6 +521,7 @@ function appendSystemNotice(text) {
 function appendLoadingIndicator() {
   const container = document.getElementById('chatMessages');
   const id = 'loading_' + Date.now();
+  const regMeta = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.highlands;
   const div = document.createElement('div');
   div.id = id;
   div.className = 'flex items-start space-x-3';
@@ -354,7 +531,7 @@ function appendLoadingIndicator() {
     </div>
     <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm text-xs font-bold text-slate-500 flex items-center space-x-2">
       <span class="w-2 h-2 rounded-full bg-brand-600 animate-ping"></span>
-      <span>Mwalimu anafikiri na kuandaa mfano mzuri...</span>
+      <span>Mwalimu anatafuta mfano wa ${regMeta.icon} ${regMeta.name_sw}...</span>
     </div>
   `;
   container.appendChild(div);
@@ -404,7 +581,6 @@ function speakText(encodedText) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.rate = 0.95;
     utterance.pitch = 1.0;
-    // Set language
     utterance.lang = STATE.language === 'english' ? 'en-US' : 'sw-KE';
     window.speechSynthesis.speak(utterance);
   } else {
@@ -451,28 +627,36 @@ function renderVault() {
   const container = document.getElementById('vaultModulesGrid');
   if (!container) return;
   const isSw = STATE.language !== 'english';
+  const regKey = STATE.region;
+  const regMeta = STATE.regionsMeta[regKey] || STATE.regionsMeta.highlands;
 
-  container.innerHTML = STATE.offlineModules.map(m => `
-    <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-3 hover:border-brand-500 transition-all flex flex-col justify-between">
-      <div class="space-y-1.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">${m.subject}</span>
-          <span class="text-xs text-brand-600 font-bold">📦 0 KB Offline</span>
+  container.innerHTML = STATE.offlineModules.map(m => {
+    const regionalDict = m.regional_analogies ? (m.regional_analogies[regKey] || m.regional_analogies.highlands) : {};
+    const localAnalogy = isSw ? (regionalDict.analogy_sw || m.analogy_sw) : (regionalDict.analogy_en || m.analogy_en);
+
+    return `
+      <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-3 hover:border-brand-500 transition-all flex flex-col justify-between">
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">${m.subject}</span>
+            <span class="text-[10px] text-brand-700 font-bold bg-brand-50 border border-brand-200 px-2 py-0.5 rounded-full">📍 ${regMeta.icon} ${regMeta.name_sw}</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base">${isSw ? m.title_sw : m.title_en}</h3>
+          <p class="text-xs text-slate-600 line-clamp-2">${isSw ? m.summary_sw : m.summary_en}</p>
+          <p class="text-[11px] text-brand-900 bg-emerald-50 p-2 rounded-xl border border-emerald-100 italic line-clamp-2"><b>💡 Mfano wa Eneo Lako:</b> ${localAnalogy}</p>
         </div>
-        <h3 class="font-bold text-slate-900 text-base">${isSw ? m.title_sw : m.title_en}</h3>
-        <p class="text-xs text-slate-600 line-clamp-2">${isSw ? m.summary_sw : m.summary_en}</p>
-      </div>
 
-      <div class="pt-2 border-t border-slate-100 flex space-x-2">
-        <button onclick="openOfflineModuleInChat('${m.id}')" class="flex-1 bg-brand-50 hover:bg-brand-100 text-brand-800 text-xs font-bold py-2 rounded-xl text-center transition-all">
-          Soma Somo
-        </button>
-        <button onclick="openQuizModal('${JSON.stringify(m.quiz).replace(/"/g, '&quot;')}', '${escapeHtml(m.title_en)}')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition-all">
-          🎯 Quiz
-        </button>
+        <div class="pt-2 border-t border-slate-100 flex space-x-2">
+          <button onclick="openOfflineModuleInChat('${m.id}')" class="flex-1 bg-brand-50 hover:bg-brand-100 text-brand-800 text-xs font-bold py-2 rounded-xl text-center transition-all">
+            Soma Somo
+          </button>
+          <button onclick="openQuizModal('${JSON.stringify(m.quiz).replace(/"/g, '&quot;')}', '${escapeHtml(m.title_en)}')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition-all">
+            🎯 Quiz
+          </button>
+        </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 function openOfflineModuleInChat(moduleId) {
@@ -490,6 +674,10 @@ async function refreshProfile() {
       const res = await fetch(`/api/profile/${STATE.studentId}`);
       if (res.ok) {
         STATE.profile = await res.json();
+        if (STATE.profile.current_region) {
+          STATE.region = STATE.profile.current_region;
+          renderRegionUI();
+        }
       }
     }
   } catch (e) {
