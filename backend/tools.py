@@ -1,6 +1,6 @@
 """
-ElewaSTEM Specialized Agent Tools with Deep Hyper-Local African Ecosystems & Stakeholder Resources
-Provides localized STEM analogies, experiments, offline modules, teacher lesson plans, parent digests, and community club guides.
+ElewaSTEM Specialized Agent Tools with Deep Hyper-Local African Ecosystems, Stakeholder Resources, and Universal Accessibility
+Includes tactile audio descriptions for visually impaired/blind learners, visual sign language cues for deaf learners, and dyslexia adaptations.
 """
 
 from typing import Dict, List, Any
@@ -95,6 +95,10 @@ OFFLINE_STEM_VAULT = [
         "summary_en": "Plants use sunlight, water, and carbon dioxide from the air to produce glucose energy and release fresh oxygen.",
         "summary_sw": "Mimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.",
         
+        # Universal Accessibility Bridges
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Shika jani bichi mkononi mwako. Hisi upande wa juu ulivyo laini na bapa—sehemu hii inavuta mwangaza wa jua. Geuza jani upande wa chini, utahisi mishipa midogo midogo inayopitisha maji na mashimo madogo yasiyoonekana (stomata) yanayovuta hewa ya kaboni na kutoa oksijeni safi!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Mmea unaochipua] + [Ishara ya Jua linalong'aa] + [Ishara ya Kupumua na Kutoa Hewa]. Angalia mchoro wa mishale: Jua na Maji yanaingia ndani ya jani ➔ Chakula (Sukari) kinabaki ndani ➔ Viputo vya Oksijeni vinatoka nje.",
+        
         "regional_analogies": {
             "lake_basin": {
                 "analogy_sw": "Kule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!",
@@ -128,7 +132,7 @@ OFFLINE_STEM_VAULT = [
             "title_en": "Experiment: Observing Plant Oxygen in Your Locality",
             "materials_sw": "Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.",
             "materials_en": "A fresh local leaf (Osuga/Managu in Kisumu, coconut leaf at Coast, maize in Highlands), clear bottle with water, sunlight.",
-            "steps_sw": "1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!",
+            "steps_sw": "1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!",
             "steps_en": "1. Submerge the leaf inside the clear bottle of water.\n2. Place it in direct sunlight for 1 hour.\n3. Watch tiny bubbles form on the leaf surface - that is pure Oxygen released by your local plant!"
         },
         "quiz": {
@@ -149,6 +153,10 @@ OFFLINE_STEM_VAULT = [
         "cbc_strand": "Animals & Environmental Adaptations (Grade 5/6 Science)",
         "summary_en": "Fish like Tilapia (Ngege) and Nile Perch (Mbuta) breathe underwater using specialized gills that extract dissolved oxygen from water.",
         "summary_sw": "Samaki kama Ngege (Tilapia) na Mbuta (Nile Perch) wanapumua ndani ya maji kwa kutumia yavuyavu (gills/mashavu) zinazochuja oksijeni iliyoyeyushwa kwenye maji ya ziwa.",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Fikiria kichwa cha samaki Ngege. Kando ya kichwa kuna mashavu mawili yanayojifungua na kujifunga. Ndani yake kuna tabaka nyembamba laini zenye rangi nyekundu ya damu zinazofanya kazi kama chujio la hewa. Maji yakipita, chujio hili linafyonza hewa ya oksijeni na kuituma kwenye damu ya samaki!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Samaki anayeogelea] + [Ishara ya Mashavu yanayopumua] + [Mchoro wa Chujio linalovuta Oksijeni].",
+
         "regional_analogies": {
             "lake_basin": {
                 "analogy_sw": "Kule Dunga Beach au Luanda Kotieno kando ya Ziwa Victoria, unapoangalia samaki Ngege (Tilapia), mashavu yake yakifunguka na kufunga, yanafanya kazi kama chujio maalum (filter) linalofyonza oksijeni kutoka majini na kuingiza kwenye damu yake!",
@@ -203,6 +211,10 @@ OFFLINE_STEM_VAULT = [
         "cbc_strand": "Energy & Force (Grade 6 Science & Technology)",
         "summary_en": "Electric current is the continuous flow of charges through a closed circuit wire.",
         "summary_sw": "Mkondo wa umeme ni mwendo wa chembe ndogo za chaji zinazosafiri kwenye waya uliounganishwa bila kukatika.",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Fikiria bomba la duara lililojaa maji. Ukifungua pampu, maji yanasukumwa kuanzia mwanzo hadi mwisho wa bomba. Betri ndio pampu inayozungusha chembe za umeme kwenye waya wa chuma. Waya ukikatika mahali popote, mzunguko unakoma!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Waya wa Duara] + [Ishara ya Mwanga unaowaka] + [Mchoro wa Njia Iliyofungwa bila pengo].",
+
         "regional_analogies": {
             "lake_basin": {
                 "analogy_sw": "Kule Kisumu na Ziwa Victoria, fikiria taa za betri za kuvulia dagaa usiku ziwani! Betri ya 12V inasukuma mkondo wa umeme kupitia nyaya zilizofungwa vizuri ili taa iwake gizani ziwani kuvuta samaki. Saketi ikikatika taa inazima mara moja!",
@@ -257,6 +269,10 @@ OFFLINE_STEM_VAULT = [
         "cbc_strand": "Forces & Motion (Grade 5/6 Science)",
         "summary_en": "Gravity pulls mass toward the center of the Earth. Friction opposes motion between contacting surfaces.",
         "summary_sw": "Mvuto wa ardhi (Grabiti) huvuta vitu chini ardhini. Msuguano huzuia au kupunguza mwendo vitu vinapogusana.",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Shikilia kitu kidogo mkononi (kama jiwe au kifuniko cha chupa) kisha ufungue mkono wako. Unahisi kikidondoka moja kwa moja ardhini—hiyo ni nguvu ya grabiti ya dunia inayokivuta. Kisha paka viganja vyako viwili pamoja kwa haraka—utahisi joto likiongezeka mkononi, hilo joto linatokana na nguvu ya msuguano!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Mchoro wa Jiwe linaloanguka chini ⬇️ (Grabiti)] + [Mchoro wa Viganja viwili vinavyosuguana ↔️ (Msuguano)].",
+
         "regional_analogies": {
             "lake_basin": {
                 "analogy_sw": "Kule Kisumu bandarini, mvuvi anaporusha nanga nzito ya chuma ya mashua, nguvu ya grabiti inalivuta chuma kuzama chini ya maji ya Ziwa Victoria!",
@@ -311,6 +327,10 @@ OFFLINE_STEM_VAULT = [
         "cbc_strand": "Numbers & Operations (Grade 5/6 Mathematics)",
         "summary_en": "A fraction represents equal parts of a whole quantity (Numerator / Denominator).",
         "summary_sw": "Sehemu (Fraction) huonyesha vipande vilivyogawanywa sawasawa kutoka kwa kitu kizima kimoja.",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Chukua kijiti kimoja au karatasi. Ikate katikati uwe na vipande viwili sawa. Kila kipande mkononi mwako ni Nusu (1/2). Ukikata kila kimoja tena uwe na vipande vinne, kila kipande ni Robo (1/4). Vipande 2 vya robo ukiweka pamoja ni sawa na nusu!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Mchoro wa Duara lililogawanywa nusu (1/2)] + [Mchoro wa Duara lenye vipande 4 (1/4)].",
+
         "regional_analogies": {
             "lake_basin": {
                 "analogy_sw": "Kule Kisumu bandarini ukinunua kapu lenye samaki 10 wa Ngege (Tilapia) na ukapika samaki 5 kwa chakula cha jioni, umepika 5/10 ya samaki wote, ambayo ikirahisishwa ni nusu kamili (1/2) ya samaki!",
@@ -362,7 +382,6 @@ OFFLINE_STEM_VAULT = [
 
 # --- STAKEHOLDER RESOURCES ---
 
-# 1. Teachers: CBC-Aligned Lesson Plans & Classroom Diagnostics
 def generate_teacher_lesson_plan(topic_id: str, region: str) -> Dict[str, Any]:
     topic = find_offline_topic(topic_id)
     reg_info = REGIONS.get(region, REGIONS["lake_basin"])
@@ -380,13 +399,14 @@ def generate_teacher_lesson_plan(topic_id: str, region: str) -> Dict[str, Any]:
             "Kufanya jaribio salama la kisayansi kwa kutumia vifaa vya nyumbani/shuleni."
         ],
         "local_teaching_aid": regional_analogy["analogy_sw"],
+        "tactile_support_for_blind": topic.get("tactile_audio_description_sw", ""),
+        "visual_sign_for_deaf": topic.get("sign_language_visual_cues_sw", ""),
         "in_class_activity": topic["experiment"],
         "diagnostic_quiz": topic["quiz"],
         "dpa_privacy_note": "Hakuna data ya kibinafsi ya mtoto inayohitajika kufanya somo hili darasani."
     }
 
 
-# 2. Parents: Weekly Progress Digest & At-Home Science Challenges
 def generate_parent_digest(student_profile: Dict[str, Any], region: str) -> Dict[str, Any]:
     reg_info = REGIONS.get(region, REGIONS["lake_basin"])
     mastery = student_profile.get("mastery_graph", {})
@@ -407,7 +427,6 @@ def generate_parent_digest(student_profile: Dict[str, Any], region: str) -> Dict
     }
 
 
-# 3. Community STEM Mentors & Village Centers
 def get_community_club_projects(region: str) -> List[Dict[str, Any]]:
     reg_info = REGIONS.get(region, REGIONS["lake_basin"])
     return [

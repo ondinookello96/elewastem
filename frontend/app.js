@@ -1,6 +1,5 @@
 /**
- * ElewaSTEM Frontend Application Logic with Multi-Stakeholder Hub & Voice-First Accessibility
- * Stakeholders: Learners, Parents (SMS digests & home challenges), Teachers (CBC lesson plans), Community Mentors.
+ * ElewaSTEM Frontend Application Logic with Universal Accessibility (Blindness, Deafness, Dyslexia) & Stakeholder Hub
  */
 
 // Application State
@@ -9,6 +8,11 @@ const STATE = {
   language: 'swahili',
   region: 'lake_basin',
   autoSpeak: true,
+  screenReaderMode: true, // Audio & Tactile descriptions
+  signLanguageMode: true, // Visual Sign Language Cues & Diagrams
+  dyslexiaMode: false,
+  highContrast: false,
+  textSize: 'normal', // 'normal', 'lg', 'xl'
   gpsCoords: null,
   dpaConsent: false,
   simulatedOffline: false,
@@ -71,7 +75,7 @@ const I18N = {
   }
 };
 
-// Regional Quick Prompt Templates (Deeply Localized)
+// Regional Quick Prompt Templates
 const REGIONAL_PROMPT_CHIPS = {
   lake_basin: [
     { title: '🐟 Samaki Ngege & Upumuaji Ziwani', query: 'Eleza jinsi samaki Ngege (Tilapia) na Mbuta kule Kisumu wanavyotumia yavuyavu (gills) kupumua oksijeni ya Ziwa Victoria' },
@@ -109,6 +113,7 @@ const REGIONAL_PROMPT_CHIPS = {
 document.addEventListener('DOMContentLoaded', async () => {
   initNetworkListeners();
   loadSavedPreferences();
+  applyAccessibilityClasses();
   await loadOfflinePack();
   await refreshProfile();
   renderRegionUI();
@@ -152,10 +157,90 @@ function toggleSimulateOffline() {
   updateNetworkUI();
   const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
   const msg = STATE.simulatedOffline 
-    ? (STATE.language === 'swahili' ? `🔴 Umeingia hali ya Nje ya Mtandao (Offline). Masomo na miongozo ya ${reg.name_sw} inafanya kazi 100% bila mtandao!` : `🔴 Offline simulation enabled. Hub for ${reg.name_en} running from local offline vault!`)
+    ? (STATE.language === 'swahili' ? `🔴 Umeingia hali ya Nje ya Mtandao (Offline). Masomo ya ${reg.name_sw} yanafanya kazi 100% bila mtandao!` : `🔴 Offline simulation enabled. Hub for ${reg.name_en} running from local offline vault!`)
     : (STATE.language === 'swahili' ? '🟢 Umerudi Mtandaoni (Online). Gemini 2.5 Flash imeunganishwa tena!' : '🟢 Back Online! Connected to Gemini 2.5 Flash backend.');
   
   appendSystemNotice(msg);
+}
+
+// Universal Accessibility Controls
+function openA11yModal() {
+  document.getElementById('a11yModal').classList.remove('hidden');
+}
+
+function closeA11yModal() {
+  document.getElementById('a11yModal').classList.add('hidden');
+}
+
+function toggleScreenReaderMode() {
+  STATE.screenReaderMode = !STATE.screenReaderMode;
+  localStorage.setItem('elewa_screen_reader', STATE.screenReaderMode ? 'true' : 'false');
+  const btn = document.getElementById('screenReaderToggleBtn');
+  if (btn) {
+    btn.innerText = STATE.screenReaderMode ? 'Imewashwa' : 'Washa';
+    btn.className = STATE.screenReaderMode ? 'px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-600 text-white' : 'px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-200 text-slate-800';
+  }
+  renderVault();
+}
+
+function toggleSignLanguageMode() {
+  STATE.signLanguageMode = !STATE.signLanguageMode;
+  localStorage.setItem('elewa_sign_lang', STATE.signLanguageMode ? 'true' : 'false');
+  const btn = document.getElementById('signLangToggleBtn');
+  if (btn) {
+    btn.innerText = STATE.signLanguageMode ? 'Imewashwa' : 'Washa';
+    btn.className = STATE.signLanguageMode ? 'px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-600 text-white' : 'px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-200 text-slate-800';
+  }
+  renderVault();
+}
+
+function toggleDyslexiaMode() {
+  STATE.dyslexiaMode = !STATE.dyslexiaMode;
+  localStorage.setItem('elewa_dyslexia', STATE.dyslexiaMode ? 'true' : 'false');
+  applyAccessibilityClasses();
+  const btn = document.getElementById('dyslexiaToggleBtn');
+  if (btn) {
+    btn.innerText = STATE.dyslexiaMode ? 'Imewashwa' : 'Washa';
+    btn.className = STATE.dyslexiaMode ? 'px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-600 text-white' : 'px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-200 text-slate-800';
+  }
+}
+
+function toggleHighContrast() {
+  STATE.highContrast = !STATE.highContrast;
+  localStorage.setItem('elewa_high_contrast', STATE.highContrast ? 'true' : 'false');
+  applyAccessibilityClasses();
+  const btn = document.getElementById('highContrastBtn');
+  if (btn) {
+    btn.innerText = STATE.highContrast ? 'Imewashwa' : 'Washa';
+    btn.className = STATE.highContrast ? 'px-2.5 py-1 rounded-lg text-xs font-bold bg-yellow-400 text-black' : 'px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-200 text-slate-800';
+  }
+}
+
+function setTextSize(size) {
+  STATE.textSize = size;
+  localStorage.setItem('elewa_text_size', size);
+  applyAccessibilityClasses();
+}
+
+function applyAccessibilityClasses() {
+  const body = document.getElementById('appBody');
+  if (!body) return;
+
+  if (STATE.dyslexiaMode) {
+    body.classList.add('dyslexia-mode');
+  } else {
+    body.classList.remove('dyslexia-mode');
+  }
+
+  if (STATE.highContrast) {
+    body.classList.add('high-contrast');
+  } else {
+    body.classList.remove('high-contrast');
+  }
+
+  body.classList.remove('text-size-lg', 'text-size-xl');
+  if (STATE.textSize === 'lg') body.classList.add('text-size-lg');
+  if (STATE.textSize === 'xl') body.classList.add('text-size-xl');
 }
 
 // Voice Auto-Speak Accessibility Toggle
@@ -191,12 +276,19 @@ function updateAutoSpeakUI() {
 function loadSavedPreferences() {
   STATE.dpaConsent = (localStorage.getItem('elewa_dpa_consent') === 'granted');
   const savedRegion = localStorage.getItem('elewa_user_region');
-  if (savedRegion && STATE.regionsMeta[savedRegion]) {
-    STATE.region = savedRegion;
+  if (savedRegion && STATE.regionsMeta[savedRegion]) STATE.region = savedRegion;
+
+  if (localStorage.getItem('elewa_auto_speak') !== null) {
+    STATE.autoSpeak = (localStorage.getItem('elewa_auto_speak') === 'true');
   }
-  const savedAutoSpeak = localStorage.getItem('elewa_auto_speak');
-  if (savedAutoSpeak !== null) {
-    STATE.autoSpeak = (savedAutoSpeak === 'true');
+  if (localStorage.getItem('elewa_dyslexia') !== null) {
+    STATE.dyslexiaMode = (localStorage.getItem('elewa_dyslexia') === 'true');
+  }
+  if (localStorage.getItem('elewa_high_contrast') !== null) {
+    STATE.highContrast = (localStorage.getItem('elewa_high_contrast') === 'true');
+  }
+  if (localStorage.getItem('elewa_text_size')) {
+    STATE.textSize = localStorage.getItem('elewa_text_size');
   }
 }
 
@@ -261,8 +353,7 @@ function executeGPSScan() {
     },
     (error) => {
       if (gpsBtn) gpsBtn.classList.remove('bg-amber-400', 'animate-pulse');
-      console.log('GPS notice:', error.message);
-      appendSystemNotice(`📍 Hatujaweza kusoma GPS. Unaweza kuchagua kaunti/eneo lako kwenye orodha!`);
+      appendSystemNotice(`📍 Hatujaweza kusoma GPS. Unaweza kuchagua eneo kwenye orodha!`);
       openRegionModal();
     },
     { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
@@ -387,7 +478,6 @@ function switchStakeholderTab(subTab) {
   });
 }
 
-// Stakeholder 1: Parents Digest
 function updateParentDigestPreview() {
   const smsEl = document.getElementById('parentSmsPreview');
   if (!smsEl) return;
@@ -407,7 +497,6 @@ function copySmsDigest() {
   });
 }
 
-// Stakeholder 2: Teacher CBC Lesson Plan
 function loadTeacherLessonPlan(topicId) {
   const card = document.getElementById('teacherLessonPlanCard');
   if (!card) return;
@@ -443,6 +532,18 @@ function loadTeacherLessonPlan(topicId) {
         <p class="text-emerald-950 italic">${regionalDict.analogy_sw || mod.analogy_sw}</p>
       </div>
 
+      ${mod.tactile_audio_description_sw ? `
+      <div class="bg-blue-50 border border-blue-200 p-3 rounded-xl">
+        <p class="font-bold text-blue-900 mb-0.5">👁️ Mwongozo wa Wanafunzi Wasioona (Tactile Description):</p>
+        <p class="text-blue-950">${mod.tactile_audio_description_sw}</p>
+      </div>` : ''}
+
+      ${mod.sign_language_visual_cues_sw ? `
+      <div class="bg-purple-50 border border-purple-200 p-3 rounded-xl">
+        <p class="font-bold text-purple-900 mb-0.5">🧏 Mwongozo wa Wanafunzi Wasiosikia (Sign Language Cues):</p>
+        <p class="text-purple-950">${mod.sign_language_visual_cues_sw}</p>
+      </div>` : ''}
+
       <div>
         <p class="font-bold text-slate-800 mb-1">🧪 Shughuli ya Darasani / Jaribio:</p>
         <p class="text-slate-600"><b>Vifaa:</b> ${mod.experiment.materials_sw}</p>
@@ -458,7 +559,6 @@ function loadTeacherLessonPlan(topicId) {
   `;
 }
 
-// Stakeholder 3: Community Mentors Activities
 function renderCommunityActivities() {
   const grid = document.getElementById('communityProjectsGrid');
   if (!grid) return;
@@ -493,9 +593,8 @@ function renderCommunityActivities() {
 async function loadOfflinePack() {
   try {
     const cached = localStorage.getItem('elewa_offline_pack');
-    if (cached) {
-      STATE.offlineModules = JSON.parse(cached);
-    }
+    if (cached) STATE.offlineModules = JSON.parse(cached);
+
     if (navigator.onLine) {
       const res = await fetch('/api/offline-pack');
       if (res.ok) {
@@ -559,9 +658,7 @@ async function executeAgentQuery(query, simplify = false) {
     if (res.ok) {
       const data = await res.json();
       appendAssistantMessage(data);
-      if (data.student_profile) {
-        STATE.profile = data.student_profile;
-      }
+      if (data.student_profile) STATE.profile = data.student_profile;
       if (STATE.autoSpeak) speakText(data.text);
     } else {
       const localFallback = generateLocalOfflineAnswer(query, simplify);
@@ -631,6 +728,8 @@ ${isSw ? exp.steps_sw : exp.steps_en}
     region: STATE.region,
     topic: matched.title_en,
     subject: matched.subject,
+    tactile_description: matched.tactile_audio_description_sw,
+    sign_cues: matched.sign_language_visual_cues_sw,
     quiz_data: quiz
   };
 }
@@ -668,10 +767,30 @@ function appendAssistantMessage(data) {
         ${isOffline ? '<span class="inline-block bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📦 Offline Vault</span>' : '<span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">✨ Gemini 2.5 Flash</span>'}
         <span class="inline-block bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full">${regMeta.icon} ${regMeta.name_sw}</span>
       </div>
+      
       <div class="stem-card leading-relaxed space-y-2">${formattedHtml}</div>
+
+      <!-- Universal Accessibility Cards -->
+      ${data.tactile_description && STATE.screenReaderMode ? `
+      <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs space-y-1">
+        <p class="font-bold text-blue-900 flex items-center space-x-1">
+          <span>👁️</span>
+          <span>Maelezo ya Sauti & Kushika (Kwa Wasioona):</span>
+        </p>
+        <p class="text-blue-950">${data.tactile_description}</p>
+      </div>` : ''}
+
+      ${data.sign_cues && STATE.signLanguageMode ? `
+      <div class="bg-purple-50 border border-purple-200 rounded-xl p-3 text-xs space-y-1">
+        <p class="font-bold text-purple-900 flex items-center space-x-1">
+          <span>🧏</span>
+          <span>Alama za Lugha ya Ishara & Picha (Kwa Wasiosikia):</span>
+        </p>
+        <p class="text-purple-950">${data.sign_cues}</p>
+      </div>` : ''}
       
       <div class="pt-2 border-t border-slate-100 flex flex-wrap gap-2 text-xs font-semibold">
-        <button onclick="speakText('${encodeURIComponent(data.text)}')" class="px-2.5 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 flex items-center space-x-1 transition-all">
+        <button onclick="speakText('${encodeURIComponent(data.text + (data.tactile_description ? ' ' + data.tactile_description : ''))}')" class="px-2.5 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 flex items-center space-x-1 transition-all">
           <span>🔊</span>
           <span>Sikiliza kwa Sauti</span>
         </button>
@@ -861,7 +980,7 @@ function cancelVoiceRecognition() {
   document.getElementById('voiceOverlayModal').classList.add('hidden');
 }
 
-// Offline Vault Rendering
+// Offline Vault Rendering with Universal Accessibility
 function renderVault() {
   const container = document.getElementById('vaultModulesGrid');
   if (!container) return;
@@ -883,13 +1002,19 @@ function renderVault() {
           <h3 class="font-bold text-slate-900 text-base">${isSw ? m.title_sw : m.title_en}</h3>
           <p class="text-xs text-slate-600 line-clamp-2">${isSw ? m.summary_sw : m.summary_en}</p>
           <p class="text-[11px] text-brand-900 bg-emerald-50 p-2 rounded-xl border border-emerald-100 italic line-clamp-2"><b>💡 Mfano wa Eneo Lako:</b> ${localAnalogy}</p>
+
+          ${m.tactile_audio_description_sw && STATE.screenReaderMode ? `
+          <p class="text-[11px] text-blue-900 bg-blue-50 p-2 rounded-xl border border-blue-100 line-clamp-2"><b>👁️ Maelezo ya Kushika (Blindness):</b> ${m.tactile_audio_description_sw}</p>` : ''}
+
+          ${m.sign_language_visual_cues_sw && STATE.signLanguageMode ? `
+          <p class="text-[11px] text-purple-900 bg-purple-50 p-2 rounded-xl border border-purple-100 line-clamp-2"><b>🧏 Alama za Ishara (Deafness):</b> ${m.sign_language_visual_cues_sw}</p>` : ''}
         </div>
 
         <div class="pt-2 border-t border-slate-100 flex space-x-2">
           <button onclick="openOfflineModuleInChat('${m.id}')" class="flex-1 bg-brand-50 hover:bg-brand-100 text-brand-800 text-xs font-bold py-2 rounded-xl text-center transition-all">
             Soma Somo
           </button>
-          <button onclick="speakText('${encodeURIComponent((isSw ? m.summary_sw : m.summary_en) + ' Mfano: ' + localAnalogy)}')" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 text-xs font-bold px-3 py-2 rounded-xl transition-all" title="Sikiliza kwa Sauti">
+          <button onclick="speakText('${encodeURIComponent((isSw ? m.summary_sw : m.summary_en) + ' Mfano: ' + localAnalogy + (m.tactile_audio_description_sw ? ' ' + m.tactile_audio_description_sw : ''))}')" class="bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 text-xs font-bold px-3 py-2 rounded-xl transition-all" title="Sikiliza kwa Sauti">
             🔊
           </button>
           <button onclick="openQuizModal('${JSON.stringify(m.quiz).replace(/"/g, '&quot;')}', '${escapeHtml(m.title_en)}')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition-all">

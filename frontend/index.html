@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ElewaSTEM — Mwalimu wa Sayansi (Multi-Stakeholder STEM Platform)</title>
-  <meta name="description" content="Jukwaa la AI la STEM kwa Wanafunzi, Wazazi, Walimu na Vilabu vya Sayansi barani Afrika.">
+  <title>ElewaSTEM — Mwalimu wa Sayansi (Universal Accessibility & STEM)</title>
+  <meta name="description" content="Jukwaa jumuishi la AI la STEM linalojumuisha wasioona, wasiosikia, dyslexia, wazazi na walimu barani Afrika.">
   <meta name="theme-color" content="#10b981">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
@@ -31,7 +31,7 @@
   </script>
   <link rel="stylesheet" href="/style.css">
 </head>
-<body class="bg-slate-50 text-slate-800 flex flex-col h-screen overflow-hidden font-sans antialiased">
+<body id="appBody" class="bg-slate-50 text-slate-800 flex flex-col h-screen overflow-hidden font-sans antialiased">
 
   <!-- TOP HEADER -->
   <header class="bg-white border-b border-slate-200 px-3 sm:px-4 py-2 flex items-center justify-between shadow-sm flex-shrink-0">
@@ -42,30 +42,30 @@
       <div>
         <div class="flex items-center space-x-1.5">
           <h1 class="font-black text-base sm:text-lg text-slate-900 tracking-tight">Elewa<span class="text-brand-600">STEM</span></h1>
-          <span class="text-[9px] sm:text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800">Ecosystem AI</span>
+          <span class="text-[9px] sm:text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800">Inclusive AI</span>
         </div>
-        <p class="text-[10px] sm:text-xs text-slate-500 font-medium hidden sm:block">Wanafunzi • Wazazi • Walimu • Jamii • CBC Aligned</p>
+        <p class="text-[10px] sm:text-xs text-slate-500 font-medium hidden sm:block">Universal Accessibility • Blindness, Deafness, Dyslexia, CBC</p>
       </div>
     </div>
 
-    <!-- Controls: Voice Auto-Read, GPS/Region, Network, Language -->
-    <div class="flex items-center space-x-1.5 sm:space-x-2">
+    <!-- Controls: Accessibility Modal, Voice Auto-Read, GPS/Region, Network, Language -->
+    <div class="flex items-center space-x-1 sm:space-x-2">
+      <!-- Universal Accessibility Quick Button -->
+      <button onclick="openA11yModal()" id="a11yBtn" title="Mipangilio ya Ujumuishi (Wasioona, Wasiosikia, Dyslexia, Ukubwa wa Maandishi)" class="flex items-center space-x-1 px-2 py-1 rounded-lg text-xs font-bold bg-blue-50 text-blue-900 border border-blue-300 hover:bg-blue-100 transition-all">
+        <span>♿</span>
+        <span class="hidden md:inline">Ujumuishi</span>
+      </button>
+
       <!-- Auto-Speak Toggle for Low Literacy -->
       <button onclick="toggleAutoSpeak()" id="autoSpeakBtn" title="Washa usomaji wa sauti kiotomatiki" class="flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-bold bg-purple-50 text-purple-900 border border-purple-300 hover:bg-purple-100 transition-all">
         <span id="autoSpeakIcon">🔊</span>
-        <span id="autoSpeakText" class="hidden md:inline">Sauti: Washa</span>
+        <span id="autoSpeakText" class="hidden lg:inline">Sauti: Washa</span>
       </button>
 
       <!-- GPS & Region Selector Button -->
       <button onclick="openRegionModal()" id="regionBadge" title="Bonyeza kubadili eneo au kuwasha GPS" class="flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300 hover:bg-amber-100 transition-all">
         <span id="regionIcon">🏞️</span>
-        <span id="regionNameText" class="truncate max-w-[85px] sm:max-w-[120px]">Kisumu</span>
-      </button>
-
-      <!-- GPS Quick-Detect Button -->
-      <button onclick="handleGPSButtonClick()" id="gpsBtn" title="Tafuta eneo kwa GPS (Inalindwa na DPA 2019)" class="p-1 sm:px-2 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-brand-50 text-slate-700 hover:text-brand-700 border border-slate-300 flex items-center space-x-1 transition-all">
-        <span>📍</span>
-        <span class="hidden lg:inline text-[11px]">GPS</span>
+        <span id="regionNameText" class="truncate max-w-[80px] sm:max-w-[110px]">Kisumu</span>
       </button>
 
       <!-- Network status indicator -->
@@ -111,8 +111,7 @@
       <!-- 4. Stakeholders Hub -->
       <button onclick="switchTab('stakeholders')" id="tabBtn-stakeholders" class="tab-btn flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 border border-transparent">
         <span>👥</span>
-        <span>Kituo cha Wadau (Stakeholders)</span>
-        <span class="bg-indigo-600 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">Wazazi/Walimu</span>
+        <span>Kituo cha Wadau</span>
       </button>
     </div>
 
@@ -128,7 +127,7 @@
 
     <!-- 1. CHAT VIEW (LEARNER) -->
     <section id="chatSection" class="flex-1 flex flex-col overflow-hidden">
-      <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 max-w-4xl w-full mx-auto">
+      <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 max-w-4xl w-full mx-auto" aria-live="polite">
         <!-- Welcome Message -->
         <div class="flex items-start space-x-3">
           <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-white text-sm flex-shrink-0 shadow">
@@ -140,7 +139,7 @@
               <span id="welcomeEcoPill" class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📍 Eneo: Kisumu & Ziwa Victoria</span>
             </div>
             <p id="welcomeText">
-              Mimi ni mwalimu wako wa Sayansi na Hesabu. <b>Huna haja ya kuandika au kusoma herufi ngumu!</b> Unaweza kubonyeza kitufe cha kipaza sauti (🎤) kuongea nami, nami nitakusomea majibu kwa sauti ya Kiswahili au Kiingereza!
+              Mimi ni mwalimu wako wa Sayansi na Hesabu. <b>Mfumo huu umeundwa kwa watoto wote</b>: unaweza kuongea kwa sauti, kusikiliza maelezo ya kushika (tactile audio), kuona alama za picha/ishara (sign language cues), au kurekebisha maandishi yawe makubwa na mepesi kusoma!
             </p>
             <div class="pt-2">
               <p class="text-xs font-semibold text-slate-500 mb-1.5">💡 Jaribu kubonyeza mada ya kusikiliza:</p>
@@ -154,14 +153,15 @@
       <div id="quickChipsBar" class="px-4 py-1.5 bg-slate-100 border-t border-slate-200 flex items-center justify-between text-xs max-w-4xl w-full mx-auto">
         <span class="text-slate-500 font-medium hidden sm:inline">⚡ Mada za haraka:</span>
         <div class="flex space-x-1.5 overflow-x-auto no-scrollbar py-0.5">
-          <button onclick="sendQuickPrompt('Nieleze kwa mifano ya mimea na wanyama wa eneo langu')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">📍 Mfano wa Eneo Langu</button>
+          <button onclick="sendQuickPrompt('Nieleze kwa mifano ya mimea na wanyama wa eneo langu')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">📍 Mfano wa Eneo</button>
+          <button onclick="sendQuickPrompt('Nieleze kwa mifano ya kushika kwa wasioona (tactile)')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 font-medium">👁️ Maelezo ya Kushika (Blind)</button>
           <button onclick="sendQuickPrompt('Nieleze kwa mifano rahisi sana')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">💡 Rahisisha Zaidi</button>
           <button onclick="sendQuickPrompt('Nipe jaribio rahisi la kufanya nyumbani')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">🧪 Jaribio la Nyumbani</button>
           <button onclick="sendQuickPrompt('Nipe swali la mtihani la kujipima')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">🎯 Swali la Jaribio</button>
         </div>
       </div>
 
-      <!-- Chat Input Bar with High-Accessibility Voice Button -->
+      <!-- Chat Input Bar -->
       <div class="p-3 bg-white border-t border-slate-200 flex-shrink-0 shadow-lg">
         <form id="chatForm" onsubmit="handleChatSubmit(event)" class="max-w-4xl mx-auto flex items-center space-x-2">
           <button type="button" id="voiceBtn" onclick="toggleVoiceInput()" title="Bonyeza hapa kuongea kwa sauti (Speak your question)" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 text-white flex items-center justify-center text-xl hover:from-brand-700 hover:to-emerald-600 active:scale-95 transition-all shadow-md flex-shrink-0">
@@ -184,7 +184,7 @@
       <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center justify-between">
         <div>
           <h2 class="font-bold text-emerald-900 text-base">📦 Hifadhi ya Masomo (Offline Knowledge Vault)</h2>
-          <p class="text-xs text-emerald-700">Masomo yamebadilishwa kulingana na eneo lako (<b id="vaultRegionNotice">Bonde la Ziwa Victoria (Kisumu)</b>). Unaweza kusikiliza kwa sauti bila mtandao.</p>
+          <p class="text-xs text-emerald-700">Masomo yamebadilishwa kulingana na eneo lako (<b id="vaultRegionNotice">Bonde la Ziwa Victoria (Kisumu)</b>). Yana maelezo ya sauti na ya picha bila mtandao.</p>
         </div>
         <span class="text-2xl" id="vaultRegionIcon">🏞️</span>
       </div>
@@ -225,10 +225,8 @@
       </div>
     </section>
 
-    <!-- 4. STAKEHOLDERS HUB (PARENTS, TEACHERS, COMMUNITY MENTORS) -->
+    <!-- 4. STAKEHOLDERS HUB -->
     <section id="stakeholdersSection" class="hidden flex-1 overflow-y-auto p-4 max-w-4xl w-full mx-auto space-y-6">
-      
-      <!-- Stakeholder Header Banner -->
       <div class="bg-gradient-to-r from-indigo-900 to-purple-800 rounded-3xl p-6 text-white shadow-lg space-y-2">
         <div class="flex items-center space-x-2">
           <span class="text-2xl">👥</span>
@@ -239,7 +237,6 @@
         </p>
       </div>
 
-      <!-- Stakeholder Sub-Navigation -->
       <div class="flex space-x-2 border-b border-slate-200 pb-2 overflow-x-auto no-scrollbar text-xs font-bold">
         <button onclick="switchStakeholderTab('parents')" id="subTab-parents" class="px-3.5 py-2 rounded-xl bg-indigo-50 text-indigo-900 border border-indigo-200">
           👨‍👩‍👧 Wazazi na Walezi (Parents)
@@ -254,7 +251,6 @@
 
       <!-- 4A. PARENTS VIEW -->
       <div id="stakeholderView-parents" class="space-y-4">
-        <!-- Parent Weekly Progress Digest -->
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
           <div class="flex items-center justify-between">
             <h3 class="font-black text-slate-900 text-sm flex items-center space-x-2">
@@ -271,7 +267,7 @@
           <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs font-mono text-slate-800 space-y-2">
             <p class="font-bold text-indigo-900">📲 Mfano wa Ujumbe wa SMS kwa Mzazi:</p>
             <p id="parentSmsPreview" class="bg-white p-3 rounded-lg border border-slate-200 text-slate-700 italic">
-              "ElewaSTEM Ripoti: Mwanafunzi amechunguza mada za Usanisinuru (Photosynthesis) na Upumuaji wa Samaki kwa kutumia mifano ya Ziwa Victoria. Ameshinda beji ya 'Mvumbuzi Chipukizi'!"
+              "ElewaSTEM Ripoti: Mwanafunzi amechunguza mada za Usanisinuru na Upumuaji wa Samaki kwa kutumia mifano ya Ziwa Victoria. Ameshinda beji ya 'Mvumbuzi Chipukizi'!"
             </p>
             <button onclick="copySmsDigest()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
               📋 Nakili Ujumbe wa SMS (Copy SMS)
@@ -279,7 +275,6 @@
           </div>
         </div>
 
-        <!-- At-Home Science Challenge for Parents -->
         <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 space-y-2">
           <h4 class="font-black text-amber-900 text-sm flex items-center space-x-2">
             <span>🧪</span>
@@ -308,7 +303,6 @@
             Tengeneza somo lililooanishwa na mtaala wa CBC (Grade 5/6 Science) likiwa na mifano ya mazingira ya shule yako:
           </p>
 
-          <!-- Lesson Plan Selector -->
           <div class="flex space-x-2">
             <select id="teacherTopicSelect" onchange="loadTeacherLessonPlan(this.value)" class="bg-slate-50 border border-slate-300 text-xs font-bold p-2.5 rounded-xl flex-1 focus:ring-2 focus:ring-brand-500">
               <option value="photosynthesis">Usanisinuru (Photosynthesis in Local Plants)</option>
@@ -319,10 +313,7 @@
             </select>
           </div>
 
-          <!-- Lesson Plan Card Rendered Dynamically -->
-          <div id="teacherLessonPlanCard" class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs space-y-3">
-            <!-- Dynamic Content -->
-          </div>
+          <div id="teacherLessonPlanCard" class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs space-y-3"></div>
         </div>
       </div>
 
@@ -341,15 +332,103 @@
             Miradi ya vitendo inayotumia vifaa vilivyopo kijijini kwa ajili ya vituo vya watoto, makanisa, misikiti na kumbi za jamii:
           </p>
 
-          <div id="communityProjectsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <!-- Dynamically populated -->
-          </div>
+          <div id="communityProjectsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
         </div>
       </div>
 
     </section>
 
   </main>
+
+  <!-- UNIVERSAL ACCESSIBILITY SETTINGS MODAL -->
+  <div id="a11yModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 animate-scale-up">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center space-x-2.5">
+          <span class="text-2xl">♿</span>
+          <div>
+            <h3 class="font-black text-slate-900 text-base">Mipangilio ya Ujumuishi (Universal Accessibility)</h3>
+            <p class="text-[10px] text-slate-500 font-bold uppercase">Upatikanaji kwa Watoto Wenye Mahitaji Maalum</p>
+          </div>
+        </div>
+        <button onclick="closeA11yModal()" class="text-slate-400 hover:text-slate-600 font-bold text-lg p-1">&times;</button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        
+        <!-- 1. Blindness & Visual Impairment -->
+        <div class="bg-blue-50 border border-blue-200 rounded-2xl p-3.5 space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="text-xl">👁️</span>
+              <div>
+                <p class="font-bold text-blue-950">Hali ya Wasioona na Wenye Uoni Hafifu (Screen Reader & Audio)</p>
+                <p class="text-[10px] text-blue-800 font-normal">Maelezo ya sauti ya kushika (tactile analogies) na usomaji kamili.</p>
+              </div>
+            </div>
+            <button onclick="toggleScreenReaderMode()" id="screenReaderToggleBtn" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-600 text-white">
+              Imewashwa
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Deafness & Hearing Impairment -->
+        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3.5 space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="text-xl">🧏</span>
+              <div>
+                <p class="font-bold text-emerald-950">Hali ya Wasiosikia (Deafness & Sign Language Cues)</p>
+                <p class="text-[10px] text-emerald-800 font-normal">Alama za Lugha ya Ishara ya Kenya (KSL) na michoro ya picha.</p>
+              </div>
+            </div>
+            <button onclick="toggleSignLanguageMode()" id="signLangToggleBtn" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-600 text-white">
+              Imewashwa
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Dyslexia & Neurodiversity -->
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3.5 space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="text-xl">📖</span>
+              <div>
+                <p class="font-bold text-amber-950">Hali ya Dyslexia & ADHD (Mwandiko Mepesi & Mwanga Mwanana)</p>
+                <p class="text-[10px] text-amber-800 font-normal">Nafasi pana ya herufi, rangi ya njano isiyoumiza macho na masomo ya vipande vidogo.</p>
+              </div>
+            </div>
+            <button onclick="toggleDyslexiaMode()" id="dyslexiaToggleBtn" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-200 text-slate-800">
+              Washa
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. High Contrast & Text Scaling -->
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-800">🌓 Rangi Iliyokolea (High Contrast Mode):</span>
+            <button onclick="toggleHighContrast()" id="highContrastBtn" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-200 text-slate-800">
+              Washa
+            </button>
+          </div>
+          <div class="flex items-center justify-between border-t border-slate-200 pt-2">
+            <span class="font-bold text-slate-800">🔍 Ukubwa wa Maandishi (Text Size):</span>
+            <div class="flex space-x-1">
+              <button onclick="setTextSize('normal')" class="px-2 py-1 rounded-lg text-xs font-bold bg-slate-200 hover:bg-slate-300">A</button>
+              <button onclick="setTextSize('lg')" class="px-2 py-1 rounded-lg text-xs font-bold bg-slate-200 hover:bg-slate-300">A+</button>
+              <button onclick="setTextSize('xl')" class="px-2 py-1 rounded-lg text-xs font-bold bg-slate-200 hover:bg-slate-300">A++</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex justify-end pt-2">
+        <button onclick="closeA11yModal()" class="bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all">Hifadhi Mipangilio</button>
+      </div>
+    </div>
+  </div>
 
   <!-- VOICE LISTENING OVERLAY MODAL -->
   <div id="voiceOverlayModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
@@ -402,7 +481,7 @@
           </p>
           <ul class="list-disc pl-4 space-y-1">
             <li><b>100% On-Device:</b> Data ya GPS inasindikwa kwenye simu yako pekee na inafanya kazi hata bila mtandao.</li>
-            <li><b>Hakuna Ufuatiliaji:</b> Data ya eneo haitumiwi kwa matangazo, haihifadhiwi kwenye seva za kigeni, wala kuuzwa.</li>
+            <li><b>Hakuna Ufuatiliaji:</b> Data ya eneo haitumiwi kwa matangazo wala kuuzwa.</li>
             <li><b>Haki ya Kujiondoa:</b> Unaweza kuzima GPS wakati wowote na kuchagua eneo mwenyewe.</li>
           </ul>
         </div>

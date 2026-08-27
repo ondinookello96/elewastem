@@ -1,4 +1,4 @@
-/* ElewaSTEM Styles */
+/* ElewaSTEM Universal Accessibility & UI Styles */
 
 @keyframes scaleUp {
   from {
@@ -47,16 +47,13 @@
   width: 6px;
   height: 6px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 9999px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
@@ -111,3 +108,70 @@
 .stem-card strong {
   color: #0f172a;
 }
+
+/* --- UNIVERSAL ACCESSIBILITY MODES --- */
+
+/* 1. High Contrast Mode (For Low Vision / Visual Impairment) */
+body.high-contrast {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+body.high-contrast header,
+body.high-contrast nav,
+body.high-contrast main,
+body.high-contrast section,
+body.high-contrast div.bg-white,
+body.high-contrast div.bg-slate-50,
+body.high-contrast div.bg-emerald-50,
+body.high-contrast div.bg-amber-50,
+body.high-contrast div.bg-indigo-50 {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+  border-color: #facc15 !important;
+}
+body.high-contrast h1, 
+body.high-contrast h2, 
+body.high-contrast h3, 
+body.high-contrast h4,
+body.high-contrast strong,
+body.high-contrast p {
+  color: #ffff00 !important;
+}
+body.high-contrast button {
+  border: 2px solid #ffff00 !important;
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+}
+
+/* 2. Dyslexia / Neurodiverse Mode */
+body.dyslexia-mode {
+  font-family: 'Comic Sans MS', 'Trebuchet MS', 'Arial', sans-serif !important;
+  letter-spacing: 0.08em !important;
+  word-spacing: 0.15em !important;
+  line-height: 1.8 !important;
+  background-color: #fefce8 !important; /* Soft warm cream tint reduces glare */
+}
+body.dyslexia-mode p,
+body.dyslexia-mode span,
+body.dyslexia-mode h3,
+body.dyslexia-mode h4 {
+  letter-spacing: 0.06em !important;
+  line-height: 1.8 !important;
+}
+
+/* 3. Text Scaling */
+body.text-size-lg {
+  font-size: 1.15rem !important;
+}
+body.text-size-lg h1 { font-size: 1.5rem !important; }
+body.text-size-lg h2 { font-size: 1.35rem !important; }
+body.text-size-lg h3 { font-size: 1.25rem !important; }
+body.text-size-lg p, body.text-size-lg button, body.text-size-lg input { font-size: 1.05rem !important; }
+
+body.text-size-xl {
+  font-size: 1.35rem !important;
+}
+body.text-size-xl h1 { font-size: 1.75rem !important; }
+body.text-size-xl h2 { font-size: 1.55rem !important; }
+body.text-size-xl h3 { font-size: 1.45rem !important; }
+body.text-size-xl p, body.text-size-xl button, body.text-size-xl input { font-size: 1.25rem !important; }
