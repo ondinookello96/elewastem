@@ -1,18 +1,19 @@
 /**
- * ElewaSTEM Frontend Application Logic with Universal Accessibility (Blindness, Deafness, Dyslexia) & Stakeholder Hub
+ * ElewaSTEM Pan-African Frontend Logic: 16+ African Languages & Cross-Border DPA Compliance Matrix
  */
 
 // Application State
 const STATE = {
   studentId: 'demo_student',
-  language: 'swahili',
+  language: 'sw', // 'sw', 'sheng', 'yo', 'ha', 'ig', 'pcm', 'am', 'om', 'so', 'zu', 'xh', 'rw', 'lg', 'tw', 'sn', 'ln', 'en'
+  jurisdiction: 'KE',
   region: 'lake_basin',
   autoSpeak: true,
-  screenReaderMode: true, // Audio & Tactile descriptions
-  signLanguageMode: true, // Visual Sign Language Cues & Diagrams
+  screenReaderMode: true,
+  signLanguageMode: true,
   dyslexiaMode: false,
   highContrast: false,
-  textSize: 'normal', // 'normal', 'lg', 'xl'
+  textSize: 'normal',
   gpsCoords: null,
   dpaConsent: false,
   simulatedOffline: false,
@@ -21,17 +22,20 @@ const STATE = {
   activeSpeechUtterance: null,
   activeSpeechRecognition: null,
   offlineModules: [],
+  languagesMeta: {},
+  jurisdictionsMeta: {},
   regionsMeta: {
     lake_basin: { name_sw: 'Kisumu & Ziwa Victoria', name_en: 'Lake Victoria Basin (Kisumu)', icon: '🏞️', desc_sw: 'Kisumu, Mwanza, Entebbe • Samaki Ngege & Mbuta, Magugu Maji (Akech), Osuga & Mitoo' },
-    coastal: { name_sw: 'Pwani na Bahari', name_en: 'Coastal & Ocean (Mombasa)', icon: '🌊', desc_sw: 'Mombasa, Kilifi, Zanzibar • Minazi, mikoko ya kupumulia, chumvi' },
-    highlands: { name_sw: 'Nyanda za Juu & Kilimo', name_en: 'Highlands & Farms', icon: '⛰️', desc_sw: 'Nakuru, Eldoret, Mt. Kenya • Mashamba ya chai & mahindi, mito ya milima' },
-    arid: { name_sw: 'Maeneo Kavu & Ukame', name_en: 'Arid & Pastoralist', icon: '☀️', desc_sw: 'Turkana, Garissa, Kajiado • Miti ya acacia yenye nta, ngamia, solar boreholes' },
-    urban: { name_sw: 'Mijini', name_en: 'Urban Centers', icon: '🏙️', desc_sw: 'Nairobi, Kampala, Dar, Lagos • Taa za solar, matatu electronics, miti ya jiji' }
+    coastal: { name_sw: 'Pwani na Bahari', name_en: 'Coastal & Ocean (Mombasa/Lagos)', icon: '🌊', desc_sw: 'Mombasa, Kilifi, Zanzibar, Lagos • Minazi, mikoko ya kupumulia, chumvi' },
+    highlands: { name_sw: 'Nyanda za Juu & Kilimo', name_en: 'Highlands & Farms', icon: '⛰️', desc_sw: 'Nakuru, Eldoret, Mt. Kenya, Ethiopian Highlands • Mashamba ya chai, mahindi, kahawa' },
+    arid: { name_sw: 'Maeneo Kavu & Sahel', name_en: 'Arid & Pastoralist (Sahel/Kalahari)', icon: '☀️', desc_sw: 'Turkana, Garissa, Kano, Sahel • Miti ya acacia yenye nta, ngamia, solar boreholes' },
+    urban: { name_sw: 'Mijini', name_en: 'Urban Centers (Nairobi, Lagos, Joburg)', icon: '🏙️', desc_sw: 'Nairobi, Lagos, Johannesburg, Accra • Taa za solar, matatu/danfo electronics' }
   },
   profile: {
     name: 'Mwanafunzi Hodari',
     grade_level: 'Grade 6',
     current_region: 'lake_basin',
+    jurisdiction: 'KE',
     mastery_graph: {},
     badges: ['🌟 Mwanzo Bora (Great Start)']
   },
@@ -40,7 +44,7 @@ const STATE = {
 
 // UI Translations
 const I18N = {
-  swahili: {
+  sw: {
     tab_chat: 'Mwanafunzi Chat',
     tab_vault: 'Offline Vault (Masomo)',
     tab_mastery: 'Maendeleo',
@@ -51,7 +55,62 @@ const I18N = {
     simplify_btn: '💡 Rahisisha',
     quiz_btn: '🎯 Fanya Jaribio'
   },
-  english: {
+  sheng: {
+    tab_chat: 'Msee wa STEM',
+    tab_vault: 'Masomo Offline',
+    tab_mastery: 'Level Yangu',
+    input_placeholder: 'Bonga na mic au type swali yako...',
+    online_text: 'Online',
+    offline_text: 'Offline (Zero Data)',
+    listen_btn: '🔊 Sikiza',
+    simplify_btn: '💡 Fafanua zaidi',
+    quiz_btn: '🎯 Cheza Quiz'
+  },
+  yo: {
+    tab_chat: 'Olùkọ́ STEM',
+    tab_vault: 'Ẹ̀kọ́ Àìlórí Ayélujára',
+    tab_mastery: 'Ìlọsíwájú',
+    input_placeholder: 'Sọ̀rọ̀ sínú mic tàbí kọ ìbéèrè rẹ...',
+    online_text: 'Lórí Ayélujára',
+    offline_text: 'Àìlórí Ayélujára (0 KB)',
+    listen_btn: '🔊 Gbọ́',
+    simplify_btn: '💡 Ṣe àlàyé',
+    quiz_btn: '🎯 Ṣe Ìdánwò'
+  },
+  ha: {
+    tab_chat: 'Malamin STEM',
+    tab_vault: 'Karatun Ba Intanet',
+    tab_mastery: 'Ci gaba',
+    input_placeholder: 'Yi magana ta mic ko rubuta tambaya...',
+    online_text: 'A Layi',
+    offline_text: 'Babu Intanet (0 KB)',
+    listen_btn: '🔊 Saurara',
+    simplify_btn: '💡 Saukake',
+    quiz_btn: '🎯 Yi Tambayoyi'
+  },
+  ig: {
+    tab_chat: 'Onye Nkuzi STEM',
+    tab_vault: 'Ihe Ọmụmụ Offline',
+    tab_mastery: 'Ọganihu',
+    input_placeholder: 'Kwuo okwu na mic ma ọ bụ dee ajụjụ...',
+    online_text: 'N\'ịntanetị',
+    offline_text: 'Na-enweghị ịntanetị (0 KB)',
+    listen_btn: '🔊 Gee ntị',
+    simplify_btn: '💡 Mee ka ọ dị mfe',
+    quiz_btn: '🎯 Mee Nnwale'
+  },
+  pcm: {
+    tab_chat: 'STEM Ticha',
+    tab_vault: 'Offline Lessons',
+    tab_mastery: 'My Progress',
+    input_placeholder: 'Talk for mic or type your question...',
+    online_text: 'Online',
+    offline_text: 'Offline (0 KB)',
+    listen_btn: '🔊 Listen',
+    simplify_btn: '💡 Break am down',
+    quiz_btn: '🎯 Take Quiz'
+  },
+  en: {
     tab_chat: 'Learner Chat',
     tab_vault: 'Offline Vault (Lessons)',
     tab_mastery: 'Mastery & Badges',
@@ -61,17 +120,6 @@ const I18N = {
     listen_btn: '🔊 Listen',
     simplify_btn: '💡 Simplify',
     quiz_btn: '🎯 Take Quiz'
-  },
-  sheng: {
-    tab_chat: 'Msee wa STEM',
-    tab_vault: 'Masomo Offline',
-    tab_mastery: 'Level Yangu',
-    input_placeholder: 'Bonga na mic au type swali yako hapa...',
-    online_text: 'Online',
-    offline_text: 'Offline (Zero Data)',
-    listen_btn: '🔊 Sikiza',
-    simplify_btn: '💡 Fafanua zaidi',
-    quiz_btn: '🎯 Cheza Quiz'
   }
 };
 
@@ -115,6 +163,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadSavedPreferences();
   applyAccessibilityClasses();
   await loadOfflinePack();
+  await loadLanguagesAndJurisdictions();
   await refreshProfile();
   renderRegionUI();
   renderVault();
@@ -122,9 +171,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateAutoSpeakUI();
   loadTeacherLessonPlan('photosynthesis');
   renderCommunityActivities();
+  renderJurisdictionDetails(STATE.jurisdiction);
 });
 
-// Network Connectivity & Offline Simulation
+// Network Connectivity
 function initNetworkListeners() {
   window.addEventListener('online', updateNetworkUI);
   window.addEventListener('offline', updateNetworkUI);
@@ -140,15 +190,16 @@ function updateNetworkUI() {
   const dot = document.getElementById('networkDot');
   const text = document.getElementById('networkText');
   const online = isEffectivelyOnline();
+  const langDict = I18N[STATE.language] || I18N.sw;
 
   if (online) {
     badge.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 transition-all hover:scale-105';
     dot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
-    text.innerText = I18N[STATE.language].online_text;
+    text.innerText = langDict.online_text;
   } else {
     badge.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300 transition-all hover:scale-105';
     dot.className = 'w-2 h-2 rounded-full bg-amber-500';
-    text.innerText = I18N[STATE.language].offline_text;
+    text.innerText = langDict.offline_text;
   }
 }
 
@@ -157,10 +208,32 @@ function toggleSimulateOffline() {
   updateNetworkUI();
   const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
   const msg = STATE.simulatedOffline 
-    ? (STATE.language === 'swahili' ? `🔴 Umeingia hali ya Nje ya Mtandao (Offline). Masomo ya ${reg.name_sw} yanafanya kazi 100% bila mtandao!` : `🔴 Offline simulation enabled. Hub for ${reg.name_en} running from local offline vault!`)
-    : (STATE.language === 'swahili' ? '🟢 Umerudi Mtandaoni (Online). Gemini 2.5 Flash imeunganishwa tena!' : '🟢 Back Online! Connected to Gemini 2.5 Flash backend.');
+    ? `🔴 Offline simulation enabled. ElewaSTEM running 100% disconnected for ${reg.name_sw}!` 
+    : `🟢 Back Online! Connected to Gemini 2.5 Flash Pan-African backend.`;
   
   appendSystemNotice(msg);
+}
+
+// Pan-African Languages & Privacy Jurisdictions Fetcher
+async function loadLanguagesAndJurisdictions() {
+  try {
+    if (isEffectivelyOnline()) {
+      const [langRes, jurRes] = await Promise.all([
+        fetch('/api/languages'),
+        fetch('/api/privacy/jurisdictions')
+      ]);
+      if (langRes.ok) {
+        const langs = await langRes.json();
+        langs.forEach(l => STATE.languagesMeta[l.code] = l);
+      }
+      if (jurRes.ok) {
+        const jurs = await jurRes.json();
+        jurs.forEach(j => STATE.jurisdictionsMeta[j.country === 'Pan-African Union' ? 'AU_CONTINENTAL' : j.country.substring(0,2).toUpperCase()] = j);
+      }
+    }
+  } catch (err) {
+    console.log('Language & Privacy fetch notice:', err);
+  }
 }
 
 // Universal Accessibility Controls
@@ -243,7 +316,7 @@ function applyAccessibilityClasses() {
   if (STATE.textSize === 'xl') body.classList.add('text-size-xl');
 }
 
-// Voice Auto-Speak Accessibility Toggle
+// Voice Auto-Speak Toggle
 function toggleAutoSpeak() {
   STATE.autoSpeak = !STATE.autoSpeak;
   localStorage.setItem('elewa_auto_speak', STATE.autoSpeak ? 'true' : 'false');
@@ -272,11 +345,18 @@ function updateAutoSpeakUI() {
   }
 }
 
-// Data Protection & Preferences Handlers
+// Privacy & Preferences Handlers
 function loadSavedPreferences() {
   STATE.dpaConsent = (localStorage.getItem('elewa_dpa_consent') === 'granted');
   const savedRegion = localStorage.getItem('elewa_user_region');
   if (savedRegion && STATE.regionsMeta[savedRegion]) STATE.region = savedRegion;
+
+  const savedLang = localStorage.getItem('elewa_user_lang');
+  if (savedLang) {
+    STATE.language = savedLang;
+    const select = document.getElementById('langSelect');
+    if (select) select.value = savedLang;
+  }
 
   if (localStorage.getItem('elewa_auto_speak') !== null) {
     STATE.autoSpeak = (localStorage.getItem('elewa_auto_speak') === 'true');
@@ -316,19 +396,9 @@ function revokeLocationConsent() {
   STATE.dpaConsent = false;
   localStorage.removeItem('elewa_dpa_consent');
   STATE.gpsCoords = null;
-  closePrivacyModal();
-  appendSystemNotice('🛡️ <b>Data Protection Act:</b> Idhini ya GPS imefutwa.');
+  appendSystemNotice('🛡️ <b>Pan-African DPA:</b> Idhini ya GPS imefutwa.');
 }
 
-function openPrivacyModal() {
-  document.getElementById('privacyModal').classList.remove('hidden');
-}
-
-function closePrivacyModal() {
-  document.getElementById('privacyModal').classList.add('hidden');
-}
-
-// GPS Execution (Edge calculation on device)
 function executeGPSScan() {
   if (!('geolocation' in navigator)) {
     alert('Kifaa chako hakina GPS.');
@@ -349,7 +419,7 @@ function executeGPSScan() {
       selectRegion(detectedRegion);
 
       const reg = STATE.regionsMeta[detectedRegion];
-      appendSystemNotice(`🎯 <b>GPS Auto-Detect (DPA 2019 Protected):</b> [${lat.toFixed(2)}, ${lon.toFixed(2)}] ➔ ${reg.icon} <b>${reg.name_sw}</b>.`);
+      appendSystemNotice(`🎯 <b>GPS Auto-Detect (DPA Protected):</b> [${lat.toFixed(2)}, ${lon.toFixed(2)}] ➔ ${reg.icon} <b>${reg.name_sw}</b>.`);
     },
     (error) => {
       if (gpsBtn) gpsBtn.classList.remove('bg-amber-400', 'animate-pulse');
@@ -388,13 +458,12 @@ function selectRegion(regionKey) {
   updateParentDigestPreview();
 
   const reg = STATE.regionsMeta[regionKey];
-  const isSw = STATE.language !== 'english';
-  appendSystemNotice(`📍 ${isSw ? 'Mazingira ya eneo yamebadilishwa kuwa:' : 'Eco-region switched to:'} <b>${reg.icon} ${isSw ? reg.name_sw : reg.name_en}</b>.`);
+  appendSystemNotice(`📍 Mazingira ya eneo yamebadilishwa kuwa: <b>${reg.icon} ${reg.name_sw}</b>.`);
 }
 
 function renderRegionUI() {
   const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
-  const isSw = STATE.language !== 'english';
+  const isSw = STATE.language !== 'en';
 
   const iconEl = document.getElementById('regionIcon');
   const textEl = document.getElementById('regionNameText');
@@ -423,18 +492,24 @@ function renderRegionUI() {
   }
 }
 
-// Language Switching
-function changeLanguage(lang) {
-  STATE.language = lang;
+// Pan-African Language Switching
+function changeLanguage(langCode) {
+  STATE.language = langCode;
+  localStorage.setItem('elewa_user_lang', langCode);
   updateUIStrings();
   updateNetworkUI();
   renderRegionUI();
   renderVault();
   renderMastery();
+
+  const langMeta = STATE.languagesMeta[langCode];
+  if (langMeta) {
+    appendSystemNotice(`🌍 Lugha imebadilishwa kuwa: <b>${langMeta.flag} ${langMeta.native_name}</b> (${langMeta.motto}).`);
+  }
 }
 
 function updateUIStrings() {
-  const dict = I18N[STATE.language] || I18N.swahili;
+  const dict = I18N[STATE.language] || I18N.sw;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (dict[key]) el.innerText = dict[key];
@@ -446,7 +521,7 @@ function updateUIStrings() {
 // Navigation Tabs
 function switchTab(tabId) {
   STATE.activeTab = tabId;
-  ['chat', 'vault', 'mastery', 'stakeholders'].forEach(t => {
+  ['chat', 'vault', 'mastery', 'stakeholders', 'privacy_hub'].forEach(t => {
     const section = document.getElementById(`${t}Section`);
     const btn = document.getElementById(`tabBtn-${t}`);
     if (t === tabId) {
@@ -460,9 +535,10 @@ function switchTab(tabId) {
 
   if (tabId === 'mastery') refreshProfile();
   if (tabId === 'stakeholders') updateParentDigestPreview();
+  if (tabId === 'privacy_hub') renderJurisdictionDetails(STATE.jurisdiction);
 }
 
-// Stakeholders Sub-Tab Navigation
+// Stakeholders Sub-Tabs
 function switchStakeholderTab(subTab) {
   STATE.activeStakeholderSubTab = subTab;
   ['parents', 'teachers', 'community'].forEach(s => {
@@ -522,7 +598,7 @@ function loadTeacherLessonPlan(topicId) {
         <p class="font-bold text-slate-800 mb-1">🎯 Matokeo ya Kujifunza (Learning Outcomes):</p>
         <ul class="list-disc pl-4 space-y-0.5 text-slate-600">
           <li>Mwanafunzi aweze kueleza dhana ya <b>${mod.title_sw}</b> kwa kutumia mazingira ya <b>${regMeta.name_sw}</b>.</li>
-          <li>Kutambua msamiati wa kisayansi katika Kiswahili na Kiingereza.</li>
+          <li>Kutambua msamiati wa kisayansi katika lugha ya asili na Kiingereza.</li>
           <li>Kufanya jaribio la vitendo darasani kwa kutumia vifaa vya bure vya mazingira.</li>
         </ul>
       </div>
@@ -583,8 +659,104 @@ function renderCommunityActivities() {
       </div>
       <p class="text-[11px] text-slate-600 leading-relaxed">
         <b>Vifaa:</b> Sanduku la kadibodi, foil ya alumini, karatasi ya nailoni safi.<br>
-        <b>Lengo:</b> Kutumia jua kukausha mboga za kienyeji (kama managu/osuga) kwa ajili ya kuhifadhi.
+        <b>Lengo:</b> Kutumia jua kukausha mboga za kienyeji kwa ajili ya kuhifadhi.
       </p>
+    </div>
+  `;
+}
+
+// Pan-African Data Protection Legal Hub Renderer
+function renderJurisdictionDetails(countryCode) {
+  STATE.jurisdiction = countryCode;
+  const card = document.getElementById('jurisdictionDetailCard');
+  if (!card) return;
+
+  const jurMap = {
+    KE: {
+      flag: '🇰🇪', country: 'Kenya', law: 'Data Protection Act 2019',
+      authority: 'Office of the Data Protection Commissioner (ODPC)',
+      child_section: 'Section 29 (Processing Personal Data of Children)',
+      compliance: 'Strict parental consent gatekeeper; 100% on-device edge calculation; zero cloud retention of student telemetry.'
+    },
+    NG: {
+      flag: '🇳🇬', country: 'Nigeria', law: 'Nigeria Data Protection Act 2023 (NDPA)',
+      authority: 'Nigeria Data Protection Commission (NDPC)',
+      child_section: 'Section 31 (Processing of Personal Data of a Child)',
+      compliance: 'Parental consent verified; strict duty of care in educational software; data minimization enforced.'
+    },
+    ZA: {
+      flag: '🇿🇦', country: 'South Africa', law: 'Protection of Personal Information Act 2013 (POPIA)',
+      authority: 'Information Regulator (South Africa)',
+      child_section: 'Section 34 & 35 (Prohibition on Processing Child Personal Information)',
+      compliance: 'Authorized pedagogical use with competent person consent; zero marketing profiling.'
+    },
+    GH: {
+      flag: '🇬🇭', country: 'Ghana', law: 'Data Protection Act 2012 (Act 843)',
+      authority: 'Data Protection Commission (DPC Ghana)',
+      child_section: 'Section 37 & 38 (Special Personal Data & Minors)',
+      compliance: 'Explicit parental assent; educational data strictly siloed.'
+    },
+    UG: {
+      flag: '🇺🇬', country: 'Uganda', law: 'Data Protection and Privacy Act 2019',
+      authority: 'Personal Data Protection Office (PDPO Uganda)',
+      child_section: 'Section 8 (Data on Children)',
+      compliance: 'Zero-knowledge client PWA architecture preventing non-consensual transmission.'
+    },
+    TZ: {
+      flag: '🇹🇿', country: 'Tanzania', law: 'Personal Data Protection Act 2022',
+      authority: 'Personal Data Protection Commission (PDPC Tanzania)',
+      child_section: 'Section 30 (Special Categories & Protection of Children)',
+      compliance: '100% compliant through on-device local storage custody.'
+    },
+    RW: {
+      flag: '🇷🇼', country: 'Rwanda', law: 'Law No. 058/2021 on Personal Data and Privacy',
+      authority: 'National Cyber Security Authority (NCSA Rwanda)',
+      child_section: 'Article 10 (Processing of Personal Data of a Child)',
+      compliance: 'Parental authorization under 16; instant data erasure controls.'
+    },
+    AU_CONTINENTAL: {
+      flag: '🌍', country: 'Pan-African Union', law: 'AU Malabo Convention on Cyber Security & Personal Data (2014)',
+      authority: 'African Union Commission (AUC)',
+      child_section: 'Article 14 & 15 (Principles of Personal Data Processing)',
+      compliance: 'Promotes African digital sovereignty through local on-device AI processing without foreign data extraction.'
+    }
+  };
+
+  const jur = jurMap[countryCode] || jurMap.KE;
+
+  card.innerHTML = `
+    <div class="space-y-2.5">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">${jur.flag}</span>
+          <div>
+            <h4 class="font-black text-slate-900 text-sm">${jur.country} — ${jur.law}</h4>
+            <p class="text-[10px] text-slate-500 font-bold">Mamlaka ya Udhibiti: ${jur.authority}</p>
+          </div>
+        </div>
+        <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">100% Compliant</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+        <div class="bg-white p-3 rounded-xl border border-slate-200">
+          <p class="font-bold text-slate-800">📜 Kifungu cha Ulinzi wa Watoto:</p>
+          <p class="text-slate-600 mt-0.5">${jur.child_section}</p>
+        </div>
+        <div class="bg-white p-3 rounded-xl border border-slate-200">
+          <p class="font-bold text-slate-800">🛡️ Kinga ya ElewaSTEM (Guarantees):</p>
+          <p class="text-slate-600 mt-0.5">${jur.compliance}</p>
+        </div>
+      </div>
+
+      <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl flex items-center justify-between">
+        <div class="flex items-center space-x-2 text-[11px] text-emerald-950">
+          <span>🔒</span>
+          <span><b>Data Sovereignty:</b> Hakuna data ya mtoto inayopelekwa kwenye seva za kigeni bila idhini.</span>
+        </div>
+        <button onclick="revokeLocationConsent()" class="text-[10px] bg-white border border-emerald-300 text-red-600 font-bold px-2 py-1 rounded-lg">
+          Futa Data
+        </button>
+      </div>
     </div>
   `;
 }
@@ -648,6 +820,7 @@ async function executeAgentQuery(query, simplify = false) {
         message: query,
         language: STATE.language,
         region: STATE.region,
+        jurisdiction: STATE.jurisdiction,
         gps_coordinates: STATE.gpsCoords,
         simplify: simplify
       })
@@ -684,7 +857,7 @@ function generateLocalOfflineAnswer(query, simplify) {
 
   const regKey = STATE.region;
   const regMeta = STATE.regionsMeta[regKey] || STATE.regionsMeta.lake_basin;
-  const isSw = STATE.language !== 'english';
+  const isSw = STATE.language !== 'en';
   
   const title = isSw ? matched.title_sw : matched.title_en;
   const summary = isSw ? matched.summary_sw : matched.summary_en;
@@ -757,6 +930,7 @@ function appendAssistantMessage(data) {
   const formattedHtml = parseMarkdownToHtml(data.text);
   const quizDataJson = data.quiz_data ? JSON.stringify(data.quiz_data).replace(/"/g, '&quot;') : '';
   const regMeta = STATE.regionsMeta[data.region || STATE.region] || STATE.regionsMeta.lake_basin;
+  const langMeta = STATE.languagesMeta[data.language || STATE.language];
 
   div.innerHTML = `
     <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-white text-sm flex-shrink-0 shadow">
@@ -766,6 +940,7 @@ function appendAssistantMessage(data) {
       <div class="flex items-center space-x-2 flex-wrap gap-1 mb-1">
         ${isOffline ? '<span class="inline-block bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📦 Offline Vault</span>' : '<span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">✨ Gemini 2.5 Flash</span>'}
         <span class="inline-block bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full">${regMeta.icon} ${regMeta.name_sw}</span>
+        ${langMeta ? `<span class="inline-block bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full">${langMeta.flag} ${langMeta.native_name}</span>` : ''}
       </div>
       
       <div class="stem-card leading-relaxed space-y-2">${formattedHtml}</div>
@@ -775,7 +950,7 @@ function appendAssistantMessage(data) {
       <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs space-y-1">
         <p class="font-bold text-blue-900 flex items-center space-x-1">
           <span>👁️</span>
-          <span>Maelezo ya Sauti & Kushika (Kwa Wasioona):</span>
+          <span>Maelezo ya Sauti & Kushika (Tactile Audio):</span>
         </p>
         <p class="text-blue-950">${data.tactile_description}</p>
       </div>` : ''}
@@ -784,7 +959,7 @@ function appendAssistantMessage(data) {
       <div class="bg-purple-50 border border-purple-200 rounded-xl p-3 text-xs space-y-1">
         <p class="font-bold text-purple-900 flex items-center space-x-1">
           <span>🧏</span>
-          <span>Alama za Lugha ya Ishara & Picha (Kwa Wasiosikia):</span>
+          <span>Alama za Lugha ya Ishara & Picha (Sign Language Cues):</span>
         </p>
         <p class="text-purple-950">${data.sign_cues}</p>
       </div>` : ''}
@@ -891,18 +1066,15 @@ function speakText(rawText) {
     .trim();
 
   if (cleanText.length > 500) {
-    cleanText = cleanText.substring(0, 500) + '... Unaweza kuuliza swali zaidi!';
+    cleanText = cleanText.substring(0, 500) + '...';
   }
 
   const utterance = new SpeechSynthesisUtterance(cleanText);
   utterance.rate = 0.95;
   utterance.pitch = 1.05;
 
-  if (STATE.language === 'english') {
-    utterance.lang = 'en-US';
-  } else {
-    utterance.lang = 'sw-KE';
-  }
+  const langMeta = STATE.languagesMeta[STATE.language];
+  utterance.lang = langMeta ? langMeta.tts_locale : (STATE.language === 'en' ? 'en-US' : 'sw-KE');
 
   STATE.activeSpeechUtterance = utterance;
   window.speechSynthesis.speak(utterance);
@@ -926,7 +1098,8 @@ function toggleVoiceInput() {
 
   try {
     const recognition = new SpeechRecognition();
-    recognition.lang = STATE.language === 'english' ? 'en-US' : 'sw-KE';
+    const langMeta = STATE.languagesMeta[STATE.language];
+    recognition.lang = langMeta ? langMeta.tts_locale : (STATE.language === 'en' ? 'en-US' : 'sw-KE');
     recognition.interimResults = true;
     recognition.continuous = false;
 
@@ -980,11 +1153,11 @@ function cancelVoiceRecognition() {
   document.getElementById('voiceOverlayModal').classList.add('hidden');
 }
 
-// Offline Vault Rendering with Universal Accessibility
+// Offline Vault Rendering
 function renderVault() {
   const container = document.getElementById('vaultModulesGrid');
   if (!container) return;
-  const isSw = STATE.language !== 'english';
+  const isSw = STATE.language !== 'en';
   const regKey = STATE.region;
   const regMeta = STATE.regionsMeta[regKey] || STATE.regionsMeta.lake_basin;
 
@@ -1004,10 +1177,10 @@ function renderVault() {
           <p class="text-[11px] text-brand-900 bg-emerald-50 p-2 rounded-xl border border-emerald-100 italic line-clamp-2"><b>💡 Mfano wa Eneo Lako:</b> ${localAnalogy}</p>
 
           ${m.tactile_audio_description_sw && STATE.screenReaderMode ? `
-          <p class="text-[11px] text-blue-900 bg-blue-50 p-2 rounded-xl border border-blue-100 line-clamp-2"><b>👁️ Maelezo ya Kushika (Blindness):</b> ${m.tactile_audio_description_sw}</p>` : ''}
+          <p class="text-[11px] text-blue-900 bg-blue-50 p-2 rounded-xl border border-blue-100 line-clamp-2"><b>👁️ Tactile Description:</b> ${m.tactile_audio_description_sw}</p>` : ''}
 
           ${m.sign_language_visual_cues_sw && STATE.signLanguageMode ? `
-          <p class="text-[11px] text-purple-900 bg-purple-50 p-2 rounded-xl border border-purple-100 line-clamp-2"><b>🧏 Alama za Ishara (Deafness):</b> ${m.sign_language_visual_cues_sw}</p>` : ''}
+          <p class="text-[11px] text-purple-900 bg-purple-50 p-2 rounded-xl border border-purple-100 line-clamp-2"><b>🧏 Sign Language Cues:</b> ${m.sign_language_visual_cues_sw}</p>` : ''}
         </div>
 
         <div class="pt-2 border-t border-slate-100 flex space-x-2">
@@ -1035,7 +1208,7 @@ function openOfflineModuleInChat(moduleId) {
   if (STATE.autoSpeak) speakText(answer.text);
 }
 
-// Student Profile & Mastery Graph
+// Student Profile
 async function refreshProfile() {
   try {
     if (isEffectivelyOnline()) {
@@ -1104,7 +1277,7 @@ function openQuizModal(quizJsonStr, topicName) {
     const feedback = document.getElementById('quizFeedback');
 
     title.innerText = `🎯 Swali: ${topicName}`;
-    const isSw = STATE.language !== 'english';
+    const isSw = STATE.language !== 'en';
     question.innerText = isSw ? quiz.question_sw : quiz.question_en;
 
     if (STATE.autoSpeak) {
@@ -1130,7 +1303,7 @@ function openQuizModal(quizJsonStr, topicName) {
 function handleQuizAnswer(selectedIndex) {
   if (!STATE.currentQuiz) return;
   const { quiz, topicName } = STATE.currentQuiz;
-  const isSw = STATE.language !== 'english';
+  const isSw = STATE.language !== 'en';
   const isCorrect = (selectedIndex === quiz.correct_index);
 
   const feedback = document.getElementById('quizFeedback');

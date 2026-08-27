@@ -1,6 +1,6 @@
 """
-ElewaSTEM FastAPI Server with Multi-Stakeholder Ecosystem Support
-Serves Learners (PWA, Voice, Quizzes), Teachers (CBC Lesson Plans), Parents (SMS Digests), Community Mentors, and Curriculum Bodies.
+ElewaSTEM FastAPI Server with Pan-African Language Scaling & Cross-Border Data Protection Framework
+Serves 16+ African languages (Masakhane / Gemini), 8+ Data Protection Jurisdictions, and Universal Stakeholder Hubs.
 """
 
 import os
@@ -21,14 +21,15 @@ from tools import (
     generate_parent_digest,
     get_community_club_projects
 )
+from african_languages import get_all_african_languages, get_language_meta
+from privacy_matrix import get_all_jurisdictions, get_privacy_framework
 
 app = FastAPI(
-    title="ElewaSTEM Multi-Stakeholder API",
-    description="Multilingual Adaptive AI STEM Tutor for African Children with Parent, Teacher, and Community Stakeholder Hubs",
-    version="1.2.0"
+    title="ElewaSTEM Pan-African Multi-Language & Multi-Jurisdiction API",
+    description="Multilingual Adaptive AI STEM Tutor for African Children across 16+ African Languages & Pan-African Data Protection Laws",
+    version="1.3.0"
 )
 
-# CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -40,12 +41,13 @@ app.add_middleware(
 FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend")
 
 
-# Request & Response Models
+# Request Models
 class ChatRequest(BaseModel):
     student_id: str = "demo_student"
     message: str
-    language: str = "swahili"  # "swahili", "english", "sheng"
+    language: str = "sw"  # Can be sw, sheng, yo, ha, ig, pcm, am, om, so, zu, xh, rw, lg, tw, sn, ln, en
     region: str = "lake_basin"
+    jurisdiction: str = "KE"  # KE, NG, ZA, GH, UG, TZ, RW, AU_CONTINENTAL
     gps_coordinates: Optional[Dict[str, float]] = None
     simplify: bool = False
 
@@ -55,6 +57,7 @@ class ProfileUpdateRequest(BaseModel):
     grade_level: Optional[str] = None
     preferred_language: Optional[str] = None
     current_region: Optional[str] = None
+    jurisdiction: Optional[str] = "KE"
     gps_coordinates: Optional[Dict[str, float]] = None
 
 
@@ -65,29 +68,46 @@ class QuizResultRequest(BaseModel):
     score: int = 100
 
 
-# --- Core Learner Endpoints ---
+# --- Endpoints ---
 
 @app.get("/api/health")
 async def health_check():
     return {
         "status": "healthy",
-        "app": "ElewaSTEM",
-        "version": "1.2.0",
+        "app": "ElewaSTEM Pan-African",
+        "version": "1.3.0",
+        "supported_african_languages_count": len(get_all_african_languages()),
+        "data_protection_jurisdictions_count": len(get_all_jurisdictions()),
         "features": [
-            "multilingual",
+            "pan_african_languages_masakhane_gemini",
+            "cross_border_data_protection_matrix",
             "offline_pwa",
-            "voice_accessibility_tts_stt",
-            "geo_adaptive_context",
-            "dpa_2019_consent",
+            "universal_accessibility_tts_stt_tactile_sign",
             "stakeholders_parents_teachers_mentors"
         ],
         "gemini_connected": elewa_agent.client is not None
     }
 
 
+@app.get("/api/languages")
+async def list_african_languages():
+    """Returns the Pan-African language registry."""
+    return get_all_african_languages()
+
+
+@app.get("/api/privacy/jurisdictions")
+async def list_privacy_jurisdictions():
+    """Returns the Pan-African Data Protection Legal Matrix."""
+    return get_all_jurisdictions()
+
+
+@app.get("/api/privacy/jurisdiction/{country_code}")
+async def get_jurisdiction(country_code: str):
+    return get_privacy_framework(country_code)
+
+
 @app.get("/api/regions")
 async def list_regions():
-    """Returns available African eco-regions for localized context."""
     return get_available_regions()
 
 
@@ -111,6 +131,9 @@ async def chat_with_agent(req: ChatRequest):
         region=req.region,
         simplify=req.simplify
     )
+    # Attach language and privacy metadata
+    response["language_meta"] = get_language_meta(req.language)
+    response["jurisdiction_meta"] = get_privacy_framework(req.jurisdiction)
     return response
 
 
@@ -140,11 +163,15 @@ async def update_profile(student_id: str, req: ProfileUpdateRequest):
 async def download_offline_pack():
     modules = get_offline_starter_pack()
     regions = get_available_regions()
+    languages = get_all_african_languages()
+    privacy_frameworks = get_all_jurisdictions()
     return {
-        "pack_name": "ElewaSTEM Regional Offline Knowledge Vault",
-        "version": "1.2",
+        "pack_name": "ElewaSTEM Pan-African Offline Vault",
+        "version": "1.3",
         "module_count": len(modules),
         "regions": regions,
+        "languages": languages,
+        "privacy_jurisdictions": privacy_frameworks,
         "modules": modules
     }
 
@@ -165,28 +192,21 @@ async def submit_quiz_result(req: QuizResultRequest):
     }
 
 
-# --- Stakeholder Hub Endpoints ---
-
 @app.get("/api/teacher/lesson-plan")
 async def get_teacher_lesson_plan(topic: str = "photosynthesis", region: str = "lake_basin"):
-    """Returns a CBC-aligned STEM lesson plan with local African analogies and diagnostics."""
     return generate_teacher_lesson_plan(topic, region)
 
 
 @app.get("/api/parent/digest/{student_id}")
 async def get_parent_progress_digest(student_id: str, region: str = "lake_basin"):
-    """Returns a simplified progress digest and SMS alert for parents on feature phones."""
     profile = student_memory.get_or_create_profile(student_id).model_dump()
     return generate_parent_digest(profile, region)
 
 
 @app.get("/api/community/activities")
 async def get_community_activities(region: str = "lake_basin"):
-    """Returns low-cost STEM club projects for village community centers and mentors."""
     return get_community_club_projects(region)
 
-
-# --- SMS Gateway ---
 
 @app.post("/api/sms", response_class=PlainTextResponse)
 async def sms_gateway(
@@ -200,24 +220,23 @@ async def sms_gateway(
     if not user_msg:
         return "Karibu ElewaSTEM! Tuma swali lako la Sayansi (mfano: 'eleza umeme kisumu' au 'what is photosynthesis')."
 
+    # Multilingual detector (Swahili, Yoruba, Hausa, Igbo, English)
     is_sw = any(w in user_msg.lower() for w in ["eleza", "nini", "kwa nini", "jinsi", "sayansi", "mmea", "umeme", "hesabu"])
-    lang = "swahili" if is_sw else "english"
+    is_yo = any(w in user_msg.lower() for w in ["bawo", "kini", "sayensi", "oluko"])
+    is_ha = any(w in user_msg.lower() for w in ["sannu", "menene", "kimiyya", "malami"])
+    is_ig = any(w in user_msg.lower() for w in ["kedu", "sayensi", "onye nkuzi"])
 
-    region = "lake_basin"
-    if any(w in user_msg.lower() for w in ["pwani", "mombasa", "coast", "bahari", "dar"]):
-        region = "coastal"
-    elif any(w in user_msg.lower() for w in ["ziwa", "victoria", "kisumu", "mwanza", "samaki"]):
-        region = "lake_basin"
-    elif any(w in user_msg.lower() for w in ["turkana", "garissa", "kavu", "arid", "jua"]):
-        region = "arid"
-    elif any(w in user_msg.lower() for w in ["jiji", "nairobi", "kampala", "urban", "matatu"]):
-        region = "urban"
+    lang = "sw"
+    if is_yo: lang = "yo"
+    elif is_ha: lang = "ha"
+    elif is_ig: lang = "ig"
+    elif not is_sw: lang = "en"
 
     response = elewa_agent.generate_response(
         student_id=f"sms_{user_phone}",
         message=user_msg,
         target_language=lang,
-        region=region,
+        region="lake_basin",
         simplify=True
     )
     
@@ -226,7 +245,6 @@ async def sms_gateway(
     return sms_reply
 
 
-# --- Serve Static Frontend ---
 if os.path.exists(FRONTEND_DIR):
     app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 

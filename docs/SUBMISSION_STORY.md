@@ -1,88 +1,59 @@
-# ElewaSTEM — Devpost Submission Story
+# ElewaSTEM — Pan-African Multi-Language & Multi-Jurisdiction AI STEM Ecosystem
 
 ## Project Name
-**ElewaSTEM (Mwalimu STEM)** — *Universal, Inclusive AI STEM Learning for Every African Child Across Language, Geography & Ability*
+**ElewaSTEM (Mwalimu STEM)** — *Universal, Inclusive Pan-African AI STEM Learning Ecosystem Across 16+ African Languages, Special Needs, & Pan-African Data Protection Laws*
 
 ## Tagline
-A voice-first, universally accessible & offline AI STEM ecosystem connecting learners (including blind, deaf, and dyslexic children), parents (SMS digests), teachers (CBC plans), & mentors.
+A voice-first, offline-capable AI STEM ecosystem connecting learners (including blind, deaf, dyslexic), parents (SMS digests), & teachers across 16+ African languages and 8+ Data Protection Jurisdictions.
 
 ---
 
-## 🌟 Inspiration: True Educational Equity Leaves No Child Behind
-In many African communities, children face compounding, systemic hurdles in STEM education:
-1. **The Special Needs & Disability Barrier**: Visually impaired (blind/low-vision), hearing impaired (deaf/hard-of-hearing), and neurodiverse (dyslexic/ADHD) children are often completely excluded from digital STEM tools.
-2. **The Literacy & Typing Barrier**: Early-grade and primary school learners struggle to type on touchscreens or read dense paragraphs of technical English text.
-3. **The Parent-Teacher Disconnect**: Parents in rural and peri-urban areas (many without STEM backgrounds or smartphones) struggle to follow what their children are learning or support them at home.
-4. **The Context & Connectivity Barrier**: Traditional textbooks reference foreign contexts with zero internet access in classrooms.
+## 🌟 Inspiration: True Educational Equity & Digital Sovereignty for Africa
+In many African classrooms, children and educators face compounding barriers:
+1. **The Language & NLP Divide**: While pioneering initiatives like **Masakhane**, **Lelapa AI (InkubaLM)**, **AfriSpeech**, and Google Research (Accra & Nairobi labs) have proven the immense power of African NLP, mainstream educational AI remains English-centric.
+2. **The Special Needs Barrier**: Visually impaired (blind), hearing impaired (deaf), and neurodiverse (dyslexic) learners are excluded from digital STEM tools.
+3. **Cross-Border Privacy & Child Protection**: Diverse legal requirements across Africa—from Kenya's **DPA 2019** and Nigeria's **NDPA 2023** to South Africa's **POPIA 2013** and the **African Union Malabo Convention**—require strict data sovereignty and child protection.
+4. **The Connectivity Deficit**: Vast rural regions operate on intermittent 2G networks where cloud-dependent AI fails.
 
-When an 8-year-old in Kisumu—whether blind, deaf, or speaking only Kiswahili—wonders why fish can breathe under Lake Victoria, they need an accessible, compassionate learning companion:
-* **The Blind Child** receives rich **Tactile Audio Descriptions** (*"Shika jani bichi mkononi... hisi mishipa midogo..."*) and full screen-reader spoken guidance.
-* **The Deaf Child** receives **Visual Sign Language Cues** mapped to Kenyan Sign Language (KSL) and clear step-by-step visual diagrams.
-* **The Dyslexic Child** enjoys **High-Legibility Dyslexia Typography**, cream anti-glare filters, and bite-sized learning chunks.
-* **The Parent** receives a simple Swahili SMS digest celebrating their child's progress with a fun 2-minute kitchen science challenge.
-* **The Teacher** gets an instant CBC-aligned lesson plan with localized teaching aids and diagnostic quizzes using free local materials.
-
-We built **ElewaSTEM** to unite all these learners and stakeholders into one holistic, privacy-respecting (Kenya DPA 2019 compliant) platform that works with **0 KB data connection**.
+**ElewaSTEM** was engineered from the ground up to solve all four challenges simultaneously.
 
 ---
 
-## 🚀 Key Universal Innovations
+## 🚀 Key Pan-African Innovations
 
-### 1. ♿ **Universal Accessibility (Blindness, Deafness, Dyslexia, Low-Vision)**:
-* 👁️ **For Blind & Visually Impaired Learners**:
-  - Full screen-reader semantic markup (`aria-live="polite"`).
-  - **Tactile Audio Descriptions**: Explains physical textures, spatial dimensions, and tactile analogies of leaves, circuits, fish gills, and fractions so blind children can visualize through touch and sound.
-  - Zero-bandwidth speech synthesis in natural Swahili and English.
-* 🧏 **For Deaf & Hearing Impaired Learners**:
-  - Visual sign language cues and terminology bridges aligned with Kenyan Sign Language (KSL).
-  - Real-time visual subtitles, graphical process flowcharts, and visual feedback pulses.
-* 📖 **For Dyslexic & Neurodiverse Learners**:
-  - Dyslexia-friendly high-legibility typography, increased letter spacing, and soft cream anti-glare background tints.
-  - Chunked, step-by-step Socratic learning to eliminate cognitive fatigue.
-* 🌓 **High Contrast & Giant Text Scaling**: High-visibility yellow-on-black mode and scalable text sizes.
+### 1. 🌍 **16+ African Language Matrix (Grounding Frontier LLMs in African NLP)**:
+* **East & Central Africa**: Kiswahili (*"Usimeze, Elewa!"*), Sheng (*"Usicram, Elewa!"*), Oluganda (*"Tokwata bukwasi mu mutwe, Tegeera!"*), Ikinyarwanda (*"Sobanukirwa!"*), Lingála (*"Yebá!"*).
+* **West Africa**: Èdè Yorùbá (*"Má kọ́ sórí, Ṣe àgbéyẹ̀wò!"*), Harshen Hausa (*"Fahimta!"*), Asụsụ Igbo (*"Ghọta ya!"*), Naija Pidgin (*"No cram am, Make you understand am!"*), Twi / Akan (*"Te aseɛ!"*).
+* **Horn of Africa**: አማርኛ / Amharic (*"አትሸምድድ፣ ተረዳው!"*), Afaan Oromoo (*"Hubadhu!"*), Af-Soomaali (*"Ha xafidin, Faham!"*).
+* **Southern Africa**: isiZulu (*"Ungabambi ngekhanda kuphela, Qonda!"*), isiXhosa (*"Musa ukunkqaya nje, Qonda!"*), chiShona (*"Nzwisisa!"*).
+* Zero-bandwidth voice synthesis (TTS) and speech recognition (STT) localized for each language's phonetic system.
 
-### 2. 🌍 **Hyper-Local African Geo-Context & Offline GPS**:
-* Automatically detects or allows selecting the student's African eco-region (**Kisumu & Lake Victoria**, **Mombasa Coastal**, **Highland Farms**, **Turkana Arid Lands**, **Urban Centers**).
-* Uses hardware GPS (**100% offline without cellular data**) to ground science in the student's local flora, fauna, and geography.
+### 2. 🛡️ **Pan-African Data Protection Legal Hub (Multi-Jurisdiction Compliance)**:
+* 🇰🇪 **Kenya**: *Data Protection Act, 2019* (Section 29 — Processing Personal Data of Children; ODPC regulated).
+* 🇳🇬 **Nigeria**: *Nigeria Data Protection Act, 2023 (NDPA)* (Section 31 — Protection of Child Data; NDPC regulated).
+* 🇿🇦 **South Africa**: *Protection of Personal Information Act, 2013 (POPIA)* (Section 34/35 — Minor Data Safeguards; Information Regulator).
+* 🇬🇭 **Ghana**: *Data Protection Act, 2012 (Act 843)* (Section 37/38 — DPC Ghana).
+* 🇺🇬 **Uganda**: *Data Protection and Privacy Act, 2019* (Section 8 — PDPO / NITA-U).
+* 🇹🇿 **Tanzania**: *Personal Data Protection Act, 2022* (Section 30 — PDPC).
+* 🇷🇼 **Rwanda**: *Law No. 058/2021 on Personal Data and Privacy* (Article 10 — NCSA).
+* 🌍 **Continental**: *African Union Malabo Convention on Cyber Security and Personal Data Protection (2014)*.
 
-### 3. 🔒 **Child Data Privacy (Kenya Data Protection Act 2019 Compliant)**:
-* Full compliance with **Section 29 of the Kenya DPA 2019** (Processing Personal Data of Children).
-* 100% on-device edge calculation with explicit opt-in consent and zero cloud profiling.
+**Privacy Guarantee**: 100% On-Device Edge Computing without persistent cloud tracking, zero commercial profiling, and 1-click statutory consent revocation.
 
-### 4. 👥 **Multi-Stakeholder Hub (Parents, Teachers, Community Mentors)**:
-* **Parents**: Weekly plain-language progress summaries, 1-click SMS cards for 2G feature phones, and weekend kitchen/farm science challenges.
-* **Teachers**: CBC/NECTA-aligned lesson plan generator with localized teaching aids and printable diagnostic quizzes.
-* **Community Mentors**: Zero-cost STEM club projects using local materials (clean water charcoal filters, solar cookers).
+### 3. ♿ **Universal Accessibility (Blindness, Deafness, Dyslexia)**:
+* **Blind & Low Vision**: Tactile Audio Descriptions (*"Shika jani bichi mkononi... hisi mishipa midogo..."*) & TalkBack/Screen Reader ARIA optimization.
+* **Deaf & Hard of Hearing**: Visual sign language concept cues (KSL) and structured visual flowcharts.
+* **Dyslexic & ADHD**: Anti-glare cream theme, dyslexia typography, and step-by-step chunked explanations.
 
----
-
-## 🛠️ How We Built It
-
-* **AI & Multi-Agent Core**: 
-  - Google Gemini 2.5 / 3.5 Flash via the official `google-genai` Python SDK.
-  - Specialized system prompts engineered with pedagogical scaffolding, regional eco-zone grounding, and universal accessibility adaptations.
-* **Voice & Multimodal UX**:
-  - Web Speech API for real-time speech recognition (STT) and native multilingual speech synthesis (TTS).
-  - High-accessibility CSS themes for Dyslexia, High Contrast, and Screen Readers.
-* **Backend Architecture**:
-  - FastAPI asynchronous server with REST endpoints for multi-turn chat, stakeholder lesson plans, parent digests, offline pack distribution, and SMS webhook.
-  - Persistent JSON/Firestore-ready Memory Bank tracking student mastery levels and geo-coordinates.
-* **Frontend & Edge Client**:
-  - Progressive Web App (PWA) with Service Worker caching and IndexedDB local storage.
-  - Offline GPS Coordinate-to-Biome mapping algorithm with Kenya DPA 2019 consent gatekeeper.
+### 4. 👥 **Multi-Stakeholder Hub**:
+* **Parents**: Weekly plain-language SMS digests for 2G feature phones and weekend at-home science challenges.
+* **Teachers**: CBC and national curriculum lesson plan generator with local teaching aids and diagnostic quizzes.
+* **Mentors**: Zero-budget community STEM club project guides (charcoal filters, solar dryers).
 
 ---
 
-## 🏆 Accomplishments We're Proud Of
-
-* Creating a genuinely **universal and inclusive STEM AI** where blind, deaf, dyslexic, rural, and urban African children learn on equal footing.
-* Zero-bandwidth voice, offline GPS detection, and offline lesson capabilities that make generative AI accessible beyond high-speed urban fibers.
-* Seamless real-time code-switching between English, Swahili, and Sheng without losing scientific rigor.
-
----
-
-## 🔮 What's Next for ElewaSTEM
-
-* **Physical Braille & Tactile Kit Integration**: Partnering with African institutes for the blind to map ElewaSTEM audio lessons to tactile 3D embossed diagrams.
-* **Direct SMS / USSD & IVR Deployment**: Launching toll-free voice calls and SMS across Kenya, Tanzania, Uganda, and Nigeria.
-* **National Curriculum Alignment**: Collaborating with KICD (Kenya), NECTA (Tanzania), and UNEB (Uganda) to certify ElewaSTEM lesson plans across all national primary school clusters.
+## 🛠️ Technology Stack
+* **AI Engine**: Google Gemini 2.5 / 3.5 Flash via `google-genai` Python SDK.
+* **African NLP Benchmarks**: Integrating Masakhane, Lelapa AI, and AfriSpeech multilingual representations.
+* **Backend**: FastAPI asynchronous Python server with statutory DPA router and offline sync endpoints.
+* **Frontend**: Progressive Web App (PWA) with client-side edge bounding-box geolocation and Web Speech API.
