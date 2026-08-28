@@ -9,6 +9,7 @@ import json
 from typing import Dict, Any, Optional
 from memory import student_memory, StudentProfile
 from tools import find_offline_topic, REGIONS
+from diagrams import get_diagram_for_topic
 
 # Optional google-genai SDK import
 try:
@@ -150,6 +151,7 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                     "temperature": temperature,
                     "tactile_description": topic_data.get("tactile_audio_description_sw", ""),
                     "sign_cues": topic_data.get("sign_language_visual_cues_sw", ""),
+                    "diagram": get_diagram_for_topic(message) or get_diagram_for_topic(detected_topic["topic"]),
                     "quiz_data": topic_data.get("quiz"),
                     "student_profile": student_memory.get_or_create_profile(student_id).model_dump()
                 }
@@ -235,6 +237,7 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
             "temperature": 0.2 if mode == "precise" else 0.75,
             "tactile_description": topic_data.get("tactile_audio_description_sw", ""),
             "sign_cues": topic_data.get("sign_language_visual_cues_sw", ""),
+            "diagram": get_diagram_for_topic(message) or get_diagram_for_topic(topic_data["id"]),
             "quiz_data": quiz,
             "student_profile": student_memory.get_or_create_profile(student_id).model_dump()
         }

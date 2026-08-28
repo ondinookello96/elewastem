@@ -1240,6 +1240,21 @@ function appendAssistantMessage(data) {
         </p>
         <p class="text-purple-950">${data.sign_cues}</p>
       </div>` : ''}
+
+      <!-- Interactive Visual Vector Science Diagram -->
+      ${data.diagram ? `
+      <div class="bg-gradient-to-b from-slate-50 to-emerald-50 border-2 border-emerald-300/80 rounded-2xl p-3.5 space-y-2 shadow-sm">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🎨</span>
+            <h5 class="font-black text-slate-900 text-xs">${data.diagram.title_sw || 'Mchoro wa Sayansi'}</h5>
+          </div>
+          <span class="bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-xs">Vector Visual (0 KB)</span>
+        </div>
+        <div class="w-full overflow-x-auto rounded-xl border border-slate-200/60 bg-white p-1">
+          ${data.diagram.svg}
+        </div>
+      </div>` : ''}
       
       <div class="pt-2 border-t border-slate-100 flex flex-wrap gap-2 text-xs font-semibold">
         <button onclick="speakText('${encodeURIComponent(data.text + (data.tactile_description ? ' ' + data.tactile_description : ''))}')" class="px-2.5 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 flex items-center space-x-1 transition-all">

@@ -141,8 +141,23 @@ def run_tests():
     for k, v in theories.items():
         print(f"   * 🧠 [{k}]: {v['swahili_title']} ({v['theorists']})")
 
+    # 14. Responsive Offline Science Vector Diagrams (SVG)
+    diag_payload = {
+        'student_id': 'diagram_tester',
+        'message': 'Nionyeshe mchoro wa picha wa Usanisinuru (Photosynthesis diagram)',
+        'language': 'sw',
+        'region': 'lake_basin'
+    }
+    r = requests.post(f'{BASE_URL}/api/chat', json=diag_payload)
+    assert r.status_code == 200
+    diag_res = r.json()
+    assert 'diagram' in diag_res and diag_res['diagram'] is not None
+    print(f"\n[PASSED] 14. Interactive Offline Science Vector Diagram (SVG):")
+    print(f"   * Diagram Title: {diag_res['diagram']['title_sw']}")
+    print(f"   * SVG Vector Payload Length: {len(diag_res['diagram']['svg'])} characters")
+
     print("\n============================================================")
-    print(" 🎉 ALL 13 COMPREHENSIVE FEATURES & PEDAGOGICAL FRAMEWORKS VERIFIED!")
+    print(" 🎉 ALL 14 COMPREHENSIVE FEATURES & DIAGRAM SYSTEMS VERIFIED!")
     print("============================================================")
 
 if __name__ == '__main__':
