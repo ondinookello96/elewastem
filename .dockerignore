@@ -1,0 +1,12 @@
+.git
+.github
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.DS_Store
+.system_generated
+*.log
+check_reqs.py

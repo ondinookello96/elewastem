@@ -1,107 +1,135 @@
-# 🌱 ElewaSTEM (Mwalimu STEM) — Geo-Adaptive & Multilingual AI STEM Tutor
+# 🌱 ElewaSTEM (Mwalimu STEM) — Pan-African Inclusive AI STEM Learning Ecosystem
 
-> **"Usimeze, Elewa!"** — *Demystifying STEM for Every African Child in Their Own Language & Local Ecosystem.*
+> **"Usimeze, Elewa!"** — *Demystifying STEM for Every African Child in Their Own Language, Local Ecosystem, and Physical Ability.*
 
-**ElewaSTEM** is an adaptive, offline-first multilingual AI STEM tutor designed specifically for children and young students in Africa. It bridges educational and language barriers by explaining complex concepts in Physics, Mathematics, Biology, Chemistry, and Computing through **culturally and geographically grounded analogies**, real-time code-switching between English, Swahili (Kiswahili), and Sheng, **offline GPS auto-detection**, interactive quizzes, and persistent student memory.
-
----
-
-## 🏆 All Things Agentic Hackathon Submission
-
-* **Track**: **The Collaborative Partner**
-* **Target Categories**: Best Multimodal UX, Best Architectural Design, Grand Prize
-* **Core Technologies**: Google Gemini 2.5 / 3.5 Flash, `google-genai` Python SDK, FastAPI, PWA, Service Worker, Geolocation API, Web Speech API
+**ElewaSTEM** is an adaptive, offline-first multilingual AI STEM tutor and multi-stakeholder learning ecosystem designed specifically for children and young students across Africa. It bridges educational, language, accessibility, and connectivity barriers by explaining complex concepts in Physics, Mathematics, Biology, Chemistry, and Computing through **culturally and geographically grounded African ecological analogies**, **16+ African languages** (grounded in African NLP benchmarks like Masakhane, Lelapa AI / InkubaLM, and AfriSpeech), **universal special needs accessibility** (tactile audio for the blind, visual sign cues for the deaf, dyslexia typography), **statutory compliance across 8+ African Data Protection Acts** (Kenya DPA 2019, Nigeria NDPA 2023, POPIA 2013, AU Malabo Convention), **multi-stakeholder portals** (Parents, Teachers, Community Mentors), and **100% offline-first edge computing (0 KB data consumption)**.
 
 ---
 
-## 🌟 Key Features
+## 🏆 All Things Agentic Hackathon Submission Details
 
-1. **Hyper-Local Geo-Adaptive Context & Offline GPS**:
-   * Automatically detects or allows selecting the student's African eco-region (**🌊 Coastal**, **⛰️ Highlands**, **🏞️ Lake Victoria Basin**, **☀️ Arid & Pastoralist**, **🏙️ Urban**).
-   * Uses device hardware GPS (**which works 100% offline without mobile data**) to map coordinates directly to regional biomes.
-   * Dynamically adapts all science analogies, experiments, and examples to the learner's immediate physical surroundings.
-2. **Dual-Language & Code-Switching Bridge**:
-   * Fluidly switch between 🇬🇧 English, 🇰🇪 Kiswahili, and 💬 Sheng.
-   * Understands questions asked in vernacular and pairs every concept with the formal English scientific terminology required for national exams.
-3. **Culturally Grounded African Analogies**:
-   * Explains electrical circuits via water tanks & solar borehole pumps, cellular biology via village homesteads, fractions by sharing fish/chapatis, and gravity via falling mangoes/coconuts.
-4. **Socratic & Interactive Pedagogy**:
-   * Step-by-step guidance rather than homework spoon-feeding.
-   * Hands-on at-home mini-experiments using everyday household items (water bottles, salt, sunlight, leaves).
-5. **Persistent Student Mastery Bank**:
-   * Tracks student progress, concept mastery percentage (0–100%), and awards badges (*Mvumbuzi Chipukizi*, *Bingwa wa Sayansi*).
-6. **Offline-First & Low-Connectivity Architecture**:
-   * Progressive Web App (PWA) with a local **Offline Knowledge Vault** (0 KB data required).
-   * Zero-bandwidth browser-native Speech Synthesis (TTS) & Voice Recognition.
-   * SMS/USSD webhook endpoint for feature phones (Africa's Talking compatible).
+* **Selected Track**: **The Collaborative Partner**
+* **Target Categories**: Grand Prize, Best Architectural Design, Best Multimodal & Inclusive UX, Operational Utility
+* **Google Cloud Services Used**:
+  * ☁️ **Google Cloud Run**: Serverless containerized deployment with auto-scaling.
+  * 📦 **Google Cloud Build & Artifact Registry**: Automated CI/CD container build pipeline (`cloudbuild.yaml`).
+  * 🗄️ **Google Cloud Firestore / Datastore**: Cloud synchronization for persistent student mastery profiles.
+  * 🤖 **Google Vertex AI / Gemini 2.5 & 3.5 Flash**: Orchestrated via the official `google-genai` Python SDK.
+* **Open Source Repository**: [https://github.com/ondinookello96/elewastem](https://github.com/ondinookello96/elewastem)
+* **Devpost Project**: [https://devpost.com/software/elewastem-mwalimu-stem](https://devpost.com/software/elewastem-mwalimu-stem)
 
 ---
 
-## 🏗️ Architecture Diagram
+## 🌟 Key Innovations
+
+1. **🌍 16+ Pan-African Languages Matrix & Indigenous Code-Switching**:
+   * Grounded in **African NLP benchmarks** (Masakhane, Lelapa AI / InkubaLM, AfriSpeech).
+   * Supports: **Kiswahili**, **Sheng (Mtaani)**, **Èdè Yorùbá**, **Harshen Hausa**, **Asụsụ Igbo**, **Naija Pidgin**, **አማርኛ (Amharic)**, **Afaan Oromoo**, **Af-Soomaali**, **isiZulu**, **isiXhosa**, **Ikinyarwanda**, **Oluganda**, **Twi (Akan)**, **chiShona**, **Lingála**, and **African English**.
+   * Zero-bandwidth browser-native Speech Synthesis (TTS) and Speech Recognition (STT) localized for African phonetic systems.
+
+2. **♿ Universal Accessibility & Special Needs Inclusion**:
+   * 👁️ **Blind & Visually Impaired Learners**: Embedded **Tactile Audio Descriptions** (*"Shika jani bichi mkononi... hisi mishipa midogo ya xylem..."*) and ARIA semantic screen-reader markup.
+   * 🧏 **Deaf & Hard-of-Hearing Learners**: Kenyan Sign Language (KSL) visual concept cues and process flowcharts.
+   * 📖 **Dyslexia & ADHD Support**: 1-click dyslexia typography, letter-spacing expansion, and anti-glare cream theme.
+   * 🌓 **High Contrast & Scalable Fonts**: Yellow-on-black contrast mode and multi-level text scaling.
+
+3. **🏞️ Hyper-Local African Eco-Grounding & Hardware GPS**:
+   * Dynamically adapts science analogies to 5 African biomes (**Lake Victoria Basin / Kisumu**, **Coastal Mangroves / Mombasa / Lagos**, **Agricultural Highlands / Eldoret / Mt. Kenya**, **Arid ASAL & Sahel / Turkana / Garissa / Kano**, and **Urban Metropolises**).
+   * Hardware GPS mapping works **100% offline** on edge bounding boxes with explicit consent gatekeepers.
+
+4. **🛡️ Pan-African Cross-Border Data Protection Legal Hub**:
+   * Native compliance across **8+ national data protection frameworks**:
+     * 🇰🇪 **Kenya**: *Data Protection Act, 2019* (Section 29 on Children's Data; ODPC).
+     * 🇳🇬 **Nigeria**: *Nigeria Data Protection Act, 2023 (NDPA)* (Section 31 on Child Protection; NDPC).
+     * 🇿🇦 **South Africa**: *POPIA 2013* (Section 34/35 Special Information of Children; Information Regulator).
+     * 🇬🇭 **Ghana**: *Data Protection Act, 2012 (Act 843)* (Section 37/38; DPC).
+     * 🇺🇬 **Uganda**: *Data Protection and Privacy Act, 2019* (Section 8; PDPO).
+     * 🇹🇿 **Tanzania**: *Personal Data Protection Act, 2022* (Section 30; PDPC).
+     * 🇷🇼 **Rwanda**: *Law No. 058/2021 on Personal Data and Privacy* (Article 10; NCSA).
+     * 🌍 **Pan-African Union**: *AU Malabo Convention on Cyber Security and Personal Data (2014)*.
+   * Enforces 100% on-device edge processing, zero cloud tracking, and 1-click statutory consent revocation.
+
+5. **👥 360° Multi-Stakeholder Hub & Remote Parent Synchronization**:
+   * **👨‍👩‍👧 Parents**: Automated 2G feature phone SMS progress digests via Africa's Talking API, remote pairing code (`ELEWA-7921`), remote parent magic link, and weekend kitchen science challenges.
+   * **👩‍🏫 Teachers**: Automated CBC/NECTA-aligned lesson plans mapped to national curriculum strands with zero-budget local teaching aids.
+   * **🤝 Community Mentors**: Village STEM club guides (bio-sand charcoal water filters, solar dryers).
+   * **🔄 360° Continuous Feedback Loop**: Live community feedback feed and aggregated stakeholder sentiment metrics.
+
+6. **📦 100% Offline-First Edge PWA (0 KB Data Operation)**:
+   * Progressive Web App caching with pre-compiled offline knowledge vaults.
+
+---
+
+## 🏗️ System Architecture
 
 ```
-+-------------------------------------------------------------------------------+
-|                       Child / Student in Africa                               |
-|              (Mobile Browser, Low-Cost Android, or 2G Phone)                  |
-+-------------------------------------------------------------------------------+
-                                      |
-                     +----------------+----------------+
-                     |                                 |
-         [Online / 2G-3G Burst]              [Offline / Disconnected]
-                     |                                 |
-                     v                                 v
-      +-----------------------------+   +-------------------------------+
-      |    FastAPI Agent Gateway    |   |     PWA Service Worker        |
-      |   (Cloud Run / Localhost)   |   |   + Local Offline Vault       |
-      | + Geo-Context Engine        |   |   + Offline GPS Biome Mapper  |
-      +-----------------------------+   +-------------------------------+
-         |           |           |                     |
-         |           |           |                     v
-         v           v           v          +-----------------------+
-   +----------+ +---------+ +--------+      |  Zero-Bandwidth TTS   |
-   |  Google  | | Student | |  SMS/  |      |  & SVG Science Cards  |
-   |  Gemini  | | Mastery | |  USSD  |      +-----------------------+
-   | 2.5/3.5  | | Memory  | | Webhook|
-   |  Flash   | |  Bank   | +--------+
-   +----------+ +---------+
++---------------------------------------------------------------------------------------------------+
+|                                  CHILD / LEARNER IN AFRICA                                        |
+|              (Low-Cost Smartphone, Tablet, Offline Browser, or 2G Feature Phone)                  |
++---------------------------------------------------------------------------------------------------+
+                                                  │
+                 ┌────────────────────────────────┴────────────────────────────────┐
+                 ▼                                                                 ▼
+      [ONLINE / 2G-3G-4G BURST]                                       [OFFLINE / 0 KB DISCONNECTED]
+                 │                                                                 │
+                 ▼                                                                 ▼
++------------------------------------+                         +------------------------------------+
+|       GOOGLE CLOUD RUN             |                         |        OFFLINE PWA ENGINE          |
+|    FastAPI Multilingual Gateway    |                         |    • Service Worker Vault (0 KB)   |
+|    • 16+ African Languages Router  |                         |    • On-Device GPS Biome Mapper    |
+|    • Pan-African DPA Legal Matrix  |                         |    • Browser-Native Speech (TTS)   |
+|    • Multi-Stakeholder Feedback    |                         |    • Tactile Audio for Blind       |
++------------------------------------+                         |    • Sign Language Cues for Deaf   |
+     │              │             │                            +------------------------------------+
+     ▼              ▼             ▼
++----------+  +----------+  +----------+
+|  Google  |  |  Google  |  | Africa's |
+|  Gemini  |  |  Cloud   |  | Talking  |
+| 2.5/3.5  |  |Firestore|  | 2G SMS   |
+|  Flash   |  | Mastery  |  | Webhook  |
++----------+  +----------+  +----------+
 ```
 
 ---
 
-## 🚀 Quick Start & Reproducible Testing
+## ☁️ Google Cloud Deployment (Production Ready)
 
-### 1. Prerequisites
-* Python 3.10+
-* Google Gemini API Key (Optional for live LLM mode; the app includes a full built-in Offline Vault if no key is set).
+### Option A: One-Command Deployment to Google Cloud Run
+```bash
+# Authenticate with Google Cloud
+gcloud auth login
+gcloud config set project YOUR_PROJECT_ID
 
-### 2. Run the Application
-```powershell
-cd C:\Users\Cosmas\.gemini\antigravity\scratch\elewastem
-.\venv\Scripts\python run.py
+# Deploy directly to Google Cloud Run from source
+gcloud run deploy elewastem \
+  --source . \
+  --region us-central1 \
+  --platform managed \
+  --allow-unauthenticated \
+  --memory 1Gi \
+  --cpu 1 \
+  --set-env-vars GEMINI_API_KEY=your_gemini_api_key
+```
+
+### Option B: Automated Google Cloud Build Pipeline
+```bash
+# Trigger automated container build and deployment via Cloud Build
+gcloud builds submit --config cloudbuild.yaml
+```
+
+---
+
+## 💻 Local Quick Start & Testing
+
+### 1. Run the Local Server
+```bash
+# Run server
+python run.py
 ```
 Open your browser at **`http://localhost:8000`**.
 
----
-
-## 🧪 Testing Guide
-
-### Test 1: Geo-Adaptive Location Switching & Offline GPS
-1. In the header bar, click the **`⛰️ Nyanda za Juu (Highlands)`** button or **`📍 GPS`** button.
-2. Select **`🌊 Pwani na Bahari (Coastal)`**.
-3. Notice how the chat prompt chips and offline vault immediately adapt to **coconut palms (*minazi*)**, **sea breezes**, and **salt evaporation pans**!
-4. Switch to **`☀️ Maeneo Kavu (Turkana / Arid)`** to see **acacia drought adaptations** and **solar borehole pumps**.
-
-### Test 2: Low-Connectivity & Offline Simulation
-1. Click the green **`🟢 Mtandaoni`** button to switch to **`🔴 Nje ya Mtandao (0 KB)`**.
-2. Notice that the entire chat, localized analogies, and quizzes continue working seamlessly from the local offline knowledge vault without an internet connection!
-3. Click the **`📦 Offline Vault`** tab to browse pre-cached modules.
-
-### Test 3: Multilingual Code-Switching & Speech
-1. Select **🇰🇪 Kiswahili** or **💬 Sheng** in the language dropdown.
-2. Ask: *"Eleza usanisinuru inavyofanya kazi"*
-3. Click **`🔊 Sikiliza`** to hear speech synthesis audio.
-
----
-
-## 📄 License
-MIT License. Built with ❤️ for African children and young scientists everywhere.
+### 2. Run the Full Automated Test Suite
+```bash
+python test_suite.py
+```
+*Executes all 9 end-to-end automated tests covering health checks, 16+ languages, 8 DPA legal frameworks, adaptive Socratic chat, tactile/sign cues, CBC teacher plans, parent SMS digests, and stakeholder feedback loops.*
