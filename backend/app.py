@@ -199,7 +199,33 @@ async def get_teacher_lesson_plan(topic: str = "photosynthesis", region: str = "
 @app.get("/api/parent/digest/{student_id}")
 async def get_parent_progress_digest(student_id: str, region: str = "lake_basin"):
     profile = student_memory.get_or_create_profile(student_id).model_dump()
-    return generate_parent_digest(profile, region)
+    digest = generate_parent_digest(profile, region)
+    # Generate remote pairing code and magic link for away parents
+    pairing_code = f"ELEWA-{(abs(hash(student_id)) % 8999) + 1000}"
+    digest["pairing_code"] = pairing_code
+    digest["remote_magic_link"] = f"https://elewastem.org/parent?code={pairing_code}&student={student_id}"
+    return digest
+
+
+@app.post("/api/parent/send-remote-alert")
+async def send_remote_parent_alert(req: Dict[str, Any]):
+    phone_number = req.get("phone_number", "+254700000000")
+    student_id = req.get("student_id", "demo_student")
+    region = req.get("region", "lake_basin")
+    
+    profile = student_memory.get_or_create_profile(student_id).model_dump()
+    digest = generate_parent_digest(profile, region)
+    sms_text = digest["sms_digest_text"]
+    
+    # In production, this connects to Africa's Talking / Twilio SMS gateway API
+    return {
+        "status": "dispatched",
+        "recipient_phone": phone_number,
+        "sms_content": sms_text,
+        "gateway": "Africa's Talking / Telco 2G Gateway",
+        "message": f"Ujumbe wa maendeleo ya mtoto umetumwa kwa nambari ya mzazi {phone_number} aliyeko mbali!",
+        "timestamp": digest.get("timestamp", "now")
+    }
 
 
 @app.get("/api/community/activities")

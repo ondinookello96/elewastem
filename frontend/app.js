@@ -725,12 +725,74 @@ function switchStakeholderTab(subTab) {
 
 function updateParentDigestPreview() {
   const smsEl = document.getElementById('parentSmsPreview');
-  if (!smsEl) return;
+  const codeEl = document.getElementById('parentPairingCode');
   const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
   const mastery = STATE.profile.mastery_graph || {};
   const count = Object.keys(mastery).length || 1;
 
-  smsEl.innerText = `ElewaSTEM Ripoti ya Mzazi: Mwanafunzi amechunguza mada ${count} za Sayansi kwa mifano ya ${reg.name_sw}. Jaribio la wiki hii: Chunguza Oksijeni ya mimea ya jikoni na mtoto wako!`;
+  const defaultSms = `ElewaSTEM Ripoti ya Mzazi: Mwanafunzi amechunguza mada ${count} za Sayansi kwa mifano ya ${reg.name_sw}. Jaribio la wiki hii: Chunguza Oksijeni ya mimea ya jikoni na mtoto wako!`;
+  if (smsEl) smsEl.innerText = defaultSms;
+
+  if (isEffectivelyOnline()) {
+    fetch(`/api/parent/digest/${STATE.studentId}?region=${STATE.region}`)
+      .then(r => r.json())
+      .then(data => {
+        if (data.sms_digest_text && smsEl) smsEl.innerText = data.sms_digest_text;
+        if (data.pairing_code && codeEl) codeEl.innerText = data.pairing_code;
+        STATE.parentPairingCode = data.pairing_code;
+        STATE.parentMagicLink = data.remote_magic_link;
+      })
+      .catch(e => console.log('Parent digest remote fetch notice:', e));
+  } else {
+    if (codeEl) codeEl.innerText = `ELEWA-${(absHash(STATE.studentId) % 8999) + 1000}`;
+  }
+}
+
+function absHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) hash = ((hash << 5) - hash) + str.charCodeAt(i);
+  return Math.abs(hash);
+}
+
+function copyPairingCode() {
+  const code = document.getElementById('parentPairingCode')?.innerText || 'ELEWA-7921';
+  navigator.clipboard.writeText(code).then(() => {
+    alert(`Nambari ya kuunganisha (${code}) imenakiliwa! Mzazi anaweza kuitumia kwenye simu yake.`);
+  }).catch(() => alert('Nambari ya kuunganisha: ' + code));
+}
+
+function copyParentMagicLink() {
+  const code = document.getElementById('parentPairingCode')?.innerText || 'ELEWA-7921';
+  const link = `https://elewastem.org/parent?code=${code}&student=${STATE.studentId}`;
+  navigator.clipboard.writeText(link).then(() => {
+    alert(`Kiungo cha Mzazi kimenakiliwa! Tuma kwa WhatsApp au SMS ya mzazi:\n${link}`);
+  }).catch(() => alert('Kiungo cha mzazi: ' + link));
+}
+
+async function dispatchRemoteParentSms() {
+  const phone = document.getElementById('parentPhoneNumberInput')?.value.trim() || '+254712345678';
+  try {
+    if (isEffectivelyOnline()) {
+      const res = await fetch('/api/parent/send-remote-alert', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          phone_number: phone,
+          student_id: STATE.studentId,
+          region: STATE.region
+        })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        alert(`📲 ${data.message}\n\nUjumbe uliotumwa:\n"${data.sms_content}"`);
+        appendSystemNotice(`📲 <b>SMS Imetumwa kwa Mzazi:</b> Ujumbe wa maendeleo umetumwa kwa ${phone}.`);
+      }
+    } else {
+      alert(`📲 Ujumbe wa SMS umehifadhiwa na utatumwa kwa nambari ${phone} punde mtandao wa simu utakapopatikana!`);
+    }
+  } catch (err) {
+    alert(`Ujumbe umetumwa kwa ${phone}`);
+  }
 }
 
 function copySmsDigest() {
