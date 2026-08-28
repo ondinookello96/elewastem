@@ -25,6 +25,7 @@ from african_languages import get_all_african_languages, get_language_meta
 from privacy_matrix import get_all_jurisdictions, get_privacy_framework
 from feedback import feedback_manager, StakeholderFeedback
 from ethics_matrix import get_all_ethics_frameworks, audit_ethical_safety
+from agent_orchestrator import AGENT_ROLES, trail_engine, hunt_orchestrator, guard_cycle_engine
 
 app = FastAPI(
     title="ElewaSTEM Pan-African Multi-Language & Multi-Stakeholder API",
@@ -113,6 +114,31 @@ async def list_ethics_frameworks():
     return get_all_ethics_frameworks()
 
 
+@app.get("/api/orchestrator/pipeline")
+async def get_orchestrator_pipeline():
+    return {
+        "frameworks_active": ["RANK", "TRAIL", "HUNT", "GUARD", "CYCLE"],
+        "agent_roles": AGENT_ROLES,
+        "hunt_pipeline_stages": [
+            "1. Scout: Regional Eco-Zone Mapping",
+            "2. Guardian: ETHOS Harm-Prevention & Safety Filter",
+            "3. Hunter: Socratic Pedagogy in 16+ African Languages",
+            "4. Storyteller: Tactile & KSL Sign Language Cue Decoration",
+            "5. Coordinator: Parent 2G SMS & CBC Teacher Lesson Plan Dispatch"
+        ]
+    }
+
+
+@app.get("/api/memory/trail-audit")
+async def get_trail_memory_audit():
+    return trail_engine.get_trail_architecture()
+
+
+@app.get("/api/cycle/report")
+async def get_cycle_engine_report():
+    return guard_cycle_engine.get_cycle_report()
+
+
 @app.get("/api/regions")
 async def list_regions():
     return get_available_regions()
@@ -194,6 +220,13 @@ async def download_offline_pack():
 @app.post("/api/quiz-result")
 async def submit_quiz_result(req: QuizResultRequest):
     student_memory.record_quiz_result(
+        student_id=req.student_id,
+        topic=req.topic,
+        passed=req.passed,
+        score=req.score
+    )
+    # CYCLE Engine: Log decision outcome
+    guard_cycle_engine.log_decision_outcome(
         student_id=req.student_id,
         topic=req.topic,
         passed=req.passed,

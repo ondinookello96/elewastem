@@ -114,8 +114,27 @@ def run_tests():
     for k, v in ethics.items():
         print(f"   * 🛡️ [{k}]: {v['title']}")
 
+    # 11. RANK Roles & HUNT Multi-Agent Pipeline
+    r = requests.get(f'{BASE_URL}/api/orchestrator/pipeline')
+    assert r.status_code == 200
+    pipeline = r.json()
+    print(f"\n[PASSED] 11. Multi-Agent Orchestration (RANK & HUNT Frameworks):")
+    print(f"   * Active Roles: {list(pipeline['agent_roles'].keys())}")
+    for stage in pipeline['hunt_pipeline_stages']:
+        print(f"   * {stage}")
+
+    # 12. TRAIL Memory Audit & CYCLE Engine
+    r1 = requests.get(f'{BASE_URL}/api/memory/trail-audit')
+    r2 = requests.get(f'{BASE_URL}/api/cycle/report')
+    assert r1.status_code == 200 and r2.status_code == 200
+    trail = r1.json()
+    cycle = r2.json()
+    print(f"\n[PASSED] 12. Memory Sovereignty (TRAIL) & Continuous Learning (CYCLE):")
+    print(f"   * TRAIL Land Rights: {trail['L_LandRights']}")
+    print(f"   * CYCLE Insights: {cycle['Y_YieldInsights']}")
+
     print("\n============================================================")
-    print(" 🎉 ALL 10 COMPREHENSIVE FEATURES & ETHICAL FRAMEWORKS VERIFIED!")
+    print(" 🎉 ALL 12 COMPREHENSIVE FEATURES & AGENTIC FRAMEWORKS VERIFIED!")
     print("============================================================")
 
 if __name__ == '__main__':

@@ -59,6 +59,14 @@ In many African classrooms, children and educators face compounding barriers:
 * **PRIDE**: Pause Points, Review Cadence, Interpretability for Village Elders, Disagreement Rights, and Elders Council Governance.
 * **HORIZON**: Historical Harm Prevention, Opportunity Cost Awareness, Family Ripple Effects, Intergenerational Wisdom, and Ecological Stewardship (Lake Victoria & African ecosystems).
 
+### 6. 🤖 **Autonomous Multi-Agent Architecture (RANK, TRAIL, HUNT, GUARD, CYCLE & 4Ds)**:
+* **RANK**: Maasai-elder calibrated roles (**Scout** for eco-zones, **Hunter** for Socratic tutoring, **Guardian** for safety, **Storyteller** for accessibility) with strict authority bounds and notification triggers.
+* **TRAIL**: 5-tiered sovereign memory lifecycle (**Transient** chat, **Relational** opt-in mastery, **Archival** community benchmarks, **Inheritance** pipelines, **Land Rights** 100% on-device African custody).
+* **HUNT**: Multi-agent handoff pipeline connecting `GeoScout ➔ SocraticTutor ➔ SafetyGuardian ➔ ParentSMSDispatcher ➔ TeacherPlanner`.
+* **GUARD**: Hard constraints against PII extraction, anomaly detection, immutable audit logs, red team tested safety, and dignity preservation.
+* **CYCLE**: Closed-loop continuous learning engine that captures quiz outcomes, auto-scales analogy depth, and generates plain-language reports for parents and elders.
+* **4Ds Expedition**: Delegation (human/AI division of labor), Description (persona, negative rules, delimiters), Discernment (fact checking), and Diligence (stewardship) with dynamic temperature dialing (0.75 creative vs 0.2 precise).
+
 ---
 
 ## 🛠️ Technology Stack & Google Cloud Integration
