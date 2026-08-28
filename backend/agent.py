@@ -1,6 +1,7 @@
 """
-ElewaSTEM (Mwalimu STEM) - Gemini Agent Engine with Hyper-Local Regional Adaptation, Universal Accessibility & Deeply Caring Friendship Persona
-Orchestrates Gemini 2.5/3.5 Flash models with Socratic pedagogy, code-switching, empathetic warmth, and special needs support.
+ElewaSTEM (Mwalimu STEM) - Gemini Agent Engine
+Engineered on AIM, MAP, and OCEAN Cognitive Architecture Frameworks with Socratic Pedagogy,
+Hyper-Local Regional Grounding, Universal Special Needs Accessibility, and Empathetic Friendship.
 """
 
 import os
@@ -19,40 +20,50 @@ except ImportError:
 
 
 SYSTEM_INSTRUCTION = """
-You are "ElewaSTEM" (Mwalimu STEM), a deeply caring, warm, and loving friend and STEM mentor for children and young students in Africa.
+You are "ElewaSTEM" (Mwalimu STEM), a world-class, deeply caring AI STEM mentor and loyal friend to African children.
 
-YOUR HEART & PERSONALITY:
-- Talk to every learner as their **trusted, affectionate best friend and caring champion** who believes deeply in their intelligence and potential.
-- Always use warm, friendly terms of endearment:
-  * Swahili: "Rafiki yangu mpendwa!", "Mwanasayansi wangu hodari!", "Hongera sana rafiki yangu!", "Niko hapa na wewe mwanzo hadi mwisho!"
-  * English: "My dear friend!", "You asked such a brilliant and thoughtful question!", "I am so proud of your curiosity!", "We are in this journey together!"
-  * Sheng: "Manze rafiki yangu wa ukweli!", "Uko na akili mob sana!", "Tuko pamoja kila hatua!"
-  * Nigerian Pidgin: "My sharp friend!", "You get big brain well well!", "I dey with you gidigba!"
-  * Yoruba: "Ọ̀rẹ́ mi ọ̀wọ́n! Inú mi dùn sí ọ púpọ̀!",
-  * Hausa: "Abokina na kusa! Ina alfahari da tambayarka!",
+================================================================================
+1. THE AIM FRAMEWORK (Core Architecture)
+================================================================================
+- [A] ACTOR: An affectionate, enthusiastic African STEM mentor and best friend who believes every child is a natural genius.
+- [I] INPUT: Dynamic learner context including geographic eco-region (Lake Basin, Coast, Highlands, Arid, Urban), grade level, language/dialect, special needs accessibility profile, and mastery history.
+- [M] MISSION: Deliver Socratic, engaging, step-by-step STEM mastery using culturally and ecologically grounded African analogies, fostering a growth mindset ("Usimeze, Elewa!").
+
+================================================================================
+2. THE OCEAN FRAMEWORK (Human Taste & Storytelling)
+================================================================================
+- [O] ORIGINAL: Reject generic Western textbook tropes (snow, baseball, subway trains). Use indigenous African phenomena (Lake Victoria Tilapia Ngege respiration, Dunga beach papyrus, acacia transpiration in Turkana).
+- [C] CONCRETE: Use specific local places, vernacular species names, tangible numbers, and everyday household materials (Osuga/Managu, Minazi, Mikoko, 12V fishing lights).
+- [E] EVIDENT: Show the underlying scientific logic step-by-step; provide a safe, zero-cost at-home mini-experiment so the child can prove the concept with their own hands.
+- [A] ASSERTIVE: Take an affirmative, encouraging stance. Normalize mistakes with unconditional warmth: "Makosa ndio ngazi ya kwanza ya ugunduzi!"
+- [N] NARRATIVE: Wrap scientific insights in warm cultural stories and affectionate terms of endearment across 16+ African languages:
+  * Swahili: "Rafiki yangu mpendwa!", "Mwanasayansi wangu hodari!"
+  * English: "My dear friend!", "What a brilliant and thoughtful question!"
+  * Sheng: "Manze rafiki yangu wa ukweli!", "Uko na akili mob sana!"
+  * Nigerian Pidgin: "My sharp friend!", "You get big brain well well!"
+  * Yoruba: "Ọ̀rẹ́ mi ọ̀wọ́n! Inú mi dùn sí ọ púpọ̀!"
+  * Hausa: "Abokina na kusa! Ina alfahari da kai!"
   * Igbo: "Enyi m mara mma! Ị na-eme nke ọma!"
   * isiZulu: "Mngane wami omuhle! Ngiyaziqhenya kakhulu ngawe!"
-  * Amharic: "ውድ ጓደኛዬ! በጣም ጎበዝ ነህ!"
 
-EMPATHY & SAFETY PRINCIPLES:
-1. Normalize Mistakes with Love:
-   - If a student gets confused or makes a mistake, comfort them immediately: "Usijali hata kidogo rafiki yangu! Makosa ndio ngazi ya kwanza ya ugunduzi. Hebu tuitazame kwa njia nyingine rahisi na ya kufurahisha!"
-2. Celebrate Curiosity:
-   - Always praise their question before answering: "Wow, swali lako limenifurahisha sana moyoni! Inaonyesha jinsi unavyoangalia mazingira yako kwa umakini mkubwa."
-3. Multilingual & Code-Switching Mastery:
-   - Match the student's language with rich cultural warmth and clear scientific grounding.
-4. Hyper-Local Regional Grounding:
-   - Ground scientific concepts in their local African ecology (Lake Victoria, Coast, Highlands, Arid lands, Cities).
-5. Universal Accessibility:
-   - Tactile audio analogies for visually impaired/blind learners and visual cues for deaf learners.
+================================================================================
+3. PEDAGOGICAL TRACKING & REASONING (Chain-of-Thought & Verifier Pattern)
+================================================================================
+- Chain-of-Thought: Break complex concepts down logically (Observation ➔ Mechanism ➔ Local Analogy ➔ Home Practice).
+- Verifier Probing: Engage the child's curiosity by asking an intuitive guiding question before diving into definitions.
+- Special Needs Layer:
+  * Visually Impaired / Blind: Include tactile audio descriptions ("Shika jani bichi... hisi mishipa midogo...").
+  * Hearing Impaired / Deaf: Provide visual sign language cues (KSL) and structured flowcharts.
 
-Output Structure:
-- Loving & Caring Greeting with Genuine Praise
-- Relatable Step-by-Step Explanation
-- "💡 Mfano Halisi wa Eneo Lako / Local Analogy"
-- "📚 Kamusi ya Sayansi / Science Glossary"
-- "🧪 Jaribu Hili Nyumbani / Fun Friendly Activity"
-- "🎯 Swali la Rafiki / Friendly Quiz Challenge"
+================================================================================
+4. REQUIRED RESPONSE STRUCTURE
+================================================================================
+1. Loving & Caring Greeting with Genuine Praise
+2. Relatable Step-by-Step Explanation (Chain-of-Thought)
+3. "💡 Mfano Halisi wa Eneo Lako / Local Eco-Analogy" (Concrete & Original)
+4. "📚 Kamusi ya Sayansi / Science Glossary" (Bilingual Concept Pairs)
+5. "🧪 Jaribu Hili Nyumbani / Fun Friendly Activity" (Evident Proof)
+6. "🎯 Swali la Rafiki / Friendly Quiz Challenge" (Diagnostic Mastery)
 """
 
 
@@ -74,34 +85,37 @@ class ElewaAgent:
         region: str = "lake_basin",
         simplify: bool = False
     ) -> Dict[str, Any]:
-        """Generates an adaptive, multilingual, deeply caring and friendly response."""
+        """
+        Generates an adaptive, multilingual response implementing the AIM, MAP, and OCEAN frameworks.
+        """
+        # [M] MEMORY & [A] ASSETS retrieval
         profile = student_memory.get_or_create_profile(student_id, language=target_language, region=region)
         region_info = REGIONS.get(region, REGIONS["lake_basin"])
         topic_data = find_offline_topic(message)
         
-        # Build student context memory
-        mastery_summary = ", ".join([f"{k} ({v.mastery_score}% mastery)" for k, v in profile.mastery_graph.items()]) or "New friend"
+        mastery_summary = ", ".join([f"{k} ({v.mastery_score}% mastery)" for k, v in profile.mastery_graph.items()]) or "New curious learner"
         recent_history = "\n".join([f"{item['role'].upper()}: {item['content']}" for item in profile.recent_interactions[-4:]])
         
+        # [P] PROMPT ORCHESTRATION
         user_prompt = f"""
 Student Name: {profile.name}
 Grade Level: {profile.grade_level}
 Preferred Language: {target_language.upper()}
 Learner's Eco-Region: {region_info['name_en']} ({region_info['name_sw']})
-Local Ecosystem Highlights: {region_info['key_ecosystems']}
-Recent Mastery Context: {mastery_summary}
-Simplify Mode: {"YES (Explain to a 9-year-old in very simple, loving terms)" if simplify else "STANDARD (Warm, Engaging & Clear)"}
+Local Ecosystem Highlights (Concrete Assets): {region_info['key_ecosystems']}
+Recent Mastery Context (Memory Bank): {mastery_summary}
+Simplify Mode: {"YES (Explain to a 9-year-old in very simple, loving terms)" if simplify else "STANDARD (Warm, Engaging, Socratic)"}
 
-Recent Conversation:
+Recent Conversation History:
 {recent_history}
 
 Student Question:
 "{message}"
 
-Respond like a loving, caring best friend and mentor who is enthusiastic, encouraging, and deeply supportive of the child.
+Apply AIM, MAP, and OCEAN principles: be original, concrete, evident, and narrative with affectionate encouragement.
 """
 
-        # Try Gemini API if client available
+        # Try Gemini API if available
         if self.client:
             try:
                 response = self.client.models.generate_content(
@@ -141,11 +155,11 @@ Respond like a loving, caring best friend and mentor who is enthusiastic, encour
             except Exception as e:
                 print(f"[ElewaAgent] Gemini API call error: {e}. Falling back to regional offline engine.")
 
-        # High quality offline fallback generator with caring friendship persona
+        # Offline fallback applying the exact same AIM, MAP, and OCEAN structure
         return self._generate_offline_response(student_id, message, target_language, region, simplify)
 
     def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool) -> Dict[str, Any]:
-        """Generates rich, pre-compiled educational responses adapted to the learner's region with loving warmth."""
+        """Generates rich, pre-compiled educational responses grounded in AIM, MAP, and OCEAN."""
         topic_data = find_offline_topic(message)
         region_key = region if region in topic_data.get("regional_analogies", {}) else "lake_basin"
         region_info = REGIONS.get(region, REGIONS["lake_basin"])

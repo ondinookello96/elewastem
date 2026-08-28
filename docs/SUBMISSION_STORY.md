@@ -1,10 +1,10 @@
-# ElewaSTEM — Pan-African Multi-Language & Multi-Jurisdiction AI STEM Ecosystem
+# ElewaSTEM — Pan-African Multi-Language, Inclusive & Multi-Stakeholder AI STEM Ecosystem
 
 ## Project Name
-**ElewaSTEM (Mwalimu STEM)** — *Universal, Inclusive Pan-African AI STEM Learning Ecosystem Across 16+ African Languages, Special Needs, & Pan-African Data Protection Laws*
+**ElewaSTEM (Mwalimu STEM)** — *Universal, Inclusive Pan-African AI STEM Learning Ecosystem Across 16+ African Languages, Special Needs, Multi-Stakeholder Feedback Loops & Pan-African Data Protection Laws*
 
 ## Tagline
-A voice-first, offline-capable AI STEM ecosystem connecting learners (including blind, deaf, dyslexic), parents (SMS digests), & teachers across 16+ African languages and 8+ Data Protection Jurisdictions.
+A voice-first, offline-capable AI STEM ecosystem powered by Google Cloud & Gemini, connecting learners (including blind, deaf, dyslexic), parents (remote SMS sync), teachers (CBC plans), & mentors across 16+ African languages and 8+ Data Protection Jurisdictions.
 
 ---
 
@@ -14,8 +14,9 @@ In many African classrooms, children and educators face compounding barriers:
 2. **The Special Needs Barrier**: Visually impaired (blind), hearing impaired (deaf), and neurodiverse (dyslexic) learners are excluded from digital STEM tools.
 3. **Cross-Border Privacy & Child Protection**: Diverse legal requirements across Africa—from Kenya's **DPA 2019** and Nigeria's **NDPA 2023** to South Africa's **POPIA 2013** and the **African Union Malabo Convention**—require strict data sovereignty and child protection.
 4. **The Connectivity Deficit**: Vast rural regions operate on intermittent 2G networks where cloud-dependent AI fails.
+5. **Stakeholder Isolation**: Parents working away from home and public school teachers lack direct, simple tools to participate in their children's digital learning journey.
 
-**ElewaSTEM** was engineered from the ground up to solve all four challenges simultaneously.
+**ElewaSTEM** was engineered from the ground up to solve all five challenges simultaneously.
 
 ---
 
@@ -45,15 +46,22 @@ In many African classrooms, children and educators face compounding barriers:
 * **Deaf & Hard of Hearing**: Visual sign language concept cues (KSL) and structured visual flowcharts.
 * **Dyslexic & ADHD**: Anti-glare cream theme, dyslexia typography, and step-by-step chunked explanations.
 
-### 4. 👥 **Multi-Stakeholder Hub**:
-* **Parents**: Weekly plain-language SMS digests for 2G feature phones and weekend at-home science challenges.
+### 4. 👥 **360° Multi-Stakeholder Hub & Remote Parent Sync**:
+* **Parents**: Automated 2G feature phone SMS progress digests via Africa's Talking API, remote pairing code (`ELEWA-7921`), remote parent magic link, and weekend kitchen science challenges.
 * **Teachers**: CBC and national curriculum lesson plan generator with local teaching aids and diagnostic quizzes.
 * **Mentors**: Zero-budget community STEM club project guides (charcoal filters, solar dryers).
+* **Continuous Feedback Loop**: In-app reaction widgets and live community feedback feed for parents, teachers, and accessibility advocates.
 
 ---
 
-## 🛠️ Technology Stack
-* **AI Engine**: Google Gemini 2.5 / 3.5 Flash via `google-genai` Python SDK.
+## 🛠️ Technology Stack & Google Cloud Integration
+
+* **AI Engine**: Google Gemini 2.5 / 3.5 Flash via official `google-genai` Python SDK.
+* **Google Cloud Services**:
+  * ☁️ **Google Cloud Run**: Auto-scaling serverless container hosting for the FastAPI backend.
+  * 📦 **Google Cloud Build & Artifact Registry**: Automated container build pipeline (`cloudbuild.yaml`).
+  * 🗄️ **Google Cloud Firestore**: Cloud storage for learner mastery bank synchronization.
+  * 🤖 **Vertex AI / Gemini API**: Multi-turn Socratic reasoning with cultural grounding.
 * **African NLP Benchmarks**: Integrating Masakhane, Lelapa AI, and AfriSpeech multilingual representations.
 * **Backend**: FastAPI asynchronous Python server with statutory DPA router and offline sync endpoints.
 * **Frontend**: Progressive Web App (PWA) with client-side edge bounding-box geolocation and Web Speech API.
