@@ -1,11 +1,11 @@
 /**
- * ElewaSTEM Pan-African Frontend Logic: 16+ African Languages & Cross-Border DPA Compliance Matrix
+ * ElewaSTEM Pan-African Frontend Logic: 16+ African Languages, Multi-Stakeholder Feedback Loop & Cross-Border DPA Compliance Matrix
  */
 
 // Application State
 const STATE = {
   studentId: 'demo_student',
-  language: 'sw', // 'sw', 'sheng', 'yo', 'ha', 'ig', 'pcm', 'am', 'om', 'so', 'zu', 'xh', 'rw', 'lg', 'tw', 'sn', 'ln', 'en'
+  language: 'sw',
   jurisdiction: 'KE',
   region: 'lake_basin',
   autoSpeak: true,
@@ -24,6 +24,7 @@ const STATE = {
   offlineModules: [],
   languagesMeta: {},
   jurisdictionsMeta: {},
+  feedbackData: { total_feedback: 4, average_rating: 5.0, recent: [] },
   regionsMeta: {
     lake_basin: { name_sw: 'Kisumu & Ziwa Victoria', name_en: 'Lake Victoria Basin (Kisumu)', icon: '🏞️', desc_sw: 'Kisumu, Mwanza, Entebbe • Samaki Ngege & Mbuta, Magugu Maji (Akech), Osuga & Mitoo' },
     coastal: { name_sw: 'Pwani na Bahari', name_en: 'Coastal & Ocean (Mombasa/Lagos)', icon: '🌊', desc_sw: 'Mombasa, Kilifi, Zanzibar, Lagos • Minazi, mikoko ya kupumulia, chumvi' },
@@ -165,6 +166,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadOfflinePack();
   await loadLanguagesAndJurisdictions();
   await refreshProfile();
+  await loadFeedbackFeed();
   renderRegionUI();
   renderVault();
   updateUIStrings();
@@ -192,14 +194,16 @@ function updateNetworkUI() {
   const online = isEffectivelyOnline();
   const langDict = I18N[STATE.language] || I18N.sw;
 
-  if (online) {
-    badge.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 transition-all hover:scale-105';
-    dot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
-    text.innerText = langDict.online_text;
-  } else {
-    badge.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300 transition-all hover:scale-105';
-    dot.className = 'w-2 h-2 rounded-full bg-amber-500';
-    text.innerText = langDict.offline_text;
+  if (badge && dot && text) {
+    if (online) {
+      badge.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 transition-all hover:scale-105';
+      dot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+      text.innerText = langDict.online_text;
+    } else {
+      badge.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300 transition-all hover:scale-105';
+      dot.className = 'w-2 h-2 rounded-full bg-amber-500';
+      text.innerText = langDict.offline_text;
+    }
   }
 }
 
@@ -214,7 +218,7 @@ function toggleSimulateOffline() {
   appendSystemNotice(msg);
 }
 
-// Pan-African Languages & Privacy Jurisdictions Fetcher
+// Languages & Privacy Jurisdictions Fetcher
 async function loadLanguagesAndJurisdictions() {
   try {
     if (isEffectivelyOnline()) {
@@ -234,6 +238,165 @@ async function loadLanguagesAndJurisdictions() {
   } catch (err) {
     console.log('Language & Privacy fetch notice:', err);
   }
+}
+
+// Multi-Stakeholder Feedback Management
+function openFeedbackModal(defaultRole = 'student') {
+  const modal = document.getElementById('feedbackModal');
+  const roleSelect = document.getElementById('fbStakeholderType');
+  const title = document.getElementById('feedbackModalTitle');
+  if (roleSelect) roleSelect.value = defaultRole;
+
+  if (title) {
+    const titles = {
+      student: 'Toa Maoni ya Mwanafunzi (Learner Feedback)',
+      parent: 'Toa Maoni ya Mzazi (Parent Feedback)',
+      teacher: 'Toa Maoni ya Mwalimu (Teacher Feedback)',
+      community_mentor: 'Ripoti ya Klabu ya Sayansi (Mentor Report)',
+      accessibility_advocate: 'Maoni ya Ujumuishi (Accessibility Feedback)'
+    };
+    title.innerText = titles[defaultRole] || 'Toa Maoni Yako (Stakeholder Feedback)';
+  }
+
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeFeedbackModal() {
+  const modal = document.getElementById('feedbackModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+async function submitFeedbackForm(e) {
+  if (e) e.preventDefault();
+  const role = document.getElementById('fbStakeholderType').value;
+  const category = document.getElementById('fbCategory').value;
+  const ratingEls = document.getElementsByName('fbRating');
+  let rating = 5;
+  for (let r of ratingEls) {
+    if (r.checked) { rating = parseInt(r.value); break; }
+  }
+  const comment = document.getElementById('fbComment').value.trim();
+  if (!comment) return;
+
+  const payload = {
+    stakeholder_type: role,
+    student_id: STATE.studentId,
+    region: STATE.region,
+    language: STATE.language,
+    rating: rating,
+    category: category,
+    comment: comment,
+    topic: 'Continuous Feedback'
+  };
+
+  try {
+    if (isEffectivelyOnline()) {
+      const res = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) {
+        alert('🎉 Asante sana! Maoni yako yamerekodiwa kwa mafanikio.');
+      }
+    } else {
+      alert('📦 Maoni yako yamehifadhiwa kwenye kumbukumbu ya simu na yatatumwa punde mtandao utakaporejea!');
+    }
+  } catch (err) {
+    console.log('Feedback submit error:', err);
+  }
+
+  closeFeedbackModal();
+  document.getElementById('fbComment').value = '';
+  await loadFeedbackFeed();
+  appendSystemNotice(`💬 <b>Asante kwa Maoni:</b> "${comment.substring(0, 50)}..."`);
+}
+
+async function loadFeedbackFeed() {
+  try {
+    if (isEffectivelyOnline()) {
+      const [recentRes, summaryRes] = await Promise.all([
+        fetch('/api/feedback/recent'),
+        fetch('/api/feedback/summary')
+      ]);
+
+      if (recentRes.ok && summaryRes.ok) {
+        const recent = await recentRes.json();
+        const summary = await summaryRes.json();
+        renderFeedbackFeed(recent, summary);
+      }
+    }
+  } catch (e) {
+    console.log('Feedback feed load notice:', e);
+  }
+}
+
+function renderFeedbackFeed(recentList, summary) {
+  const container = document.getElementById('recentFeedbackList');
+  const countEl = document.getElementById('totalFeedbackCount');
+  const ratingEl = document.getElementById('avgFeedbackRating');
+
+  if (countEl) countEl.innerText = summary.total_feedback || recentList.length;
+  if (ratingEl) ratingEl.innerText = `${summary.average_rating || 5.0} ⭐`;
+
+  if (!container) return;
+
+  const roleBadges = {
+    student: { text: '🎓 Mwanafunzi', color: 'bg-emerald-100 text-emerald-800' },
+    parent: { text: '👨‍👩‍👧 Mzazi', color: 'bg-purple-100 text-purple-800' },
+    teacher: { text: '👩‍🏫 Mwalimu', color: 'bg-blue-100 text-blue-800' },
+    community_mentor: { text: '🤝 Mshauri wa Klabu', color: 'bg-amber-100 text-amber-800' },
+    accessibility_advocate: { text: '♿ Mtaalamu wa Mahitaji', color: 'bg-teal-100 text-teal-800' }
+  };
+
+  container.innerHTML = recentList.map(item => {
+    const role = roleBadges[item.stakeholder_type] || roleBadges.student;
+    return `
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-1.5 shadow-sm">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-1.5">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${role.color}">${role.text}</span>
+            <span class="text-amber-500 font-bold">${'⭐'.repeat(item.rating || 5)}</span>
+          </div>
+          <span class="text-[9px] text-slate-400 font-mono">${new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+        </div>
+        <p class="text-slate-800 italic">"${escapeHtml(item.comment)}"</p>
+        <div class="text-[10px] text-slate-500 font-semibold flex items-center space-x-2">
+          <span>📍 Eneo: ${item.region || 'Kisumu'}</span>
+          <span>•</span>
+          <span>Mada: ${escapeHtml(item.topic || 'General')}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function quickReact(emoji, topic) {
+  const commentMap = {
+    'understood': 'Nimeelewa vizuri sana!',
+    'simplify': 'Tafadhali ninaomba unieleze kwa mifano rahisi zaidi ya mazingira yangu.',
+    'voice': 'Asante kwa maelezo ya sauti!'
+  };
+
+  const payload = {
+    stakeholder_type: 'student',
+    student_id: STATE.studentId,
+    region: STATE.region,
+    language: STATE.language,
+    rating: emoji === 'understood' ? 5 : 4,
+    category: 'content_clarity',
+    comment: commentMap[emoji] || 'Maoni ya haraka',
+    topic: topic || 'Chat Reaction'
+  };
+
+  fetch('/api/feedback', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    appendSystemNotice(`✨ <b>Maoni Yamepokelewa:</b> ${commentMap[emoji]}`);
+    loadFeedbackFeed();
+  }).catch(() => {});
 }
 
 // Universal Accessibility Controls
@@ -334,14 +497,16 @@ function updateAutoSpeakUI() {
   const icon = document.getElementById('autoSpeakIcon');
   const text = document.getElementById('autoSpeakText');
 
-  if (STATE.autoSpeak) {
-    btn.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-bold bg-purple-100 text-purple-900 border border-purple-400 hover:bg-purple-200 transition-all';
-    icon.innerText = '🔊';
-    text.innerText = 'Sauti: Washa';
-  } else {
-    btn.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-500 border border-slate-300 hover:bg-slate-200 transition-all';
-    icon.innerText = '🔇';
-    text.innerText = 'Sauti: Zima';
+  if (btn && icon && text) {
+    if (STATE.autoSpeak) {
+      btn.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-bold bg-purple-100 text-purple-900 border border-purple-400 hover:bg-purple-200 transition-all';
+      icon.innerText = '🔊';
+      text.innerText = 'Sauti: Washa';
+    } else {
+      btn.className = 'flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-500 border border-slate-300 hover:bg-slate-200 transition-all';
+      icon.innerText = '🔇';
+      text.innerText = 'Sauti: Zima';
+    }
   }
 }
 
@@ -534,14 +699,17 @@ function switchTab(tabId) {
   });
 
   if (tabId === 'mastery') refreshProfile();
-  if (tabId === 'stakeholders') updateParentDigestPreview();
+  if (tabId === 'stakeholders') {
+    updateParentDigestPreview();
+    loadFeedbackFeed();
+  }
   if (tabId === 'privacy_hub') renderJurisdictionDetails(STATE.jurisdiction);
 }
 
 // Stakeholders Sub-Tabs
 function switchStakeholderTab(subTab) {
   STATE.activeStakeholderSubTab = subTab;
-  ['parents', 'teachers', 'community'].forEach(s => {
+  ['parents', 'teachers', 'community', 'feedback_feed'].forEach(s => {
     const view = document.getElementById(`stakeholderView-${s}`);
     const btn = document.getElementById(`subTab-${s}`);
     if (s === subTab) {
@@ -552,6 +720,7 @@ function switchStakeholderTab(subTab) {
       btn.className = 'px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200';
     }
   });
+  if (subTab === 'feedback_feed') loadFeedbackFeed();
 }
 
 function updateParentDigestPreview() {
@@ -872,7 +1041,7 @@ function generateLocalOfflineAnswer(query, simplify) {
 
   const text = `### 🔬 ${title}
 
-${isSw ? `Habari kutoka **${regMeta.icon} ${regMeta.name_sw}** (Offline Vault):` : `Explanation for **${regMeta.icon} ${regMeta.name_en}** (Offline Vault):`}
+${isSw ? `Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako kuhusu eneo letu zuri la **${regMeta.icon} ${regMeta.name_sw}** (Offline Vault):` : `Hello my dear friend! 🌟 I am so proud of your question about **${regMeta.icon} ${regMeta.name_en}** (Offline Vault):`}
 
 ${summary}
 
@@ -883,7 +1052,7 @@ ${analogy}
 
 ---
 
-#### 📚 Kamusi ya Sayansi (Key Terms)
+#### 📚 Kamusi ya Sayansi (Maneno ya Kujivunia Kujua!)
 ${termsFormatted}
 
 ---
@@ -982,6 +1151,20 @@ function appendAssistantMessage(data) {
           <span>Fanya Jaribio</span>
         </button>` : ''}
       </div>
+
+      <!-- Stakeholder Quick Reaction & Feedback Bar -->
+      <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+        <div class="flex items-center space-x-1.5">
+          <span class="font-medium">Umeelewa somo hili?</span>
+          <button onclick="quickReact('understood', '${escapeHtml(data.topic || 'STEM')}')" class="hover:scale-125 transition-transform" title="Nimeelewa vizuri!">😃</button>
+          <button onclick="quickReact('simplify', '${escapeHtml(data.topic || 'STEM')}')" class="hover:scale-125 transition-transform" title="Rahisisha zaidi">🤔</button>
+          <button onclick="quickReact('voice', '${escapeHtml(data.topic || 'STEM')}')" class="hover:scale-125 transition-transform" title="Sauti nzuri">🔊</button>
+        </div>
+        <button onclick="openFeedbackModal('student')" class="text-brand-700 hover:text-brand-800 font-bold flex items-center space-x-1">
+          <span>💬</span>
+          <span>Toa Maoni</span>
+        </button>
+      </div>
     </div>
   `;
   container.appendChild(div);
@@ -1014,7 +1197,7 @@ function appendLoadingIndicator() {
     </div>
     <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm text-xs font-bold text-slate-500 flex items-center space-x-2">
       <span class="w-2 h-2 rounded-full bg-brand-600 animate-ping"></span>
-      <span>Mwalimu anatafuta mfano wa ${regMeta.icon} ${regMeta.name_sw}...</span>
+      <span>Mwalimu rafiki anakuandalia jibu tamu la ${regMeta.icon} ${regMeta.name_sw}...</span>
     </div>
   `;
   container.appendChild(div);
@@ -1310,15 +1493,15 @@ function handleQuizAnswer(selectedIndex) {
   feedback.classList.remove('hidden');
 
   const feedbackSpokenText = isCorrect 
-    ? (isSw ? `Hongera sana! Uko sahihi kabisa! ${quiz.explanation_sw}` : `Awesome! That is correct! ${quiz.explanation_en}`)
-    : (isSw ? `Uko karibu! Jaribu tena. ${quiz.explanation_sw}` : `Almost! Try again. ${quiz.explanation_en}`);
+    ? (isSw ? `Hongera sana rafiki yangu! Uko sahihi kabisa! ${quiz.explanation_sw}` : `Awesome my dear friend! That is correct! ${quiz.explanation_en}`)
+    : (isSw ? `Uko karibu sana rafiki yangu! Usijali, jaribu tena: ${quiz.explanation_sw}` : `Almost there my friend! Keep going: ${quiz.explanation_en}`);
 
   if (isCorrect) {
     feedback.className = 'p-3 rounded-xl text-xs font-semibold leading-relaxed bg-emerald-100 text-emerald-900 border border-emerald-300';
-    feedback.innerHTML = `🎉 <b>${isSw ? 'Hongera sana! Uko sahihi!' : 'Awesome! That is correct!'}</b><br>${isSw ? quiz.explanation_sw : quiz.explanation_en}`;
+    feedback.innerHTML = `🎉 <b>${isSw ? 'Hongera sana rafiki yangu! Uko sahihi!' : 'Awesome my friend! That is correct!'}</b><br>${isSw ? quiz.explanation_sw : quiz.explanation_en}`;
   } else {
     feedback.className = 'p-3 rounded-xl text-xs font-semibold leading-relaxed bg-amber-100 text-amber-900 border border-amber-300';
-    feedback.innerHTML = `💡 <b>${isSw ? 'Uko karibu! Jaribu tena:' : 'Almost! Try again:'}</b><br>${isSw ? quiz.explanation_sw : quiz.explanation_en}`;
+    feedback.innerHTML = `💡 <b>${isSw ? 'Uko karibu sana! Jaribu tena:' : 'Almost there! Try again:'}</b><br>${isSw ? quiz.explanation_sw : quiz.explanation_en}`;
   }
 
   if (STATE.autoSpeak) speakText(feedbackSpokenText);

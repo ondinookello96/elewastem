@@ -1,6 +1,6 @@
 """
-ElewaSTEM FastAPI Server with Pan-African Language Scaling & Cross-Border Data Protection Framework
-Serves 16+ African languages (Masakhane / Gemini), 8+ Data Protection Jurisdictions, and Universal Stakeholder Hubs.
+ElewaSTEM FastAPI Server with Pan-African Language Scaling, Multi-Jurisdiction Privacy, and Multi-Stakeholder Feedback Loop
+Serves 16+ African languages, 8+ Data Protection Jurisdictions, Universal Stakeholder Hubs, and 360-degree Community Feedback.
 """
 
 import os
@@ -23,11 +23,12 @@ from tools import (
 )
 from african_languages import get_all_african_languages, get_language_meta
 from privacy_matrix import get_all_jurisdictions, get_privacy_framework
+from feedback import feedback_manager, StakeholderFeedback
 
 app = FastAPI(
-    title="ElewaSTEM Pan-African Multi-Language & Multi-Jurisdiction API",
-    description="Multilingual Adaptive AI STEM Tutor for African Children across 16+ African Languages & Pan-African Data Protection Laws",
-    version="1.3.0"
+    title="ElewaSTEM Pan-African Multi-Language & Multi-Stakeholder API",
+    description="Multilingual Adaptive AI STEM Tutor for African Children with Universal Stakeholder Feedback Loop",
+    version="1.4.0"
 )
 
 app.add_middleware(
@@ -45,9 +46,9 @@ FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "fronten
 class ChatRequest(BaseModel):
     student_id: str = "demo_student"
     message: str
-    language: str = "sw"  # Can be sw, sheng, yo, ha, ig, pcm, am, om, so, zu, xh, rw, lg, tw, sn, ln, en
+    language: str = "sw"
     region: str = "lake_basin"
-    jurisdiction: str = "KE"  # KE, NG, ZA, GH, UG, TZ, RW, AU_CONTINENTAL
+    jurisdiction: str = "KE"
     gps_coordinates: Optional[Dict[str, float]] = None
     simplify: bool = False
 
@@ -75,15 +76,16 @@ async def health_check():
     return {
         "status": "healthy",
         "app": "ElewaSTEM Pan-African",
-        "version": "1.3.0",
+        "version": "1.4.0",
         "supported_african_languages_count": len(get_all_african_languages()),
         "data_protection_jurisdictions_count": len(get_all_jurisdictions()),
         "features": [
             "pan_african_languages_masakhane_gemini",
             "cross_border_data_protection_matrix",
-            "offline_pwa",
+            "multi_stakeholder_feedback_loop",
             "universal_accessibility_tts_stt_tactile_sign",
-            "stakeholders_parents_teachers_mentors"
+            "stakeholders_parents_teachers_mentors",
+            "offline_pwa"
         ],
         "gemini_connected": elewa_agent.client is not None
     }
@@ -91,13 +93,11 @@ async def health_check():
 
 @app.get("/api/languages")
 async def list_african_languages():
-    """Returns the Pan-African language registry."""
     return get_all_african_languages()
 
 
 @app.get("/api/privacy/jurisdictions")
 async def list_privacy_jurisdictions():
-    """Returns the Pan-African Data Protection Legal Matrix."""
     return get_all_jurisdictions()
 
 
@@ -131,7 +131,6 @@ async def chat_with_agent(req: ChatRequest):
         region=req.region,
         simplify=req.simplify
     )
-    # Attach language and privacy metadata
     response["language_meta"] = get_language_meta(req.language)
     response["jurisdiction_meta"] = get_privacy_framework(req.jurisdiction)
     return response
@@ -167,7 +166,7 @@ async def download_offline_pack():
     privacy_frameworks = get_all_jurisdictions()
     return {
         "pack_name": "ElewaSTEM Pan-African Offline Vault",
-        "version": "1.3",
+        "version": "1.4",
         "module_count": len(modules),
         "regions": regions,
         "languages": languages,
@@ -208,6 +207,28 @@ async def get_community_activities(region: str = "lake_basin"):
     return get_community_club_projects(region)
 
 
+# --- Multi-Stakeholder Feedback Endpoints ---
+
+@app.post("/api/feedback")
+async def submit_stakeholder_feedback(feedback: StakeholderFeedback):
+    saved = feedback_manager.add_feedback(feedback)
+    return {
+        "status": "success",
+        "message": "Asante sana kwa maoni yako! Ujumbe umepokelewa na kuwekwa kwenye mfumo wa kuboresha mitaala.",
+        "feedback": saved
+    }
+
+
+@app.get("/api/feedback/recent")
+async def list_recent_feedback(limit: int = 15):
+    return feedback_manager.get_recent_feedback(limit=limit)
+
+
+@app.get("/api/feedback/summary")
+async def get_feedback_summary():
+    return feedback_manager.get_summary_metrics()
+
+
 @app.post("/api/sms", response_class=PlainTextResponse)
 async def sms_gateway(
     from_: str = Form(None, alias="from"),
@@ -218,9 +239,24 @@ async def sms_gateway(
     user_msg = text or ""
     
     if not user_msg:
-        return "Karibu ElewaSTEM! Tuma swali lako la Sayansi (mfano: 'eleza umeme kisumu' au 'what is photosynthesis')."
+        return "Karibu ElewaSTEM! Tuma swali lako la Sayansi au maoni (mfano: 'eleza umeme kisumu' au 'maoni: somo lilikuwa zuri')."
 
-    # Multilingual detector (Swahili, Yoruba, Hausa, Igbo, English)
+    # Check if this is an SMS feedback message
+    if user_msg.lower().startswith("maoni") or user_msg.lower().startswith("feedback"):
+        feedback_comment = user_msg.split(":", 1)[-1].strip() if ":" in user_msg else user_msg
+        feedback_manager.add_feedback(StakeholderFeedback(
+            stakeholder_type="parent",
+            student_id=f"sms_{user_phone}",
+            region="lake_basin",
+            language="sw",
+            rating=5,
+            category="general",
+            comment=f"[SMS Feedback] {feedback_comment}",
+            topic="SMS Gateway"
+        ))
+        return "Asante sana! Maoni yako ya SMS yamepokelewa na yatawasaidia walimu na watengenezaji kuboresha masomo."
+
+    # Multilingual detector
     is_sw = any(w in user_msg.lower() for w in ["eleza", "nini", "kwa nini", "jinsi", "sayansi", "mmea", "umeme", "hesabu"])
     is_yo = any(w in user_msg.lower() for w in ["bawo", "kini", "sayensi", "oluko"])
     is_ha = any(w in user_msg.lower() for w in ["sannu", "menene", "kimiyya", "malami"])

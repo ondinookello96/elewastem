@@ -10,7 +10,7 @@ BASE_URL = 'http://localhost:8000'
 
 def run_tests():
     print("============================================================")
-    print(" ELEWASTEM FULL FEATURE VERIFICATION SUITE")
+    print(" ELEWASTEM FULL FEATURE & FEEDBACK VERIFICATION SUITE")
     print("============================================================")
 
     # 1. Health & Meta
@@ -20,6 +20,7 @@ def run_tests():
     print(f"[PASSED] 1. Health Check: OK (v{health['version']})")
     print(f"   * Languages: {health['supported_african_languages_count']}")
     print(f"   * Privacy Jurisdictions: {health['data_protection_jurisdictions_count']}")
+    print(f"   * Features: {', '.join(health['features'])}")
 
     # 2. African Languages Endpoint
     r = requests.get(f'{BASE_URL}/api/languages')
@@ -78,8 +79,35 @@ def run_tests():
     for act in comm:
         print(f"   * {act['project_name']} (Materials: {act['materials'][:50]}...)")
 
+    # 8. Multi-Stakeholder Feedback Mechanism
+    fb_payload = {
+        'stakeholder_type': 'teacher',
+        'student_id': 'mwalimu_otieno',
+        'region': 'lake_basin',
+        'language': 'sw',
+        'rating': 5,
+        'category': 'cbc_alignment',
+        'comment': 'Mifano ya samaki Ngege na Dunga Beach inawasaidia sana wanafunzi wangu wa Darasa la 5 kuelewa respiration!',
+        'topic': 'Aquatic Biology'
+    }
+    r = requests.post(f'{BASE_URL}/api/feedback', json=fb_payload)
+    assert r.status_code == 200
+    fb_res = r.json()
+    print(f"\n[PASSED] 8. Multi-Stakeholder Feedback Submission: OK")
+    print(f"   * Response Status: {fb_res.get('status')}")
+    print(f"   * Feedback Message: {fb_res.get('message')}")
+
+    # 9. Feedback Summary & Metrics
+    r = requests.get(f'{BASE_URL}/api/feedback/summary')
+    assert r.status_code == 200
+    summary = r.json()
+    print(f"\n[PASSED] 9. Feedback Metrics Aggregator:")
+    print(f"   * Total Feedback Records: {summary.get('total_feedback')}")
+    print(f"   * Average Stakeholder Rating: {summary.get('average_rating')} ⭐")
+    print(f"   * Stakeholder Breakdown: {summary.get('by_stakeholder')}")
+
     print("\n============================================================")
-    print(" ALL 7 COMPREHENSIVE FEATURES ARE FULLY OPERATIONAL!")
+    print(" 🎉 ALL 9 COMPREHENSIVE FEATURES & FEEDBACK LOOPS VERIFIED!")
     print("============================================================")
 
 if __name__ == '__main__':

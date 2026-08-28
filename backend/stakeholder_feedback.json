@@ -1,0 +1,74 @@
+[
+  {
+    "id": "fb_1787898251039",
+    "stakeholder_type": "teacher",
+    "student_id": "mwalimu_otieno",
+    "region": "lake_basin",
+    "language": "sw",
+    "rating": 5,
+    "category": "cbc_alignment",
+    "comment": "Mifano ya samaki Ngege na Dunga Beach inawasaidia sana wanafunzi wangu wa Darasa la 5 kuelewa respiration!",
+    "topic": "Aquatic Biology",
+    "timestamp": "2026-08-28T09:24:11.039204"
+  },
+  {
+    "id": "fb_1787898228024",
+    "stakeholder_type": "teacher",
+    "student_id": "mwalimu_otieno",
+    "region": "lake_basin",
+    "language": "sw",
+    "rating": 5,
+    "category": "cbc_alignment",
+    "comment": "Mifano ya samaki Ngege na Dunga Beach inawasaidia sana wanafunzi wangu wa Darasa la 5 kuelewa respiration!",
+    "topic": "Aquatic Biology",
+    "timestamp": "2026-08-28T09:23:48.024461"
+  },
+  {
+    "id": "fb_seed_1",
+    "stakeholder_type": "student",
+    "student_id": "demo_student",
+    "region": "lake_basin",
+    "language": "sw",
+    "rating": 5,
+    "category": "content_clarity",
+    "comment": "Nimeelewa vizuri sana jinsi samaki Ngege wanavyopumua ziwani! Sauti ilikuwa wazi.",
+    "topic": "Aquatic Biology & Respiration",
+    "timestamp": "2026-08-28T09:23:16.095693"
+  },
+  {
+    "id": "fb_seed_2",
+    "stakeholder_type": "parent",
+    "student_id": "demo_student",
+    "region": "lake_basin",
+    "language": "sw",
+    "rating": 5,
+    "category": "local_analogy",
+    "comment": "Ujumbe wa SMS ulinisaidia kujua mtoto amesoma nini. Tulifanya jaribio la majani ya managu jikoni jioni!",
+    "topic": "Photosynthesis",
+    "timestamp": "2026-08-28T09:23:16.095719"
+  },
+  {
+    "id": "fb_seed_3",
+    "stakeholder_type": "teacher",
+    "student_id": "tr_akinyi",
+    "region": "lake_basin",
+    "language": "sw",
+    "rating": 5,
+    "category": "cbc_alignment",
+    "comment": "Mwongozo wa somo la Usanisinuru umeoana kikamilifu na mtaala wa CBC Grade 5 Science & Technology.",
+    "topic": "Grade 5 Science Strand",
+    "timestamp": "2026-08-28T09:23:16.095721"
+  },
+  {
+    "id": "fb_seed_4",
+    "stakeholder_type": "accessibility_advocate",
+    "student_id": "spec_ed_nuru",
+    "region": "lake_basin",
+    "language": "sw",
+    "rating": 5,
+    "category": "accessibility",
+    "comment": "Maelezo ya sauti ya kushika (tactile descriptions) yanawasaidia sana watoto wetu wasioona kushika majani na kuhisi mishipa.",
+    "topic": "Tactile Biology for Blind Learners",
+    "timestamp": "2026-08-28T09:23:16.095723"
+  }
+]
