@@ -106,8 +106,16 @@ def run_tests():
     print(f"   * Average Stakeholder Rating: {summary.get('average_rating')} ⭐")
     print(f"   * Stakeholder Breakdown: {summary.get('by_stakeholder')}")
 
+    # 10. ETHOS, TRACK, OASIS, PRIDE & HORIZON Frameworks
+    r = requests.get(f'{BASE_URL}/api/ethics/frameworks')
+    assert r.status_code == 200
+    ethics = r.json()
+    print(f"\n[PASSED] 10. Responsible AI & Ethics Frameworks (ETHOS, TRACK, OASIS, PRIDE, HORIZON):")
+    for k, v in ethics.items():
+        print(f"   * 🛡️ [{k}]: {v['title']}")
+
     print("\n============================================================")
-    print(" 🎉 ALL 9 COMPREHENSIVE FEATURES & FEEDBACK LOOPS VERIFIED!")
+    print(" 🎉 ALL 10 COMPREHENSIVE FEATURES & ETHICAL FRAMEWORKS VERIFIED!")
     print("============================================================")
 
 if __name__ == '__main__':

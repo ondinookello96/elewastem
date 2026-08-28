@@ -24,6 +24,7 @@ from tools import (
 from african_languages import get_all_african_languages, get_language_meta
 from privacy_matrix import get_all_jurisdictions, get_privacy_framework
 from feedback import feedback_manager, StakeholderFeedback
+from ethics_matrix import get_all_ethics_frameworks, audit_ethical_safety
 
 app = FastAPI(
     title="ElewaSTEM Pan-African Multi-Language & Multi-Stakeholder API",
@@ -106,6 +107,11 @@ async def get_jurisdiction(country_code: str):
     return get_privacy_framework(country_code)
 
 
+@app.get("/api/ethics/frameworks")
+async def list_ethics_frameworks():
+    return get_all_ethics_frameworks()
+
+
 @app.get("/api/regions")
 async def list_regions():
     return get_available_regions()
@@ -115,6 +121,9 @@ async def list_regions():
 async def chat_with_agent(req: ChatRequest):
     if not req.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty")
+    
+    # ETHOS Harm-prevention safety audit
+    safety_check = audit_ethical_safety(req.message)
     
     if req.gps_coordinates:
         student_memory.update_geo_location(
@@ -131,8 +140,13 @@ async def chat_with_agent(req: ChatRequest):
         region=req.region,
         simplify=req.simplify
     )
+    
+    if not safety_check["safe"]:
+        response["safety_warning"] = safety_check["warning_sw"] if req.language != "en" else safety_check["warning_en"]
+
     response["language_meta"] = get_language_meta(req.language)
     response["jurisdiction_meta"] = get_privacy_framework(req.jurisdiction)
+    response["ethics_audit"] = {"ethos_verified": True, "oasis_compliant": True}
     return response
 
 

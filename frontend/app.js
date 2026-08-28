@@ -723,6 +723,32 @@ function switchStakeholderTab(subTab) {
   if (subTab === 'feedback_feed') loadFeedbackFeed();
 }
 
+// Ethics & Governance Sub-Tabs (DPAs vs Frameworks)
+function switchEthicsSubTab(subTab) {
+  ['dpas', 'frameworks'].forEach(e => {
+    const view = document.getElementById(`ethicsView-${e}`);
+    const btn = document.getElementById(`ethicsSubTab-${e}`);
+    if (e === subTab) {
+      if (view) view.classList.remove('hidden');
+      if (btn) btn.className = 'px-3.5 py-2 rounded-xl bg-emerald-50 text-emerald-900 border border-emerald-200';
+    } else {
+      if (view) view.classList.add('hidden');
+      if (btn) btn.className = 'px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200';
+    }
+  });
+}
+
+function triggerKillSwitch() {
+  stopSpeech();
+  appendSystemNotice('🛑 <b>TRACK Kill Switch Activated:</b> Mwalimu/Mzazi amesimamisha mazungumzo ya AI mara moja kwa usalama.');
+  alert('🛑 AI Override: Mazungumzo yamesimamishwa. Unaweza kuuliza swali jipya au kusahihisha dhana darasani.');
+}
+
+function elderDisagreement(topic) {
+  openFeedbackModal('teacher');
+  appendSystemNotice('👥 <b>PRIDE Loop (Disagreement Rights):</b> Haki ya kupinga au kusahihisha jibu la AI imefunguliwa kwa Mwalimu/Mzazi.');
+}
+
 function updateParentDigestPreview() {
   const smsEl = document.getElementById('parentSmsPreview');
   const codeEl = document.getElementById('parentPairingCode');
