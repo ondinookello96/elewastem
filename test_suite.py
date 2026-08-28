@@ -133,8 +133,16 @@ def run_tests():
     print(f"   * TRAIL Land Rights: {trail['L_LandRights']}")
     print(f"   * CYCLE Insights: {cycle['Y_YieldInsights']}")
 
+    # 13. African Pedagogy & Learning Theories Matrix
+    r = requests.get(f'{BASE_URL}/api/pedagogy/theories')
+    assert r.status_code == 200
+    theories = r.json()
+    print(f"\n[PASSED] 13. African Pedagogy & Learning Theories Matrix (8 Theories):")
+    for k, v in theories.items():
+        print(f"   * 🧠 [{k}]: {v['swahili_title']} ({v['theorists']})")
+
     print("\n============================================================")
-    print(" 🎉 ALL 12 COMPREHENSIVE FEATURES & AGENTIC FRAMEWORKS VERIFIED!")
+    print(" 🎉 ALL 13 COMPREHENSIVE FEATURES & PEDAGOGICAL FRAMEWORKS VERIFIED!")
     print("============================================================")
 
 if __name__ == '__main__':

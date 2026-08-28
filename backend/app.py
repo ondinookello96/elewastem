@@ -26,6 +26,7 @@ from privacy_matrix import get_all_jurisdictions, get_privacy_framework
 from feedback import feedback_manager, StakeholderFeedback
 from ethics_matrix import get_all_ethics_frameworks, audit_ethical_safety
 from agent_orchestrator import AGENT_ROLES, trail_engine, hunt_orchestrator, guard_cycle_engine
+from learning_theories import get_all_learning_theories
 
 app = FastAPI(
     title="ElewaSTEM Pan-African Multi-Language & Multi-Stakeholder API",
@@ -137,6 +138,11 @@ async def get_trail_memory_audit():
 @app.get("/api/cycle/report")
 async def get_cycle_engine_report():
     return guard_cycle_engine.get_cycle_report()
+
+
+@app.get("/api/pedagogy/theories")
+async def get_learning_theories():
+    return get_all_learning_theories()
 
 
 @app.get("/api/regions")

@@ -69,6 +69,16 @@ According to joint research from the **World Bank**, **UNESCO Institute for Stat
 * **CYCLE**: Closed-loop continuous learning engine that captures quiz outcomes, auto-scales analogy depth, and generates plain-language reports for parents and elders.
 * **4Ds Expedition**: Delegation (human/AI division of labor), Description (persona, negative rules, delimiters), Discernment (fact checking), and Diligence (stewardship) with dynamic temperature dialing (0.75 creative vs 0.2 precise).
 
+### 7. 🧠 **Grounded in 8 Foundational African Learning Theories**:
+* **Constructivism (Piaget/Bruner)**: Hands-on zero-cost kitchen experiments; active discovery over rote cramming (*"Usimeze, Elewa!"*).
+* **Social Constructivism & Ubuntu (Vygotsky)**: Zone of Proximal Development grounded in Ubuntu (*"Mtu ni mtu kupitia watu"*); AI acts as a caring older sibling/mentor (MKO).
+* **Experiential Learning (Kolb)**: 4-stage eco cycle: Lake Victoria *Ngege* observation ➔ reflection ➔ dissolved oxygen abstraction ➔ home bubble experiment.
+* **Culturally Responsive Pedagogy (Ladson-Billings / Nsamenang)**: Validates African indigenous botanical wisdom (*Osuga, Mitoo*) and 16+ African languages.
+* **Multiple Intelligences (Gardner)**: Tactile Audio for blind learners, visual KSL sign cues for deaf learners, and voice-first oral storytelling.
+* **Cognitive Load & Dual Coding (Sweller/Paivio)**: 1-click *"💡 Rahisisha Zaidi"* chunking for 9-year-olds and neurodiverse learners (ADHD/Dyslexia).
+* **Growth Mindset (Dweck/Skinner)**: Positive affirmation eliminating classroom fear: *"Makosa ndio ngazi ya kwanza ya ugunduzi!"*.
+* **Connectivism (Siemens/Downes)**: 360° network uniting Child (PWA) ➔ Remote Parent (2G SMS) ➔ CBC Teacher (Lesson Plans) ➔ Community Mentors (STEM Clubs).
+
 ---
 
 ## 🛠️ Technology Stack & Google Cloud Integration

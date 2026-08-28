@@ -456,6 +456,9 @@
         <button onclick="switchEthicsSubTab('statistics')" id="ethicsSubTab-statistics" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200">
           📊 Takwimu za Elimu Afrika (World Bank / UNESCO)
         </button>
+        <button onclick="switchEthicsSubTab('theories')" id="ethicsSubTab-theories" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200">
+          🧠 Nadharia za Mafunzo (African Pedagogy)
+        </button>
       </div>
 
       <!-- 5A. NATIONAL DPAS VIEW -->
@@ -618,6 +621,107 @@
             <p class="text-amber-900 leading-relaxed">
               Nchini Kenya, 27% ya wanafunzi wanaoingia Junior Secondary hawawezi kusoma hadithi ya Grade 3 ya Kiingereza, na 29.4% hawawezi kufanya hesabu za sehemu.
             </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5D. LEARNING THEORIES & AFRICAN PEDAGOGY VIEW -->
+      <div id="ethicsView-theories" class="hidden space-y-4">
+        <div class="grid grid-cols-1 gap-3 text-xs">
+          <!-- 1. Constructivism -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <h4 class="font-black text-slate-900 text-sm flex items-center space-x-2">
+                <span>🏗️</span>
+                <span>1. Constructivism / Ujengaji wa Maarifa (Piaget & Bruner)</span>
+              </h4>
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Active Discovery</span>
+            </div>
+            <p class="text-slate-600"><b>Utekelezaji kwa Mtoto wa Afrika:</b> Mtoto anajenga uelewa kwa mikono yake mwenyewe kupitia majaribio ya jikoni ya gharama ya sufuri (chupa za plastiki, makaa ya jiko, mchanga). Hakuna kukariri bila kuelewa ("Usimeze, Elewa!").</p>
+          </div>
+
+          <!-- 2. Social Constructivism & Ubuntu -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <h4 class="font-black text-slate-900 text-sm flex items-center space-x-2">
+                <span>🤝</span>
+                <span>2. Social Constructivism & Ubuntu Pedagogy (Vygotsky / ZPD)</span>
+              </h4>
+              <span class="bg-indigo-100 text-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded-full">"Mtu ni Mtu Kupitia Watu"</span>
+            </div>
+            <p class="text-slate-600"><b>Utekelezaji kwa Mtoto wa Afrika:</b> Falsafa ya Utu/Ubuntu. AI inafanya kazi kama rafiki na kaka/dada mlezi (More Knowledgeable Other) anayeshirikiana na wazazi, walimu wa CBC, na vikundi vya watoto vijijini.</p>
+          </div>
+
+          <!-- 3. Experiential Learning -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <h4 class="font-black text-slate-900 text-sm flex items-center space-x-2">
+                <span>🔄</span>
+                <span>3. Experiential Learning / Mafunzo ya Uzoefu (David Kolb)</span>
+              </h4>
+              <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-full">4-Stage Eco Cycle</span>
+            </div>
+            <p class="text-slate-600"><b>Utekelezaji kwa Mtoto wa Afrika:</b> Mzunguko wa hatua 4 kulingana na mazingira halisi: Kuchunguza samaki Ngege Ziwa Victoria ➔ Kutafakari kwanini samaki anakufa bila maji ➔ Kuelewa mishipa ya mashavu na hewa ya Oksijeni ➔ Kufanya jaribio la viputo vya maji nyumbani.</p>
+          </div>
+
+          <!-- 4. Culturally Responsive Pedagogy -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <h4 class="font-black text-slate-900 text-sm flex items-center space-x-2">
+                <span>🌿</span>
+                <span>4. Culturally Responsive & Afrocentric Pedagogy (Ladson-Billings / Nsamenang)</span>
+              </h4>
+              <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Indigenous Knowledge</span>
+            </div>
+            <p class="text-slate-600"><b>Utekelezaji kwa Mtoto wa Afrika:</b> Kuthamini sayansi ya asili ya Kiafrika (mboga za kienyeji kama Osuga, Mitoo, miti ya Acacia ya Turkana, uvumbuzi wa chuma) na lugha 16+ za kiasili (Sheng, Yoruba, Hausa, Zulu, Pidgin).</p>
+          </div>
+
+          <!-- 5. Multiple Intelligences -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <h4 class="font-black text-slate-900 text-sm flex items-center space-x-2">
+                <span>🎨</span>
+                <span>5. Multiple Intelligences / Akili Nyingi (Howard Gardner)</span>
+              </h4>
+              <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Multi-Sensory Inclusivity</span>
+            </div>
+            <p class="text-slate-600"><b>Utekelezaji kwa Mtoto wa Afrika:</b> Sauti na hadithi za mdomo kwa wasioona (Tactile Audio), michoro ya ishara za KSL kwa wasiosikia (Spatial), na mifano ya mimea na wanyama wa kiasili (Naturalistic).</p>
+          </div>
+
+          <!-- 6. Cognitive Load & Dual Coding -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <h4 class="font-black text-slate-900 text-sm flex items-center space-x-2">
+                <span>💡</span>
+                <span>6. Cognitive Load & Dual Coding (Sweller & Paivio)</span>
+              </h4>
+              <span class="bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Bite-Sized Chunks</span>
+            </div>
+            <p class="text-slate-600"><b>Utekelezaji kwa Mtoto wa Afrika:</b> Kitufe cha "💡 Rahisisha Zaidi" kinachopunguza msongamano wa mawazo na kugawa masomo katika vipande vidogo vinavyomfaa mtoto wa miaka 9 au mwenye ADHD/Dyslexia.</p>
+          </div>
+
+          <!-- 7. Growth Mindset -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <h4 class="font-black text-slate-900 text-sm flex items-center space-x-2">
+                <span>🌱</span>
+                <span>7. Growth Mindset & Positive Affirmation (Carol Dweck)</span>
+              </h4>
+              <span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-full">"Makosa ni Ngazi ya Ugunduzi"</span>
+            </div>
+            <p class="text-slate-600"><b>Utekelezaji kwa Mtoto wa Afrika:</b> Kuondoa woga wa viboko au adhabu za shule za kizamani; AI inampa mtoto upendo, pongezi, na beji za ushindi kwa kila jaribio analofanya.</p>
+          </div>
+
+          <!-- 8. Connectivism -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <h4 class="font-black text-slate-900 text-sm flex items-center space-x-2">
+                <span>🌐</span>
+                <span>8. Connectivism / Mtandao wa Jamii (Siemens & Downes)</span>
+              </h4>
+              <span class="bg-sky-100 text-sky-800 text-[10px] font-bold px-2 py-0.5 rounded-full">360° Stakeholder Network</span>
+            </div>
+            <p class="text-slate-600"><b>Utekelezaji kwa Mtoto wa Afrika:</b> Mtandao wa 360 unaounganisha Mtoto (PWA) ➔ Mzazi Kijijini (2G SMS) ➔ Mwalimu Shuleni (Mipango ya Masomo ya CBC) ➔ Vijana Walezi wa Jamii (Vilabu vya Sayansi).</p>
           </div>
         </div>
       </div>

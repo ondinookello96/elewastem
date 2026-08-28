@@ -724,9 +724,9 @@ function switchStakeholderTab(subTab) {
   if (subTab === 'feedback_feed') loadFeedbackFeed();
 }
 
-// Ethics, Privacy & Statistics Sub-Tabs
+// Ethics, Privacy, Statistics & Theories Sub-Tabs
 function switchEthicsSubTab(subTab) {
-  ['dpas', 'frameworks', 'statistics'].forEach(e => {
+  ['dpas', 'frameworks', 'statistics', 'theories'].forEach(e => {
     const view = document.getElementById(`ethicsView-${e}`);
     const btn = document.getElementById(`ethicsSubTab-${e}`);
     if (e === subTab) {
