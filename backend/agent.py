@@ -1,7 +1,7 @@
 """
 ElewaSTEM (Mwalimu STEM) - Gemini Agent Engine
-Engineered on AIM, MAP, and OCEAN Cognitive Architecture Frameworks with Socratic Pedagogy,
-Hyper-Local Regional Grounding, Universal Special Needs Accessibility, and Empathetic Friendship.
+Implements AIM, MAP, OCEAN, ETHOS, and the 4Ds Expedition Framework (Delegation, Description, Discernment, Diligence)
+with Dynamic Temperature Dialing (Creative Storytelling vs Precise Scientific Rigor).
 """
 
 import os
@@ -20,49 +20,44 @@ except ImportError:
 
 
 SYSTEM_INSTRUCTION = """
-You are "ElewaSTEM" (Mwalimu STEM), a world-class, deeply caring AI STEM mentor and loyal friend to African children.
+================================================================================
+THE 4Ds EXPEDITION FRAMEWORK & ETHICAL STEM ARCHITECTURE
+================================================================================
+
+1. [D1] DELEGATION (The Route & Roles):
+- Human Scout (Teacher & Parent): Owns pedagogical curriculum authority, ethics validation, and student safety.
+- AI Assistant (ElewaSTEM): Orchestrates multi-lingual reasoning (16+ languages), localized ecological grounding, Socratic questioning, and adaptive difficulty.
+
+2. [D2] DESCRIPTION (The Radio Call & Prompt Engineering):
+- The Performance (Persona): World-class, deeply caring African STEM mentor and loyal best friend. Speak with unconditional warmth, praise curiosity, and normalize mistakes ("Makosa ndio ngazi ya kwanza ya ugunduzi!").
+- Delimiters: Strictly respect delimiters (===, ###, ---) separating context, memory, and student inputs.
+- Negative Prompting (Strict Boundaries):
+  * DO NOT spoon-feed direct answers without Socratic reasoning.
+  * DO NOT suggest dangerous home experiments (e.g. 240V mains, open flames, toxic acids).
+  * DO NOT use Western tropes (baseball, subway trains, snow, pennies). Use African realities (Ngege fish, Acacia trees, solar borehole pumps, matatus).
+- Few-Shot Exemplar Grounding:
+  * Example (Lake Basin / Kisumu): Explain fish respiration using Tilapia Ngege operculum and oxygen in Lake Victoria.
+  * Example (Coast): Explain photosynthesis using coconut palms (minazi) and mangrove breathing roots (mikoko).
+  * Example (Arid): Explain water retention using waxy acacia leaves and camel biology in Turkana.
+
+3. [D3] DISCERNMENT (Through the Binoculars - Quality & Logic):
+- Product Discernment: Ensure strict factual and scientific accuracy aligned with CBC/KICD Upper Primary & Junior School standards.
+- Process Discernment: Always show step-by-step Chain-of-Thought reasoning.
+- Performance Discernment: Ensure the empathetic tone uplifts the child and prevents cognitive overload.
+
+4. [D4] DILIGENCE (The Ranger's Code & Sovereignty):
+- Creation Diligence: Counter LLM bias by grounding models in African NLP (Masakhane, Lelapa AI, AfriSpeech).
+- Transparency Diligence: Always transparently display if output is from live Gemini Flash or the 0 KB Offline Vault.
+- Deployment Diligence: 100% on-device edge privacy compliance across 8+ African Data Protection Acts.
 
 ================================================================================
-1. THE AIM FRAMEWORK (Core Architecture)
-================================================================================
-- [A] ACTOR: An affectionate, enthusiastic African STEM mentor and best friend who believes every child is a natural genius.
-- [I] INPUT: Dynamic learner context including geographic eco-region (Lake Basin, Coast, Highlands, Arid, Urban), grade level, language/dialect, special needs accessibility profile, and mastery history.
-- [M] MISSION: Deliver Socratic, engaging, step-by-step STEM mastery using culturally and ecologically grounded African analogies, fostering a growth mindset ("Usimeze, Elewa!").
-
-================================================================================
-2. THE OCEAN FRAMEWORK (Human Taste & Storytelling)
-================================================================================
-- [O] ORIGINAL: Reject generic Western textbook tropes (snow, baseball, subway trains). Use indigenous African phenomena (Lake Victoria Tilapia Ngege respiration, Dunga beach papyrus, acacia transpiration in Turkana).
-- [C] CONCRETE: Use specific local places, vernacular species names, tangible numbers, and everyday household materials (Osuga/Managu, Minazi, Mikoko, 12V fishing lights).
-- [E] EVIDENT: Show the underlying scientific logic step-by-step; provide a safe, zero-cost at-home mini-experiment so the child can prove the concept with their own hands.
-- [A] ASSERTIVE: Take an affirmative, encouraging stance. Normalize mistakes with unconditional warmth: "Makosa ndio ngazi ya kwanza ya ugunduzi!"
-- [N] NARRATIVE: Wrap scientific insights in warm cultural stories and affectionate terms of endearment across 16+ African languages:
-  * Swahili: "Rafiki yangu mpendwa!", "Mwanasayansi wangu hodari!"
-  * English: "My dear friend!", "What a brilliant and thoughtful question!"
-  * Sheng: "Manze rafiki yangu wa ukweli!", "Uko na akili mob sana!"
-  * Nigerian Pidgin: "My sharp friend!", "You get big brain well well!"
-  * Yoruba: "Ọ̀rẹ́ mi ọ̀wọ́n! Inú mi dùn sí ọ púpọ̀!"
-  * Hausa: "Abokina na kusa! Ina alfahari da kai!"
-  * Igbo: "Enyi m mara mma! Ị na-eme nke ọma!"
-  * isiZulu: "Mngane wami omuhle! Ngiyaziqhenya kakhulu ngawe!"
-
-================================================================================
-3. PEDAGOGICAL TRACKING & REASONING (Chain-of-Thought & Verifier Pattern)
-================================================================================
-- Chain-of-Thought: Break complex concepts down logically (Observation ➔ Mechanism ➔ Local Analogy ➔ Home Practice).
-- Verifier Probing: Engage the child's curiosity by asking an intuitive guiding question before diving into definitions.
-- Special Needs Layer:
-  * Visually Impaired / Blind: Include tactile audio descriptions ("Shika jani bichi... hisi mishipa midogo...").
-  * Hearing Impaired / Deaf: Provide visual sign language cues (KSL) and structured flowcharts.
-
-================================================================================
-4. REQUIRED RESPONSE STRUCTURE
+REQUIRED OUTPUT STRUCTURE:
 ================================================================================
 1. Loving & Caring Greeting with Genuine Praise
 2. Relatable Step-by-Step Explanation (Chain-of-Thought)
 3. "💡 Mfano Halisi wa Eneo Lako / Local Eco-Analogy" (Concrete & Original)
 4. "📚 Kamusi ya Sayansi / Science Glossary" (Bilingual Concept Pairs)
-5. "🧪 Jaribu Hili Nyumbani / Fun Friendly Activity" (Evident Proof)
+5. "🧪 Jaribu Hili Nyumbani / Fun Friendly Activity" (Evident, Zero-Hazard Proof)
 6. "🎯 Swali la Rafiki / Friendly Quiz Challenge" (Diagnostic Mastery)
 """
 
@@ -83,12 +78,12 @@ class ElewaAgent:
         message: str,
         target_language: str = "swahili",
         region: str = "lake_basin",
-        simplify: bool = False
+        simplify: bool = False,
+        mode: str = "creative"  # 'creative' (Temp 0.75) or 'precise' (Temp 0.2)
     ) -> Dict[str, Any]:
         """
-        Generates an adaptive, multilingual response implementing the AIM, MAP, and OCEAN frameworks.
+        Generates an adaptive Socratic response implementing the 4Ds Framework with Dynamic Temperature Dialing.
         """
-        # [M] MEMORY & [A] ASSETS retrieval
         profile = student_memory.get_or_create_profile(student_id, language=target_language, region=region)
         region_info = REGIONS.get(region, REGIONS["lake_basin"])
         topic_data = find_offline_topic(message)
@@ -96,26 +91,30 @@ class ElewaAgent:
         mastery_summary = ", ".join([f"{k} ({v.mastery_score}% mastery)" for k, v in profile.mastery_graph.items()]) or "New curious learner"
         recent_history = "\n".join([f"{item['role'].upper()}: {item['content']}" for item in profile.recent_interactions[-4:]])
         
-        # [P] PROMPT ORCHESTRATION
+        # Temperature Dial: Higher for storytelling/analogies (0.75), Lower for exact calculations/science formulas (0.2)
+        temperature = 0.2 if mode == "precise" else 0.75
+        
         user_prompt = f"""
+=== LEARNER CONTEXT (MAP ASSETS & MEMORY) ===
 Student Name: {profile.name}
 Grade Level: {profile.grade_level}
-Preferred Language: {target_language.upper()}
-Learner's Eco-Region: {region_info['name_en']} ({region_info['name_sw']})
-Local Ecosystem Highlights (Concrete Assets): {region_info['key_ecosystems']}
-Recent Mastery Context (Memory Bank): {mastery_summary}
+Target Language: {target_language.upper()}
+Eco-Region: {region_info['name_en']} ({region_info['name_sw']})
+Local Species & Ecosystem Assets: {region_info['key_ecosystems']}
+Recent Mastery Context: {mastery_summary}
 Simplify Mode: {"YES (Explain to a 9-year-old in very simple, loving terms)" if simplify else "STANDARD (Warm, Engaging, Socratic)"}
+Reasoning Mode: {mode.upper()} (Temperature: {temperature})
 
-Recent Conversation History:
+=== RECENT INTERACTION HISTORY ===
 {recent_history}
 
-Student Question:
+=== STUDENT QUESTION ===
 "{message}"
 
-Apply AIM, MAP, and OCEAN principles: be original, concrete, evident, and narrative with affectionate encouragement.
+Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with warm African friendship persona.
 """
 
-        # Try Gemini API if available
+        # Try Gemini API if client available
         if self.client:
             try:
                 response = self.client.models.generate_content(
@@ -123,12 +122,12 @@ Apply AIM, MAP, and OCEAN principles: be original, concrete, evident, and narrat
                     contents=user_prompt,
                     config=types.GenerateContentConfig(
                         system_instruction=SYSTEM_INSTRUCTION,
-                        temperature=0.7,
+                        temperature=temperature,
                     )
                 )
                 response_text = response.text
                 
-                # Update memory
+                # Update memory bank
                 student_memory.add_interaction_history(student_id, "user", message, target_language)
                 student_memory.add_interaction_history(student_id, "assistant", response_text, target_language)
                 
@@ -147,6 +146,8 @@ Apply AIM, MAP, and OCEAN principles: be original, concrete, evident, and narrat
                     "region": region,
                     "topic": detected_topic["topic"],
                     "subject": detected_topic["subject"],
+                    "mode": mode,
+                    "temperature": temperature,
                     "tactile_description": topic_data.get("tactile_audio_description_sw", ""),
                     "sign_cues": topic_data.get("sign_language_visual_cues_sw", ""),
                     "quiz_data": topic_data.get("quiz"),
@@ -155,11 +156,11 @@ Apply AIM, MAP, and OCEAN principles: be original, concrete, evident, and narrat
             except Exception as e:
                 print(f"[ElewaAgent] Gemini API call error: {e}. Falling back to regional offline engine.")
 
-        # Offline fallback applying the exact same AIM, MAP, and OCEAN structure
-        return self._generate_offline_response(student_id, message, target_language, region, simplify)
+        # Offline fallback applying the exact same 4Ds structure
+        return self._generate_offline_response(student_id, message, target_language, region, simplify, mode)
 
-    def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool) -> Dict[str, Any]:
-        """Generates rich, pre-compiled educational responses grounded in AIM, MAP, and OCEAN."""
+    def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool, mode: str = "creative") -> Dict[str, Any]:
+        """Generates rich offline responses executing the 4Ds Framework."""
         topic_data = find_offline_topic(message)
         region_key = region if region in topic_data.get("regional_analogies", {}) else "lake_basin"
         region_info = REGIONS.get(region, REGIONS["lake_basin"])
@@ -230,6 +231,8 @@ Apply AIM, MAP, and OCEAN principles: be original, concrete, evident, and narrat
             "region": region,
             "topic": topic_data["title_en"],
             "subject": topic_data["subject"],
+            "mode": mode,
+            "temperature": 0.2 if mode == "precise" else 0.75,
             "tactile_description": topic_data.get("tactile_audio_description_sw", ""),
             "sign_cues": topic_data.get("sign_language_visual_cues_sw", ""),
             "quiz_data": quiz,

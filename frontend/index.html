@@ -157,15 +157,20 @@
         </div>
       </div>
 
-      <!-- Quick Action Prompt Chips Bar -->
+      <!-- Quick Action Prompt Chips Bar with 4Ds Temperature Toggle -->
       <div id="quickChipsBar" class="px-4 py-1.5 bg-slate-100 border-t border-slate-200 flex items-center justify-between text-xs max-w-4xl w-full mx-auto">
-        <span class="text-slate-500 font-medium hidden sm:inline">⚡ Mada za haraka:</span>
-        <div class="flex space-x-1.5 overflow-x-auto no-scrollbar py-0.5">
+        <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-0.5">
+          <!-- 4Ds Dynamic Temperature Dial Button -->
+          <button type="button" onclick="toggleAgentMode()" id="agentModeBtn" title="4Ds Framework: Badili Hali ya Kufikiri na Joto (Temperature Dial)" class="px-2.5 py-1 bg-purple-100 text-purple-900 border border-purple-300 rounded-lg font-bold flex items-center space-x-1 flex-shrink-0 hover:bg-purple-200 transition-all">
+            <span id="agentModeIcon">🎨</span>
+            <span id="agentModeText">Hadithi (Temp 0.75)</span>
+          </button>
+          
           <button onclick="sendQuickPrompt('Nieleze kwa mifano ya mimea na wanyama wa eneo langu')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">📍 Mfano wa Eneo</button>
           <button onclick="sendQuickPrompt('Nieleze kwa mifano ya kushika kwa wasioona (tactile)')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 font-medium">👁️ Tactile (Blind)</button>
-          <button onclick="sendQuickPrompt('Nieleze kwa mifano rahisi sana')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">💡 Rahisisha Zaidi</button>
-          <button onclick="sendQuickPrompt('Nipe jaribio rahisi la kufanya nyumbani')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">🧪 Jaribio la Nyumbani</button>
-          <button onclick="sendQuickPrompt('Nipe swali la mtihani la kujipima')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">🎯 Swali la Jaribio</button>
+          <button onclick="sendQuickPrompt('Nieleze kwa mifano rahisi sana')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">💡 Rahisisha</button>
+          <button onclick="sendQuickPrompt('Nipe jaribio rahisi la kufanya nyumbani')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">🧪 Jaribio</button>
+          <button onclick="sendQuickPrompt('Nipe swali la mtihani la kujipima')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium">🎯 Quiz</button>
         </div>
       </div>
 

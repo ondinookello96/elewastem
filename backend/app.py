@@ -52,6 +52,7 @@ class ChatRequest(BaseModel):
     jurisdiction: str = "KE"
     gps_coordinates: Optional[Dict[str, float]] = None
     simplify: bool = False
+    mode: Optional[str] = "creative"
 
 
 class ProfileUpdateRequest(BaseModel):
@@ -138,7 +139,8 @@ async def chat_with_agent(req: ChatRequest):
         message=req.message,
         target_language=req.language,
         region=req.region,
-        simplify=req.simplify
+        simplify=req.simplify,
+        mode=req.mode or "creative"
     )
     
     if not safety_check["safe"]:

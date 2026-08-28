@@ -52,6 +52,13 @@ In many African classrooms, children and educators face compounding barriers:
 * **Mentors**: Zero-budget community STEM club project guides (charcoal filters, solar dryers).
 * **Continuous Feedback Loop**: In-app reaction widgets and live community feedback feed for parents, teachers, and accessibility advocates.
 
+### 5. ⚖️ **The 5 Ethical AI Governance Frameworks**:
+* **ETHOS**: Empathy, Transparency, Human Impact, Ownership, and Digital Sovereignty.
+* **TRACK**: Training data diversity (African NLP), Representation (Blind/Deaf/ASAL), Bias de-amplification, and Teacher Kill Switch.
+* **OASIS**: Opt-in by Design, Anonymization Depth (Zero PII), Sovereignty First, Intentional Retention, and Security as Ritual.
+* **PRIDE**: Pause Points, Review Cadence, Interpretability for Village Elders, Disagreement Rights, and Elders Council Governance.
+* **HORIZON**: Historical Harm Prevention, Opportunity Cost Awareness, Family Ripple Effects, Intergenerational Wisdom, and Ecological Stewardship (Lake Victoria & African ecosystems).
+
 ---
 
 ## 🛠️ Technology Stack & Google Cloud Integration

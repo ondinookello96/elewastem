@@ -19,6 +19,7 @@ const STATE = {
   simulatedOffline: false,
   activeTab: 'chat',
   activeStakeholderSubTab: 'parents',
+  agentMode: 'creative', // 'creative' (Temp 0.75) vs 'precise' (Temp 0.2)
   activeSpeechUtterance: null,
   activeSpeechRecognition: null,
   offlineModules: [],
@@ -1049,6 +1050,24 @@ async function handleChatSubmit(e) {
   await executeAgentQuery(query);
 }
 
+function toggleAgentMode() {
+  STATE.agentMode = (STATE.agentMode === 'creative' ? 'precise' : 'creative');
+  const btn = document.getElementById('agentModeBtn');
+  const icon = document.getElementById('agentModeIcon');
+  const text = document.getElementById('agentModeText');
+  if (STATE.agentMode === 'creative') {
+    if (btn) btn.className = 'px-2.5 py-1 bg-purple-100 text-purple-900 border border-purple-300 rounded-lg font-bold flex items-center space-x-1 flex-shrink-0 hover:bg-purple-200 transition-all';
+    if (icon) icon.innerText = '🎨';
+    if (text) text.innerText = 'Hadithi (Temp 0.75)';
+    appendSystemNotice('🎨 <b>4Ds Mode:</b> Hali ya Hadithi na Mifano ya Kusisimua (Temperature: 0.75).');
+  } else {
+    if (btn) btn.className = 'px-2.5 py-1 bg-blue-100 text-blue-900 border border-blue-300 rounded-lg font-bold flex items-center space-x-1 flex-shrink-0 hover:bg-blue-200 transition-all';
+    if (icon) icon.innerText = '📐';
+    if (text) text.innerText = 'Usahihi (Temp 0.2)';
+    appendSystemNotice('📐 <b>4Ds Mode:</b> Hali ya Usahihi na Hesabu Halisi (Temperature: 0.2).');
+  }
+}
+
 function sendQuickPrompt(text) {
   switchTab('chat');
   appendUserMessage(text);
@@ -1079,7 +1098,8 @@ async function executeAgentQuery(query, simplify = false) {
         region: STATE.region,
         jurisdiction: STATE.jurisdiction,
         gps_coordinates: STATE.gpsCoords,
-        simplify: simplify
+        simplify: simplify,
+        mode: STATE.agentMode
       })
     });
 
