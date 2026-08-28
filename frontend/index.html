@@ -453,6 +453,9 @@
         <button onclick="switchEthicsSubTab('frameworks')" id="ethicsSubTab-frameworks" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200">
           ⚖️ Mifumo ya Maadili (ETHOS, TRACK, OASIS, PRIDE, HORIZON)
         </button>
+        <button onclick="switchEthicsSubTab('statistics')" id="ethicsSubTab-statistics" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200">
+          📊 Takwimu za Elimu Afrika (World Bank / UNESCO)
+        </button>
       </div>
 
       <!-- 5A. NATIONAL DPAS VIEW -->
@@ -562,6 +565,59 @@
             <p class="text-amber-900"><b>Z (Zero-Sum Traps):</b> Kuhakikisha watoto wa vijijini wasio na intaneti wanapata ubora uleule (0 KB Offline PWA & 2G SMS).</p>
             <p class="text-amber-900"><b>O (Open Futures):</b> Kufungua milango ya ndoto za watoto kuwa wahandisi na wagunduzi.</p>
             <p class="text-amber-900"><b>N (Non-Human Stakeholders):</b> Kulinda mazingira, vyanzo vya maji (Ziwa Victoria), na viumbe hai.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5C. EMPIRICAL STATISTICS VIEW (WORLD BANK, UNESCO, USAWA AGENDA) -->
+      <div id="ethicsView-statistics" class="hidden space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <!-- Card 1: 89% Learning Poverty -->
+          <div class="bg-red-50 border border-red-200 rounded-2xl p-4 shadow-sm space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-black text-red-700">89%</span>
+              <span class="bg-red-200 text-red-900 text-[10px] font-bold px-2 py-0.5 rounded-full">World Bank & UNESCO (2022)</span>
+            </div>
+            <h4 class="font-black text-red-950 text-sm">Learning Poverty Rate (Umri wa Miaka 10)</h4>
+            <p class="text-red-900 leading-relaxed">
+              Watoto 9 kati ya 10 (89%) katika nchi za Afrika Kusini mwa Jangwa la Sahara hawawezi kusoma na kuelewa hadithi fupi ifikapo umri wa miaka 10.
+            </p>
+          </div>
+
+          <!-- Card 2: 80% Language Mismatch -->
+          <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 shadow-sm space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-black text-blue-700">80%</span>
+              <span class="bg-blue-200 text-blue-900 text-[10px] font-bold px-2 py-0.5 rounded-full">UNESCO GEM Report</span>
+            </div>
+            <h4 class="font-black text-blue-950 text-sm">Watoto Wanaofundishwa Lugha Ngeni</h4>
+            <p class="text-blue-900 leading-relaxed">
+              Asilimia 80 ya watoto wanaanza shule kwa lugha ya kikoloni/kigeni wasiyoongea nyumbani. Kufundisha kwa lugha ya mama kunaongeza uelewa kwa <b>+30%</b>.
+            </p>
+          </div>
+
+          <!-- Card 3: 2.5x Disability Exclusion -->
+          <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 shadow-sm space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-black text-purple-700">2.5x</span>
+              <span class="bg-purple-200 text-purple-900 text-[10px] font-bold px-2 py-0.5 rounded-full">UNICEF & WHO (2023)</span>
+            </div>
+            <h4 class="font-black text-purple-950 text-sm">Ubaguzi wa Watoto Wenye Ulemavu</h4>
+            <p class="text-purple-900 leading-relaxed">
+              Watoto wasioona, wasiosikia na wenye dyslexia wana uwezekano wa mara 2.5 zaidi wa kutowahi kuingia darasani. Chini ya 10% ya walimu wamepata mafunzo maalum.
+            </p>
+          </div>
+
+          <!-- Card 4: 27% Kenya Grade 7 Gap -->
+          <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 shadow-sm space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-black text-amber-700">27%</span>
+              <span class="bg-amber-200 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full">Usawa Agenda FLANA (2024-2026)</span>
+            </div>
+            <h4 class="font-black text-amber-950 text-sm">Wanafunzi wa Grade 7 Wasioweza Kusoma</h4>
+            <p class="text-amber-900 leading-relaxed">
+              Nchini Kenya, 27% ya wanafunzi wanaoingia Junior Secondary hawawezi kusoma hadithi ya Grade 3 ya Kiingereza, na 29.4% hawawezi kufanya hesabu za sehemu.
+            </p>
           </div>
         </div>
       </div>

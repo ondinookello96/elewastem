@@ -724,9 +724,9 @@ function switchStakeholderTab(subTab) {
   if (subTab === 'feedback_feed') loadFeedbackFeed();
 }
 
-// Ethics & Governance Sub-Tabs (DPAs vs Frameworks)
+// Ethics, Privacy & Statistics Sub-Tabs
 function switchEthicsSubTab(subTab) {
-  ['dpas', 'frameworks'].forEach(e => {
+  ['dpas', 'frameworks', 'statistics'].forEach(e => {
     const view = document.getElementById(`ethicsView-${e}`);
     const btn = document.getElementById(`ethicsSubTab-${e}`);
     if (e === subTab) {
