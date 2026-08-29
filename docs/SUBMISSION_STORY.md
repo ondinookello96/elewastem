@@ -83,12 +83,12 @@ According to joint research from the **World Bank**, **UNESCO Institute for Stat
 
 ## 🛠️ Technology Stack & Google Cloud Integration
 
-* **AI Engine**: Google Gemini 3.5 Flash (with multi-modal reasoning on Vertex AI via the official `google-genai` Python SDK).
+* **AI Engine**: Google Gemini 3.7 Flash (Hybrid Reasoning Model with dynamic thinking budget on Vertex AI via the official `google-genai` Python SDK).
 * **Google Cloud Services**:
   * ☁️ **Google Cloud Run**: Auto-scaling serverless container hosting for the FastAPI backend.
   * 📦 **Google Cloud Build & Artifact Registry**: Automated container build pipeline (`cloudbuild.yaml`).
   * 🗄️ **Google Cloud Firestore**: Cloud storage for learner mastery bank synchronization.
-  * 🤖 **Vertex AI / Gemini 3.5 API**: Multi-turn Socratic reasoning with cultural grounding.
+  * 🤖 **Vertex AI / Gemini 3.7 API**: Multi-turn Socratic reasoning with cultural grounding.
 * **African NLP Benchmarks**: Integrating Masakhane, Lelapa AI, and AfriSpeech multilingual representations.
 * **Backend**: FastAPI asynchronous Python server with statutory DPA router and offline sync endpoints.
 * **Frontend**: Progressive Web App (PWA) with client-side edge bounding-box geolocation and Web Speech API.

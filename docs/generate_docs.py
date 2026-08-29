@@ -70,7 +70,7 @@ doc.add_heading('Scene 3: 360° Stakeholder Network & Remote Parent Sync (1:25 �
 doc.add_paragraph('"Education is a community effort. ElewaSTEM solves the parent-teacher gap through our 360° Stakeholder Loop.\n\nParents working away from home receive automated 2G feature phone SMS progress updates without needing a smartphone. Teachers receive instant CBC curriculum-aligned lesson plans, and community mentors get zero-cost STEM club guides."')
 
 doc.add_heading('Scene 4: Google Cloud Architecture & Data Sovereignty (2:05 – 2:40)', level=2)
-doc.add_paragraph('"Under the hood, ElewaSTEM runs on Google Cloud Run, Google Cloud Build, and Gemini 2.5 Flash on Vertex AI.\n\nWe enforce strict digital sovereignty across 8 African Data Protection Acts and the AU Malabo Convention. With our OASIS protocol, all child data is processed 100% on-device on the edge with zero persistent cloud tracking, guarded by a Maasai-elder calibrated autonomous multi-agent swarm."')
+doc.add_paragraph('"Under the hood, ElewaSTEM runs on Google Cloud Run, Google Cloud Build, and Gemini 3.7 Flash on Vertex AI.\n\nWe enforce strict digital sovereignty across 8 African Data Protection Acts and the AU Malabo Convention. With our OASIS protocol, all child data is processed 100% on-device on the edge with zero persistent cloud tracking, guarded by a Maasai-elder calibrated autonomous multi-agent swarm."')
 
 doc.add_heading('Scene 5: Outro & Call to Action (2:40 – 3:00)', level=2)
 doc.add_paragraph('"ElewaSTEM proves that frontier AI can celebrate African languages, protect children\'s data rights, and bring world-class STEM education to the most remote villages.\n\nOur motto is: \'Usimeze, Elewa!\' — Don\'t cram, understand! Thank you!"')

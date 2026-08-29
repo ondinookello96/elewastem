@@ -118,8 +118,8 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
         # Try Gemini API if client available
         if self.client:
             try:
-                # Primary: Google Gemini 3.5 Flash (or Gemini 2.5 Flash fallback)
-                model_name = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
+                # Primary: Google Gemini 3.7 Flash (Hybrid Reasoning Model)
+                model_name = os.getenv("GEMINI_MODEL", "gemini-3.7-flash")
                 try:
                     response = self.client.models.generate_content(
                         model=model_name,
@@ -130,8 +130,8 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                         )
                     )
                 except Exception as model_err:
-                    print(f"[ElewaAgent] Primary model {model_name} error: {model_err}. Trying gemini-2.5-flash fallback.")
-                    model_name = "gemini-2.5-flash"
+                    print(f"[ElewaAgent] Primary model {model_name} error: {model_err}. Trying gemini-2.0-flash fallback.")
+                    model_name = "gemini-2.0-flash"
                     response = self.client.models.generate_content(
                         model=model_name,
                         contents=user_prompt,
@@ -155,7 +155,7 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                 )
 
                 return {
-                    "source": "gemini-3.5-flash",
+                    "source": "gemini-3.7-flash",
                     "text": response_text,
                     "language": target_language,
                     "region": region,
