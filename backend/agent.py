@@ -118,14 +118,28 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
         # Try Gemini API if client available
         if self.client:
             try:
-                response = self.client.models.generate_content(
-                    model="gemini-2.5-flash",
-                    contents=user_prompt,
-                    config=types.GenerateContentConfig(
-                        system_instruction=SYSTEM_INSTRUCTION,
-                        temperature=temperature,
+                # Primary: Google Gemini 3.5 Flash (or Gemini 2.5 Flash fallback)
+                model_name = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
+                try:
+                    response = self.client.models.generate_content(
+                        model=model_name,
+                        contents=user_prompt,
+                        config=types.GenerateContentConfig(
+                            system_instruction=SYSTEM_INSTRUCTION,
+                            temperature=temperature,
+                        )
                     )
-                )
+                except Exception as model_err:
+                    print(f"[ElewaAgent] Primary model {model_name} error: {model_err}. Trying gemini-2.5-flash fallback.")
+                    model_name = "gemini-2.5-flash"
+                    response = self.client.models.generate_content(
+                        model=model_name,
+                        contents=user_prompt,
+                        config=types.GenerateContentConfig(
+                            system_instruction=SYSTEM_INSTRUCTION,
+                            temperature=temperature,
+                        )
+                    )
                 response_text = response.text
                 
                 # Update memory bank
@@ -141,7 +155,7 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                 )
 
                 return {
-                    "source": "gemini-2.5-flash",
+                    "source": "gemini-3.5-flash",
                     "text": response_text,
                     "language": target_language,
                     "region": region,
