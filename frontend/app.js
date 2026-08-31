@@ -1102,11 +1102,11 @@ function detectGPSLocation() {
       if (btn) btn.className = 'flex items-center space-x-1 px-2.5 py-1 bg-teal-700 text-white rounded-xl font-bold shadow-xs transition-all flex-shrink-0';
 
       renderRegionUI();
-      appendSystemNotice(`📍 <b>GPS Imethibitishwa:</b> Lat ${lat.toFixed(2)}, Lon ${lon.toFixed(2)} ➔ Nchi: <b>${STATE.country}</b>, Eneo: <b>${STATE.regionsMeta[STATE.region]?.name_sw || STATE.region}</b>.`);
+      appendSystemNotice(`📍 <b>Eneo Lako:</b> Nchi: <b>${STATE.country}</b> • Eneo: <b>${STATE.regionsMeta[STATE.region]?.name_sw || STATE.region}</b>.`);
     },
     (err) => {
       if (text) text.innerText = 'GPS Auto-Detect';
-      appendSystemNotice('📍 <i>GPS haikupatikana (ruhusa imezimwa). Unaweza kuchagua nchi na eneo kwa mikono hapo juu.</i>');
+      appendSystemNotice('📍 <i>Haikuweza kupata eneo kiotomatiki. Unaweza kuchagua nchi na eneo kwa urahisi kwenye menyu ☰.</i>');
     },
     { timeout: 8000 }
   );
@@ -1612,13 +1612,13 @@ function toggleAgentMode() {
   if (STATE.agentMode === 'creative') {
     if (btn) btn.className = 'px-2.5 py-1 bg-purple-100 text-purple-900 border border-purple-300 rounded-lg font-bold flex items-center space-x-1 flex-shrink-0 hover:bg-purple-200 transition-all';
     if (icon) icon.innerText = '🎨';
-    if (text) text.innerText = 'Hadithi (Temp 0.75)';
-    appendSystemNotice('🎨 <b>4Ds Mode:</b> Hali ya Hadithi na Mifano ya Kusisimua (Temperature: 0.75).');
+    if (text) text.innerText = 'Hadithi na Mifano';
+    appendSystemNotice('🎨 <b>Mtindo wa Kufundisha:</b> Mifano na Hadithi za Kusisimua.');
   } else {
     if (btn) btn.className = 'px-2.5 py-1 bg-blue-100 text-blue-900 border border-blue-300 rounded-lg font-bold flex items-center space-x-1 flex-shrink-0 hover:bg-blue-200 transition-all';
     if (icon) icon.innerText = '📐';
-    if (text) text.innerText = 'Usahihi (Temp 0.2)';
-    appendSystemNotice('📐 <b>4Ds Mode:</b> Hali ya Usahihi na Hesabu Halisi (Temperature: 0.2).');
+    if (text) text.innerText = 'Maelezo Mafupi na Hesabu';
+    appendSystemNotice('📐 <b>Mtindo wa Kufundisha:</b> Maelezo ya Moja kwa Moja na Hesabu.');
   }
 }
 
@@ -2345,14 +2345,19 @@ function updateHeaderStatusPill() {
   }
 }
 
-// 4Ds Thinking Mode / Temperature Dial Handler
+// Teaching Style Handler (Stories vs Direct)
 function toggleAgentMode() {
   const modes = ['creative', 'balanced', 'precise'];
   const current = STATE.agentMode || 'creative';
   const next = modes[(modes.indexOf(current) + 1) % modes.length];
   STATE.agentMode = next;
   updateHeaderStatusPill();
-  appendSystemNotice(`🧠 <b>Hali ya Kufikiri (4Ds Dial):</b> Imewekwa kuwa <b>${next.toUpperCase()}</b>.`);
+  const modeLabelsSw = {
+    creative: '🎨 Hadithi na Mifano ya Kusisimua',
+    balanced: '⚖️ Uwiano wa Hadithi na Ufafanuzi',
+    precise: '📐 Maelezo Mafupi na Hesabu Halisi'
+  };
+  appendSystemNotice(`💡 <b>Mtindo wa Kufundisha:</b> Umewekwa kuwa <b>${modeLabelsSw[next] || next}</b>.`);
 }
 
 // Unified App Menu Dropdown Handlers

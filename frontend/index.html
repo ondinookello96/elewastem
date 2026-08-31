@@ -48,7 +48,7 @@
       </div>
       <div class="flex items-center space-x-1">
         <h1 class="font-black text-base sm:text-lg text-slate-900 tracking-tight">Elewa<span class="text-brand-600">STEM</span></h1>
-        <span class="text-[7px] sm:text-[8.5px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800 tracking-tight">Pan-African AI-Powered STEM Learning Platform</span>
+        <span class="text-[7.5px] sm:text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 tracking-tight">Mwalimu wa Sayansi & Hesabu</span>
       </div>
 
      <!-- Right: ONLY THE UNIFIED MENU & SETTINGS DROPDOWN -->
@@ -178,16 +178,16 @@
           </div>
         </div>
 
-        <!-- 3. THINKING MODE (4Ds Framework Temperature Dial) -->
+        <!-- 3. TEACHING STYLE (Story vs Direct) -->
         <div class="space-y-1.5 pt-1 border-t border-slate-100">
-          <span class="text-[10px] font-black uppercase text-purple-700 tracking-wider" data-i18n="thinking_mode_title">🧠 Hali ya Kufikiri</span>
+          <span class="text-[10px] font-black uppercase text-purple-700 tracking-wider">💡 Mtindo wa Kufundisha</span>
           <div class="bg-slate-50 border border-slate-200 p-2 rounded-xl flex items-center justify-between">
             <div>
-              <p class="text-[10px] text-slate-500 font-bold">4Ds Framework Dial:</p>
-              <p class="text-xs font-bold text-purple-900" id="agentModeMenuText">🎨 Hadithi (Temp 0.75)</p>
+              <p class="text-[10px] text-slate-500 font-medium">Jinsi ya kufundishwa:</p>
+              <p class="text-xs font-bold text-purple-900" id="agentModeMenuText">🎨 Hadithi na Mifano</p>
             </div>
-            <button type="button" onclick="toggleAgentMode()" class="px-2.5 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold text-[10px] transition-all shadow-xs" data-i18n="thinking_mode_btn">
-              Badili Hali
+            <button type="button" onclick="toggleAgentMode()" class="px-2.5 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold text-[10px] transition-all shadow-xs">
+              Badili
             </button>
           </div>
         </div>
@@ -203,7 +203,7 @@
                 <span class="text-base">💬</span>
                 <div>
                   <p class="font-bold text-emerald-950 text-xs">1. Learn (Gumzo la Masomo)</p>
-                  <p class="text-[10px] text-emerald-700">Mwalimu wa AI wa Socratic STEM</p>
+                  <p class="text-[10px] text-emerald-700">Uliza swali lolote la Sayansi au Hesabu</p>
                 </div>
               </div>
               <span class="text-xs font-bold text-emerald-700">➜</span>
@@ -293,8 +293,8 @@
               <div class="flex items-center space-x-2">
                 <span class="text-base">🌍</span>
                 <div>
-                  <p class="font-bold text-slate-900 text-xs">Lugha 16+ za Kiafrika (NLP Matrix)</p>
-                  <p class="text-[10px] text-slate-500">Tathmini za Masakhane na Gemini Multilingual</p>
+                  <p class="font-bold text-slate-900 text-xs">Lugha 16+ za Kiafrika</p>
+                  <p class="text-[10px] text-slate-500">Jifunze kwa Kiswahili, Sheng, Yoruba, Hausa na nyinginezo</p>
                 </div>
               </div>
               <span class="text-xs font-bold text-slate-400">➜</span>
@@ -363,20 +363,52 @@
     <section id="chatSection" class="flex-1 flex flex-col h-full min-h-0 overflow-hidden">
       <!-- Spacious Message Stream with Smooth Auto-Scroll -->
       <div id="chatMessages" class="flex-1 overflow-y-auto p-2.5 sm:p-6 space-y-3 sm:space-y-4 max-w-5xl w-full mx-auto" aria-live="polite">
-        <!-- Welcome Message (Compact & Friendly) -->
-        <div id="welcomeMessageContainer" class="flex items-start space-x-2 sm:space-x-3 transition-opacity">
-          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-600 flex items-center justify-center text-white text-sm sm:text-base flex-shrink-0 shadow">
-            🌱
-          </div>
-          <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-3 sm:p-4 shadow-sm max-w-[94%] text-xs sm:text-sm text-slate-800 space-y-1.5 sm:space-y-2">
-            <p class="font-bold text-brand-700 text-sm sm:text-base" id="welcomeTitle" data-i18n="welcome_title">Hujambo rafiki yangu! 🌟</p>
-            <p id="welcomeText" class="text-slate-600 text-xs sm:text-sm leading-relaxed" data-i18n="welcome_text">
-              Mimi ni ElewaSTEM—mwalimu wako wa Sayansi na Hesabu. Bonyeza kipaza sauti 🎤 kuongea au andika swali lako hapa chini!
-            </p>
-            <div class="pt-1.5">
-              <p class="text-[11px] font-semibold text-slate-400 mb-1" id="welcomeChipsTitle" data-i18n="welcome_chips_title">💡 Mada za Kuanza:</p>
-              <div id="quickLocationChips" class="flex flex-wrap gap-1.5"></div>
+        <!-- Clean, Friendly Welcome Hero with 3 Core Benefits -->
+        <div id="welcomeMessageContainer" class="bg-white border border-slate-200 rounded-3xl p-4 sm:p-6 shadow-sm max-w-4xl mx-auto space-y-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-xl sm:text-2xl shadow-sm flex-shrink-0">
+              🌱
             </div>
+            <div>
+              <h2 class="font-black text-slate-900 text-base sm:text-lg" id="welcomeTitle">Hujambo rafiki yangu! 🌟</h2>
+              <p class="text-slate-500 text-xs sm:text-sm">Mimi ni ElewaSTEM—mwalimu wako wa Sayansi na Hesabu. Usimeze, Elewa!</p>
+            </div>
+          </div>
+
+          <!-- 3 Main Benefits Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+            <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-3 space-y-1">
+              <div class="flex items-center space-x-1.5 text-emerald-900 font-bold text-xs">
+                <span>🗣️</span>
+                <span>Ongea kwa Sauti</span>
+              </div>
+              <p class="text-[11px] text-emerald-800 leading-snug">Bonyeza kipaza sauti kuuliza swali lolote kwa lugha yako.</p>
+            </div>
+
+            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-3 space-y-1">
+              <div class="flex items-center space-x-1.5 text-blue-900 font-bold text-xs">
+                <span>🌿</span>
+                <span>Mifano ya Nyumbani</span>
+              </div>
+              <p class="text-[11px] text-blue-800 leading-snug">Mifano halisi ya mimea, maji, na vitu unavyoviona kila siku.</p>
+            </div>
+
+            <div class="bg-purple-50 border border-purple-100 rounded-2xl p-3 space-y-1">
+              <div class="flex items-center space-x-1.5 text-purple-900 font-bold text-xs">
+                <span>📦</span>
+                <span>Bila Mtandao</span>
+              </div>
+              <p class="text-[11px] text-purple-800 leading-snug">Masomo makuu yanapatikana wakati wowote bila intaneti.</p>
+            </div>
+          </div>
+
+          <!-- Direct Starter Topic Chips -->
+          <div class="pt-2 border-t border-slate-100">
+            <p class="text-[11px] font-bold text-slate-500 mb-1.5 flex items-center space-x-1">
+              <span>💡</span>
+              <span>Mada za Kuanza (Chagua moja au andika swali lako):</span>
+            </p>
+            <div id="quickLocationChips" class="flex flex-wrap gap-1.5"></div>
           </div>
         </div>
       </div>
