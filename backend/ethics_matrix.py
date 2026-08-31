@@ -1,14 +1,17 @@
 """
-ElewaSTEM Ethical AI, Data Sovereignty & Indigenous Governance Matrix
-Implements the ETHOS, TRACK, OASIS, PRIDE, and HORIZON Frameworks for Responsible AI in Africa.
+ElewaSTEM Internal Architectural & Ethical AI Design Frameworks (Proprietary)
+Implements ElewaSTEM's custom design frameworks (ETHOS, TRACK, OASIS, PRIDE, and HORIZON) 
+for Responsible AI engineering in African education. 
+NOTE: These are internal platform design & governance protocols, distinct from national statutory DPAs.
 """
 
 from typing import Dict, List, Any
 
 ETHICAL_FRAMEWORKS = {
     "ETHOS": {
-        "title": "The ETHOS Framework (Ethical Guardrails by Design)",
+        "title": "The ETHOS Framework (ElewaSTEM Ethical Guardrails Design)",
         "acronym": "ETHOS",
+        "framework_type": "ElewaSTEM Internal Design Framework (Proprietary)",
         "pillars": {
             "E": {
                 "name": "Empathy (Harm Prevention)",
@@ -33,8 +36,9 @@ ETHICAL_FRAMEWORKS = {
         }
     },
     "TRACK": {
-        "title": "The TRACK Framework (Bias Mitigation & Inclusion)",
+        "title": "The TRACK Framework (ElewaSTEM Bias Mitigation & Inclusion Design)",
         "acronym": "TRACK",
+        "framework_type": "ElewaSTEM Internal Design Framework (Proprietary)",
         "pillars": {
             "T": {
                 "name": "Training Data Diversity",
@@ -59,12 +63,13 @@ ETHICAL_FRAMEWORKS = {
         }
     },
     "OASIS": {
-        "title": "The OASIS Protocol (Sacred Data Protection & Sovereignty)",
+        "title": "The OASIS Protocol (ElewaSTEM Local-First Privacy Design)",
         "acronym": "OASIS",
+        "framework_type": "ElewaSTEM Internal Design Framework (Proprietary)",
         "pillars": {
             "O": {
                 "name": "Opt-in by Design",
-                "description": "Never assumes consent. Explicit, plain-language parental consent modals (Kenya DPA Section 29, Nigeria NDPA Section 31, POPIA Section 34)."
+                "description": "Never assumes consent. Explicit, plain-language parental consent modals (supporting Kenya DPA Section 29, Nigeria NDPA Section 31, POPIA Section 34)."
             },
             "A": {
                 "name": "Anonymization Depth & Data Minimization",
@@ -85,8 +90,9 @@ ETHICAL_FRAMEWORKS = {
         }
     },
     "PRIDE": {
-        "title": "The PRIDE Loop (Human-in-the-Loop & Elder Governance)",
+        "title": "The PRIDE Loop (ElewaSTEM Human-in-the-Loop Governance Design)",
         "acronym": "PRIDE",
+        "framework_type": "ElewaSTEM Internal Design Framework (Proprietary)",
         "pillars": {
             "P": {
                 "name": "Pause Points",
@@ -111,12 +117,13 @@ ETHICAL_FRAMEWORKS = {
         }
     },
     "HORIZON": {
-        "title": "The HORIZON Scan (Intergenerational & Ecological Stewardship)",
+        "title": "The HORIZON Scan (ElewaSTEM Ecological & Future Stewardship Design)",
         "acronym": "HORIZON",
+        "framework_type": "ElewaSTEM Internal Design Framework (Proprietary)",
         "pillars": {
             "H": {
                 "name": "Historical Harm Prevention",
-                "description": "Guards against extractive colonial narratives by highlighting indigenous African innovations (iron smelting, herbal pharmacology, astronomy)."
+                "description": "Celebrates ancient and modern African STEM innovators, countering historical biases."
             },
             "O": {
                 "name": "Opportunity Cost Awareness",

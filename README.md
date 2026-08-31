@@ -50,13 +50,21 @@
      * 🌍 **Pan-African Union**: *AU Malabo Convention on Cyber Security and Personal Data (2014)*.
    * Enforces on-device edge processing, zero cloud tracking, and 1-click statutory consent revocation.
 
-5. **👥 360° Multi-Stakeholder Hub & Remote Parent Synchronization**:
+5. **🛡️ ElewaSTEM Proprietary Ethical & Architectural Design Frameworks**:
+   * *(Custom internal AI engineering & governance protocols developed specifically for ElewaSTEM, distinct from statutory national laws)*:
+   * **ETHOS**: Ethical guardrails by design (Harm prevention, transparency, child safety filters).
+   * **OASIS**: Local-first privacy architecture (Opt-in consent, data minimization, 1-click erasure).
+   * **TRACK**: Bias mitigation & inclusion (Diverse African datasets, spatial/visual cues, kill switch).
+   * **PRIDE**: Human-in-the-loop community governance (Pause points, dispute rights, educator oversight).
+   * **HORIZON**: Intergenerational & ecological stewardship (Indigenous knowledge preservation, ecological respect).
+
+6. **👥 360° Multi-Stakeholder Hub & Remote Parent Synchronization**:
    * **👨‍👩‍👧 Parents**: Automated 2G feature phone SMS progress digests via Africa's Talking API, dynamically generated unique parent pairing codes (e.g., `ELEWA-XXXX`), remote parent magic links, and weekend kitchen science challenges.
    * **👩‍🏫 Teachers**: Automated CBC/NECTA-aligned lesson plans mapped to national curriculum strands with zero-budget local teaching aids.
    * **🤝 Community Mentors**: Village STEM club guides (bio-sand charcoal water filters, solar dryers).
    * **🔄 360° Continuous Feedback Loop**: Live community feedback feed and aggregated stakeholder sentiment metrics.
 
-6. **📦 Offline-First Edge PWA (Core Modules Available Offline)**:
+7. **📦 Offline-First Edge PWA (Core Modules Available Offline)**:
    * Progressive Web App caching with pre-compiled offline knowledge vaults (core learning modules available offline after installation/download; online AI features seamlessly activate with connectivity).
 
 ---
