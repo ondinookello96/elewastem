@@ -1,6 +1,6 @@
 """
 ElewaSTEM Vector Science Diagram Generator
-Provides 100% offline, zero-bandwidth, responsive SVG diagrams and flowcharts for African STEM learners.
+Provides lightweight, responsive SVG diagrams and flowcharts for African STEM learners with offline caching.
 """
 
 from typing import Dict, Any, Optional

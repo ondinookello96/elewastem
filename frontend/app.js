@@ -70,7 +70,7 @@ const I18N = {
     hub_chat_title: 'Gumzo la Masomo',
     hub_chat_sub: 'Rudi kwenye ukurasa wa gumzo',
     hub_vault_title: 'Hifadhi ya Masomo (Offline Vault)',
-    hub_vault_sub: 'Majaribio na masomo bila mtandao (0 KB)',
+    hub_vault_sub: 'Masomo makuu yanapatikana bila mtandao baada ya kusakinisha',
     hub_mastery_title: 'Maendeleo & Beji za Ushindi',
     hub_mastery_sub: 'Kiwango cha uelewa wa mada na beji',
     hub_stakeholders_title: 'Kituo cha Wadau & Maoni',
@@ -80,20 +80,20 @@ const I18N = {
     hub_languages_title: 'Lugha 16+ za Kiafrika',
     hub_languages_sub: 'Tathmini za Masakhane na Gemini Multilingual',
     hub_install_title: 'Sakinisha Programu',
-    hub_install_sub: 'Weka kwenye skrini ya simu, inafanya kazi bila mtandao',
+    hub_install_sub: 'Weka kwenye simu, masomo makuu yanapatikana bila mtandao',
     feedback_btn: '💬 Toa Maoni',
     back_to_chat: 'Rudi kwenye Gumzo',
     welcome_title: 'Hujambo rafiki yangu! 🌟',
     welcome_text: 'Mimi ni ElewaSTEM—mwalimu wako wa Sayansi na Hesabu. Bonyeza kipaza sauti 🎤 kuongea au andika swali lako hapa chini!',
     welcome_chips_title: '💡 Mada za Kuanza:',
     input_placeholder: 'Ongea kwa sauti au andika swali lako...',
-    online_text: 'Mtandaoni',
-    offline_text: 'Nje ya Mtandao (0 KB)',
+    online_text: 'Mtandaoni (AI Kamili)',
+    offline_text: 'Nje ya Mtandao (Masomo Makuu)',
     listen_btn: '🔊 Sikiliza',
     simplify_btn: '💡 Rahisisha',
     quiz_btn: '🎯 Fanya Jaribio',
     vault_box_title: '📦 Hifadhi ya Masomo ya Sayansi',
-    vault_box_sub: 'Masomo ya sayansi yenye maelezo ya sauti na ya picha bila mtandao (0 KB).',
+    vault_box_sub: 'Masomo makuu ya sayansi yanapatikana bila mtandao baada ya kusakinisha.',
     profile_memory_desc: 'Mfumo unafuatilia maendeleo yako kote barani Afrika.',
     badges_earned_title: 'Beji Ulizoshinda',
     concept_mastery_title: 'Kiwango cha Uelewa kwa Mada',
@@ -145,7 +145,7 @@ const I18N = {
     hub_chat_title: 'Learner Chat',
     hub_chat_sub: 'Return to active learning chat',
     hub_vault_title: 'Offline Knowledge Vault',
-    hub_vault_sub: 'Experiments & lessons without internet (0 KB)',
+    hub_vault_sub: 'Core learning modules available offline after installation/download',
     hub_mastery_title: 'Concept Mastery & Badges',
     hub_mastery_sub: 'Track topic scores and badges',
     hub_stakeholders_title: 'Stakeholder & Feedback Hub',
@@ -155,20 +155,20 @@ const I18N = {
     hub_languages_title: '16+ African Languages & NLP',
     hub_languages_sub: 'Masakhane benchmarks & Gemini AI',
     hub_install_title: 'Install Mobile App',
-    hub_install_sub: 'Add to home screen, works 100% offline',
+    hub_install_sub: 'Add to home screen, core learning modules available offline',
     feedback_btn: '💬 Feedback',
     back_to_chat: 'Back to Chat',
     welcome_title: 'Hello my friend! 🌟',
     welcome_text: 'I am ElewaSTEM—your STEM tutor. Tap the microphone 🎤 or type your question below to start learning!',
     welcome_chips_title: '💡 Quick Start Topics:',
     input_placeholder: 'Speak using the microphone or type your question...',
-    online_text: 'Online',
-    offline_text: 'Offline (0 KB)',
+    online_text: 'Online (Full AI Cloud)',
+    offline_text: 'Offline (Core Modules Available)',
     listen_btn: '🔊 Listen',
     simplify_btn: '💡 Simplify',
     quiz_btn: '🎯 Take Quiz',
     vault_box_title: '📦 Offline STEM Knowledge Vault',
-    vault_box_sub: 'STEM lessons with voice narration and offline diagrams (0 KB).',
+    vault_box_sub: 'Core learning modules available offline after installation/download.',
     profile_memory_desc: 'Tracking your learning journey across Africa.',
     badges_earned_title: 'Earned Badges',
     concept_mastery_title: 'Concept Mastery by Topic',
@@ -220,7 +220,7 @@ const I18N = {
     hub_chat_title: 'Msee wa STEM',
     hub_chat_sub: 'Rudi kwenye chat',
     hub_vault_title: 'Masomo ya Offline',
-    hub_vault_sub: 'Masomo bila neti (0 KB)',
+    hub_vault_sub: 'Masomo makuu yanapatikana offline baada ya kudownload',
     hub_mastery_title: 'Level Yangu & Badges',
     hub_mastery_sub: 'Alama za mada na beji',
     hub_stakeholders_title: 'Wadau & Maoni',
@@ -230,7 +230,7 @@ const I18N = {
     hub_languages_title: 'Lugha 16+ za Afrika',
     hub_languages_sub: 'Masakhane & Gemini',
     hub_install_title: 'Weka kwa Simu',
-    hub_install_sub: 'Weka app kwa screen',
+    hub_install_sub: 'Weka kwa screen, masomo yapo offline',
     feedback_btn: '💬 Toa Maoni',
     back_to_chat: 'Rudi kwa Chat',
     welcome_title: 'Niaje msee wangu! 🌟',
@@ -238,7 +238,7 @@ const I18N = {
     welcome_chips_title: '💡 Anzia Hapa:',
     input_placeholder: 'Bonga na mic au type swali yako...',
     online_text: 'Online',
-    offline_text: 'Offline (Zero Data)',
+    offline_text: 'Offline (Masomo Makuu)',
     listen_btn: '🔊 Sikiza',
     simplify_btn: '💡 Fafanua zaidi',
     quiz_btn: '🎯 Cheza Quiz'
@@ -264,7 +264,7 @@ const I18N = {
     hub_chat_title: 'Olùkọ́ STEM',
     hub_chat_sub: 'Padà sí ìfọ̀rọ̀wérọ̀',
     hub_vault_title: 'Ẹ̀kọ́ Àìlórí Ayélujára',
-    hub_vault_sub: 'Ẹ̀kọ́ láìsí ayélujára (0 KB)',
+    hub_vault_sub: 'Àwọn ẹ̀kọ́ pàtàkì wà lárọ̀ọ́wọ́tó láìsí ayélujára lẹ́yìn ìfipamọ́',
     hub_mastery_title: 'Ìlọsíwájú & Àwọn Àmì',
     hub_mastery_sub: 'Àwọn àmì ẹ̀kọ́ rẹ',
     hub_stakeholders_title: 'Àwọn Olùkópa & Èsì',
@@ -274,7 +274,7 @@ const I18N = {
     hub_languages_title: 'Àwọn Èdè Áfíríkà 16+',
     hub_languages_sub: 'Masakhane & Gemini',
     hub_install_title: 'Fi Sori Fóònù',
-    hub_install_sub: 'Fi sori iboju fóònù rẹ',
+    hub_install_sub: 'Fi sori iboju fóònù, àwọn ẹ̀kọ́ wà láìsí ayélujára',
     feedback_btn: '💬 Fi Èsì Ránṣẹ́',
     back_to_chat: 'Padà sí Ìfọ̀rọ̀wérọ̀',
     welcome_title: 'Báwo ọ̀rẹ́ mi! 🌟',
@@ -282,7 +282,7 @@ const I18N = {
     welcome_chips_title: '💡 Àwọn Àkòrí Ìbẹ̀rẹ̀:',
     input_placeholder: 'Sọ̀rọ̀ sínú mic tàbí kọ ìbéèrè rẹ...',
     online_text: 'Lórí Ayélujára',
-    offline_text: 'Àìlórí Ayélujára (0 KB)',
+    offline_text: 'Àìlórí Ayélujára (Ẹ̀kọ́ Pàtàkì)',
     listen_btn: '🔊 Gbọ́',
     simplify_btn: '💡 Ṣe àlàyé',
     quiz_btn: '🎯 Ṣe Ìdánwò'
@@ -308,7 +308,7 @@ const I18N = {
     hub_chat_title: 'Malamin STEM',
     hub_chat_sub: 'Koma zuwa hira',
     hub_vault_title: 'Karatun Ba Intanet',
-    hub_vault_sub: 'Darasi ba tare da intanet ba (0 KB)',
+    hub_vault_sub: 'Babban karatun yana samuwa ba tare da intanet ba bayan saukewa',
     hub_mastery_title: 'Ci gaba & Lambobin Yabo',
     hub_mastery_sub: 'Matsayin fahimtar darussa',
     hub_stakeholders_title: 'Masu Ruwa da Tsaki',
@@ -318,7 +318,7 @@ const I18N = {
     hub_languages_title: 'Harsunan Afirka 16+',
     hub_languages_sub: 'Masakhane & Gemini',
     hub_install_title: 'Sanya a Waya',
-    hub_install_sub: 'Sanya a fuskar waya',
+    hub_install_sub: 'Sanya a fuskar waya, babban karatu yana aiki ba intanet',
     feedback_btn: '💬 Bayar da Ra\'ayi',
     back_to_chat: 'Koma zuwa Hira',
     welcome_title: 'Sannu abokina! 🌟',
@@ -326,7 +326,7 @@ const I18N = {
     welcome_chips_title: '💡 Batutuwan Farko:',
     input_placeholder: 'Yi magana ta mic ko rubuta tambaya...',
     online_text: 'A Layi',
-    offline_text: 'Babu Intanet (0 KB)',
+    offline_text: 'Ba Intanet (Babban Karatu)',
     listen_btn: '🔊 Saurara',
     simplify_btn: '💡 Saukake',
     quiz_btn: '🎯 Yi Tambayoyi'
@@ -352,7 +352,7 @@ const I18N = {
     hub_chat_title: 'Onye Nkuzi STEM',
     hub_chat_sub: 'Laghachi na nkata',
     hub_vault_title: 'Ihe Ọmụmụ Offline',
-    hub_vault_sub: 'Ihe ọmụmụ na-enweghị ịntanetị (0 KB)',
+    hub_vault_sub: 'Isi ihe ọmụmụ dị na-enweghị ịntanetị mgbe e budatara ya',
     hub_mastery_title: 'Ọganihu & Baajị',
     hub_mastery_sub: 'Ọkwa nghọta nke isiokwu',
     hub_stakeholders_title: 'Ndị Metụtara & Nzaghachi',
@@ -362,7 +362,7 @@ const I18N = {
     hub_languages_title: 'Asụsụ Afrịka 16+',
     hub_languages_sub: 'Masakhane & Gemini',
     hub_install_title: 'Wụnye na Ekwentị',
-    hub_install_sub: 'Tinye na ihuenyo ekwentị',
+    hub_install_sub: 'Wụnye na ekwentị, isi ihe ọmụmụ dị offline',
     feedback_btn: '💬 Nye Nzaghachi',
     back_to_chat: 'Laghachi na Nkata',
     welcome_title: 'Ndewo enyi m! 🌟',
@@ -370,7 +370,7 @@ const I18N = {
     welcome_chips_title: '💡 Isiokwu Mmalite:',
     input_placeholder: 'Kwuo okwu na mic ma ọ bụ dee ajụjụ...',
     online_text: 'N\'ịntanetị',
-    offline_text: 'Na-enweghị ịntanetị (0 KB)',
+    offline_text: 'Ọnọdụ Offline (Isi Ihe)',
     listen_btn: '🔊 Gee ntị',
     simplify_btn: '💡 Mee ka ọ dị mfe',
     quiz_btn: '🎯 Mee Nnwale'
@@ -396,7 +396,7 @@ const I18N = {
     hub_chat_title: 'STEM Ticha',
     hub_chat_sub: 'Go back to chat',
     hub_vault_title: 'Offline Lessons',
-    hub_vault_sub: 'Lessons without internet (0 KB)',
+    hub_vault_sub: 'Core learning modules available offline after installation/download',
     hub_mastery_title: 'My Progress & Badges',
     hub_mastery_sub: 'Topic scores and badges',
     hub_stakeholders_title: 'Stakeholders & Feedback',
@@ -406,7 +406,7 @@ const I18N = {
     hub_languages_title: '16+ African Languages',
     hub_languages_sub: 'Masakhane & Gemini',
     hub_install_title: 'Install for Phone',
-    hub_install_sub: 'Put am for phone screen',
+    hub_install_sub: 'Put am for phone screen, core lessons work offline',
     feedback_btn: '💬 Give Feedback',
     back_to_chat: 'Go Back to Chat',
     welcome_title: 'How far my friend! 🌟',
@@ -414,12 +414,13 @@ const I18N = {
     welcome_chips_title: '💡 Topics to Start:',
     input_placeholder: 'Talk for mic or type your question...',
     online_text: 'Online',
-    offline_text: 'Offline (0 KB)',
+    offline_text: 'Offline (Core Lessons)',
     listen_btn: '🔊 Listen',
     simplify_btn: '💡 Break am down',
     quiz_btn: '🎯 Take Quiz'
   }
 };
+
 
 
 // Regional Quick Prompt Templates
@@ -522,7 +523,7 @@ function toggleSimulateOffline() {
   updateNetworkUI();
   const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
   const msg = STATE.simulatedOffline 
-    ? `🔴 Offline simulation enabled. ElewaSTEM running 100% disconnected for ${reg.name_sw}!` 
+    ? `🔴 Offline mode active: Core learning modules available offline for ${reg.name_sw}!` 
     : `🟢 Back Online! Connected to Gemini 2.5 Flash Pan-African backend.`;
   
   appendSystemNotice(msg);
@@ -1807,7 +1808,7 @@ function appendAssistantMessage(data) {
             <span class="text-xl">🎨</span>
             <h5 class="font-black text-slate-900 text-xs">${data.diagram.title_sw || 'Mchoro wa Sayansi'}</h5>
           </div>
-          <span class="bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-xs">Vector Visual (0 KB)</span>
+          <span class="bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-xs">Vector Visual (Offline Cached)</span>
         </div>
         <div class="w-full overflow-x-auto rounded-xl border border-slate-200/60 bg-white p-1">
           ${data.diagram.svg}

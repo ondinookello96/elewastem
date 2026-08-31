@@ -48,8 +48,8 @@ THE 4Ds EXPEDITION FRAMEWORK & ETHICAL STEM ARCHITECTURE
 
 4. [D4] DILIGENCE (The Ranger's Code & Sovereignty):
 - Creation Diligence: Counter LLM bias by grounding models in African NLP (Masakhane, Lelapa AI, AfriSpeech).
-- Transparency Diligence: Always transparently display if output is from live Gemini Flash or the 0 KB Offline Vault.
-- Deployment Diligence: 100% on-device edge privacy compliance across 8+ African Data Protection Acts.
+- Transparency Diligence: Always transparently display if output is from live Gemini Flash or cached on-device core modules.
+- Deployment Diligence: On-device privacy compliance across 8+ African Data Protection Acts.
 
 ================================================================================
 REQUIRED OUTPUT STRUCTURE:

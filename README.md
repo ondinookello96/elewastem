@@ -2,7 +2,7 @@
 
 > **"Usimeze, Elewa!"** — *Demystifying STEM for Every African Child in Their Own Language, Local Ecosystem, and Physical Ability.*
 
-**ElewaSTEM** is an adaptive, offline-first multilingual AI STEM tutor and multi-stakeholder learning ecosystem designed specifically for children and young students across Africa. It bridges educational, language, accessibility, and connectivity barriers by explaining complex concepts in Physics, Mathematics, Biology, Chemistry, and Computing through **culturally and geographically grounded African ecological analogies**, **16+ African languages** (grounded in African NLP benchmarks like Masakhane, Lelapa AI / InkubaLM, and AfriSpeech), **universal special needs accessibility** (tactile audio for the blind, visual sign cues for the deaf, dyslexia typography), **statutory compliance across 8+ African Data Protection Acts** (Kenya DPA 2019, Nigeria NDPA 2023, POPIA 2013, AU Malabo Convention), **multi-stakeholder portals** (Parents, Teachers, Community Mentors), and **100% offline-first edge computing (0 KB data consumption)**.
+**ElewaSTEM** is an adaptive, offline-first multilingual AI STEM tutor and multi-stakeholder learning ecosystem designed specifically for children and young students across Africa. It bridges educational, language, accessibility, and connectivity barriers by explaining complex concepts in Physics, Mathematics, Biology, Chemistry, and Computing through **culturally and geographically grounded African ecological analogies**, **16+ African languages** (grounded in African NLP benchmarks like Masakhane, Lelapa AI / InkubaLM, and AfriSpeech), **universal special needs accessibility** (tactile audio for the blind, visual sign cues for the deaf, dyslexia typography), **statutory compliance across 8+ African Data Protection Acts** (Kenya DPA 2019, Nigeria NDPA 2023, POPIA 2013, AU Malabo Convention), **multi-stakeholder portals** (Parents, Teachers, Community Mentors), and **offline-first edge architecture (core learning modules available offline after installation/download)**.
 
 ---
 
@@ -35,7 +35,7 @@
 
 3. **🏞️ Hyper-Local African Eco-Grounding & Hardware GPS**:
    * Dynamically adapts science analogies to 5 African biomes (**Lake Victoria Basin / Kisumu**, **Coastal Mangroves / Mombasa / Lagos**, **Agricultural Highlands / Eldoret / Mt. Kenya**, **Arid ASAL & Sahel / Turkana / Garissa / Kano**, and **Urban Metropolises**).
-   * Hardware GPS mapping works **100% offline** on edge bounding boxes with explicit consent gatekeepers.
+   * On-device GPS bounding box mapping with explicit parental consent gatekeepers.
 
 4. **🛡️ Pan-African Cross-Border Data Protection Legal Hub**:
    * Native compliance across **8+ national data protection frameworks**:
@@ -55,8 +55,8 @@
    * **🤝 Community Mentors**: Village STEM club guides (bio-sand charcoal water filters, solar dryers).
    * **🔄 360° Continuous Feedback Loop**: Live community feedback feed and aggregated stakeholder sentiment metrics.
 
-6. **📦 100% Offline-First Edge PWA (0 KB Data Operation)**:
-   * Progressive Web App caching with pre-compiled offline knowledge vaults.
+6. **📦 Offline-First Edge PWA (Core Modules Available Offline)**:
+   * Progressive Web App caching with pre-compiled offline knowledge vaults (core learning modules available offline after installation/download; online AI features seamlessly activate with connectivity).
 
 ---
 
@@ -113,12 +113,12 @@ flowchart TD
                                                   │
                  ┌────────────────────────────────┴────────────────────────────────┐
                  ▼                                                                 ▼
-      [ONLINE / 2G-3G-4G BURST]                                       [OFFLINE / 0 KB DISCONNECTED]
+      [ONLINE / CLOUD CONNECTED]                                    [OFFLINE / ON-DEVICE CACHED]
                  │                                                                 │
                  ▼                                                                 ▼
 +------------------------------------+                         +------------------------------------+
 |       GOOGLE CLOUD RUN             |                         |        OFFLINE PWA ENGINE          |
-|    FastAPI Multilingual Gateway    |                         |    • Service Worker Vault (0 KB)   |
+|    FastAPI Multilingual Gateway    |                         |    • Service Worker Vault          |
 |    • 16+ African Languages Router  |                         |    • On-Device GPS Biome Mapper    |
 |    • Pan-African DPA Legal Matrix  |                         |    • Browser-Native Speech (TTS)   |
 |    • Multi-Stakeholder Feedback    |                         |    • Tactile Audio for Blind       |
@@ -149,7 +149,7 @@ cd elewastem
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. (Optional) Set your Gemini API Key (offline engine works 100% without a key)
+# 3. (Optional) Set your Gemini API Key (offline engine works without a key)
 export GEMINI_API_KEY="your_api_key_here"  # On Windows PowerShell: $env:GEMINI_API_KEY="your_api_key"
 
 # 4. Launch the application server
@@ -164,7 +164,7 @@ python run.py
 ```bash
 python test_suite.py
 ```
-*Executes all **14 end-to-end automated test suites** validating health status, 16+ living African languages (Masakhane/Lelapa grounding), 8 Pan-African DPA statutory frameworks, adaptive Socratic Gemini chat, multi-sensory accessibility (tactile audio for blind, KSL sign language for deaf), 100% offline vector SVG science diagrams, CBC teacher lesson plans, remote parent 2G SMS digests, community STEM clubs, multi-stakeholder feedback loops, ethical safety guardrails (ETHOS/OASIS), Maasai Elder multi-agent swarm orchestration (RANK/HUNT/TRAIL/CYCLE), and 8 African learning theories.*
+*Executes all **14 end-to-end automated test suites** validating health status, 16+ living African languages (Masakhane/Lelapa grounding), 8 Pan-African DPA statutory frameworks, adaptive Socratic Gemini chat, multi-sensory accessibility (tactile audio for blind, KSL sign language for deaf), vector SVG science diagrams, CBC teacher lesson plans, remote parent 2G SMS digests, community STEM clubs, multi-stakeholder feedback loops, ethical safety guardrails (ETHOS/OASIS), Maasai Elder multi-agent swarm orchestration (RANK/HUNT/TRAIL/CYCLE), and 8 African learning theories.*
 
 ---
 

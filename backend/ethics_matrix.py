@@ -132,7 +132,7 @@ ETHICAL_FRAMEWORKS = {
             },
             "Z": {
                 "name": "Zero-Sum Trap Avoidance",
-                "description": "Ensures high-tech AI does not leave rural learners behind: provides 100% feature parity in 0 KB offline PWA and 2G SMS modes."
+                "description": "Ensures high-tech AI does not leave rural learners behind: core learning modules remain accessible offline after installation, complemented by 2G SMS modes."
             },
             "O": {
                 "name": "Open Futures & Human Agency",
