@@ -417,26 +417,29 @@
         <!-- Clean, Centered Welcome Block (Welcome Greeting + Immediate Centered Input) -->
         <div id="welcomeLandingBlock" class="my-auto flex flex-col items-center justify-center py-6 sm:py-10 px-2 max-w-xl w-full mx-auto space-y-4 transition-all duration-300">
           
-          <!-- 1. Welcome Greeting -->
-          <div class="bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-6 shadow-sm w-full flex items-center space-x-4">
-            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-2xl sm:text-3xl shadow-sm flex-shrink-0">
+          <!-- 1. Warm & Friendly Greeting Card -->
+          <div class="bg-gradient-to-r from-emerald-50 via-teal-50/60 to-amber-50/50 border border-emerald-200/90 rounded-3xl p-5 sm:p-6 shadow-sm w-full flex items-center space-x-4">
+            <div class="w-13 h-13 sm:w-15 sm:h-15 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white text-3xl shadow-md ring-4 ring-emerald-100 flex-shrink-0 animate-bounce-short">
               🌱
             </div>
             <div>
-              <h2 class="font-black text-slate-900 text-base sm:text-lg" id="welcomeTitle">Hujambo rafiki yangu! 🌟</h2>
-              <p class="text-slate-600 text-xs sm:text-sm font-medium" id="welcomeText">Mimi ni ElewaSTEM—mwalimu wako wa Sayansi na Hesabu. Usimeze, Elewa!</p>
+              <h2 class="font-black text-slate-900 text-base sm:text-lg flex items-center space-x-1.5" id="welcomeTitle">
+                <span>Hujambo rafiki yangu!</span>
+                <span class="text-amber-500">🌟</span>
+              </h2>
+              <p class="text-slate-600 text-xs sm:text-sm font-medium mt-0.5" id="welcomeText">Mimi ni ElewaSTEM—mwalimu na rafiki yako wa Sayansi na Hesabu. Uliza swali lolote, usisite! 🚀</p>
             </div>
           </div>
 
           <!-- 2. Centered Chat Form (Immediately After Greeting) -->
           <div id="landingChatFormWrapper" class="w-full">
             <form id="chatForm" onsubmit="handleChatSubmit(event)" class="w-full flex items-center space-x-2">
-              <button type="button" id="voiceBtn" onclick="toggleVoiceInput()" title="Bonyeza hapa kuongea kwa sauti (Voice Input)" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 hover:from-brand-700 hover:to-emerald-600 text-white flex items-center justify-center text-xl active:scale-95 transition-all shadow-md flex-shrink-0">
+              <button type="button" id="voiceBtn" onclick="toggleVoiceInput()" title="Bonyeza hapa kuongea kwa sauti (Voice Input)" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 hover:from-emerald-700 hover:to-teal-600 text-white flex items-center justify-center text-xl active:scale-95 transition-all shadow-md flex-shrink-0">
                 🎤
               </button>
               
               <div class="relative flex-1 flex items-center">
-                <input type="text" id="userInput" placeholder="Ongea au andika kwa Kiswahili, Sheng, English, Yoruba, Hausa..." autocomplete="off" class="w-full bg-white border border-slate-300 text-slate-900 text-xs sm:text-sm rounded-2xl py-3 pl-4 pr-24 sm:pr-28 focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 shadow-sm transition-all">
+                <input type="text" id="userInput" placeholder="Ongea au andika kwa Kiswahili, Sheng, English, Yoruba, Hausa..." autocomplete="off" class="w-full bg-white border border-slate-300 text-slate-900 text-xs sm:text-sm rounded-2xl py-3 pl-4 pr-24 sm:pr-28 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 shadow-sm transition-all">
                 
                 <!-- Sleek Inline Language Badge (Inside Input Bar) -->
                 <button type="button" onclick="openLanguagesModal()" title="Badili Lugha ya Kujifunza" class="absolute right-2 px-2 py-1 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-[10px] sm:text-[11px] font-bold text-slate-700 flex items-center space-x-1 shadow-2xs transition-all">
@@ -446,10 +449,37 @@
                 </button>
               </div>
 
-              <button type="submit" id="sendBtn" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white flex items-center justify-center active:scale-95 transition-all shadow-md flex-shrink-0">
+              <button type="submit" id="sendBtn" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center active:scale-95 transition-all shadow-md flex-shrink-0">
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 transform rotate-90" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
               </button>
             </form>
+          </div>
+
+          <!-- 3. Cheerful Curiosity Prompt Chips (Fun Real-World STEM Starters) -->
+          <div class="w-full space-y-2 pt-1">
+            <p class="text-[11px] font-black uppercase text-emerald-800 tracking-wider text-center flex items-center justify-center space-x-1">
+              <span>✨</span>
+              <span>Mawazo ya Kuanzia (Fun Questions to Explore):</span>
+              <span>✨</span>
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-2">
+              <button onclick="executeAgentQuery('Why does stomach acid not burn our own stomach?', false)" class="text-xs font-bold px-3 py-1.5 rounded-2xl bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-900 border border-slate-200/90 hover:border-emerald-300 shadow-2xs transition-all flex items-center space-x-1.5 active:scale-95">
+                <span>🍕</span>
+                <span>Tumbo linayeyushaje chakula?</span>
+              </button>
+              <button onclick="executeAgentQuery('How do plants produce fresh oxygen and food from sunlight?', false)" class="text-xs font-bold px-3 py-1.5 rounded-2xl bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-900 border border-slate-200/90 hover:border-emerald-300 shadow-2xs transition-all flex items-center space-x-1.5 active:scale-95">
+                <span>🌿</span>
+                <span>Mimea inapikaje chakula kwa jua?</span>
+              </button>
+              <button onclick="executeAgentQuery('How does an electric circuit power a light bulb in our house?', false)" class="text-xs font-bold px-3 py-1.5 rounded-2xl bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-900 border border-slate-200/90 hover:border-emerald-300 shadow-2xs transition-all flex items-center space-x-1.5 active:scale-95">
+                <span>⚡</span>
+                <span>Umeme unavyowasha taa za nyumbani</span>
+              </button>
+              <button onclick="executeAgentQuery('What is ecology and how does energy flow in a food chain?', false)" class="text-xs font-bold px-3 py-1.5 rounded-2xl bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-900 border border-slate-200/90 hover:border-emerald-300 shadow-2xs transition-all flex items-center space-x-1.5 active:scale-95">
+                <span>🌾</span>
+                <span>Mnyororo wa chakula na asili</span>
+              </button>
+            </div>
           </div>
 
         </div>

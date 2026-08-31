@@ -285,126 +285,106 @@ Reasoning Mode: {mode.upper()} (Temperature: {temperature})
         }
 
     def _solve_concept_query(self, message: str, topic_data: Dict[str, Any], region_info: Dict[str, Any], is_sw: bool, simplify: bool, is_follow_up: bool, analogy: str, summary: str, title: str, exp: Dict[str, Any]) -> str:
-        """Solves any student question offline with rich, direct scientific explanations without generic canned templates."""
+        """Solves any student question offline with warm, cheerful, engaging Socratic explanations without courtroom stiffness."""
         msg_lower = message.lower().strip()
         
         # 1. ECOLOGY & ECOSYSTEMS
         if any(w in msg_lower for w in ["ecology", "ikolojia", "ecosystem", "ikolojia ni nini", "what is ecology"]):
             if is_sw:
-                return f"""Hujambo rafiki yangu mpendwa! 🌟 Hilo ni swali la msingi na zuri sana katika Biolojia!
+                return f"""Hujambo rafiki yangu! 🌿✨ Hilo ni swali zuri ajabu kuhusu maumbile!
 
-### 🌿 Ikolojia (Ecology) ni Nini?
-**Ikolojia** (kwa Kiingereza: *Ecology*, kutoka maneno ya Kigiriki *oikos* ikimaanisha "nyumba" na *logos* ikimaanisha "elimu") ni tawi la sayansi linalochunguza **jinsi viumbe hai vinavyoingiliana vyenyewe kwa vyenyewe na jinsi vinavyoishi na mazingira yao ya asili** (kama udongo, maji, jua na hewa).
+**Ikolojia (Ecology)** kimsingi ni sayansi inayochunguza jinsi viumbe hai (kama wewe, mimea, ndege na samaki) wanavyoishi pamoja na kusaidiana na mazingira yao—kama hewa, mwangaza wa jua, udongo, na maji.
 
-### 🌍 Ngazi 4 Kuu za Ikolojia:
-1. **Kiumbe Binafsi (Organism)**: Kiumbe mmoja mmoja (kama samaki mmoja wa Ngege au mti mmoja wa mwembe).
-2. **Kundi la Aina Moja (Population)**: Kundi la viumbe vya aina moja vinavyoishi eneo moja (kama kundi la samaki wa Dagaa ziwani).
-3. **Jumuiya ya Viumbe (Community)**: Mkusanyiko wa viumbe vya aina tofauti vinavyoishi pamoja (kama samaki, mwani, ndege wa ziwani na vyura).
-4. **Mfumo wa Ikolojia (Ecosystem)**: Jumuiya ya viumbe hai PAMOJA na vitu visivyo hai kama mwangaza wa jua, maji, udongo na hewa.
+Fikiria ikolojia kama nyumba kubwa ya asili ({region_info['locality_name']}):
+🌱 **Mimea** inapokea jua na maji ili kutengeneza hewa safi na chakula.
+🦗 **Wanyama** wanakula mimea hiyo ili kupata nguvu ya kuruka na kukimbia.
+🍄 **Waozeshaji** wanarudisha virutubisho vyote ardhini ili mizunguko iendelee daima!
 
-### 💡 Mfano Halisi wa Mazingira Yetu ({region_info['locality_name']}):
+💡 **Kwenye Mazingira Yetu ({region_info['locality_name']}):**
 {analogy}
 
-Je, ungependa tuchunguze jinsi nishati ya jua inavyosafiri kwenye **Mnyororo wa Chakula (Food Chain)**, au una swali lingine kuhusu ikolojia? 💭"""
+Je, ungependa tuangalie jinsi nishati ya jua inavyosafiri kwenye **Mnyororo wa Chakula (Food Chain)**, au una swali lingine la kuvutia? 💭🚀"""
             else:
-                return f"""Hello my dear friend! 🌟 That is a foundational and wonderful question in Biology!
+                return f"""Hey there, my curious friend! 🌿✨ That is an awesome, foundational question!
 
-### 🌿 What is Ecology?
-**Ecology** (from the Greek words *oikos* meaning "home" and *logos* meaning "study") is the scientific branch of Biology that studies **how living organisms interact with one another and with their physical environment** (like soil, water, sunlight, and air).
+**Ecology** is simply the science of how living creatures (like us, trees, birds, and fish) live together and interact with their home—the water, soil, sunshine, and air around them!
 
-### 🌍 The 4 Core Levels of Ecology:
-1. **Organism**: An individual living creature (e.g. a single Tilapia fish in Lake Victoria or an Acacia tree in the savannah).
-2. **Population**: A group of the same species living in the same area (e.g. a school of Tilapia fish).
-3. **Community**: All different living species interacting together (e.g. fish, algae, water birds, and frogs in a wetland).
-4. **Ecosystem**: The biological community PLUS non-living physical elements like sunlight, water, minerals, and air.
+Think of it like a giant neighborhood in our environment ({region_info['locality_name']}):
+🌱 **Plants** drink sunlight and water to make food and clean oxygen.
+🦗 **Animals** enjoy those plants for energy to run and grow.
+🍄 **Decomposers** recycle everything back into the fertile soil so the cycle never ends!
 
-### 💡 Local Real-World Context ({region_info['locality_name']}):
+💡 **Local Real-World Flow ({region_info['locality_name']}):**
 {analogy}
 
-Would you like to explore **Food Chains** (how energy flows from the sun to plants and animals), or shall we look at **Producers and Consumers**? 💭"""
+Would you like to see how energy flows in a **Food Chain**, or do you have another fun question in mind? 💭🚀"""
 
         # 2. FOOD CHAIN / PRODUCERS / CONSUMERS / DECOMPOSERS
         if any(w in msg_lower for w in ["food chain", "food web", "mnyororo wa chakula", "producer", "mtengenezaji", "consumer", "mlaji", "decomposer", "mwozeshaji", "waozeshaji", "herbivore", "carnivore"]):
             if is_sw:
-                return f"""Swali zuri sana kuhusu mtiririko wa nishati asiliani! 🌟
+                return f"""Swali zuri sana kuhusu mtiririko wa maisha asiliani! 🌾✨
 
-### 🌾 Mnyororo wa Chakula na Ngazi za Nishati (Trophic Levels):
-Katika mazingira yetu ya **{region_info['locality_name']}**, nishati husafiri kwa mpangilio maalum:
-1. ☀️ **Jua (Sun)**: Chanzo kikuu cha nishati ya viumbe vyote duniani.
-2. 🌿 **Watengenezaji (Producers)**: Mimea ya kijani inayotumia jua kutengeneza chakula (Usanisinuru).
-3. 🦗 **Walaji wa Kwanza (Primary Consumers / Herbivores)**: Wanyama wanaokula mimea (kama panzi, mbuzi, na panya).
-4. 🦁 **Walaji wa Pili & Wawindaji Wakuu (Secondary Consumers / Carnivores)**: Wanyama wanaokula nyama (kama kuku, samaki mbuta, na simba).
-5. 🍄 **Waozeshaji (Decomposers)**: Bakteria na uyoga wanaoozesha viumbe vilivyokufa na kurudisha mbolea na madini ardhini!
+Katika mazingira yetu ya **{region_info['locality_name']}**, nishati husafiri kwa furaha kama timu:
+☀️ **Jua**: Chanzo kikuu cha nishati na mwangaza.
+🌿 **Watengenezaji (Mimea)**: Wanapika chakula kitamu kwa mwangaza wa jua.
+🦗 **Walaji (Wanyama)**: Panzi na mbuzi wanakula nyasi, kisha simba au kuku wanafuata.
+🍄 **Waozeshaji (Uyoga & Bakteria)**: Wanarudisha rutuba ardhini ili mimea mipya iote!
 
-### 💡 Mfano wa Eneo Lako:
+💡 **Mfano wa Eneo Lako:**
 {analogy}
 
-Je, unaweza kutaja mlaji mmoja wa kwanza na mlaji mmoja wa pili unayemwona mazingirani mwako? 💭"""
+Je, unaweza kutaja mnyama mmoja unayempenda anayekula nyasi na mmoja anayekula nyama mtaani kwako? 💭😃"""
             else:
-                return f"""Brilliant question on energy flow in nature! 🌟
+                return f"""Brilliant question on how nature shares energy! 🌾✨
 
-### 🌾 Food Chains and Trophic Levels:
-In our environment ({region_info['locality_name']}), energy transfers through clear biological steps:
-1. ☀️ **The Sun**: The primary source of all life energy on Earth.
-2. 🌿 **Producers (Autotrophs)**: Green plants and algae that capture sunlight to produce glucose via photosynthesis.
-3. 🦗 **Primary Consumers (Herbivores)**: Plant-eaters like grasshoppers, caterpillars, goats, and cows.
-4. 🦁 **Secondary & Apex Consumers (Carnivores)**: Predators like chickens, tilapia-eating Nile Perch, eagles, and lions.
-5. 🍄 **Decomposers**: Soil bacteria and fungi that break down organic matter and return rich nutrients back to the earth!
+In our environment ({region_info['locality_name']}), energy flows like a great teamwork relay:
+☀️ **The Sun**: Powers all life on Earth with bright light and warmth.
+🌿 **Producers (Plants & Algae)**: Make fresh food from sunlight and water.
+🦗 **Consumers (Herbivores & Carnivores)**: Animals that eat plants or other animals for energy to play and run!
+🍄 **Decomposers (Mushrooms & Microbes)**: Turn old leaves back into rich soil nutrients.
 
-### 💡 Local Real-World Flow:
+💡 **Local Real-World Connection:**
 {analogy}
 
-Can you name one primary consumer (herbivore) and one secondary consumer (carnivore) that live around your community? 💭"""
+Can you name one plant-eater and one meat-eater that live around your community? 💭😃"""
 
         # 3. VILLI / DIGESTIVE SYSTEM
         if any(w in msg_lower for w in ["villi", "villus", "vili", "microvilli", "ileum", "absorption"]):
             if is_sw:
-                return f"""Hujambo rafiki yangu mpendwa! 🌟 Hilo ni swali zuri sana kuhusu **{title}**!
+                return f"""Habari rafiki yangu! 🌟 Swali lako kuhusu mwili wa binadamu ni la werevu sana!
 
-### 🔬 Villi (Vilai) ni Nini?
-**Villi** (kwa Kiswahili: *vilai*) ni mamilioni ya vinyweleo vidogo sana vinavyofanana na vidole vidogo vinavyotanda ndani ya kuta za utumbo mwembamba (hasa sehemu ya **ileum**).
+**Villi (vilai)** ni mamilioni ya vinyweleo vidogo sana vilivyo kama vidole laini ndani ya utumbo mwembamba. Kazi yao kuu ni kama sponji yenye nguvu nyingi: zinafyonza virutubisho vyote vizuri vya ugali, mboga, au samaki unayokula na kuviingiza moja kwa moja kwenye damu yako ili upate nguvu ya kucheza na kusoma!
 
-### 🎯 Kazi Kuu 2 za Villi:
-1. **Kuongeza Eneo la Ufyonzaji (Huge Surface Area):** Vilai huongeza eneo la ndani la utumbo mara mamia ili virutubisho vyote vya chakula vifyonzwe kwa haraka na kikamilifu bila kutupwa chooni.
-2. **Kusafirisha Virutubisho Kwenye Damu:** Ndani ya kila kilai kuna mishipa midogo ya damu (capillaries) inayofyonza sukari (glucose) na amino acids, pamoja na mshipa wa *lacteal* unaofyonza mafuta (fatty acids) ili kuupa mwili wako nguvu na afya!
+Fikiria taulo laini ya pamba yenye nyuzi nyingi—inavyovuta maji haraka kuliko mfuko wa nailoni, ndivyo vilai vinavyofyonza lishe yote bila kupoteza hata chembe!
 
-### 💡 Mfano Halisi wa Mazingira Yetu ({region_info['locality_name']}):
-Fikiria taulo laini ya pamba yenye nyuzi nyingi ikifyonza maji mara moja ukilinganisha na mfuko wa nailoni. Nyuzi za taulo (villi) hufyonza maji yote papo hapo—ndivyo utumbo wako unavyofyonza virutubisho vya ugali, samaki au mboga!
-
-Je, ungependa kujua jinsi vimeng'enya (enzymes) vinavyovunja chakula kabla hakijafika kwenye villi? 💭"""
+Je, ungependa tuchunguze jinsi tumbo linavyoyeyusha chakula kwanza, au una swali lingine la afya? 💭✨"""
             else:
-                return f"""Hello my dear friend! 🌟 That is an excellent, sharp question about **{title}**!
+                return f"""Hey there! 🌟 That's a super smart question about how our bodies work!
 
-### 🔬 What are Villi?
-**Villi** (singular: *villus*) are millions of tiny, microscopic finger-like projections that line the inner surface of your small intestine (specifically the **ileum**).
+**Villi** are millions of tiny, microscopic finger-like helpers lining the inside of your small intestine! Think of them like super-absorbent sponge fibers: they soak up all the healthy energy from the food you eat (like ugali, fruits, and fish) and send it straight into your blood to give you energy to run, jump, and think!
 
-### 🎯 Key Functions of Villi:
-1. **Dramatically Expands Surface Area:** Villi increase the inner absorption area of the small intestine by up to 60 times! If smoothed out, they would cover an entire badminton court, ensuring almost zero nutrients are wasted.
-2. **Direct Nutrient Absorption into Blood:** Inside each villus is a dense network of blood capillaries that absorb digested simple sugars (glucose) and amino acids directly into the bloodstream, plus a central lymph vessel (lacteal) that absorbs fatty acids.
+Imagine a fluffy cotton towel that absorbs water instantly compared to flat plastic—villi expand the surface area so your body doesn't waste a single drop of goodness!
 
-### 💡 Everyday Real-World Analogy ({region_info['locality_name']}):
-Think of a thick cotton towel with thousands of tiny absorbent loops compared to a flat plastic sheet. The towel's loops (villi) soak up liquid instantly—just like your intestines absorb all the energy from your meals!
-
-Would you like to explore how digestive enzymes break down food before villi absorb it, or shall we try a mini quiz? 💭"""
+Would you like to discover what digestive enzymes do, or do you have another question? 💭✨"""
 
         # 4. SIMPLIFY MODE ("Explain simpler" / "Sielewi")
         if simplify or any(w in msg_lower for w in ["simpler", "rahisisha", "sielewi", "ngumu", "hard", "simple", "tell me simply"]):
             if is_sw:
-                return f"""Usijali hata kidogo rafiki yangu! 🌟 Makosa na kutoelewa ndio ngazi ya kwanza ya ugunduzi wa kweli.
+                return f"""Usijali hata kidogo rafiki yangu! 🌟 Makosa na maswali ndio mwanzo wa ugunduzi mkubwa!
 
-Hebu tuiweke mada ya **{title}** kwa njia rahisi sana ya maisha ya kila siku:
-* **Kiini cha Mada:** {summary}
-* **Mfano Rahisi wa Kienyeji ({region_info['locality_name']}):** {analogy}
+Hebu tuiweke kwa njia rahisi sana:
+* **Kiini cha Somo:** {summary}
+* **Mfano Rahisi wa Nyumbani ({region_info['locality_name']}):** {analogy}
 
-Je, unaona jinsi kanuni hii inavyofanya kazi kwa urahisi? Nambie ni swali gani dogo unalo sasa hivi ili tulifafanue pamoja! 🌿✨"""
+Unaona jinsi ilivyo rahisi na ya kawaida? Nambie ni sehemu gani ndogo ungependa tuiangalie pamoja sasa hivi! 🌿✨"""
             else:
-                return f"""No worries at all, my dear friend! 🌟 Asking for a simpler explanation is what the smartest scientists do!
+                return f"""No worries at all, my dear friend! 🌟 Asking for a simpler explanation is what the best scientists do!
 
-Let's make **{title}** crystal clear:
+Let's make it super clear and simple:
 * **The Core Idea:** {summary}
-* **Everyday Analogy ({region_info['locality_name']}):** {analogy}
+* **Everyday Home Example ({region_info['locality_name']}):** {analogy}
 
-See how logical and natural science is? Tell me which specific part you'd like to explore next! 🌿✨"""
+See how natural and logical that is? Tell me what other thought popped into your mind! 🌿✨"""
 
         # 5. ANOTHER EXAMPLE / REGIONAL COMPARISON
         if any(w in msg_lower for w in ["another", "mwingine", "example", "mfano", "more"]):
@@ -412,57 +392,37 @@ See how logical and natural science is? Tell me which specific part you'd like t
             alt_info = REGIONS.get(alt_region, REGIONS["coastal"])
             alt_analogy = topic_data.get("regional_analogies", {}).get(alt_region, {}).get("analogy_sw" if is_sw else "analogy_en", analogy)
             if is_sw:
-                return f"""Bila shaka! Hebu tuchukue mfano kutoka eneo lingine la bara letu la Afrika—**{alt_info['icon']} {alt_info['name_sw']}**:
+                return f"""Bila shaka kabisa! Hebu tutembelee eneo lingine la Afrika—**{alt_info['icon']} {alt_info['name_sw']}**:
 
 {alt_analogy}
 
-Unaona jinsi kanuni hii ya **{title}** inavyofanya kazi sawa kote barani? Ni sayansi ile ile lakini inatumika kwa njia tofauti za kiasili! 🌍"""
+Unaona jinsi asili inavyotumia kanuni hii ile ile kote barani? Sayansi iko kila mahali tunapoishi! 🌍✨"""
             else:
-                return f"""Absolutely! Let's look at another real-world example from another part of Africa—**{alt_info['icon']} {alt_info['name_en']}**:
+                return f"""Awesome! Let's take a quick virtual trip to another part of Africa—**{alt_info['icon']} {alt_info['name_en']}**:
 
 {alt_analogy}
 
-See how the same scientific principle of **{title}** applies across different ecosystems? Nature uses the exact same law everywhere! 🌍"""
+See how the same natural law works across different ecosystems? Nature connects us all everywhere! 🌍✨"""
 
-        # 6. UNIVERSAL DIRECT CONCEPT ANSWER (For ANY specific STEM question asked by student)
+        # 6. UNIVERSAL DIRECT CONCEPT ANSWER
         if is_sw:
-            return f"""Hujambo rafiki yangu mpendwa! 🌟 Hilo ni swali zuri sana kuhusu **{title}**!
+            return f"""Hujambo rafiki yangu mpendwa! 🌟 Hilo ni swali zuri sana!
 
-### 🌟 Ufafanuzi wa Kisayansi:
 {summary}
 
-### 🏞️ Mfano Halisi wa Eneo Lako ({region_info['locality_name']}):
+💡 **Kwenye Mazingira Yetu ({region_info['locality_name']}):**
 {analogy}
 
-### 🧪 Jaribio la Kujifunza Nyumbani:
-**{exp.get('title_sw', '')}**
-* **Vifaa:** {exp.get('materials_sw', '')}
-* **Hatua:**
-{exp.get('steps_sw', '')}
-
-### 💬 Maneno Muhimu:
-""" + "\n".join([f"* **{t['sw']}** ({t['en']})" for t in topic_data.get("key_terms", [])]) + f"""
-
-Je, una swali lingine kuhusu {title}, au ungependa tufanye jaribio fupi la kujipima uelewa? 💭"""
+Je, una swali lingine la kufurahisha kuhusu mada hii, au ungependa tujaribu chemsha bongo ndogo? 💭🚀"""
         else:
-            return f"""Hello my dear friend! 🌟 That is an insightful, sharp question about **{title}**!
+            return f"""Hey there, curious friend! 🌟 That is a fantastic question!
 
-### 🌟 Scientific Explanation:
 {summary}
 
-### 🏞️ Real-World Context ({region_info['locality_name']}):
+💡 **Real-World Connection ({region_info['locality_name']}):**
 {analogy}
 
-### 🧪 Safe Home Discovery Experiment:
-**{exp.get('title_en', '')}**
-* **Materials Needed:** {exp.get('materials_en', '')}
-* **Steps to Follow:**
-{exp.get('steps_en', '')}
-
-### 💬 Key Scientific Vocabulary:
-""" + "\n".join([f"* **{t['en']}** ({t['sw']})" for t in topic_data.get("key_terms", [])]) + f"""
-
-Do you have any follow-up question on {title}, or would you like to try a quick mastery quiz? 💭"""
+What else are you curious about on this topic, or would you like to try a fun mini quiz? 💭🚀"""
 
     def _extract_topic(self, user_msg: str, bot_response: str, preferred_subject: str = "all") -> Dict[str, str]:
         # Resolve topic accurately using curriculum search

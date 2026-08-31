@@ -2296,81 +2296,90 @@ function appendAssistantMessage(data, shouldSave = true) {
   const langMeta = STATE.languagesMeta[data.language || STATE.language];
 
   div.innerHTML = `
-    <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-600 flex items-center justify-center text-white text-sm sm:text-base flex-shrink-0 shadow">
+    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white text-lg flex-shrink-0 shadow-md ring-2 ring-emerald-200">
       🌱
     </div>
-    <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 sm:p-5 shadow-sm max-w-[94%] w-full text-sm text-slate-800 space-y-3">
-      <div class="flex items-center space-x-2 flex-wrap gap-1 mb-1">
-        ${isOffline ? '<span class="inline-block bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📦 Offline Vault</span>' : (data.source && data.source.includes('gemma') ? '<span class="inline-block bg-sky-100 text-sky-800 text-[10px] font-bold px-2 py-0.5 rounded-full">💎 Google Gemma 2 (Edge)</span>' : '<span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">✨ Google Gemini Flash</span>')}
-        <span class="inline-block bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full">${regMeta.icon} ${regMeta.name_sw}</span>
-        ${langMeta ? `<span class="inline-block bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full">${langMeta.flag} ${langMeta.native_name}</span>` : ''}
+    <div class="bg-gradient-to-b from-white to-emerald-50/20 border border-slate-200/80 rounded-3xl rounded-tl-md p-4 sm:p-5 shadow-sm max-w-[94%] w-full text-sm text-slate-800 space-y-3">
+      <div class="flex items-center justify-between flex-wrap gap-1.5 pb-2 border-b border-slate-100/80">
+        <div class="flex items-center space-x-1.5">
+          <span class="font-bold text-xs text-slate-900 flex items-center space-x-1">
+            <span>${STATE.language === 'en' ? 'Tutor Buddy' : 'Mwalimu Rafiki'}</span>
+            <span class="text-emerald-500">✨</span>
+          </span>
+          <span class="inline-block bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200/60">${regMeta.icon} ${STATE.language === 'en' ? regMeta.name_en : regMeta.name_sw}</span>
+        </div>
+        <div class="flex items-center space-x-1">
+          ${isOffline ? '<span class="inline-block bg-amber-50 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-amber-200/60">📦 Offline Vault</span>' : '<span class="inline-block bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200/60">✨ Google AI Flash</span>'}
+          ${langMeta ? `<span class="inline-block bg-purple-50 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-purple-200/60">${langMeta.flag} ${langMeta.native_name}</span>` : ''}
+        </div>
       </div>
       
-      <div class="stem-card leading-relaxed space-y-2">${formattedHtml}</div>
+      <div class="stem-card leading-relaxed space-y-2 text-slate-800">${formattedHtml}</div>
 
       <!-- Universal Accessibility Cards -->
       ${data.tactile_description && STATE.screenReaderMode ? `
-      <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs space-y-1">
+      <div class="bg-blue-50/80 border border-blue-200 rounded-2xl p-3 text-xs space-y-1">
         <p class="font-bold text-blue-900 flex items-center space-x-1">
           <span>👁️</span>
-          <span>Screen Reader & Audio Description Mode (Maelezo ya Sauti):</span>
+          <span>Audio Description (Maelezo ya Sauti):</span>
         </p>
         <p class="text-blue-950">${data.tactile_description}</p>
       </div>` : ''}
 
       ${data.sign_cues && STATE.signLanguageMode ? `
-      <div class="bg-purple-50 border border-purple-200 rounded-xl p-3 text-xs space-y-1">
+      <div class="bg-purple-50/80 border border-purple-200 rounded-2xl p-3 text-xs space-y-1">
         <p class="font-bold text-purple-900 flex items-center space-x-1">
           <span>🧏</span>
-          <span>Vielelezo vya Picha & Mtiririko (Visual Concept & Flowchart Cues):</span>
+          <span>Sign & Visual Cues (Vielelezo):</span>
         </p>
         <p class="text-purple-950">${data.sign_cues}</p>
       </div>` : ''}
 
       <!-- Interactive Visual Vector Science Diagram -->
       ${data.diagram ? `
-      <div class="bg-gradient-to-b from-slate-50 to-emerald-50 border-2 border-emerald-300/80 rounded-2xl p-3.5 space-y-2 shadow-sm">
+      <div class="bg-white border border-emerald-200 rounded-2xl p-3.5 space-y-2 shadow-xs">
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-2">
-            <span class="text-xl">🎨</span>
-            <h5 class="font-black text-slate-900 text-xs">${data.diagram.title_sw || 'Mchoro wa Sayansi'}</h5>
+            <span class="text-lg">🎨</span>
+            <h5 class="font-bold text-slate-900 text-xs">${data.diagram.title_sw || data.diagram.title_en || 'Interactive Visual Diagram'}</h5>
           </div>
-          <span class="bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-xs">Vector Visual (Offline Cached)</span>
+          <span class="bg-emerald-100 text-emerald-900 text-[9px] font-bold px-2 py-0.5 rounded-full">Interactive Visual</span>
         </div>
-        <div class="w-full overflow-x-auto rounded-xl border border-slate-200/60 bg-white p-1">
+        <div class="w-full overflow-x-auto rounded-xl border border-slate-100 bg-slate-50/50 p-1">
           ${data.diagram.svg}
         </div>
       </div>` : ''}
       
-      <div class="pt-2 border-t border-slate-100 flex flex-wrap gap-2 text-xs font-semibold">
-        <button onclick="speakText('${encodeURIComponent(data.text + (data.tactile_description ? ' ' + data.tactile_description : ''))}')" class="px-2.5 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 flex items-center space-x-1 transition-all">
+      <!-- Cheerful Interactive Action Pills -->
+      <div class="pt-1 flex flex-wrap items-center gap-1.5 text-xs font-bold">
+        <button onclick="speakText('${encodeURIComponent(data.text + (data.tactile_description ? ' ' + data.tactile_description : ''))}')" class="px-3 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200/80 flex items-center space-x-1.5 transition-all shadow-2xs">
           <span>🔊</span>
-          <span>Sikiliza kwa Sauti</span>
+          <span>${STATE.language === 'en' ? 'Listen (Audio)' : 'Sikiliza'}</span>
         </button>
-        <button onclick="stopSpeech()" class="px-2 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center space-x-1 transition-all" title="Simamisha Sauti">
+        <button onclick="stopSpeech()" class="px-2 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center space-x-1 transition-all" title="Stop Audio">
           <span>⏹️</span>
         </button>
-        <button onclick="executeAgentQuery('Eleza hili tena kwa mifano rahisi sana ya eneo langu', true)" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 flex items-center space-x-1 transition-all">
+        <button onclick="executeAgentQuery('${STATE.language === 'en' ? 'Can you explain this simpler with more everyday examples?' : 'Eleza hili tena kwa mifano rahisi sana ya nyumbani'}', true)" class="px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200/80 flex items-center space-x-1.5 transition-all shadow-2xs">
           <span>💡</span>
-          <span>Rahisisha</span>
+          <span>${STATE.language === 'en' ? 'Simpler Story' : 'Rahisisha'}</span>
         </button>
         ${data.quiz_data ? `
-        <button onclick="openQuizModal('${quizDataJson}', '${escapeHtml(data.topic || 'STEM')}')" class="px-2.5 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white flex items-center space-x-1 shadow-sm transition-all">
+        <button onclick="openQuizModal('${quizDataJson}', '${escapeHtml(data.topic || 'STEM')}')" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white flex items-center space-x-1.5 shadow-sm transition-all">
           <span>🎯</span>
-          <span>Fanya Jaribio</span>
+          <span>${STATE.language === 'en' ? 'Mini Quiz Game' : 'Chemsha Bongo'}</span>
         </button>` : ''}
       </div>
 
       <!-- Recommended Next Topics / Learning Pathway -->
       ${data.related_topics && data.related_topics.length > 0 ? `
-      <div class="pt-2 border-t border-slate-100 space-y-1.5">
+      <div class="pt-2 border-t border-slate-100/80 space-y-1.5">
         <p class="text-[11px] font-bold text-slate-600 flex items-center space-x-1">
           <span>🚀</span>
-          <span>Mada Zinazofuata (Next Steps to Explore):</span>
+          <span>${STATE.language === 'en' ? 'Fun Next Steps to Discover:' : 'Mada Zinazofuata za Kuchunguza:'}</span>
         </p>
         <div class="flex flex-wrap gap-1.5">
           ${data.related_topics.map(rt => `
-            <button onclick="executeAgentQuery('${escapeHtml(rt.prompt)}', false)" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 flex items-center space-x-1 transition-all shadow-xs">
+            <button onclick="executeAgentQuery('${escapeHtml(rt.prompt)}', false)" class="text-[11px] font-bold px-2.5 py-1 rounded-xl bg-emerald-50/80 hover:bg-emerald-100 text-emerald-900 border border-emerald-200/80 flex items-center space-x-1 transition-all shadow-2xs">
               <span>${rt.icon || '👉'}</span>
               <span>${STATE.language === 'en' ? rt.title_en : rt.title_sw}</span>
             </button>
@@ -2378,17 +2387,17 @@ function appendAssistantMessage(data, shouldSave = true) {
         </div>
       </div>` : ''}
 
-      <!-- Stakeholder Quick Reaction & Feedback Bar -->
-      <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-        <div class="flex items-center space-x-1.5">
-          <span class="font-medium">Umeelewa somo hili?</span>
-          <button onclick="quickReact('understood', '${escapeHtml(data.topic || 'STEM')}')" class="hover:scale-125 transition-transform" title="Nimeelewa vizuri!">😃</button>
-          <button onclick="quickReact('simplify', '${escapeHtml(data.topic || 'STEM')}')" class="hover:scale-125 transition-transform" title="Rahisisha zaidi">🤔</button>
-          <button onclick="quickReact('voice', '${escapeHtml(data.topic || 'STEM')}')" class="hover:scale-125 transition-transform" title="Sauti nzuri">🔊</button>
+      <!-- Cheerful Quick Reaction & Feedback Bar -->
+      <div class="pt-2 border-t border-slate-100/80 flex items-center justify-between text-xs text-slate-500">
+        <div class="flex items-center space-x-2">
+          <span class="text-[11px] font-medium text-slate-400">${STATE.language === 'en' ? 'Did this make sense?' : 'Je, umeelewa?'}</span>
+          <button onclick="quickReact('understood', '${escapeHtml(data.topic || 'STEM')}')" class="hover:scale-125 transition-transform" title="I get it! 🎉">😃</button>
+          <button onclick="quickReact('simplify', '${escapeHtml(data.topic || 'STEM')}')" class="hover:scale-125 transition-transform" title="Great idea! 💡">💡</button>
+          <button onclick="quickReact('voice', '${escapeHtml(data.topic || 'STEM')}')" class="hover:scale-125 transition-transform" title="Love it! ❤️">❤️</button>
         </div>
-        <button onclick="openFeedbackModal('student')" class="text-brand-700 hover:text-brand-800 font-bold flex items-center space-x-1">
+        <button onclick="openFeedbackModal('student')" class="text-emerald-700 hover:text-emerald-800 font-bold text-[11px] flex items-center space-x-1">
           <span>💬</span>
-          <span>Toa Maoni</span>
+          <span>${STATE.language === 'en' ? 'Give Feedback' : 'Toa Maoni'}</span>
         </button>
       </div>
     </div>
