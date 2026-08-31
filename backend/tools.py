@@ -492,6 +492,64 @@ OFFLINE_STEM_VAULT = [
             "explanation_sw": "Hongera sana! Algoriti ni kanuni au mlolongo wa hatua unaofuatwa na kompyuta au roboti kukamilisha kazi.",
             "explanation_en": "Spot on! An algorithm is a precise, ordered set of steps executed by a computer to accomplish a task."
         }
+    },
+    {
+        "id": "algebra_math",
+        "title_en": "Algebra: Balancing Equations & Unknown Variables (x & y)",
+        "title_sw": "Aljebra: Mlinganyo na Kutafuta Nambari Zilizofichika (x na y)",
+        "subject": "Mathematics",
+        "cbc_strand": "Algebraic Expressions & Simple Equations (Junior Secondary Mathematics)",
+        "summary_en": "Algebra uses letters (like x or y) to stand for unknown quantities. Solving an equation means keeping both sides of the '=' sign balanced like a market scale.",
+        "summary_sw": "Aljebra hutumia herufi (kama x au y) kuwakilisha nambari zilizofichika. Kutatua mlinganyo ni kusawazisha pande zote mbili za alama ya '=' kama mizani ya sokoni.",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Fikiria mizani ya mawe sokoni. Upande wa kushoto una kifurushi cha siri (x) pamoja na mawe 3 ya kilo moja. Upande wa kulia una mawe 10 ya kilo moja na mizani imelingana sawasawa! Ili kujua uzito wa kifurushi (x), ondoa mawe 3 pande zote mbili: x = 10 - 3, hivyo x ni kilo 7!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Mizani iliyosawazika] + [Ishara ya Herufi x + 3 = 10] ➔ [Ishara ya Kupunguza 3 pande zote] ➔ [x = 7].",
+
+        "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule soko la Kibuye Kisumu, mchuuzi anaweka kapu lenye samaki wasiojulikana idadi yao (x) pamoja na samaki 4 wa nyongeza. Jumla yote inapimwa na kuwa samaki 12 (x + 4 = 12). Kujua idadi ya samaki ndani ya kapu, unatoa 4 kutoka kwa 12: x = 8!",
+                "analogy_en": "At Kibuye market in Kisumu, a fish basket with unknown tilapia (x) plus 4 extra fish totals 12 on the scale (x + 4 = 12). Subtracting 4 from both sides reveals x = 8 tilapia!"
+            },
+            "coastal": {
+                "analogy_sw": "Pwani, kapu la nazi (y) likiongezwa nazi 5 linakuwa na nazi 20 (y + 5 = 20). Kujua nazi zilizokuwepo ndani, unatoa 5 pande zote: y = 15!",
+                "analogy_en": "At the coast, a crate of coconuts (y) plus 5 loose coconuts equals 20 (y + 5 = 20). Subtracting 5 gives y = 15 coconuts inside the crate!"
+            },
+            "highlands": {
+                "analogy_sw": "Mashambani Eldoret, gunia la viazi (x) lililopunguzwa kilo 10 lina uzito wa kilo 40 (x - 10 = 40). Ili kujua uzito wa awali, unaongeza kilo 10 pande zote mbili: x = 50kg!",
+                "analogy_en": "In highland farms, a sack of potatoes (x) with 10kg removed weighs 40kg (x - 10 = 40). Adding 10 to both sides restores x = 50kg!"
+            },
+            "arid": {
+                "analogy_sw": "Kwenye kisima cha maji, dumu lenye lita (x) likiongezwa lita 6 linajaa kuwa lita 20 (x + 6 = 20). Maji yaliyokuwepo awali ni x = 20 - 6 = lita 14!",
+                "analogy_en": "At a desert well, a jerrycan with water (x) plus 6 liters fills a 20-liter container (x + 6 = 20). The initial water was x = 14 liters!"
+            },
+            "urban": {
+                "analogy_sw": "Mtaani, nauli ya matatu ni shilingi 50 na salio lako lililobaki baada ya kulipa ni shilingi 150 (x - 50 = 150). Pesa uliyokuwa nayo mwanzoni ni x = 150 + 50 = Shilingi 200!",
+                "analogy_en": "In the city, paying a 50 KES matatu fare leaves 150 KES balance (x - 50 = 150). Your starting money was x = 200 KES!"
+            }
+        },
+        "key_terms": [
+            {"en": "Variable (x, y)", "sw": "Kigeuzi / Nambari Isiyojulikana"},
+            {"en": "Equation", "sw": "Mlinganyo (Pande mbili zilizo sawa kwa alama ya =)"},
+            {"en": "Balancing", "sw": "Kusawazisha Mizani ya Hesabu"},
+            {"en": "Constant", "sw": "Nambari Isiyobadilika"}
+        ],
+        "experiment": {
+            "title_sw": "Jaribio: Mizani ya Vibandiko vya Hesabu",
+            "title_en": "Experiment: The Matchbox Balance Equation",
+            "materials_sw": "Kikombe kimoja (x), sarafu au maharagwe 10.",
+            "materials_en": "One opaque cup (x), 10 beans or coins.",
+            "steps_sw": "1. Ficha maharagwe kadhaa ndani ya kikombe (x).\n2. Weka maharagwe 3 pembeni ya kikombe: x + 3.\n3. Hesabu jumla yote (kama ni 7), toa 3 pembeni uone idadi ya maharagwe 4 ndani ya kikombe!",
+            "steps_en": "1. Hide secret beans inside the cup (x).\n2. Place 3 beans beside the cup: x + 3.\n3. If total count is 7, subtract the 3 outer beans to reveal the 4 hidden beans inside!"
+        },
+        "quiz": {
+            "question_sw": "Ikiwa x + 5 = 12, thamani ya x ni ngapi?",
+            "question_en": "If x + 5 = 12, what is the value of x?",
+            "options_sw": ["A) x = 7", "B) x = 17", "C) x = 5", "D) x = 60"],
+            "options_en": ["A) x = 7", "B) x = 17", "C) x = 5", "D) x = 60"],
+            "correct_index": 0,
+            "explanation_sw": "Safi sana! Ili kupata x, toa 5 pande zote mbili: x = 12 - 5 = 7.",
+            "explanation_en": "Excellent! Subtract 5 from both sides: x = 12 - 5 = 7."
+        }
     }
 ]
 
@@ -608,13 +666,58 @@ def get_related_topics_recommendations(topic_id_or_query: str) -> List[Dict[str,
     return RELATED_TOPIC_GRAPH.get(tid, RELATED_TOPIC_GRAPH["photosynthesis"])
 
 
-def find_offline_topic(query: str) -> Dict[str, Any]:
+def find_offline_topic(query: str, preferred_subject: str = "all") -> Dict[str, Any]:
     query_lower = query.lower()
+    
+    # 1. Direct algebra match
+    if any(k in query_lower for k in ["algebra", "aljebra", "equation", "mlinganyo", "variable", "kigeuzi", "solve for x", "x +", "x -", "x ="]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "algebra_math":
+                return item
+
+    # 2. Exact match on ID or key terms
     for item in OFFLINE_STEM_VAULT:
         if (item["id"] in query_lower or 
             item["title_en"].lower() in query_lower or 
             item["title_sw"].lower() in query_lower or
-            item["subject"].lower() in query_lower or
             any(k["en"].lower() in query_lower or k["sw"].lower() in query_lower for k in item["key_terms"])):
             return item
+
+    # 3. Match by preferred subject if selected
+    if preferred_subject and preferred_subject != "all":
+        subj_map = {
+            "biology": "Biology",
+            "physics": "Physics",
+            "chemistry": "Chemistry",
+            "mathematics": "Mathematics",
+            "computer_science": "Computer Science"
+        }
+        target_subj = subj_map.get(preferred_subject.lower())
+        if target_subj:
+            for item in OFFLINE_STEM_VAULT:
+                if item["subject"] == target_subj:
+                    return item
+
+    # 4. Keyword heuristic matching across STEM disciplines
+    if any(k in query_lower for k in ["math", "hesabu", "number", "gawanya", "sehemu", "fraction", "ratio", "algebra", "calculate", "hesabu"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["subject"] == "Mathematics":
+                return item
+    elif any(k in query_lower for k in ["chem", "kemia", "acid", "asidi", "base", "besi", "reaction", "salt", "chumvi"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["subject"] == "Chemistry":
+                return item
+    elif any(k in query_lower for k in ["comput", "code", "coding", "algorithm", "algoriti", "program", "logic", "software"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["subject"] == "Computer Science":
+                return item
+    elif any(k in query_lower for k in ["electr", "circuit", "umeme", "saketi", "gravity", "mvuto", "physics", "fizikia", "force", "speed"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["subject"] == "Physics":
+                return item
+    elif any(k in query_lower for k in ["plant", "mmea", "fish", "samaki", "leaf", "jani", "bio", "botany", "cell", "living"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["subject"] == "Biology":
+                return item
+
     return OFFLINE_STEM_VAULT[0]

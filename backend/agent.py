@@ -90,7 +90,7 @@ class ElewaAgent:
         """
         profile = student_memory.get_or_create_profile(student_id, language=target_language, region=region)
         region_info = REGIONS.get(region, REGIONS["lake_basin"])
-        topic_data = find_offline_topic(message)
+        topic_data = find_offline_topic(message, preferred_subject=subject)
         
         effective_grade = grade_level or profile.grade_level
         mastery_summary = ", ".join([f"{k} ({v.mastery_score}% mastery)" for k, v in profile.mastery_graph.items()]) or "New curious learner"
@@ -162,13 +162,15 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                 student_memory.add_interaction_history(student_id, "user", message, target_language)
                 student_memory.add_interaction_history(student_id, "assistant", response_text, target_language)
                 
-                detected_topic = self._extract_topic(message, response_text)
+                detected_topic = self._extract_topic(message, response_text, preferred_subject=subject)
                 student_memory.update_topic_interaction(
                     student_id=student_id,
                     topic=detected_topic["topic"],
                     subject=detected_topic["subject"],
                     score_delta=5
                 )
+
+                has_matching_topic = (topic_data.get("subject", "").lower() == detected_topic.get("subject", "").lower())
 
                 return {
                     "source": source_badge,
@@ -179,10 +181,10 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                     "subject": detected_topic["subject"],
                     "mode": mode,
                     "temperature": temperature,
-                    "tactile_description": topic_data.get("tactile_audio_description_sw", ""),
-                    "sign_cues": topic_data.get("sign_language_visual_cues_sw", ""),
+                    "tactile_description": topic_data.get("tactile_audio_description_sw", "") if has_matching_topic else "",
+                    "sign_cues": topic_data.get("sign_language_visual_cues_sw", "") if has_matching_topic else "",
                     "diagram": get_diagram_for_topic(message) or get_diagram_for_topic(detected_topic["topic"]),
-                    "quiz_data": topic_data.get("quiz"),
+                    "quiz_data": topic_data.get("quiz") if has_matching_topic else None,
                     "related_topics": get_related_topics_recommendations(detected_topic["topic"]),
                     "student_profile": student_memory.get_or_create_profile(student_id).model_dump()
                 }
@@ -190,11 +192,11 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                 print(f"[ElewaAgent] Google AI (Gemini/Gemma) API call error: {e}. Falling back to regional offline engine.")
 
         # Offline fallback applying the exact same 4Ds structure
-        return self._generate_offline_response(student_id, message, target_language, region, simplify, mode)
+        return self._generate_offline_response(student_id, message, target_language, region, simplify, mode, subject)
 
-    def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool, mode: str = "creative") -> Dict[str, Any]:
+    def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool, mode: str = "creative", subject: str = "all") -> Dict[str, Any]:
         """Generates rich offline responses executing the 4Ds Framework."""
-        topic_data = find_offline_topic(message)
+        topic_data = find_offline_topic(message, preferred_subject=subject)
         region_key = region if region in topic_data.get("regional_analogies", {}) else "lake_basin"
         region_info = REGIONS.get(region, REGIONS["lake_basin"])
         is_sw = (language.lower() != "en" and language.lower() != "english")
@@ -263,26 +265,36 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
             "student_profile": student_memory.get_or_create_profile(student_id).model_dump()
         }
 
-    def _extract_topic(self, user_msg: str, bot_response: str) -> Dict[str, str]:
+    def _extract_topic(self, user_msg: str, bot_response: str, preferred_subject: str = "all") -> Dict[str, str]:
         combined = (user_msg + " " + bot_response).lower()
-        if any(w in combined for w in ["fish", "samaki", "gills", "mashavu", "lake", "ziwa", "ngege", "mbuta"]):
-            return {"topic": "Aquatic Biology & Respiration", "subject": "Biology"}
+        if any(w in combined for w in ["algebra", "aljebra", "equation", "mlinganyo", "variable", "kigeuzi", "solve for x", "quadratic"]):
+            return {"topic": "Algebra: Equations & Variables", "subject": "Mathematics"}
+        elif any(w in combined for w in ["fraction", "sehemu", "math", "hesabu", "divide", "gawanya", "number", "geometry", "area"]):
+            return {"topic": "Mathematics & Fractions", "subject": "Mathematics"}
         elif any(w in combined for w in ["chem", "kemia", "acid", "asidi", "base", "besi", "neutraliz", "lemon", "soda"]):
             return {"topic": "Chemistry: Acids, Bases & Reactions", "subject": "Chemistry"}
         elif any(w in combined for w in ["comput", "code", "coding", "algorithm", "algoriti", "program", "logic", "binary"]):
             return {"topic": "Computer Science: Algorithms & Logic", "subject": "Computer Science"}
-        elif any(w in combined for w in ["plant", "mmea", "leaf", "jani", "photo", "cell", "uhai", "biology"]):
-            return {"topic": "Photosynthesis & Plant Biology", "subject": "Biology"}
         elif any(w in combined for w in ["electric", "umeme", "circuit", "saketi", "wire", "battery", "betri"]):
             return {"topic": "Electricity & Circuits", "subject": "Physics"}
         elif any(w in combined for w in ["gravity", "grabiti", "force", "nguvu", "friction", "msuguano", "motion"]):
             return {"topic": "Forces & Gravity", "subject": "Physics"}
-        elif any(w in combined for w in ["fraction", "sehemu", "math", "hesabu", "divide", "gawanya", "number"]):
-            return {"topic": "Fractions & Proportions", "subject": "Mathematics"}
         elif any(w in combined for w in ["solar", "jua", "energy", "nishati", "sun"]):
             return {"topic": "Solar Energy & Heat", "subject": "Physics"}
+        elif any(w in combined for w in ["fish", "samaki", "gills", "mashavu", "lake", "ziwa", "ngege", "mbuta"]):
+            return {"topic": "Aquatic Biology & Respiration", "subject": "Biology"}
+        elif any(w in combined for w in ["plant", "mmea", "leaf", "jani", "photo", "cell", "uhai", "biology", "botany"]):
+            return {"topic": "Photosynthesis & Plant Biology", "subject": "Biology"}
         else:
-            return {"topic": "General STEM Exploration", "subject": "General Science"}
+            subj_map = {
+                "mathematics": "Mathematics",
+                "physics": "Physics",
+                "chemistry": "Chemistry",
+                "biology": "Biology",
+                "computer_science": "Computer Science"
+            }
+            mapped_subj = subj_map.get(preferred_subject.lower(), "General Science")
+            return {"topic": f"{mapped_subj} Exploration", "subject": mapped_subj}
 
 
 # Singleton Agent

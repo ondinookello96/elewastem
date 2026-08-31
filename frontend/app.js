@@ -1275,12 +1275,77 @@ async function executeAgentQuery(query, simplify = false) {
 
 function generateLocalOfflineAnswer(query, simplify) {
   const qLower = query.toLowerCase();
-  let matched = STATE.offlineModules.find(m => 
-    qLower.includes(m.id) || 
-    qLower.includes(m.title_en.toLowerCase()) || 
-    qLower.includes(m.title_sw.toLowerCase()) ||
-    m.key_terms.some(k => qLower.includes(k.en.toLowerCase()) || qLower.includes(k.sw.toLowerCase()))
-  ) || STATE.offlineModules[0];
+  
+  // 1. Direct match for Algebra & Math
+  let matched = null;
+  if (qLower.includes('algebra') || qLower.includes('aljebra') || qLower.includes('equation') || qLower.includes('mlinganyo') || qLower.includes('variable') || qLower.includes('kigeuzi') || qLower.includes('solve for x')) {
+    matched = STATE.offlineModules.find(m => m.id === 'algebra_math');
+  }
+
+  // 2. Direct match for Fractions & Math
+  if (!matched && (qLower.includes('fraction') || qLower.includes('sehemu') || qLower.includes('gawanya') || qLower.includes('hesabu') || qLower.includes('proportion'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'fractions_math');
+  }
+
+  // 3. Direct match for Chemistry
+  if (!matched && (qLower.includes('chem') || qLower.includes('kemia') || qLower.includes('acid') || qLower.includes('asidi') || qLower.includes('base') || qLower.includes('besi') || qLower.includes('reaction'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'chemistry_reactions');
+  }
+
+  // 4. Direct match for Computer Science
+  if (!matched && (qLower.includes('comput') || qLower.includes('code') || qLower.includes('algorithm') || qLower.includes('algoriti') || qLower.includes('program') || qLower.includes('logic'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'computer_algorithms');
+  }
+
+  // 5. Direct match for Physics Circuits
+  if (!matched && (qLower.includes('circuit') || qLower.includes('umeme') || qLower.includes('saketi') || qLower.includes('battery') || qLower.includes('betri') || qLower.includes('electr'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'electricity_circuits');
+  }
+
+  // 6. Direct match for Biology Photosynthesis
+  if (!matched && (qLower.includes('photo') || qLower.includes('mmea') || qLower.includes('plant') || qLower.includes('leaf') || qLower.includes('jani') || qLower.includes('usanisinuru'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'photosynthesis');
+  }
+
+  // 7. Match by key terms / title
+  if (!matched) {
+    matched = STATE.offlineModules.find(m => 
+      qLower.includes(m.id) || 
+      (m.title_en && qLower.includes(m.title_en.toLowerCase())) || 
+      (m.title_sw && qLower.includes(m.title_sw.toLowerCase())) ||
+      (m.key_terms && m.key_terms.some(k => qLower.includes(k.en.toLowerCase()) || qLower.includes(k.sw.toLowerCase())))
+    );
+  }
+
+  // 8. Match by selected subject
+  if (!matched && STATE.subject && STATE.subject !== 'all') {
+    const subjMap = {
+      biology: 'Biology',
+      physics: 'Physics',
+      chemistry: 'Chemistry',
+      mathematics: 'Mathematics',
+      computer_science: 'Computer Science'
+    };
+    const targetSubj = subjMap[STATE.subject];
+    if (targetSubj) {
+      matched = STATE.offlineModules.find(m => m.subject === targetSubj);
+    }
+  }
+
+  if (!matched) {
+    matched = STATE.offlineModules[0] || {
+      id: 'algebra_math',
+      title_en: 'Algebra & Equations',
+      title_sw: 'Aljebra & Mlinganyo wa Hesabu',
+      subject: 'Mathematics',
+      summary_sw: 'Aljebra hutumia herufi kutatua nambari zilizofichika kwa kusawazisha mizani.',
+      summary_en: 'Algebra uses variables to solve unknown values by balancing equations.',
+      regional_analogies: {},
+      key_terms: [],
+      experiment: { title_sw: 'Mizani', title_en: 'Balance', materials_sw: 'Vifaa vya nyumbani', materials_en: 'Materials', steps_sw: 'Sawazisha pande zote', steps_en: 'Balance both sides' },
+      quiz: null
+    };
+  }
 
   const regKey = STATE.region;
   const regMeta = STATE.regionsMeta[regKey] || STATE.regionsMeta.lake_basin;
@@ -1336,11 +1401,14 @@ ${isSw ? exp.steps_sw : exp.steps_en}
 
 // UI Rendering Helpers
 function appendUserMessage(text) {
+  const welcome = document.getElementById('welcomeMessageContainer');
+  if (welcome) welcome.style.display = 'none';
+
   const container = document.getElementById('chatMessages');
   const div = document.createElement('div');
   div.className = 'flex justify-end';
   div.innerHTML = `
-    <div class="bg-brand-600 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-sm max-w-[80%] text-sm font-medium leading-relaxed">
+    <div class="bg-brand-600 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-sm max-w-[88%] text-sm font-medium leading-relaxed">
       ${escapeHtml(text)}
     </div>
   `;
@@ -1351,7 +1419,7 @@ function appendUserMessage(text) {
 function appendAssistantMessage(data) {
   const container = document.getElementById('chatMessages');
   const div = document.createElement('div');
-  div.className = 'flex items-start space-x-3';
+  div.className = 'flex items-start space-x-2.5 sm:space-x-3';
 
   const isOffline = data.source === 'local_offline_vault' || data.source === 'offline_knowledge_vault';
   const formattedHtml = parseMarkdownToHtml(data.text);
@@ -1360,10 +1428,10 @@ function appendAssistantMessage(data) {
   const langMeta = STATE.languagesMeta[data.language || STATE.language];
 
   div.innerHTML = `
-    <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-white text-sm flex-shrink-0 shadow">
+    <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-600 flex items-center justify-center text-white text-sm sm:text-base flex-shrink-0 shadow">
       🌱
     </div>
-    <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%] text-sm text-slate-800 space-y-3">
+    <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 sm:p-5 shadow-sm max-w-[94%] w-full text-sm text-slate-800 space-y-3">
       <div class="flex items-center space-x-2 flex-wrap gap-1 mb-1">
         ${isOffline ? '<span class="inline-block bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📦 Offline Vault</span>' : (data.source && data.source.includes('gemma') ? '<span class="inline-block bg-sky-100 text-sky-800 text-[10px] font-bold px-2 py-0.5 rounded-full">💎 Google Gemma 2 (Edge)</span>' : '<span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">✨ Gemini 3.7 Flash</span>')}
         <span class="inline-block bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full">${regMeta.icon} ${regMeta.name_sw}</span>

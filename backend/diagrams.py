@@ -279,6 +279,63 @@ DIAGRAMS = {
   <!-- Bottom Code Concept -->
   <text x="320" y="355" font-size="10" font-weight="bold" fill="#A855F7" text-anchor="middle">Hivi ndivyo kompyuta, simu, na roboti hufanya maamuzi (Algorithms)!</text>
 </svg>"""
+    },
+    "algebra_math": {
+        "title_sw": "Mchoro wa Aljebra: Kusawazisha Mlinganyo (x + 3 = 10 ➔ x = 7)",
+        "title_en": "Algebra Balance Scale Diagram",
+        "topic_id": "algebra_math",
+        "svg": """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" class="w-full h-auto rounded-2xl shadow-inner bg-gradient-to-b from-indigo-900 to-slate-950 font-sans">
+  <text x="320" y="30" font-size="14" font-weight="bold" fill="#38BDF8" text-anchor="middle">Aljebra: Mizani ya Mlinganyo (x + 3 = 10 ➔ x = 7)</text>
+
+  <!-- Balance Fulcrum -->
+  <polygon points="320,180 290,270 350,270" fill="#64748B" stroke="#94A3B8" stroke-width="2"/>
+  <rect x="250" y="270" width="140" height="20" rx="6" fill="#334155"/>
+
+  <!-- Balance Beam -->
+  <rect x="100" y="170" width="440" height="14" rx="4" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+  <circle cx="320" cy="177" r="8" fill="#EF4444"/>
+
+  <!-- Left Pan (x + 3) -->
+  <line x1="160" y1="184" x2="160" y2="230" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="100" y="230" width="120" height="12" rx="4" fill="#94A3B8"/>
+  <!-- Box for x -->
+  <rect x="110" y="190" width="40" height="40" rx="8" fill="#8B5CF6" stroke="#C4B5FD" stroke-width="2"/>
+  <text x="130" y="215" font-size="16" font-weight="bold" fill="#FFFFFF" text-anchor="middle">x</text>
+  <!-- 3 weights of +1 -->
+  <circle cx="165" cy="210" r="10" fill="#10B981" stroke="#ECFDF5" stroke-width="1.5"/>
+  <text x="165" y="214" font-size="9" font-weight="bold" fill="#FFFFFF" text-anchor="middle">+1</text>
+  <circle cx="190" cy="210" r="10" fill="#10B981" stroke="#ECFDF5" stroke-width="1.5"/>
+  <text x="190" y="214" font-size="9" font-weight="bold" fill="#FFFFFF" text-anchor="middle">+1</text>
+  <circle cx="178" cy="190" r="10" fill="#10B981" stroke="#ECFDF5" stroke-width="1.5"/>
+  <text x="178" y="194" font-size="9" font-weight="bold" fill="#FFFFFF" text-anchor="middle">+1</text>
+
+  <text x="160" y="265" font-size="12" font-weight="bold" fill="#A78BFA" text-anchor="middle">Upande wa Kushoto: x + 3</text>
+
+  <!-- Center Equals Sign -->
+  <text x="320" y="140" font-size="28" font-weight="bold" fill="#FDE047" text-anchor="middle">=</text>
+
+  <!-- Right Pan (10 weights) -->
+  <line x1="480" y1="184" x2="480" y2="230" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="420" y="230" width="120" height="12" rx="4" fill="#94A3B8"/>
+  <g transform="translate(435, 175)">
+    <circle cx="15" cy="40" r="9" fill="#10B981"/>
+    <circle cx="35" cy="40" r="9" fill="#10B981"/>
+    <circle cx="55" cy="40" r="9" fill="#10B981"/>
+    <circle cx="75" cy="40" r="9" fill="#10B981"/>
+    <circle cx="25" cy="22" r="9" fill="#10B981"/>
+    <circle cx="45" cy="22" r="9" fill="#10B981"/>
+    <circle cx="65" cy="22" r="9" fill="#10B981"/>
+    <circle cx="35" cy="4" r="9" fill="#10B981"/>
+    <circle cx="55" cy="4" r="9" fill="#10B981"/>
+    <circle cx="45" cy="-12" r="9" fill="#10B981"/>
+  </g>
+  <text x="480" y="265" font-size="12" font-weight="bold" fill="#34D399" text-anchor="middle">Upande wa Kulia: 10</text>
+
+  <!-- Bottom Equation Box -->
+  <rect x="120" y="300" width="400" height="55" rx="12" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="320" y="322" font-size="11" font-weight="bold" fill="#E2E8F0" text-anchor="middle">Hatua: Ondoa 3 pande zote mbili ➔ x = 10 - 3</text>
+  <text x="320" y="342" font-size="13" font-weight="900" fill="#FACC15" text-anchor="middle">JIBU: x = 7 (Mizani Imetulia Sawasawa!)</text>
+</svg>"""
     }
 }
 
@@ -286,16 +343,18 @@ DIAGRAMS = {
 def get_diagram_for_topic(query_or_id: str) -> Optional[Dict[str, Any]]:
     """Returns matching responsive SVG science diagram."""
     q = query_or_id.lower()
-    if any(k in q for k in ["photo", "mmea", "plant", "leaf", "jani", "usanisinuru", "sukuma", "bio", "botany"]):
-        return DIAGRAMS["photosynthesis"]
-    elif any(k in q for k in ["fish", "samaki", "ngege", "gill", "shavu", "ziwa", "lake", "respiration", "aquatic"]):
-        return DIAGRAMS["aquatic_biology_kisumu"]
-    elif any(k in q for k in ["electr", "circuit", "umeme", "saketi", "wire", "battery", "betri", "taa", "physics", "fizikia"]):
-        return DIAGRAMS["electricity_circuits"]
-    elif any(k in q for k in ["fraction", "sehemu", "divide", "gawanya", "hesabu", "chapati", "math", "hisabati", "algebra"]):
+    if any(k in q for k in ["algebra", "aljebra", "equation", "mlinganyo", "variable", "kigeuzi", "solve for x"]):
+        return DIAGRAMS["algebra_math"]
+    elif any(k in q for k in ["fraction", "sehemu", "divide", "gawanya", "chapati", "proportion", "math", "hisabati"]):
         return DIAGRAMS["fractions_math"]
     elif any(k in q for k in ["chem", "kemia", "acid", "asidi", "base", "besi", "reaction", "siki", "soda", "lemon", "chumvi"]):
         return DIAGRAMS["chemistry_reactions"]
     elif any(k in q for k in ["comput", "code", "coding", "program", "algorithm", "algoriti", "software", "tech", "teknolojia", "logic", "binary"]):
         return DIAGRAMS["computer_algorithms"]
+    elif any(k in q for k in ["electr", "circuit", "umeme", "saketi", "wire", "battery", "betri", "taa", "physics", "fizikia"]):
+        return DIAGRAMS["electricity_circuits"]
+    elif any(k in q for k in ["fish", "samaki", "ngege", "gill", "shavu", "ziwa", "lake", "respiration", "aquatic"]):
+        return DIAGRAMS["aquatic_biology_kisumu"]
+    elif any(k in q for k in ["photo", "mmea", "plant", "leaf", "jani", "usanisinuru", "sukuma", "bio", "botany"]):
+        return DIAGRAMS["photosynthesis"]
     return None
