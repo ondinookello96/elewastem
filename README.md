@@ -85,16 +85,62 @@
 +----------+  +----------+  +----------+
 |  Google  |  |  Google  |  | Africa's |
 |  Gemini  |  |  Cloud   |  | Talking  |
-| 2.5/3.5  |  |Firestore|  | 2G SMS   |
+| 3.7/2.0  |  |Firestore|  | 2G SMS   |
 |  Flash   |  | Mastery  |  | Webhook  |
 +----------+  +----------+  +----------+
 ```
 
 ---
 
-## ☁️ Google Cloud Deployment (Production Ready)
+## 🚀 Spin-Up & Reproducible Deployment Guide
 
-### Option A: One-Command Deployment to Google Cloud Run
+### 💻 1. Local Quick Start (Python Environment)
+
+**Prerequisites**: Python 3.10+ installed.
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/ondinookello96/elewastem.git
+cd elewastem
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. (Optional) Set your Gemini API Key (offline engine works 100% without a key)
+export GEMINI_API_KEY="your_api_key_here"  # On Windows PowerShell: $env:GEMINI_API_KEY="your_api_key"
+
+# 4. Launch the application server
+python run.py
+```
+👉 Open your browser at **`http://localhost:8000`** to experience the full interactive PWA.
+
+---
+
+### 🧪 2. Run the Full Automated Test Suite (14 Verification Suites)
+
+```bash
+python test_suite.py
+```
+*Executes all **14 end-to-end automated test suites** validating health status, 16+ living African languages (Masakhane/Lelapa grounding), 8 Pan-African DPA statutory frameworks, adaptive Socratic Gemini chat, multi-sensory accessibility (tactile audio for blind, KSL sign language for deaf), 100% offline vector SVG science diagrams, CBC teacher lesson plans, remote parent 2G SMS digests, community STEM clubs, multi-stakeholder feedback loops, ethical safety guardrails (ETHOS/OASIS), Maasai Elder multi-agent swarm orchestration (RANK/HUNT/TRAIL/CYCLE), and 8 African learning theories.*
+
+---
+
+### 🐳 3. Local Docker Spin-Up
+
+```bash
+# Build Docker image
+docker build -t elewastem .
+
+# Run container on port 8080
+docker run -p 8080:8080 elewastem
+```
+👉 Access the containerized application at **`http://localhost:8080`**.
+
+---
+
+### ☁️ 4. Google Cloud Deployment (Production Ready)
+
+#### Option A: One-Command Deployment to Google Cloud Run
 ```bash
 # Authenticate with Google Cloud
 gcloud auth login
@@ -111,29 +157,8 @@ gcloud run deploy elewastem \
   --set-env-vars GEMINI_API_KEY=your_gemini_api_key
 ```
 
-### Option B: Automated Google Cloud Build Pipeline
+#### Option B: Automated Google Cloud Build Pipeline
 ```bash
 # Trigger automated container build and deployment via Cloud Build
 gcloud builds submit --config cloudbuild.yaml
 ```
-
----
-
-## 💻 Local Quick Start & Reproducible Testing Instructions
-
-### 1. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 2. Launch the Application Server
-```bash
-python run.py
-```
-Open your browser at **`http://localhost:8000`** to experience the full interactive PWA (works online and 100% offline).
-
-### 3. Run the Full Automated Test Suite (14 Verification Suites)
-```bash
-python test_suite.py
-```
-*Executes all **14 end-to-end automated test suites** covering health checks, 16+ living African languages (Masakhane/Lelapa grounding), 8 Pan-African DPA statutory frameworks, adaptive Socratic Gemini chat, multi-sensory accessibility (tactile audio for blind, KSL sign language for deaf), 100% offline vector SVG science diagrams, CBC teacher lesson plans, remote parent 2G SMS digests, community STEM clubs, multi-stakeholder feedback loops, ethical safety guardrails (ETHOS/OASIS), Maasai Elder multi-agent swarm orchestration (RANK/HUNT/TRAIL/CYCLE), and 8 African learning theories.*
