@@ -1750,6 +1750,17 @@ async function loadOfflinePack() {
   }
 }
 
+function getActiveSessionHistory() {
+  if (!STATE.currentSessionId) return [];
+  const sessions = getChatSessions();
+  const session = sessions.find(s => s.id === STATE.currentSessionId);
+  if (!session || !session.messages) return [];
+  return session.messages.slice(-10).map(m => ({
+    role: m.role === 'user' ? 'user' : 'model',
+    text: m.text || ''
+  }));
+}
+
 // Chat Flow
 async function handleChatSubmit(e) {
   if (e) e.preventDefault();
@@ -1806,6 +1817,7 @@ async function executeAgentQuery(query, simplify = false) {
       body: JSON.stringify({
         student_id: STATE.studentId,
         message: query,
+        history: getActiveSessionHistory(),
         language: STATE.language,
         region: STATE.region,
         jurisdiction: STATE.jurisdiction,

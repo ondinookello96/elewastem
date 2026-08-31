@@ -705,7 +705,6 @@ def get_diagram_for_topic(query_or_id: str) -> Optional[Dict[str, Any]]:
                 "svg": generate_concept_diagram_svg(topic)
             }
             
-    # Fallback to photosynthesis
-    return DIAGRAMS.get("photosynthesis")
+    return None
 
 

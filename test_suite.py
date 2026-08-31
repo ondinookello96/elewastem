@@ -1,10 +1,11 @@
 import sys
-import io
+import os
 import requests
 import json
 
-# Force UTF-8 stdout
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+# Ensure unbuffered UTF-8 output
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', line_buffering=True)
 
 BASE_URL = 'http://localhost:8000'
 

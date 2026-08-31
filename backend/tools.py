@@ -320,8 +320,8 @@ RELATED_TOPIC_GRAPH: Dict[str, List[Dict[str, Any]]] = {
 def get_related_topics_recommendations(topic_id_or_query: str) -> List[Dict[str, Any]]:
     """Returns structured next topic recommendations based on current learning."""
     topic = find_offline_topic(topic_id_or_query)
-    tid = topic.get("id", "photosynthesis")
-    return RELATED_TOPIC_GRAPH.get(tid, RELATED_TOPIC_GRAPH.get("photosynthesis", []))
+    tid = topic.get("id", "")
+    return RELATED_TOPIC_GRAPH.get(tid, [])
 
 
 def find_offline_topic(query: str, preferred_subject: str = "all", preferred_topic_id: Optional[str] = None) -> Dict[str, Any]:

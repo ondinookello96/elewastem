@@ -74,7 +74,8 @@ class ElewaAgent:
         subject: str = "all",
         topic_id: Optional[str] = None,
         grade_level: Optional[str] = None,
-        country: str = "Kenya"
+        country: str = "Kenya",
+        history: Optional[List[Dict[str, Any]]] = None
     ) -> Dict[str, Any]:
         """
         Generates an adaptive Socratic response implementing the 4Ds Framework with Dynamic Temperature Dialing.
@@ -86,9 +87,13 @@ class ElewaAgent:
         effective_grade = grade_level or profile.grade_level
         mastery_summary = ", ".join([f"{k} ({v.mastery_score}% mastery)" for k, v in profile.mastery_graph.items()]) or "New curious learner"
         
-        # Build 8-turn conversation history with explicit role markers
-        history_turns = profile.recent_interactions[-8:]
-        recent_history = "\n".join([f"{'Student' if item['role'] == 'user' else 'ElewaSTEM Tutor'}: {item['content']}" for item in history_turns]) or "(This is the beginning of the conversation)"
+        # Build 10-turn conversation history with explicit role markers (from incoming payload or memory profile)
+        if history and len(history) > 0:
+            history_turns = history[-10:]
+            recent_history = "\n".join([f"{'Student' if item.get('role') == 'user' else 'ElewaSTEM Tutor'}: {item.get('text', '')}" for item in history_turns])
+        else:
+            history_turns = profile.recent_interactions[-10:]
+            recent_history = "\n".join([f"{'Student' if item['role'] == 'user' else 'ElewaSTEM Tutor'}: {item['content']}" for item in history_turns]) or "(This is the beginning of the conversation)"
         
         # Temperature Dial: Higher for storytelling/analogies (0.75), Lower for exact calculations/science formulas (0.2)
         temperature = 0.2 if mode == "precise" else 0.75
@@ -225,9 +230,9 @@ Reasoning Mode: {mode.upper()} (Temperature: {temperature})
                 print(f"[ElewaAgent] Google AI (Gemini/Gemma) API call error: {e}. Falling back to regional offline engine.")
 
         # Offline fallback applying the exact same 4Ds structure
-        return self._generate_offline_response(student_id, message, target_language, region, simplify, mode, subject, topic_id=topic_id)
+        return self._generate_offline_response(student_id, message, target_language, region, simplify, mode, subject, topic_id=topic_id, history=history)
 
-    def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool, mode: str = "creative", subject: str = "all", topic_id: Optional[str] = None) -> Dict[str, Any]:
+    def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool, mode: str = "creative", subject: str = "all", topic_id: Optional[str] = None, history: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
         """Generates rich, dynamic Socratic offline responses that accurately and directly answer the exact question asked."""
         profile = student_memory.get_or_create_profile(student_id, language=language, region=region)
         topic_data = find_offline_topic(message, preferred_subject=subject, preferred_topic_id=topic_id)
@@ -236,7 +241,7 @@ Reasoning Mode: {mode.upper()} (Temperature: {temperature})
         is_sw = (language.lower() != "en" and language.lower() != "english")
         
         msg_lower = message.lower().strip()
-        recent_turns = profile.recent_interactions
+        recent_turns = history if (history and len(history) > 0) else profile.recent_interactions
         is_follow_up = len(recent_turns) >= 2
 
         title = topic_data["title_sw"] if is_sw else topic_data["title_en"]

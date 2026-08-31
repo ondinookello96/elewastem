@@ -51,6 +51,7 @@ FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "fronten
 class ChatRequest(BaseModel):
     student_id: str = "demo_student"
     message: str
+    history: Optional[List[Dict[str, Any]]] = None
     language: str = "sw"
     region: str = "lake_basin"
     jurisdiction: str = "KE"
@@ -183,7 +184,8 @@ async def chat_with_agent(req: ChatRequest):
         subject=req.subject or "all",
         topic_id=req.topic_id,
         grade_level=req.grade_level or "Grade 6 (Upper Primary)",
-        country=req.country or "Kenya"
+        country=req.country or "Kenya",
+        history=req.history
     )
     
     if not safety_check["safe"]:
