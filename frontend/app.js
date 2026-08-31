@@ -1215,7 +1215,7 @@ function appendAssistantMessage(data) {
     </div>
     <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[85%] text-sm text-slate-800 space-y-3">
       <div class="flex items-center space-x-2 flex-wrap gap-1 mb-1">
-        ${isOffline ? '<span class="inline-block bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📦 Offline Vault</span>' : '<span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">✨ Gemini 3.7 Flash</span>'}
+        ${isOffline ? '<span class="inline-block bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📦 Offline Vault</span>' : (data.source && data.source.includes('gemma') ? '<span class="inline-block bg-sky-100 text-sky-800 text-[10px] font-bold px-2 py-0.5 rounded-full">💎 Google Gemma 2 (Edge)</span>' : '<span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">✨ Gemini 3.7 Flash</span>')}
         <span class="inline-block bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full">${regMeta.icon} ${regMeta.name_sw}</span>
         ${langMeta ? `<span class="inline-block bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full">${langMeta.flag} ${langMeta.native_name}</span>` : ''}
       </div>

@@ -115,11 +115,20 @@ Reasoning Mode: {mode.upper()} (Temperature: {temperature})
 Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with warm African friendship persona.
 """
 
-        # Try Gemini API if client available
+        # Try Gemini / Gemma API if client available
         if self.client:
             try:
-                # Primary: Google Gemini 3.7 Flash (Hybrid Reasoning Model)
-                model_name = os.getenv("GEMINI_MODEL", "gemini-3.7-flash")
+                # Primary: Google Gemini 3.7 Flash (Hybrid Reasoning) or Google Gemma (Open Weights Edge)
+                requested_model = os.getenv("AI_MODEL_FAMILY", "gemini-3.7-flash")
+                
+                # Check if user/system specifically configured Gemma open-weights edge model
+                if "gemma" in requested_model.lower():
+                    model_name = os.getenv("GEMMA_MODEL", "gemma-2-9b-it")
+                    source_badge = "gemma-2-edge"
+                else:
+                    model_name = os.getenv("GEMINI_MODEL", "gemini-3.7-flash")
+                    source_badge = "gemini-3.7-flash"
+
                 try:
                     response = self.client.models.generate_content(
                         model=model_name,
@@ -130,10 +139,11 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                         )
                     )
                 except Exception as model_err:
-                    print(f"[ElewaAgent] Primary model {model_name} error: {model_err}. Trying gemini-2.0-flash fallback.")
-                    model_name = "gemini-2.0-flash"
+                    print(f"[ElewaAgent] Model {model_name} error: {model_err}. Trying gemini-2.0-flash / gemma-2-2b-it fallback.")
+                    fallback_model = "gemma-2-2b-it" if "gemma" in requested_model.lower() else "gemini-2.0-flash"
+                    source_badge = "gemma-2-edge" if "gemma" in requested_model.lower() else "gemini-2.0-flash"
                     response = self.client.models.generate_content(
-                        model=model_name,
+                        model=fallback_model,
                         contents=user_prompt,
                         config=types.GenerateContentConfig(
                             system_instruction=SYSTEM_INSTRUCTION,
@@ -155,7 +165,7 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                 )
 
                 return {
-                    "source": "gemini-3.7-flash",
+                    "source": source_badge,
                     "text": response_text,
                     "language": target_language,
                     "region": region,
@@ -170,7 +180,7 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                     "student_profile": student_memory.get_or_create_profile(student_id).model_dump()
                 }
             except Exception as e:
-                print(f"[ElewaAgent] Gemini API call error: {e}. Falling back to regional offline engine.")
+                print(f"[ElewaAgent] Google AI (Gemini/Gemma) API call error: {e}. Falling back to regional offline engine.")
 
         # Offline fallback applying the exact same 4Ds structure
         return self._generate_offline_response(student_id, message, target_language, region, simplify, mode)
