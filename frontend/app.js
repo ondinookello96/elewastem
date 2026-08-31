@@ -47,23 +47,195 @@ const STATE = {
   currentQuiz: null
 };
 
-// UI Translations
+// UI Translations (Pure Single-Language per selected locale)
 const I18N = {
   sw: {
-    tab_chat: 'Mwanafunzi Chat',
-    tab_vault: 'Offline Vault (Masomo)',
-    tab_mastery: 'Maendeleo',
-    input_placeholder: 'Ongea kwa kipaza sauti au andika swali lako...',
+    menu_btn: 'Menyu & Mipangilio',
+    active_profile_label: 'Wasifu wa Mwanafunzi',
+    learner_setup_title: '🎓 Mipangilio ya Masomo',
+    subject_label: '📚 Somo:',
+    grade_label: '🎓 Kiwango cha Masomo:',
+    country_label: '🌍 Nchi:',
+    language_label: '🗣️ Lugha ya Kujifunza:',
+    region_label: '🏞️ Mazingira ya Eneo:',
+    inclusion_title: '♿ Ujumuishi na Ufikiaji',
+    inclusion_btn_title: 'Ujumuishi',
+    inclusion_btn_sub: 'Wasioona, Viziwi & Dyslexia',
+    voice_label_on: 'Sauti: Washa',
+    voice_label_off: 'Sauti: Zima',
+    voice_btn_sub: 'Usomaji wa Sauti',
+    thinking_mode_title: '🧠 Hali ya Kufikiri',
+    thinking_mode_btn: 'Badili Hali',
+    hubs_title: '📂 Masomo, Maendeleo & Wadau',
+    hub_chat_title: 'Gumzo la Masomo',
+    hub_chat_sub: 'Rudi kwenye ukurasa wa gumzo',
+    hub_vault_title: 'Hifadhi ya Masomo (Offline Vault)',
+    hub_vault_sub: 'Majaribio na masomo bila mtandao (0 KB)',
+    hub_mastery_title: 'Maendeleo & Beji za Ushindi',
+    hub_mastery_sub: 'Kiwango cha uelewa wa mada na beji',
+    hub_stakeholders_title: 'Kituo cha Wadau & Maoni',
+    hub_stakeholders_sub: 'Mipango ya walimu, SMS za wazazi na maoni',
+    hub_privacy_title: 'Ulinzi wa Data za Kibinafsi',
+    hub_privacy_sub: 'Sheria 8 za nchi za Afrika (DPA)',
+    hub_languages_title: 'Lugha 16+ za Kiafrika',
+    hub_languages_sub: 'Tathmini za Masakhane na Gemini Multilingual',
+    hub_install_title: 'Sakinisha Programu',
+    hub_install_sub: 'Weka kwenye skrini ya simu, inafanya kazi bila mtandao',
+    feedback_btn: '💬 Toa Maoni',
+    back_to_chat: 'Rudi kwenye Gumzo',
+    welcome_title: 'Hujambo rafiki yangu! 🌟',
+    welcome_text: 'Mimi ni ElewaSTEM—mwalimu wako wa Sayansi na Hesabu. Bonyeza kipaza sauti 🎤 kuongea au andika swali lako hapa chini!',
+    welcome_chips_title: '💡 Mada za Kuanza:',
+    input_placeholder: 'Ongea kwa sauti au andika swali lako...',
     online_text: 'Mtandaoni',
     offline_text: 'Nje ya Mtandao (0 KB)',
     listen_btn: '🔊 Sikiliza',
     simplify_btn: '💡 Rahisisha',
-    quiz_btn: '🎯 Fanya Jaribio'
+    quiz_btn: '🎯 Fanya Jaribio',
+    vault_box_title: '📦 Hifadhi ya Masomo ya Sayansi',
+    vault_box_sub: 'Masomo ya sayansi yenye maelezo ya sauti na ya picha bila mtandao (0 KB).',
+    profile_memory_desc: 'Mfumo unafuatilia maendeleo yako kote barani Afrika.',
+    badges_earned_title: 'Beji Ulizoshinda',
+    concept_mastery_title: 'Kiwango cha Uelewa kwa Mada',
+    stakeholders_banner_title: 'Kituo cha Wadau wa Elimu & Mfumo wa Maoni',
+    stakeholders_banner_sub: 'Kuunganisha Wazazi, Walimu, Vilabu vya Jamii na Wataalamu wa Mahitaji Maalum ili kutoa maoni endelevu na kuboresha elimu ya STEM.',
+    privacy_banner_title: 'Ulinzi wa Data & Maadili ya AI',
+    privacy_banner_sub: 'Kuzingatia sheria za ulinzi wa data za watoto na mifumo ya maadili ya AI barani Afrika.',
+    subjects: {
+      all: '🌟 Masomo Yote ya STEM',
+      mathematics: '📐 Hisabati & Aljebra',
+      biology: '🔬 Biolojia',
+      physics: '⚡ Fizikia',
+      chemistry: '⚗️ Kemia',
+      computer_science: '💻 Sayansi ya Kompyuta',
+      agriculture: '🌾 Kilimo & Mazingira'
+    },
+    grades: {
+      'Grade 1-3 (Lower Primary)': '🌱 Darasa 1–3 (Msingi)',
+      'Grade 6 (Upper Primary)': '🌿 Darasa 4–6 (CBC)',
+      'Grade 7-9 (Junior Secondary)': '🔬 Darasa 7–9 (JSS)',
+      'Grade 10-12 (Senior High)': '⚡ Kidato 3–4 (Upili)'
+    },
+    regions: {
+      lake_basin: '🏞️ Ziwa Victoria & Kisumu',
+      coastal: '🌊 Pwani na Bahari',
+      highlands: '⛰️ Nyanda za Juu & Kilimo',
+      arid: '☀️ Maeneo Kavu & Sahel',
+      urban: '🏙️ Mijini'
+    }
+  },
+  en: {
+    menu_btn: 'Menu & Settings',
+    active_profile_label: 'Active Profile',
+    learner_setup_title: '🎓 Learner Settings',
+    subject_label: '📚 Subject:',
+    grade_label: '🎓 Grade Level:',
+    country_label: '🌍 Country:',
+    language_label: '🗣️ Learning Language:',
+    region_label: '🏞️ Eco-Zone / Region:',
+    inclusion_title: '♿ Universal Accessibility',
+    inclusion_btn_title: 'Accessibility',
+    inclusion_btn_sub: 'Blind, Deaf & Dyslexia',
+    voice_label_on: 'Voice: On',
+    voice_label_off: 'Voice: Off',
+    voice_btn_sub: 'Voice Reading',
+    thinking_mode_title: '🧠 Thinking Mode',
+    thinking_mode_btn: 'Switch Mode',
+    hubs_title: '📂 Learning, Mastery & Stakeholders',
+    hub_chat_title: 'Learner Chat',
+    hub_chat_sub: 'Return to active learning chat',
+    hub_vault_title: 'Offline Knowledge Vault',
+    hub_vault_sub: 'Experiments & lessons without internet (0 KB)',
+    hub_mastery_title: 'Concept Mastery & Badges',
+    hub_mastery_sub: 'Track topic scores and badges',
+    hub_stakeholders_title: 'Stakeholder & Feedback Hub',
+    hub_stakeholders_sub: 'Teacher lesson plans, parent SMS & feedback',
+    hub_privacy_title: 'Data Privacy & Legal Compliance',
+    hub_privacy_sub: '8 African data protection frameworks',
+    hub_languages_title: '16+ African Languages & NLP',
+    hub_languages_sub: 'Masakhane benchmarks & Gemini AI',
+    hub_install_title: 'Install Mobile App',
+    hub_install_sub: 'Add to home screen, works 100% offline',
+    feedback_btn: '💬 Feedback',
+    back_to_chat: 'Back to Chat',
+    welcome_title: 'Hello my friend! 🌟',
+    welcome_text: 'I am ElewaSTEM—your STEM tutor. Tap the microphone 🎤 or type your question below to start learning!',
+    welcome_chips_title: '💡 Quick Start Topics:',
+    input_placeholder: 'Speak using the microphone or type your question...',
+    online_text: 'Online',
+    offline_text: 'Offline (0 KB)',
+    listen_btn: '🔊 Listen',
+    simplify_btn: '💡 Simplify',
+    quiz_btn: '🎯 Take Quiz',
+    vault_box_title: '📦 Offline STEM Knowledge Vault',
+    vault_box_sub: 'STEM lessons with voice narration and offline diagrams (0 KB).',
+    profile_memory_desc: 'Tracking your learning journey across Africa.',
+    badges_earned_title: 'Earned Badges',
+    concept_mastery_title: 'Concept Mastery by Topic',
+    stakeholders_banner_title: 'Education Stakeholder & Feedback Hub',
+    stakeholders_banner_sub: 'Connecting Parents, Teachers, Community Clubs and Accessibility Mentors for continuous learning improvement.',
+    privacy_banner_title: 'Data Privacy & Ethical AI Hub',
+    privacy_banner_sub: 'Adhering to African child data protection laws and ethical AI frameworks.',
+    subjects: {
+      all: '🌟 All STEM Subjects',
+      mathematics: '📐 Mathematics & Algebra',
+      biology: '🔬 Biology',
+      physics: '⚡ Physics',
+      chemistry: '⚗️ Chemistry',
+      computer_science: '💻 Computer Science',
+      agriculture: '🌾 Agriculture & Environment'
+    },
+    grades: {
+      'Grade 1-3 (Lower Primary)': '🌱 Grade 1–3 (Lower Primary)',
+      'Grade 6 (Upper Primary)': '🌿 Grade 4–6 (Upper Primary)',
+      'Grade 7-9 (Junior Secondary)': '🔬 Grade 7–9 (Junior Secondary)',
+      'Grade 10-12 (Senior High)': '⚡ Grade 10–12 (Senior High)'
+    },
+    regions: {
+      lake_basin: '🏞️ Lake Victoria & Kisumu',
+      coastal: '🌊 Coastal & Marine',
+      highlands: '⛰️ Agricultural Highlands',
+      arid: '☀️ Arid & Sahel',
+      urban: '🏙️ Urban & Peri-Urban'
+    }
   },
   sheng: {
-    tab_chat: 'Msee wa STEM',
-    tab_vault: 'Masomo Offline',
-    tab_mastery: 'Level Yangu',
+    menu_btn: 'Menyu & Mipangilio',
+    active_profile_label: 'Level Yangu',
+    learner_setup_title: '🎓 Setup ya Masomo',
+    subject_label: '📚 Somo:',
+    grade_label: '🎓 Kiwango:',
+    country_label: '🌍 Country:',
+    language_label: '🗣️ Lugha:',
+    region_label: '🏞️ Eneo:',
+    inclusion_title: '♿ Ujumuishi',
+    inclusion_btn_title: 'Ujumuishi',
+    inclusion_btn_sub: 'Blind, Deaf & Dyslexia',
+    voice_label_on: 'Sauti: Washa',
+    voice_label_off: 'Sauti: Zima',
+    voice_btn_sub: 'Usomaji wa Sauti',
+    thinking_mode_title: '🧠 Kufikiri',
+    thinking_mode_btn: 'Badili Mode',
+    hubs_title: '📂 Masomo & Wadau',
+    hub_chat_title: 'Msee wa STEM',
+    hub_chat_sub: 'Rudi kwenye chat',
+    hub_vault_title: 'Masomo ya Offline',
+    hub_vault_sub: 'Masomo bila neti (0 KB)',
+    hub_mastery_title: 'Level Yangu & Badges',
+    hub_mastery_sub: 'Alama za mada na beji',
+    hub_stakeholders_title: 'Wadau & Maoni',
+    hub_stakeholders_sub: 'Walimu, wazazi na maoni',
+    hub_privacy_title: 'Privacy ya Data',
+    hub_privacy_sub: 'Sheria za data Afrika',
+    hub_languages_title: 'Lugha 16+ za Afrika',
+    hub_languages_sub: 'Masakhane & Gemini',
+    hub_install_title: 'Weka kwa Simu',
+    hub_install_sub: 'Weka app kwa screen',
+    feedback_btn: '💬 Toa Maoni',
+    back_to_chat: 'Rudi kwa Chat',
+    welcome_title: 'Niaje msee wangu! 🌟',
+    welcome_text: 'Mimi ni ElewaSTEM—ticha wako wa Sayansi na Maths. Bonga na mic 🎤 au type swali hapa chini!',
+    welcome_chips_title: '💡 Anzia Hapa:',
     input_placeholder: 'Bonga na mic au type swali yako...',
     online_text: 'Online',
     offline_text: 'Offline (Zero Data)',
@@ -72,9 +244,42 @@ const I18N = {
     quiz_btn: '🎯 Cheza Quiz'
   },
   yo: {
-    tab_chat: 'Olùkọ́ STEM',
-    tab_vault: 'Ẹ̀kọ́ Àìlórí Ayélujára',
-    tab_mastery: 'Ìlọsíwájú',
+    menu_btn: 'Ètò & Àkójọ',
+    active_profile_label: 'Ìwé Ẹ̀kọ́ Rẹ',
+    learner_setup_title: '🎓 Ètò Ẹ̀kọ́',
+    subject_label: '📚 Kókó Ẹ̀kọ́:',
+    grade_label: '🎓 Ipele:',
+    country_label: '🌍 Orílẹ̀-èdè:',
+    language_label: '🗣️ Èdè:',
+    region_label: '🏞️ Agbègbè:',
+    inclusion_title: '♿ Àwọn Àìní Pàtàkì',
+    inclusion_btn_title: 'Àìní Pàtàkì',
+    inclusion_btn_sub: 'Àwọn Afọ́jú & Adití',
+    voice_label_on: 'Ohùn: Tan',
+    voice_label_off: 'Ohùn: Pa',
+    voice_btn_sub: 'Kíkà Ohùn',
+    thinking_mode_title: '🧠 Ọ̀nà Ìrònú',
+    thinking_mode_btn: 'Yípadà',
+    hubs_title: '📂 Ẹ̀kọ́ & Ìlọsíwájú',
+    hub_chat_title: 'Olùkọ́ STEM',
+    hub_chat_sub: 'Padà sí ìfọ̀rọ̀wérọ̀',
+    hub_vault_title: 'Ẹ̀kọ́ Àìlórí Ayélujára',
+    hub_vault_sub: 'Ẹ̀kọ́ láìsí ayélujára (0 KB)',
+    hub_mastery_title: 'Ìlọsíwájú & Àwọn Àmì',
+    hub_mastery_sub: 'Àwọn àmì ẹ̀kọ́ rẹ',
+    hub_stakeholders_title: 'Àwọn Olùkópa & Èsì',
+    hub_stakeholders_sub: 'Àwọn olùkọ́ & àwọn òbí',
+    hub_privacy_title: 'Ààbò Data',
+    hub_privacy_sub: 'Òfin ààbò data ní Áfíríkà',
+    hub_languages_title: 'Àwọn Èdè Áfíríkà 16+',
+    hub_languages_sub: 'Masakhane & Gemini',
+    hub_install_title: 'Fi Sori Fóònù',
+    hub_install_sub: 'Fi sori iboju fóònù rẹ',
+    feedback_btn: '💬 Fi Èsì Ránṣẹ́',
+    back_to_chat: 'Padà sí Ìfọ̀rọ̀wérọ̀',
+    welcome_title: 'Báwo ọ̀rẹ́ mi! 🌟',
+    welcome_text: 'Èmi ni ElewaSTEM—olùkọ́ rẹ fún STEM. Tẹ maiki 🎤 tàbí kọ ìbéèrè rẹ ní ìsàlẹ̀!',
+    welcome_chips_title: '💡 Àwọn Àkòrí Ìbẹ̀rẹ̀:',
     input_placeholder: 'Sọ̀rọ̀ sínú mic tàbí kọ ìbéèrè rẹ...',
     online_text: 'Lórí Ayélujára',
     offline_text: 'Àìlórí Ayélujára (0 KB)',
@@ -83,9 +288,42 @@ const I18N = {
     quiz_btn: '🎯 Ṣe Ìdánwò'
   },
   ha: {
-    tab_chat: 'Malamin STEM',
-    tab_vault: 'Karatun Ba Intanet',
-    tab_mastery: 'Ci gaba',
+    menu_btn: 'Menu & Saituna',
+    active_profile_label: 'Bayanin Dalibi',
+    learner_setup_title: '🎓 Saitin Koyo',
+    subject_label: '📚 Darasi:',
+    grade_label: '🎓 Mataki:',
+    country_label: '🌍 Kasa:',
+    language_label: '🗣️ Harshe:',
+    region_label: '🏞️ Yanki:',
+    inclusion_title: '♿ Bukatu Na Musamman',
+    inclusion_btn_title: 'Samun Dama',
+    inclusion_btn_sub: 'Makafi & Kurame',
+    voice_label_on: 'Murya: Kunna',
+    voice_label_off: 'Murya: Kashe',
+    voice_btn_sub: 'Karatun Murya',
+    thinking_mode_title: '🧠 Yanayin Tunani',
+    thinking_mode_btn: 'Sauya Yanayi',
+    hubs_title: '📂 Karatu & Ci gaba',
+    hub_chat_title: 'Malamin STEM',
+    hub_chat_sub: 'Koma zuwa hira',
+    hub_vault_title: 'Karatun Ba Intanet',
+    hub_vault_sub: 'Darasi ba tare da intanet ba (0 KB)',
+    hub_mastery_title: 'Ci gaba & Lambobin Yabo',
+    hub_mastery_sub: 'Matsayin fahimtar darussa',
+    hub_stakeholders_title: 'Masu Ruwa da Tsaki',
+    hub_stakeholders_sub: 'Malamai, iyaye da ra\'ayoyi',
+    hub_privacy_title: 'Kariyar Bayanai',
+    hub_privacy_sub: 'Dokokin kariyar bayanai a Afirka',
+    hub_languages_title: 'Harsunan Afirka 16+',
+    hub_languages_sub: 'Masakhane & Gemini',
+    hub_install_title: 'Sanya a Waya',
+    hub_install_sub: 'Sanya a fuskar waya',
+    feedback_btn: '💬 Bayar da Ra\'ayi',
+    back_to_chat: 'Koma zuwa Hira',
+    welcome_title: 'Sannu abokina! 🌟',
+    welcome_text: 'Ni ne ElewaSTEM—malamin ka na STEM. Danna makirufo 🎤 ko rubuta tambayarka a kasa!',
+    welcome_chips_title: '💡 Batutuwan Farko:',
     input_placeholder: 'Yi magana ta mic ko rubuta tambaya...',
     online_text: 'A Layi',
     offline_text: 'Babu Intanet (0 KB)',
@@ -94,9 +332,42 @@ const I18N = {
     quiz_btn: '🎯 Yi Tambayoyi'
   },
   ig: {
-    tab_chat: 'Onye Nkuzi STEM',
-    tab_vault: 'Ihe Ọmụmụ Offline',
-    tab_mastery: 'Ọganihu',
+    menu_btn: 'Menu & Ntọala',
+    active_profile_label: 'Profaịlụ Nwa Akwụkwọ',
+    learner_setup_title: '🎓 Ntọala Ọmụmụ',
+    subject_label: '📚 Isiokwu:',
+    grade_label: '🎓 Ọkwa:',
+    country_label: '🌍 Obodo:',
+    language_label: '🗣️ Asụsụ:',
+    region_label: '🏞️ Mpaghara:',
+    inclusion_title: '♿ Mkpa Pụrụ Iche',
+    inclusion_btn_title: 'Nnweta',
+    inclusion_btn_sub: 'Ndị Kpuru Ìsì & Ndị Nti Chiri',
+    voice_label_on: 'Olu: Gbanwuo',
+    voice_label_off: 'Olu: Gbanyụọ',
+    voice_btn_sub: 'Ọgụgụ Olu',
+    thinking_mode_title: '🧠 Ụdị Echiche',
+    thinking_mode_btn: 'Gbanwee Ụdị',
+    hubs_title: '📂 Ọmụmụ & Ọganihu',
+    hub_chat_title: 'Onye Nkuzi STEM',
+    hub_chat_sub: 'Laghachi na nkata',
+    hub_vault_title: 'Ihe Ọmụmụ Offline',
+    hub_vault_sub: 'Ihe ọmụmụ na-enweghị ịntanetị (0 KB)',
+    hub_mastery_title: 'Ọganihu & Baajị',
+    hub_mastery_sub: 'Ọkwa nghọta nke isiokwu',
+    hub_stakeholders_title: 'Ndị Metụtara & Nzaghachi',
+    hub_stakeholders_sub: 'Ndị nkuzi, ndị nne na nna',
+    hub_privacy_title: 'Nchedo Data',
+    hub_privacy_sub: 'Iwu nchedo data na Afrịka',
+    hub_languages_title: 'Asụsụ Afrịka 16+',
+    hub_languages_sub: 'Masakhane & Gemini',
+    hub_install_title: 'Wụnye na Ekwentị',
+    hub_install_sub: 'Tinye na ihuenyo ekwentị',
+    feedback_btn: '💬 Nye Nzaghachi',
+    back_to_chat: 'Laghachi na Nkata',
+    welcome_title: 'Ndewo enyi m! 🌟',
+    welcome_text: 'Abụ m ElewaSTEM—onye nkuzi gị maka STEM. Pịa mic 🎤 ma ọ bụ dee ajụjụ gị n\'okpuru!',
+    welcome_chips_title: '💡 Isiokwu Mmalite:',
     input_placeholder: 'Kwuo okwu na mic ma ọ bụ dee ajụjụ...',
     online_text: 'N\'ịntanetị',
     offline_text: 'Na-enweghị ịntanetị (0 KB)',
@@ -105,28 +376,51 @@ const I18N = {
     quiz_btn: '🎯 Mee Nnwale'
   },
   pcm: {
-    tab_chat: 'STEM Ticha',
-    tab_vault: 'Offline Lessons',
-    tab_mastery: 'My Progress',
+    menu_btn: 'Menu & Settings',
+    active_profile_label: 'Student Profile',
+    learner_setup_title: '🎓 Learning Settings',
+    subject_label: '📚 Subject:',
+    grade_label: '🎓 Class Level:',
+    country_label: '🌍 Country:',
+    language_label: '🗣️ Language:',
+    region_label: '🏞️ Area:',
+    inclusion_title: '♿ Special Support',
+    inclusion_btn_title: 'Accessibility',
+    inclusion_btn_sub: 'Blind, Deaf & Dyslexia',
+    voice_label_on: 'Voice: On',
+    voice_label_off: 'Voice: Off',
+    voice_btn_sub: 'Voice Reading',
+    thinking_mode_title: '🧠 Thinking Mode',
+    thinking_mode_btn: 'Change Mode',
+    hubs_title: '📂 Study & Progress',
+    hub_chat_title: 'STEM Ticha',
+    hub_chat_sub: 'Go back to chat',
+    hub_vault_title: 'Offline Lessons',
+    hub_vault_sub: 'Lessons without internet (0 KB)',
+    hub_mastery_title: 'My Progress & Badges',
+    hub_mastery_sub: 'Topic scores and badges',
+    hub_stakeholders_title: 'Stakeholders & Feedback',
+    hub_stakeholders_sub: 'Teachers, parents and feedback',
+    hub_privacy_title: 'Data Privacy',
+    hub_privacy_sub: 'African data laws',
+    hub_languages_title: '16+ African Languages',
+    hub_languages_sub: 'Masakhane & Gemini',
+    hub_install_title: 'Install for Phone',
+    hub_install_sub: 'Put am for phone screen',
+    feedback_btn: '💬 Give Feedback',
+    back_to_chat: 'Go Back to Chat',
+    welcome_title: 'How far my friend! 🌟',
+    welcome_text: 'I be ElewaSTEM—your STEM tutor. Tap the mic 🎤 or type your question below!',
+    welcome_chips_title: '💡 Topics to Start:',
     input_placeholder: 'Talk for mic or type your question...',
     online_text: 'Online',
     offline_text: 'Offline (0 KB)',
     listen_btn: '🔊 Listen',
     simplify_btn: '💡 Break am down',
     quiz_btn: '🎯 Take Quiz'
-  },
-  en: {
-    tab_chat: 'Learner Chat',
-    tab_vault: 'Offline Vault (Lessons)',
-    tab_mastery: 'Mastery & Badges',
-    input_placeholder: 'Speak using the microphone or type your question...',
-    online_text: 'Online',
-    offline_text: 'Offline (0 KB)',
-    listen_btn: '🔊 Listen',
-    simplify_btn: '💡 Simplify',
-    quiz_btn: '🎯 Take Quiz'
   }
 };
+
 
 // Regional Quick Prompt Templates
 const REGIONAL_PROMPT_CHIPS = {
@@ -841,7 +1135,40 @@ function updateUIStrings() {
   });
   const input = document.getElementById('userInput');
   if (input) input.placeholder = dict.input_placeholder;
+
+  // Translate subject select options
+  if (dict.subjects) {
+    const subjSelect = document.getElementById('learnerSubjectSelect');
+    if (subjSelect) {
+      Array.from(subjSelect.options).forEach(opt => {
+        if (dict.subjects[opt.value]) opt.text = dict.subjects[opt.value];
+      });
+    }
+  }
+
+  // Translate grade select options
+  if (dict.grades) {
+    const gradeSelect = document.getElementById('learnerGradeSelect');
+    if (gradeSelect) {
+      Array.from(gradeSelect.options).forEach(opt => {
+        if (dict.grades[opt.value]) opt.text = dict.grades[opt.value];
+      });
+    }
+  }
+
+  // Translate region select options
+  if (dict.regions) {
+    const regionSelect = document.getElementById('learnerRegionSelect');
+    if (regionSelect) {
+      Array.from(regionSelect.options).forEach(opt => {
+        if (dict.regions[opt.value]) opt.text = dict.regions[opt.value];
+      });
+    }
+  }
+
+  updateHeaderStatusPill();
 }
+
 
 // Navigation Tabs
 function switchTab(tabId) {
@@ -1915,22 +2242,8 @@ function updateHeaderStatusPill() {
     Ethiopia: '🇪🇹 Ethiopia'
   };
 
-  const subjNames = {
-    all: '🌟 All STEM',
-    mathematics: '📐 Hesabu',
-    biology: '🔬 Biolojia',
-    physics: '⚡ Fizikia',
-    chemistry: '⚗️ Kemia',
-    computer_science: '💻 CS',
-    agriculture: '🌾 Kilimo'
-  };
-
-  const gradeShort = {
-    'Grade 1-3 (Lower Primary)': '🌱 G1–3',
-    'Grade 6 (Upper Primary)': '🌿 G4–6',
-    'Grade 7-9 (Junior Secondary)': '🔬 G7–9',
-    'Grade 10-12 (Senior High)': '⚡ G10–12'
-  };
+  const dict = I18N[STATE.language] || I18N.sw;
+  const isEn = STATE.language === 'en';
 
   const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
   const langMeta = STATE.languagesMeta[STATE.language] || { flag: '🇰🇪', native_name: 'Kiswahili' };
@@ -1939,9 +2252,9 @@ function updateHeaderStatusPill() {
   const summaryEl = document.getElementById('menuProfileSummaryText');
   if (summaryEl) {
     const cName = countryFlags[STATE.country] || `🌍 ${STATE.country}`;
-    const sName = subjNames[STATE.subject] || '🌟 All STEM';
-    const gName = gradeShort[STATE.gradeLevel] || '🌿 Grade 4–6';
-    const rName = `${reg.icon} ${reg.name_sw.split(' ')[0]}`;
+    const sName = dict.subjects?.[STATE.subject] || (isEn ? '🌟 All STEM' : '🌟 Masomo Yote');
+    const gName = dict.grades?.[STATE.gradeLevel] || (isEn ? '🌿 Grade 4–6' : '🌿 Darasa 4–6');
+    const rName = `${reg.icon} ${(isEn ? reg.name_en : reg.name_sw).split(' ')[0]}`;
     const lName = `${langMeta.flag} ${langMeta.native_name.split(' ')[0]}`;
     summaryEl.innerText = `${cName} • ${sName} • ${gName} • ${rName} • ${lName}`;
   }
@@ -1950,9 +2263,10 @@ function updateHeaderStatusPill() {
   const autoMenuText = document.getElementById('autoSpeakMenuText');
   const autoMenuIcon = document.getElementById('autoSpeakMenuIcon');
   if (autoMenuText && autoMenuIcon) {
-    autoMenuText.innerText = STATE.autoSpeak ? 'Sauti: Washa' : 'Sauti: Zima';
+    autoMenuText.innerText = STATE.autoSpeak ? (dict.voice_label_on || 'Sauti: Washa') : (dict.voice_label_off || 'Sauti: Zima');
     autoMenuIcon.innerText = STATE.autoSpeak ? '🔊' : '🔇';
   }
+
 
   // Sync agent mode menu text
   const modeTextEl = document.getElementById('agentModeMenuText');
