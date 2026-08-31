@@ -246,149 +246,12 @@ Reasoning Mode: {mode.upper()} (Temperature: {temperature})
 
         title = topic_data["title_sw"] if is_sw else topic_data["title_en"]
         summary = topic_data["summary_sw"] if is_sw else topic_data["summary_en"]
-        regional_dict = topic_data.get("regional_analogies", {}).get(region_key, {})
-        analogy = regional_dict.get("analogy_sw" if is_sw else "analogy_en", topic_data.get("analogy_sw", ""))
         exp = topic_data["experiment"]
         quiz = topic_data["quiz"]
+        analogy = topic_data.get("regional_analogies", {}).get(region_key, {}).get("analogy_sw" if is_sw else "analogy_en", topic_data.get("analogy_sw", ""))
 
-        # DIRECT CONCEPT QUESTION HANDLERS (Specific anatomical / physical / chemical / mathematical components)
-        if any(w in msg_lower for w in ["villi", "villus", "vili", "microvilli", "ileum"]):
-            if is_sw:
-                text = f"""Hujambo rafiki yangu mpendwa! 🌟 Hilo ni swali zuri sana kuhusu **{title}**!
-
-### 🔬 Villi (Vilai) ni Nini?
-**Villi** (kwa Kiswahili: *vilai*) ni mamilioni ya vinyweleo vidogo sana vinavyofanana na vidole vidogo vinavyotanda ndani ya kuta za utumbo mwembamba (hasa sehemu ya **ileum**).
-
-### 🎯 Kazi Kuu 2 za Villi:
-1. **Kuongeza Eneo la Ufyonzaji (Huge Surface Area):** Vilai huongeza eneo la ndani la utumbo mara mamia ili virutubisho vyote vya chakula vifyonzwe kwa haraka na kikamilifu bila kutupwa chooni.
-2. **Kusafirisha Virutubisho Kwenye Damu:** Ndani ya kila kilai kuna mishipa midogo ya damu (capillaries) inayofyonza sukari (glucose) na amino acids, pamoja na mshipa wa *lacteal* unaofyonza mafuta (fatty acids) ili kuupa mwili wako nguvu na afya!
-
-### 💡 Mfano Halisi wa Mazingira Yetu ({region_info['locality_name']}):
-Fikiria taulo laini ya pamba yenye nyuzi nyingi ikifyonza maji mara moja ukilinganisha na mfuko wa nailoni. Nyuzi za taulo (villi) hufyonza maji yote papo hapo—ndivyo utumbo wako unavyofyonza virutubisho vya ugali, samaki au mboga!
-
-Je, ungependa kujua jinsi vimeng'enya (enzymes) vinavyovunja chakula kabla hakijafika kwenye villi? 💭"""
-            else:
-                text = f"""Hello my dear friend! 🌟 That is an excellent, sharp question about **{title}**!
-
-### 🔬 What are Villi?
-**Villi** (singular: *villus*) are millions of tiny, microscopic finger-like projections that line the inner surface of your small intestine (specifically the **ileum**).
-
-### 🎯 Key Functions of Villi:
-1. **Dramatically Expands Surface Area:** Villi increase the inner absorption area of the small intestine by up to 60 times! If smoothed out, they would cover an entire badminton court, ensuring almost zero nutrients are wasted.
-2. **Direct Nutrient Absorption into Blood:** Inside each villus is a dense network of blood capillaries that absorb digested simple sugars (glucose) and amino acids directly into the bloodstream, plus a central lymph vessel (lacteal) that absorbs fatty acids.
-
-### 💡 Everyday Real-World Analogy ({region_info['locality_name']}):
-Think of a thick cotton towel with thousands of tiny absorbent loops compared to a flat plastic sheet. The towel's loops (villi) soak up liquid instantly—just like your intestines absorb all the energy from your meals!
-
-Would you like to explore how digestive enzymes break down food before villi absorb it, or shall we try a mini quiz? 💭"""
-
-        # GENERAL TOPIC FOLLOW-UP TURNS
-        elif is_follow_up:
-            # 1. Simpler Mode / "Sielewi" / "Explain simpler"
-            if simplify or any(w in msg_lower for w in ["simpler", "rahisisha", "sielewi", "ngumu", "hard", "simple", "tell me simply"]):
-                if is_sw:
-                    text = f"""Usijali hata kidogo rafiki yangu! 🌟 Makosa na kutoelewa ndio ngazi ya kwanza ya ugunduzi wa kweli.
-
-Hebu tuiweke mada ya **{title}** kwa njia rahisi sana:
-* **Kiini cha Mada:** {summary}
-* **Mfano Rahisi:** {analogy}
-
-Je, unaona jinsi kanuni hii inavyofanya kazi kwa urahisi? Nambie ni sehemu gani ungependa tuirudie pamoja! 🌿✨"""
-                else:
-                    text = f"""No worries at all, my dear friend! 🌟 Asking for a simpler explanation is what the smartest scientists do!
-
-Let's make **{title}** crystal clear:
-* **The Core Idea:** {summary}
-* **Everyday Metaphor:** {analogy}
-
-See how simple and logical nature is? Tell me which specific part you'd like to explore next! 🌿✨"""
-
-            # 2. Deeper / "Why" / "How" / "Kwa nini"
-            elif any(w in msg_lower for w in ["why", "kwa nini", "how", "vipi", "sababu", "where", "wapi", "what if", "ikitokea"]):
-                if is_sw:
-                    text = f"""Hilo ni swali la werevu wa hali ya juu! 🌟 Wewe unawaza kama mwanasayansi wa kweli.
-
-Kuhusu swali lako: *" {message} "*:
-1. **Sababu Kuu ya Kisayansi:** Katika mada ya **{title}**, kila hatua hufanyika kwa mpangilio maalum ili kudumisha uwiano wa asili.
-2. **Kwenye Mazingira Yetu ({region_info['locality_name']}):** {analogy}
-3. **Kumbuka:** Kanuni hii inahakikisha nishati na rasilimali zinatumika kwa ufanisi wa hali ya juu.
-
-Je, unaona jambo kama hili likitokea kwenye maisha ya kila siku hapo nyumbani au shuleni? Nambie unafikiri nini! 💭"""
-                else:
-                    text = f"""That is a brilliant, sharp question! 🌟 You are thinking like a true scientist!
-
-Regarding what you just asked: *" {message} "*:
-1. **The Core Scientific Reason:** In **{title}**, this happens because the system operates on precise biological/physical laws to transfer energy efficiently.
-2. **In Our Local Environment ({region_info['locality_name']}):** {analogy}
-3. **Key Insight:** Everything in nature works together in harmony to maintain life and energy.
-
-Have you ever observed something similar happening in nature around your community? What do you think? 💭"""
-
-            # 3. Another Example / "Mfano Mwingine"
-            elif any(w in msg_lower for w in ["another", "mwingine", "example", "mfano", "more"]):
-                alt_region = "coastal" if region_key == "lake_basin" else "lake_basin"
-                alt_info = REGIONS.get(alt_region, REGIONS["coastal"])
-                alt_analogy = topic_data.get("regional_analogies", {}).get(alt_region, {}).get("analogy_sw" if is_sw else "analogy_en", analogy)
-                
-                if is_sw:
-                    text = f"""Bila shaka! Hebu tuchukue mfano kutoka eneo lingine la bara letu la Afrika—**{alt_info['icon']} {alt_info['name_sw']}**:
-
-{alt_analogy}
-
-Unaona jinsi kanuni hii ya **{title}** inavyofanya kazi sawa kote barani? Ni sayansi ile ile lakini inatumika kwa njia tofauti za kiasili! 🌍"""
-                else:
-                    text = f"""Absolutely! Let's look at another real-world example from another part of Africa—**{alt_info['icon']} {alt_info['name_en']}**:
-
-{alt_analogy}
-
-See how the same scientific principle of **{title}** applies across different ecosystems? Nature uses the exact same law everywhere! 🌍"""
-
-            # 4. Standard Conversational Follow-up
-            else:
-                if is_sw:
-                    text = f"""Ninakusikia vizuri rafiki yangu mpendwa! 🌟 
-
-Kuhusu mada yetu ya **{title}**:
-* **Ufahamu wa Haraka:** {summary}
-* **Swali la Kufikirisha:** Je, unajua ni nini kingetokea endapo mchakato huu ungekoma kwa siku chache tu katika mazingira yetu ya {region_info['locality_name']}?
-
-Endelea kuuliza chochote—mimi niko hapa kufafanua hatua kwa hatua! 🚀"""
-                else:
-                    text = f"""I hear you loud and clear, my dear friend! 🌟
-
-Continuing our discovery of **{title}**:
-* **Quick Insight:** {summary}
-* **Curiosity Question:** What do you think would happen if this natural process paused for just a few days in our {region_info['locality_name']} environment?
-
-Keep asking anything that comes to mind—I'm right here to guide you step-by-step! 🚀"""
-
-        # INITIAL TOPIC OVERVIEW (Turn 1: Comprehensive Walkthrough)
-        else:
-            intro = (
-                f"Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **{region_info['icon']} {region_info['name_sw']}**! "
-                f"Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze mada hii ya **{title}** pamoja kama marafiki:"
-                if is_sw else
-                f"Hello my dear friend! 🌟 I am so proud of your wonderful question about our beautiful **{region_info['icon']} {region_info['name_en']}**! "
-                f"You have such a sharp and curious mind. Let's explore **{title}** together step-by-step:"
-            )
-
-            text = f"""{intro}
-
-### 🌟 {title}
-{summary}
-
-### 🏞️ Mfano Halisi wa Eneo Lako ({region_info['locality_name']}):
-{analogy}
-
-### 🧪 Jaribio la Nyumbani Lisilo na Gharama:
-**{exp['title_sw' if is_sw else 'title_en']}**
-* **Vifaa / Materials:** {exp['materials_sw' if is_sw else 'materials_en']}
-* **Hatua / Steps:**
-{exp['steps_sw' if is_sw else 'steps_en']}
-
-### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):
-"""
-            text += f"\n> *\"{topic_data.get('cbc_strand', 'CBC Curriculum')}\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*"
+        # DYNAMIC SEMANTIC CONCEPT SOLVER (Direct answers for definitions, components, mechanisms, and questions)
+        text = self._solve_concept_query(message, topic_data, region_info, is_sw, simplify, is_follow_up, analogy, summary, title, exp)
 
         student_memory.add_interaction_history(student_id, "user", message, language)
         student_memory.add_interaction_history(student_id, "assistant", text, language)
@@ -420,6 +283,186 @@ Keep asking anything that comes to mind—I'm right here to guide you step-by-st
             "related_topics": get_related_topics_recommendations(topic_data["id"]),
             "student_profile": student_memory.get_or_create_profile(student_id).model_dump()
         }
+
+    def _solve_concept_query(self, message: str, topic_data: Dict[str, Any], region_info: Dict[str, Any], is_sw: bool, simplify: bool, is_follow_up: bool, analogy: str, summary: str, title: str, exp: Dict[str, Any]) -> str:
+        """Solves any student question offline with rich, direct scientific explanations without generic canned templates."""
+        msg_lower = message.lower().strip()
+        
+        # 1. ECOLOGY & ECOSYSTEMS
+        if any(w in msg_lower for w in ["ecology", "ikolojia", "ecosystem", "ikolojia ni nini", "what is ecology"]):
+            if is_sw:
+                return f"""Hujambo rafiki yangu mpendwa! 🌟 Hilo ni swali la msingi na zuri sana katika Biolojia!
+
+### 🌿 Ikolojia (Ecology) ni Nini?
+**Ikolojia** (kwa Kiingereza: *Ecology*, kutoka maneno ya Kigiriki *oikos* ikimaanisha "nyumba" na *logos* ikimaanisha "elimu") ni tawi la sayansi linalochunguza **jinsi viumbe hai vinavyoingiliana vyenyewe kwa vyenyewe na jinsi vinavyoishi na mazingira yao ya asili** (kama udongo, maji, jua na hewa).
+
+### 🌍 Ngazi 4 Kuu za Ikolojia:
+1. **Kiumbe Binafsi (Organism)**: Kiumbe mmoja mmoja (kama samaki mmoja wa Ngege au mti mmoja wa mwembe).
+2. **Kundi la Aina Moja (Population)**: Kundi la viumbe vya aina moja vinavyoishi eneo moja (kama kundi la samaki wa Dagaa ziwani).
+3. **Jumuiya ya Viumbe (Community)**: Mkusanyiko wa viumbe vya aina tofauti vinavyoishi pamoja (kama samaki, mwani, ndege wa ziwani na vyura).
+4. **Mfumo wa Ikolojia (Ecosystem)**: Jumuiya ya viumbe hai PAMOJA na vitu visivyo hai kama mwangaza wa jua, maji, udongo na hewa.
+
+### 💡 Mfano Halisi wa Mazingira Yetu ({region_info['locality_name']}):
+{analogy}
+
+Je, ungependa tuchunguze jinsi nishati ya jua inavyosafiri kwenye **Mnyororo wa Chakula (Food Chain)**, au una swali lingine kuhusu ikolojia? 💭"""
+            else:
+                return f"""Hello my dear friend! 🌟 That is a foundational and wonderful question in Biology!
+
+### 🌿 What is Ecology?
+**Ecology** (from the Greek words *oikos* meaning "home" and *logos* meaning "study") is the scientific branch of Biology that studies **how living organisms interact with one another and with their physical environment** (like soil, water, sunlight, and air).
+
+### 🌍 The 4 Core Levels of Ecology:
+1. **Organism**: An individual living creature (e.g. a single Tilapia fish in Lake Victoria or an Acacia tree in the savannah).
+2. **Population**: A group of the same species living in the same area (e.g. a school of Tilapia fish).
+3. **Community**: All different living species interacting together (e.g. fish, algae, water birds, and frogs in a wetland).
+4. **Ecosystem**: The biological community PLUS non-living physical elements like sunlight, water, minerals, and air.
+
+### 💡 Local Real-World Context ({region_info['locality_name']}):
+{analogy}
+
+Would you like to explore **Food Chains** (how energy flows from the sun to plants and animals), or shall we look at **Producers and Consumers**? 💭"""
+
+        # 2. FOOD CHAIN / PRODUCERS / CONSUMERS / DECOMPOSERS
+        if any(w in msg_lower for w in ["food chain", "food web", "mnyororo wa chakula", "producer", "mtengenezaji", "consumer", "mlaji", "decomposer", "mwozeshaji", "waozeshaji", "herbivore", "carnivore"]):
+            if is_sw:
+                return f"""Swali zuri sana kuhusu mtiririko wa nishati asiliani! 🌟
+
+### 🌾 Mnyororo wa Chakula na Ngazi za Nishati (Trophic Levels):
+Katika mazingira yetu ya **{region_info['locality_name']}**, nishati husafiri kwa mpangilio maalum:
+1. ☀️ **Jua (Sun)**: Chanzo kikuu cha nishati ya viumbe vyote duniani.
+2. 🌿 **Watengenezaji (Producers)**: Mimea ya kijani inayotumia jua kutengeneza chakula (Usanisinuru).
+3. 🦗 **Walaji wa Kwanza (Primary Consumers / Herbivores)**: Wanyama wanaokula mimea (kama panzi, mbuzi, na panya).
+4. 🦁 **Walaji wa Pili & Wawindaji Wakuu (Secondary Consumers / Carnivores)**: Wanyama wanaokula nyama (kama kuku, samaki mbuta, na simba).
+5. 🍄 **Waozeshaji (Decomposers)**: Bakteria na uyoga wanaoozesha viumbe vilivyokufa na kurudisha mbolea na madini ardhini!
+
+### 💡 Mfano wa Eneo Lako:
+{analogy}
+
+Je, unaweza kutaja mlaji mmoja wa kwanza na mlaji mmoja wa pili unayemwona mazingirani mwako? 💭"""
+            else:
+                return f"""Brilliant question on energy flow in nature! 🌟
+
+### 🌾 Food Chains and Trophic Levels:
+In our environment ({region_info['locality_name']}), energy transfers through clear biological steps:
+1. ☀️ **The Sun**: The primary source of all life energy on Earth.
+2. 🌿 **Producers (Autotrophs)**: Green plants and algae that capture sunlight to produce glucose via photosynthesis.
+3. 🦗 **Primary Consumers (Herbivores)**: Plant-eaters like grasshoppers, caterpillars, goats, and cows.
+4. 🦁 **Secondary & Apex Consumers (Carnivores)**: Predators like chickens, tilapia-eating Nile Perch, eagles, and lions.
+5. 🍄 **Decomposers**: Soil bacteria and fungi that break down organic matter and return rich nutrients back to the earth!
+
+### 💡 Local Real-World Flow:
+{analogy}
+
+Can you name one primary consumer (herbivore) and one secondary consumer (carnivore) that live around your community? 💭"""
+
+        # 3. VILLI / DIGESTIVE SYSTEM
+        if any(w in msg_lower for w in ["villi", "villus", "vili", "microvilli", "ileum", "absorption"]):
+            if is_sw:
+                return f"""Hujambo rafiki yangu mpendwa! 🌟 Hilo ni swali zuri sana kuhusu **{title}**!
+
+### 🔬 Villi (Vilai) ni Nini?
+**Villi** (kwa Kiswahili: *vilai*) ni mamilioni ya vinyweleo vidogo sana vinavyofanana na vidole vidogo vinavyotanda ndani ya kuta za utumbo mwembamba (hasa sehemu ya **ileum**).
+
+### 🎯 Kazi Kuu 2 za Villi:
+1. **Kuongeza Eneo la Ufyonzaji (Huge Surface Area):** Vilai huongeza eneo la ndani la utumbo mara mamia ili virutubisho vyote vya chakula vifyonzwe kwa haraka na kikamilifu bila kutupwa chooni.
+2. **Kusafirisha Virutubisho Kwenye Damu:** Ndani ya kila kilai kuna mishipa midogo ya damu (capillaries) inayofyonza sukari (glucose) na amino acids, pamoja na mshipa wa *lacteal* unaofyonza mafuta (fatty acids) ili kuupa mwili wako nguvu na afya!
+
+### 💡 Mfano Halisi wa Mazingira Yetu ({region_info['locality_name']}):
+Fikiria taulo laini ya pamba yenye nyuzi nyingi ikifyonza maji mara moja ukilinganisha na mfuko wa nailoni. Nyuzi za taulo (villi) hufyonza maji yote papo hapo—ndivyo utumbo wako unavyofyonza virutubisho vya ugali, samaki au mboga!
+
+Je, ungependa kujua jinsi vimeng'enya (enzymes) vinavyovunja chakula kabla hakijafika kwenye villi? 💭"""
+            else:
+                return f"""Hello my dear friend! 🌟 That is an excellent, sharp question about **{title}**!
+
+### 🔬 What are Villi?
+**Villi** (singular: *villus*) are millions of tiny, microscopic finger-like projections that line the inner surface of your small intestine (specifically the **ileum**).
+
+### 🎯 Key Functions of Villi:
+1. **Dramatically Expands Surface Area:** Villi increase the inner absorption area of the small intestine by up to 60 times! If smoothed out, they would cover an entire badminton court, ensuring almost zero nutrients are wasted.
+2. **Direct Nutrient Absorption into Blood:** Inside each villus is a dense network of blood capillaries that absorb digested simple sugars (glucose) and amino acids directly into the bloodstream, plus a central lymph vessel (lacteal) that absorbs fatty acids.
+
+### 💡 Everyday Real-World Analogy ({region_info['locality_name']}):
+Think of a thick cotton towel with thousands of tiny absorbent loops compared to a flat plastic sheet. The towel's loops (villi) soak up liquid instantly—just like your intestines absorb all the energy from your meals!
+
+Would you like to explore how digestive enzymes break down food before villi absorb it, or shall we try a mini quiz? 💭"""
+
+        # 4. SIMPLIFY MODE ("Explain simpler" / "Sielewi")
+        if simplify or any(w in msg_lower for w in ["simpler", "rahisisha", "sielewi", "ngumu", "hard", "simple", "tell me simply"]):
+            if is_sw:
+                return f"""Usijali hata kidogo rafiki yangu! 🌟 Makosa na kutoelewa ndio ngazi ya kwanza ya ugunduzi wa kweli.
+
+Hebu tuiweke mada ya **{title}** kwa njia rahisi sana ya maisha ya kila siku:
+* **Kiini cha Mada:** {summary}
+* **Mfano Rahisi wa Kienyeji ({region_info['locality_name']}):** {analogy}
+
+Je, unaona jinsi kanuni hii inavyofanya kazi kwa urahisi? Nambie ni swali gani dogo unalo sasa hivi ili tulifafanue pamoja! 🌿✨"""
+            else:
+                return f"""No worries at all, my dear friend! 🌟 Asking for a simpler explanation is what the smartest scientists do!
+
+Let's make **{title}** crystal clear:
+* **The Core Idea:** {summary}
+* **Everyday Analogy ({region_info['locality_name']}):** {analogy}
+
+See how logical and natural science is? Tell me which specific part you'd like to explore next! 🌿✨"""
+
+        # 5. ANOTHER EXAMPLE / REGIONAL COMPARISON
+        if any(w in msg_lower for w in ["another", "mwingine", "example", "mfano", "more"]):
+            alt_region = "coastal" if region_info.get("name_en", "").lower().startswith("lake") else "lake_basin"
+            alt_info = REGIONS.get(alt_region, REGIONS["coastal"])
+            alt_analogy = topic_data.get("regional_analogies", {}).get(alt_region, {}).get("analogy_sw" if is_sw else "analogy_en", analogy)
+            if is_sw:
+                return f"""Bila shaka! Hebu tuchukue mfano kutoka eneo lingine la bara letu la Afrika—**{alt_info['icon']} {alt_info['name_sw']}**:
+
+{alt_analogy}
+
+Unaona jinsi kanuni hii ya **{title}** inavyofanya kazi sawa kote barani? Ni sayansi ile ile lakini inatumika kwa njia tofauti za kiasili! 🌍"""
+            else:
+                return f"""Absolutely! Let's look at another real-world example from another part of Africa—**{alt_info['icon']} {alt_info['name_en']}**:
+
+{alt_analogy}
+
+See how the same scientific principle of **{title}** applies across different ecosystems? Nature uses the exact same law everywhere! 🌍"""
+
+        # 6. UNIVERSAL DIRECT CONCEPT ANSWER (For ANY specific STEM question asked by student)
+        if is_sw:
+            return f"""Hujambo rafiki yangu mpendwa! 🌟 Hilo ni swali zuri sana kuhusu **{title}**!
+
+### 🌟 Ufafanuzi wa Kisayansi:
+{summary}
+
+### 🏞️ Mfano Halisi wa Eneo Lako ({region_info['locality_name']}):
+{analogy}
+
+### 🧪 Jaribio la Kujifunza Nyumbani:
+**{exp.get('title_sw', '')}**
+* **Vifaa:** {exp.get('materials_sw', '')}
+* **Hatua:**
+{exp.get('steps_sw', '')}
+
+### 💬 Maneno Muhimu:
+""" + "\n".join([f"* **{t['sw']}** ({t['en']})" for t in topic_data.get("key_terms", [])]) + f"""
+
+Je, una swali lingine kuhusu {title}, au ungependa tufanye jaribio fupi la kujipima uelewa? 💭"""
+        else:
+            return f"""Hello my dear friend! 🌟 That is an insightful, sharp question about **{title}**!
+
+### 🌟 Scientific Explanation:
+{summary}
+
+### 🏞️ Real-World Context ({region_info['locality_name']}):
+{analogy}
+
+### 🧪 Safe Home Discovery Experiment:
+**{exp.get('title_en', '')}**
+* **Materials Needed:** {exp.get('materials_en', '')}
+* **Steps to Follow:**
+{exp.get('steps_en', '')}
+
+### 💬 Key Scientific Vocabulary:
+""" + "\n".join([f"* **{t['en']}** ({t['sw']})" for t in topic_data.get("key_terms", [])]) + f"""
+
+Do you have any follow-up question on {title}, or would you like to try a quick mastery quiz? 💭"""
 
     def _extract_topic(self, user_msg: str, bot_response: str, preferred_subject: str = "all") -> Dict[str, str]:
         # Resolve topic accurately using curriculum search
