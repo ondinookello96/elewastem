@@ -839,13 +839,14 @@ function switchTab(tabId) {
     const section = document.getElementById(`${t}Section`);
     const btn = document.getElementById(`tabBtn-${t}`);
     if (t === tabId) {
-      section.classList.remove('hidden');
-      btn.classList.add('active-tab');
+      if (section) section.classList.remove('hidden');
+      if (btn) btn.classList.add('active-tab');
     } else {
-      section.classList.add('hidden');
-      btn.classList.remove('active-tab');
+      if (section) section.classList.add('hidden');
+      if (btn) btn.classList.remove('active-tab');
     }
   });
+
 
   if (tabId === 'mastery') refreshProfile();
   if (tabId === 'stakeholders') {
@@ -1892,12 +1893,6 @@ function closeQuizModal() {
 
 // Header Status Pill & Live Synchronization
 function updateHeaderStatusPill() {
-  const cEl = document.getElementById('statusCountryText');
-  const sEl = document.getElementById('statusSubjectText');
-  const gEl = document.getElementById('statusGradeText');
-  const rEl = document.getElementById('statusRegionText');
-  const lEl = document.getElementById('statusLangText');
-
   const countryFlags = {
     Kenya: '🇰🇪 Kenya',
     Tanzania: '🇹🇿 Tanzania',
@@ -1929,11 +1924,16 @@ function updateHeaderStatusPill() {
   const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
   const langMeta = STATE.languagesMeta[STATE.language] || { flag: '🇰🇪', native_name: 'Kiswahili' };
 
-  if (cEl) cEl.innerText = countryFlags[STATE.country] || `🌍 ${STATE.country}`;
-  if (sEl) sEl.innerText = subjNames[STATE.subject] || '🌟 All STEM';
-  if (gEl) gEl.innerText = gradeShort[STATE.gradeLevel] || '🌿 Grade 4–6';
-  if (rEl) rEl.innerText = `${reg.icon} ${reg.name_sw.split(' ')[0]}`;
-  if (lEl) lEl.innerText = `${langMeta.flag} ${langMeta.native_name.split(' ')[0]}`;
+  // Update menu profile summary card
+  const summaryEl = document.getElementById('menuProfileSummaryText');
+  if (summaryEl) {
+    const cName = countryFlags[STATE.country] || `🌍 ${STATE.country}`;
+    const sName = subjNames[STATE.subject] || '🌟 All STEM';
+    const gName = gradeShort[STATE.gradeLevel] || '🌿 Grade 4–6';
+    const rName = `${reg.icon} ${reg.name_sw.split(' ')[0]}`;
+    const lName = `${langMeta.flag} ${langMeta.native_name.split(' ')[0]}`;
+    summaryEl.innerText = `${cName} • ${sName} • ${gName} • ${rName} • ${lName}`;
+  }
   
   // Also sync auto-speak menu button text/icon
   const autoMenuText = document.getElementById('autoSpeakMenuText');
@@ -1942,6 +1942,25 @@ function updateHeaderStatusPill() {
     autoMenuText.innerText = STATE.autoSpeak ? 'Sauti: Washa' : 'Sauti: Zima';
     autoMenuIcon.innerText = STATE.autoSpeak ? '🔊' : '🔇';
   }
+
+  // Sync agent mode menu text
+  const modeTextEl = document.getElementById('agentModeMenuText');
+  if (modeTextEl) {
+    const mode = STATE.agentMode || 'creative';
+    if (mode === 'creative') modeTextEl.innerText = '🎨 Hadithi (Temp 0.75)';
+    else if (mode === 'balanced') modeTextEl.innerText = '⚖️ Mizani (Temp 0.40)';
+    else modeTextEl.innerText = '🎯 Sahihi (Temp 0.10)';
+  }
+}
+
+// 4Ds Thinking Mode / Temperature Dial Handler
+function toggleAgentMode() {
+  const modes = ['creative', 'balanced', 'precise'];
+  const current = STATE.agentMode || 'creative';
+  const next = modes[(modes.indexOf(current) + 1) % modes.length];
+  STATE.agentMode = next;
+  updateHeaderStatusPill();
+  appendSystemNotice(`🧠 <b>Hali ya Kufikiri (4Ds Dial):</b> Imewekwa kuwa <b>${next.toUpperCase()}</b>.`);
 }
 
 // Unified App Menu Dropdown Handlers
@@ -1972,8 +1991,7 @@ function closeAppMenuDropdown() {
 // Close App Menu dropdown when clicking anywhere outside
 document.addEventListener('click', (e) => {
   const container = document.getElementById('appMenuContainer');
-  const pill = document.getElementById('headerLiveStatusPill');
-  if (container && !container.contains(e.target) && (!pill || !pill.contains(e.target))) {
+  if (container && !container.contains(e.target)) {
     closeAppMenuDropdown();
   }
 });
@@ -1988,3 +2006,4 @@ function closeLanguagesInfoModal() {
   const modal = document.getElementById('languagesInfoModal');
   if (modal) modal.classList.add('hidden');
 }
+

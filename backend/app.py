@@ -373,11 +373,20 @@ if os.path.exists(FRONTEND_DIR):
 
     @app.get("/")
     async def serve_index():
-        return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
+        response = FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        return response
 
     @app.get("/{full_path:path}")
     async def serve_frontend_assets(full_path: str):
         file_path = os.path.join(FRONTEND_DIR, full_path)
         if os.path.exists(file_path) and os.path.isfile(file_path):
-            return FileResponse(file_path)
-        return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
+            response = FileResponse(file_path)
+            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            return response
+        response = FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        return response
+

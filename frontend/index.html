@@ -29,255 +29,254 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css?v=2.2">
 </head>
+
 <body id="appBody" class="bg-slate-50 text-slate-800 flex flex-col h-screen overflow-hidden font-sans antialiased">
 
-  <!-- TOP HEADER (SINGLE ULTRA-SLEEK BAR) -->
-  <header class="bg-white border-b border-slate-200 px-3 sm:px-4 py-2 flex items-center justify-between shadow-sm flex-shrink-0 relative z-30">
-    <!-- Left: Logo & Live Status Pill -->
-    <div class="flex items-center space-x-2 sm:space-x-3">
-      <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-lg shadow-sm">
+  <!-- TOP HEADER (CLEAN, MINIMALIST & SPACIOUS) -->
+  <header class="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between shadow-sm flex-shrink-0 relative z-30">
+    <!-- Left: Pure Logo -->
+    <div class="flex items-center space-x-2.5 cursor-pointer" onclick="switchTab('chat')">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-lg shadow-sm">
         🌱
       </div>
-      <div>
-        <div class="flex items-center space-x-1.5">
-          <h1 class="font-black text-base sm:text-lg text-slate-900 tracking-tight cursor-pointer" onclick="switchTab('chat')">Elewa<span class="text-brand-600">STEM</span></h1>
-          <span class="text-[9px] sm:text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800">Pan-Africa AI</span>
-        </div>
-      </div>
-      <!-- Live Context Status Pill -->
-      <div id="headerLiveStatusPill" class="hidden md:flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 cursor-pointer hover:bg-emerald-100 transition-all" onclick="toggleAppMenuDropdown(event)">
-        <span id="statusCountryText">🇰🇪 Kenya</span> • 
-        <span id="statusSubjectText" class="text-brand-700">🌟 All STEM</span> • 
-        <span id="statusGradeText" class="text-purple-800">🌿 Grade 4–6</span> • 
-        <span id="statusRegionText" class="text-blue-800">🏞️ Kisumu</span> • 
-        <span id="statusLangText" class="text-slate-700">🗣️ Kiswahili</span>
+      <div class="flex items-center space-x-1.5">
+        <h1 class="font-black text-lg text-slate-900 tracking-tight">Elewa<span class="text-brand-600">STEM</span></h1>
+        <span class="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800">Pan-Africa AI</span>
       </div>
     </div>
 
-    <!-- Right Controls: Quick Inclusion Icon, Voice Toggle & UNIFIED MENU DROPDOWN -->
-    <div class="flex items-center space-x-1.5 sm:space-x-2">
-      <!-- Quick Accessibility Button -->
-      <button onclick="openA11yModal()" id="a11yBtn" title="Inclusion (Blind, Deaf, Dyslexia)" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-blue-50 text-blue-900 border border-blue-300 hover:bg-blue-100 transition-all">
-        <span>♿</span>
-        <span class="hidden lg:inline">Inclusion</span>
+    <!-- Right: ONLY THE UNIFIED MENU & SETTINGS DROPDOWN -->
+    <div class="relative inline-block text-left" id="appMenuContainer">
+      <button type="button" onclick="toggleAppMenuDropdown(event)" id="appMenuBtn" title="Fungua Mipangilio & Huduma Zote" class="flex items-center space-x-2 px-3.5 py-2 bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-700 hover:to-emerald-700 text-white rounded-2xl font-bold text-xs shadow-md active:scale-95 transition-all">
+        <span>☰</span>
+        <span>Menu & Settings</span>
+        <svg class="w-3.5 h-3.5 text-emerald-200 transition-transform" id="appMenuChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
       </button>
 
-      <!-- Quick Auto-Speak Toggle -->
-      <button onclick="toggleAutoSpeak(); updateHeaderStatusPill();" id="autoSpeakBtn" title="Voice Toggle" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-purple-50 text-purple-900 border border-purple-300 hover:bg-purple-100 transition-all">
-        <span id="autoSpeakIcon">🔊</span>
-        <span id="autoSpeakText" class="hidden lg:inline">Sauti: Washa</span>
-      </button>
+      <!-- All-in-One Comprehensive Dropdown Menu -->
+      <div id="appMenuDropdown" class="hidden absolute right-0 mt-2 w-[340px] sm:w-[390px] rounded-3xl bg-white shadow-2xl border border-slate-200 p-4 z-50 transform origin-top-right transition-all max-h-[85vh] overflow-y-auto space-y-4 text-xs">
+        
+        <!-- Live Profile Status Card Inside Dropdown -->
+        <div class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 p-2.5 rounded-2xl flex items-center justify-between shadow-xs">
+          <div>
+            <p class="text-[9px] uppercase font-black text-emerald-800 tracking-wider">Hali ya Sasa (Active Profile)</p>
+            <p class="text-[11px] font-bold text-slate-800" id="menuProfileSummaryText">🇰🇪 Kenya • 🌟 All STEM • 🌿 Grade 4–6 • 🏞️ Kisumu • 🗣️ Kiswahili</p>
+          </div>
+          <span class="text-[9px] bg-emerald-600 text-white font-bold px-2 py-0.5 rounded-full">Live</span>
+        </div>
 
-      <!-- UNIFIED ALL-IN-ONE MENU DROPDOWN (Consolidates Inclusion, Language, Location, Vault, Development, Stakeholders, DPA, All STEM, Level, Country) -->
-      <div class="relative inline-block text-left" id="appMenuContainer">
-        <button type="button" onclick="toggleAppMenuDropdown(event)" id="appMenuBtn" title="Fungua Mipangilio & Huduma Zote" class="flex items-center space-x-1.5 px-3 py-1.5 bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-700 hover:to-emerald-700 text-white rounded-xl font-bold text-xs shadow-md transition-all">
-          <span>☰</span>
-          <span>Menu & Settings</span>
-          <svg class="w-3.5 h-3.5 text-emerald-200 transition-transform" id="appMenuChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
+        <!-- 1. LEARNER CONFIGURATION (All STEM, Level of Study, Country, Language, Location Category) -->
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between pb-1 border-b border-slate-100">
+            <span class="text-[10px] font-black uppercase text-brand-700 tracking-wider">🎓 Mipangilio ya Mwanafunzi (Learner Setup)</span>
+            <span class="text-[9px] bg-brand-50 text-brand-700 font-bold px-1.5 py-0.2 rounded">Interactive</span>
+          </div>
 
-        <!-- Dropdown Menu -->
-        <div id="appMenuDropdown" class="hidden absolute right-0 mt-2 w-[340px] sm:w-[380px] rounded-3xl bg-white shadow-2xl border border-slate-200 p-4 z-50 transform origin-top-right transition-all max-h-[85vh] overflow-y-auto space-y-4 text-xs">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <!-- 1a. ALL STEM / SUBJECT FOCUS -->
+            <div class="bg-slate-50 border border-slate-200 p-2 rounded-xl">
+              <label for="learnerSubjectSelect" class="block font-bold text-slate-700 text-[10px] mb-0.5">📚 Somo (All STEM Focus):</label>
+              <select id="learnerSubjectSelect" onchange="handleSubjectChange(event); updateHeaderStatusPill();" class="w-full bg-white border border-slate-300 font-bold text-brand-700 p-1 rounded-lg text-xs outline-none cursor-pointer">
+                <option value="all">🌟 Masomo Yote (All STEM)</option>
+                <option value="mathematics">📐 Hesabu (Mathematics / Algebra)</option>
+                <option value="biology">🔬 Biolojia (Biology)</option>
+                <option value="physics">⚡ Fizikia (Physics)</option>
+                <option value="chemistry">⚗️ Kemia (Chemistry)</option>
+                <option value="computer_science">💻 Sayansi ya Kompyuta (CS)</option>
+                <option value="agriculture">🌾 Kilimo & Mazingira (Agri)</option>
+              </select>
+            </div>
+
+            <!-- 1b. LEVEL OF STUDY / GRADE -->
+            <div class="bg-slate-50 border border-slate-200 p-2 rounded-xl">
+              <label for="learnerGradeSelect" class="block font-bold text-slate-700 text-[10px] mb-0.5">🎓 Kiwango (Level of Study):</label>
+              <select id="learnerGradeSelect" onchange="handleGradeChange(event); updateHeaderStatusPill();" class="w-full bg-white border border-slate-300 font-bold text-purple-800 p-1 rounded-lg text-xs outline-none cursor-pointer">
+                <option value="Grade 1-3 (Lower Primary)">🌱 Darasa 1–3 (Lower Primary)</option>
+                <option value="Grade 6 (Upper Primary)" selected>🌿 Darasa 4–6 (Upper Primary / CBC)</option>
+                <option value="Grade 7-9 (Junior Secondary)">🔬 Darasa 7–9 (Junior Secondary / JSS)</option>
+                <option value="Grade 10-12 (Senior High)">⚡ Form 3–4 / G10–12 (Senior High)</option>
+              </select>
+            </div>
+
+            <!-- 1c. COUNTRY -->
+            <div class="bg-slate-50 border border-slate-200 p-2 rounded-xl">
+              <label for="learnerCountrySelect" class="block font-bold text-slate-700 text-[10px] mb-0.5">🌍 Nchi (Country):</label>
+              <select id="learnerCountrySelect" onchange="handleCountryChange(event); updateHeaderStatusPill();" class="w-full bg-white border border-slate-300 font-bold text-emerald-800 p-1 rounded-lg text-xs outline-none cursor-pointer">
+                <option value="Kenya" selected>🇰🇪 Kenya</option>
+                <option value="Tanzania">🇹🇿 Tanzania</option>
+                <option value="Uganda">🇺🇬 Uganda</option>
+                <option value="Rwanda">🇷🇼 Rwanda</option>
+                <option value="Nigeria">🇳🇬 Nigeria</option>
+                <option value="Ghana">🇬🇭 Ghana</option>
+                <option value="South Africa">🇿🇦 South Africa</option>
+                <option value="Ethiopia">🇪🇹 Ethiopia</option>
+              </select>
+            </div>
+
+            <!-- 1d. LANGUAGE (16+ Pan-African Languages) -->
+            <div class="bg-slate-50 border border-slate-200 p-2 rounded-xl">
+              <label for="langSelect" class="block font-bold text-slate-700 text-[10px] mb-0.5">🗣️ Lugha (Language):</label>
+              <select id="langSelect" onchange="changeLanguage(this.value); updateHeaderStatusPill();" class="w-full bg-white border border-slate-300 font-bold text-slate-800 p-1 rounded-lg text-xs outline-none cursor-pointer">
+                <option value="sw">🇰🇪 🇹🇿 Kiswahili</option>
+                <option value="sheng">🇰🇪 Sheng (Mtaani)</option>
+                <option value="yo">🇳🇬 Èdè Yorùbá</option>
+                <option value="ha">🇳🇬 🇳🇪 Hausa</option>
+                <option value="ig">🇳🇬 Asụsụ Igbo</option>
+                <option value="pcm">🇳🇬 🇬🇭 Naija Pidgin</option>
+                <option value="am">🇪🇹 አማርኛ (Amharic)</option>
+                <option value="om">🇪🇹 Afaan Oromoo</option>
+                <option value="so">🇸🇴 Af-Soomaali</option>
+                <option value="zu">🇿🇦 isiZulu</option>
+                <option value="xh">🇿🇦 isiXhosa</option>
+                <option value="rw">🇷🇼 Ikinyarwanda</option>
+                <option value="lg">🇺🇬 Oluganda</option>
+                <option value="tw">🇬🇭 Twi (Akan)</option>
+                <option value="sn">🇿🇼 chiShona</option>
+                <option value="ln">🇨🇩 Lingála</option>
+                <option value="en">🌍 English (African Context)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 1e. LOCATION CATEGORY (Highlands, Lake Basin, Coastal, Arid, Urban & GPS) -->
+          <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl flex items-center justify-between gap-2">
+            <div class="flex-1">
+              <label for="learnerRegionSelect" class="block font-bold text-slate-700 text-[10px] mb-0.5">🏞️ Mazingira (Location Category):</label>
+              <select id="learnerRegionSelect" onchange="handleRegionChange(event); updateHeaderStatusPill();" class="w-full bg-white border border-slate-300 font-bold text-blue-800 p-1 rounded-lg text-xs outline-none cursor-pointer">
+                <option value="lake_basin" selected>🏞️ Ziwa Victoria & Kisumu</option>
+                <option value="coastal">🌊 Pwani na Bahari (Coastal)</option>
+                <option value="highlands">⛰️ Nyanda za Juu & Kilimo (Highlands)</option>
+                <option value="arid">☀️ Maeneo Kavu & Sahel (Arid)</option>
+                <option value="urban">🏙️ Mijini (Urban / Nairobi)</option>
+              </select>
+            </div>
+            <button type="button" onclick="detectGPSLocation();" id="gpsDetectBtn" title="Tambua Eneo Lako Kiotomatiki kwa GPS" class="self-end px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[10px] transition-all shadow-xs flex-shrink-0">
+              <span id="gpsDetectText">📍 GPS Auto</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. INCLUSION & AUDIO (Ujumuishi & Sauti) -->
+        <div class="space-y-1.5 pt-1 border-t border-slate-100">
+          <span class="text-[10px] font-black uppercase text-blue-700 tracking-wider">♿ Inclusion & Accessibility (Ujumuishi)</span>
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" onclick="openA11yModal(); closeAppMenuDropdown();" class="w-full bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-950 p-2.5 rounded-xl text-left font-bold transition-all">
+              <p class="flex items-center space-x-1"><span>♿</span> <span>Inclusion</span></p>
+              <p class="text-[10px] text-blue-700 font-normal">Blind, Deaf & Dyslexia</p>
+            </button>
+
+            <button type="button" onclick="toggleAutoSpeak(); updateHeaderStatusPill();" id="autoSpeakMenuBtn" class="w-full bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-950 p-2.5 rounded-xl text-left font-bold transition-all">
+              <p class="flex items-center space-x-1"><span id="autoSpeakMenuIcon">🔊</span> <span id="autoSpeakMenuText">Sauti: Washa</span></p>
+              <p class="text-[10px] text-purple-700 font-normal">Usomaji wa Sauti (Voice)</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. THINKING MODE (4Ds Framework Temperature Dial) -->
+        <div class="space-y-1.5 pt-1 border-t border-slate-100">
+          <span class="text-[10px] font-black uppercase text-purple-700 tracking-wider">🧠 Hali ya Kufikiri (Thinking Mode)</span>
+          <div class="bg-slate-50 border border-slate-200 p-2 rounded-xl flex items-center justify-between">
+            <div>
+              <p class="text-[10px] text-slate-500 font-bold">4Ds Framework Dial:</p>
+              <p class="text-xs font-bold text-purple-900" id="agentModeMenuText">🎨 Hadithi (Temp 0.75)</p>
+            </div>
+            <button type="button" onclick="toggleAgentMode()" class="px-2.5 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold text-[10px] transition-all shadow-xs">
+              Badili Hali
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. STUDIES, DEVELOPMENT & STAKEHOLDERS HUBS -->
+        <div class="space-y-1.5 pt-1 border-t border-slate-100">
+          <span class="text-[10px] font-black uppercase text-amber-700 tracking-wider">📂 Studies, Development & Stakeholders</span>
           
-          <!-- 1. LEARNER CONFIGURATION (All STEM, Level of Study, Country, Language, Location Category) -->
-          <div class="space-y-2.5">
-            <div class="flex items-center justify-between pb-1 border-b border-slate-100">
-              <span class="text-[10px] font-black uppercase text-brand-700 tracking-wider">🎓 Mipangilio ya Mwanafunzi (Learner Setup)</span>
-              <span class="text-[9px] bg-brand-50 text-brand-700 font-bold px-1.5 py-0.2 rounded">Interactive</span>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <!-- 1a. ALL STEM / SUBJECT FOCUS -->
-              <div class="bg-slate-50 border border-slate-200 p-2 rounded-xl">
-                <label for="learnerSubjectSelect" class="block font-bold text-slate-700 text-[10px] mb-0.5">📚 Somo (All STEM Focus):</label>
-                <select id="learnerSubjectSelect" onchange="handleSubjectChange(event); updateHeaderStatusPill();" class="w-full bg-white border border-slate-300 font-bold text-brand-700 p-1 rounded-lg text-xs outline-none">
-                  <option value="all">🌟 Masomo Yote (All STEM)</option>
-                  <option value="mathematics">📐 Hesabu (Mathematics / Algebra)</option>
-                  <option value="biology">🔬 Biolojia (Biology)</option>
-                  <option value="physics">⚡ Fizikia (Physics)</option>
-                  <option value="chemistry">⚗️ Kemia (Chemistry)</option>
-                  <option value="computer_science">💻 Sayansi ya Kompyuta (CS)</option>
-                  <option value="agriculture">🌾 Kilimo & Mazingira (Agri)</option>
-                </select>
+          <div class="space-y-1.5">
+            <!-- Return to Chat -->
+            <button type="button" onclick="switchTab('chat'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl flex items-center justify-between transition-all">
+              <div class="flex items-center space-x-2">
+                <span class="text-base">💬</span>
+                <div>
+                  <p class="font-bold text-emerald-950 text-xs">Mwanafunzi Chat (Active Chat)</p>
+                  <p class="text-[10px] text-emerald-700">Rudi kwenye ukurasa wa gumzo la masomo</p>
+                </div>
               </div>
+              <span class="text-xs font-bold text-emerald-700">➜</span>
+            </button>
 
-              <!-- 1b. LEVEL OF STUDY / GRADE -->
-              <div class="bg-slate-50 border border-slate-200 p-2 rounded-xl">
-                <label for="learnerGradeSelect" class="block font-bold text-slate-700 text-[10px] mb-0.5">🎓 Kiwango (Level of Study):</label>
-                <select id="learnerGradeSelect" onchange="handleGradeChange(event); updateHeaderStatusPill();" class="w-full bg-white border border-slate-300 font-bold text-purple-800 p-1 rounded-lg text-xs outline-none">
-                  <option value="Grade 1-3 (Lower Primary)">🌱 Darasa 1–3 (Lower Primary)</option>
-                  <option value="Grade 6 (Upper Primary)" selected>🌿 Darasa 4–6 (Upper Primary / CBC)</option>
-                  <option value="Grade 7-9 (Junior Secondary)">🔬 Darasa 7–9 (Junior Secondary / JSS)</option>
-                  <option value="Grade 10-12 (Senior High)">⚡ Form 3–4 / G10–12 (Senior High)</option>
-                </select>
+            <!-- Offline Vault Studies -->
+            <button type="button" onclick="switchTab('vault'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
+              <div class="flex items-center space-x-2">
+                <span class="text-base">📦</span>
+                <div>
+                  <p class="font-bold text-slate-900 text-xs">Offline Vault Studies (5 Modules)</p>
+                  <p class="text-[10px] text-slate-500">Majaribio na masomo bila mtandao (0 KB)</p>
+                </div>
               </div>
+              <span class="text-xs font-bold text-slate-400">➜</span>
+            </button>
 
-              <!-- 1c. COUNTRY -->
-              <div class="bg-slate-50 border border-slate-200 p-2 rounded-xl">
-                <label for="learnerCountrySelect" class="block font-bold text-slate-700 text-[10px] mb-0.5">🌍 Nchi (Country):</label>
-                <select id="learnerCountrySelect" onchange="handleCountryChange(event); updateHeaderStatusPill();" class="w-full bg-white border border-slate-300 font-bold text-emerald-800 p-1 rounded-lg text-xs outline-none">
-                  <option value="Kenya" selected>🇰🇪 Kenya</option>
-                  <option value="Tanzania">🇹🇿 Tanzania</option>
-                  <option value="Uganda">🇺🇬 Uganda</option>
-                  <option value="Rwanda">🇷🇼 Rwanda</option>
-                  <option value="Nigeria">🇳🇬 Nigeria</option>
-                  <option value="Ghana">🇬🇭 Ghana</option>
-                  <option value="South Africa">🇿🇦 South Africa</option>
-                  <option value="Ethiopia">🇪🇹 Ethiopia</option>
-                </select>
+            <!-- Development & Mastery (Maendeleo) -->
+            <button type="button" onclick="switchTab('mastery'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
+              <div class="flex items-center space-x-2">
+                <span class="text-base">🏆</span>
+                <div>
+                  <p class="font-bold text-slate-900 text-xs">Development & Mastery (Maendeleo)</p>
+                  <p class="text-[10px] text-slate-500">Kiwango cha uelewa wa mada na beji za ushindi</p>
+                </div>
               </div>
+              <span class="text-xs font-bold text-slate-400">➜</span>
+            </button>
 
-              <!-- 1d. LANGUAGE (16+ Pan-African Languages) -->
-              <div class="bg-slate-50 border border-slate-200 p-2 rounded-xl">
-                <label for="langSelect" class="block font-bold text-slate-700 text-[10px] mb-0.5">🗣️ Lugha (Language):</label>
-                <select id="langSelect" onchange="changeLanguage(this.value); updateHeaderStatusPill();" class="w-full bg-white border border-slate-300 font-bold text-slate-800 p-1 rounded-lg text-xs outline-none">
-                  <option value="sw">🇰🇪 🇹🇿 Kiswahili</option>
-                  <option value="sheng">🇰🇪 Sheng (Mtaani)</option>
-                  <option value="yo">🇳🇬 Èdè Yorùbá</option>
-                  <option value="ha">🇳🇬 🇳🇪 Hausa</option>
-                  <option value="ig">🇳🇬 Asụsụ Igbo</option>
-                  <option value="pcm">🇳🇬 🇬🇭 Naija Pidgin</option>
-                  <option value="am">🇪🇹 አማርኛ (Amharic)</option>
-                  <option value="om">🇪🇹 Afaan Oromoo</option>
-                  <option value="so">🇸🇴 Af-Soomaali</option>
-                  <option value="zu">🇿🇦 isiZulu</option>
-                  <option value="xh">🇿🇦 isiXhosa</option>
-                  <option value="rw">🇷🇼 Ikinyarwanda</option>
-                  <option value="lg">🇺🇬 Oluganda</option>
-                  <option value="tw">🇬🇭 Twi (Akan)</option>
-                  <option value="sn">🇿🇼 chiShona</option>
-                  <option value="ln">🇨🇩 Lingála</option>
-                  <option value="en">🌍 English (African Context)</option>
-                </select>
+            <!-- Stakeholder & Feedback Center -->
+            <button type="button" onclick="switchTab('stakeholders'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
+              <div class="flex items-center space-x-2">
+                <span class="text-base">👥</span>
+                <div>
+                  <p class="font-bold text-slate-900 text-xs">Stakeholder & Feedback Center</p>
+                  <p class="text-[10px] text-slate-500">Teacher CBC plans, Parent 2G SMS, Mentors & Feedback</p>
+                </div>
               </div>
-            </div>
+              <span class="text-xs font-bold text-slate-400">➜</span>
+            </button>
 
-            <!-- 1e. LOCATION CATEGORY (Highlands, Lake Basin, Coastal, Arid, Urban & GPS) -->
-            <div class="bg-slate-50 border border-slate-200 p-2.5 rounded-xl flex items-center justify-between gap-2">
-              <div class="flex-1">
-                <label for="learnerRegionSelect" class="block font-bold text-slate-700 text-[10px] mb-0.5">🏞️ Mazingira (Location Category):</label>
-                <select id="learnerRegionSelect" onchange="handleRegionChange(event); updateHeaderStatusPill();" class="w-full bg-white border border-slate-300 font-bold text-blue-800 p-1 rounded-lg text-xs outline-none">
-                  <option value="lake_basin" selected>🏞️ Ziwa Victoria & Kisumu</option>
-                  <option value="coastal">🌊 Pwani na Bahari (Coastal)</option>
-                  <option value="highlands">⛰️ Nyanda za Juu & Kilimo (Highlands)</option>
-                  <option value="arid">☀️ Maeneo Kavu & Sahel (Arid)</option>
-                  <option value="urban">🏙️ Mijini (Urban / Nairobi)</option>
-                </select>
+            <!-- Data Protection (Pan-African DPA) -->
+            <button type="button" onclick="switchTab('privacy_hub'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
+              <div class="flex items-center space-x-2">
+                <span class="text-base">🛡️</span>
+                <div>
+                  <p class="font-bold text-slate-900 text-xs">Data Protection (Pan-African DPA)</p>
+                  <p class="text-[10px] text-slate-500">8 Legal matrices (Kenya ODPC, NDPC, POPIA, AU Malabo)</p>
+                </div>
               </div>
-              <button type="button" onclick="detectGPSLocation();" id="gpsDetectBtn" title="Tambua Eneo Lako Kiotomatiki kwa GPS" class="self-end px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[10px] transition-all shadow-xs flex-shrink-0">
-                <span id="gpsDetectText">📍 GPS Auto</span>
-              </button>
-            </div>
+              <span class="text-xs font-bold text-slate-400">➜</span>
+            </button>
+
+            <!-- 16+ African Languages NLP -->
+            <button type="button" onclick="openLanguagesInfoModal(); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
+              <div class="flex items-center space-x-2">
+                <span class="text-base">🌍</span>
+                <div>
+                  <p class="font-bold text-slate-900 text-xs">16+ African Languages & NLP</p>
+                  <p class="text-[10px] text-slate-500">Masakhane NLP benchmarks & Google Gemini Multilingual</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-slate-400">➜</span>
+            </button>
           </div>
+        </div>
 
-          <!-- 2. INCLUSION & AUDIO (Ujumuishi & Sauti) -->
-          <div class="space-y-1.5 pt-1 border-t border-slate-100">
-            <span class="text-[10px] font-black uppercase text-blue-700 tracking-wider">♿ Inclusion & Accessibility (Ujumuishi)</span>
-            <div class="grid grid-cols-2 gap-2">
-              <button type="button" onclick="openA11yModal(); closeAppMenuDropdown();" class="w-full bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-950 p-2.5 rounded-xl text-left font-bold transition-all">
-                <p class="flex items-center space-x-1"><span>♿</span> <span>Inclusion</span></p>
-                <p class="text-[10px] text-blue-700 font-normal">Blind, Deaf & Dyslexia</p>
-              </button>
-
-              <button type="button" onclick="toggleAutoSpeak(); updateHeaderStatusPill();" id="autoSpeakMenuBtn" class="w-full bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-950 p-2.5 rounded-xl text-left font-bold transition-all">
-                <p class="flex items-center space-x-1"><span id="autoSpeakMenuIcon">🔊</span> <span id="autoSpeakMenuText">Sauti: Washa</span></p>
-                <p class="text-[10px] text-purple-700 font-normal">Usomaji wa Sauti (Voice)</p>
-              </button>
-            </div>
-          </div>
-
-          <!-- 3. STUDIES, DEVELOPMENT & STAKEHOLDERS HUBS (Offline Vault, Development, Stakeholders, Data Protection, Languages) -->
-          <div class="space-y-1.5 pt-1 border-t border-slate-100">
-            <span class="text-[10px] font-black uppercase text-amber-700 tracking-wider">📂 Studies, Development & Stakeholders</span>
-            
-            <div class="space-y-1.5">
-              <!-- 3a. Return to Chat -->
-              <button type="button" onclick="switchTab('chat'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-2">
-                  <span class="text-base">💬</span>
-                  <div>
-                    <p class="font-bold text-emerald-950 text-xs">Mwanafunzi Chat (Active Chat)</p>
-                    <p class="text-[10px] text-emerald-700">Rudi kwenye ukurasa wa gumzo la masomo</p>
-                  </div>
-                </div>
-                <span class="text-xs font-bold text-emerald-700">➜</span>
-              </button>
-
-              <!-- 3b. Offline Vault Studies -->
-              <button type="button" onclick="switchTab('vault'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-2">
-                  <span class="text-base">📦</span>
-                  <div>
-                    <p class="font-bold text-slate-900 text-xs">Offline Vault Studies (5 Modules)</p>
-                    <p class="text-[10px] text-slate-500">Majaribio na masomo bila mtandao (0 KB)</p>
-                  </div>
-                </div>
-                <span class="text-xs font-bold text-slate-400">➜</span>
-              </button>
-
-              <!-- 3c. Development & Mastery (Maendeleo) -->
-              <button type="button" onclick="switchTab('mastery'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-2">
-                  <span class="text-base">🏆</span>
-                  <div>
-                    <p class="font-bold text-slate-900 text-xs">Development & Mastery (Maendeleo)</p>
-                    <p class="text-[10px] text-slate-500">Kiwango cha uelewa wa mada na beji za ushindi</p>
-                  </div>
-                </div>
-                <span class="text-xs font-bold text-slate-400">➜</span>
-              </button>
-
-              <!-- 3d. Stakeholder & Feedback Center -->
-              <button type="button" onclick="switchTab('stakeholders'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-2">
-                  <span class="text-base">👥</span>
-                  <div>
-                    <p class="font-bold text-slate-900 text-xs">Stakeholder & Feedback Center</p>
-                    <p class="text-[10px] text-slate-500">Teacher CBC plans, Parent 2G SMS, Mentors & Feedback</p>
-                  </div>
-                </div>
-                <span class="text-xs font-bold text-slate-400">➜</span>
-              </button>
-
-              <!-- 3e. Data Protection (Pan-African DPA) -->
-              <button type="button" onclick="switchTab('privacy_hub'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-2">
-                  <span class="text-base">🛡️</span>
-                  <div>
-                    <p class="font-bold text-slate-900 text-xs">Data Protection (Pan-African DPA)</p>
-                    <p class="text-[10px] text-slate-500">8 Legal matrices (Kenya ODPC, NDPC, POPIA, AU Malabo)</p>
-                  </div>
-                </div>
-                <span class="text-xs font-bold text-slate-400">➜</span>
-              </button>
-
-              <!-- 3f. 16+ African Languages NLP -->
-              <button type="button" onclick="openLanguagesInfoModal(); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
-                <div class="flex items-center space-x-2">
-                  <span class="text-base">🌍</span>
-                  <div>
-                    <p class="font-bold text-slate-900 text-xs">16+ African Languages & NLP</p>
-                    <p class="text-[10px] text-slate-500">Masakhane NLP benchmarks & Google Gemini Multilingual</p>
-                  </div>
-                </div>
-                <span class="text-xs font-bold text-slate-400">➜</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Footer -->
-          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500">
-            <span>ElewaSTEM v1.4.0 • Google AI</span>
-            <button onclick="openFeedbackModal('student'); closeAppMenuDropdown();" class="text-brand-700 font-bold hover:underline">💬 Toa Maoni</button>
-          </div>
+        <!-- Footer -->
+        <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500">
+          <span>ElewaSTEM v1.4.0 • Google AI</span>
+          <button onclick="openFeedbackModal('student'); closeAppMenuDropdown();" class="text-brand-700 font-bold hover:underline">💬 Toa Maoni</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- MAIN CONTAINER (100% SCREEN HEIGHT PURE WORKSPACE) -->
+  <!-- MAIN CONTAINER (100% PURE CHAT WORKSPACE) -->
   <main class="flex-1 flex flex-col h-full min-h-0 overflow-hidden relative">
 
     <!-- 1. CHAT VIEW (LEARNER) -->
@@ -290,10 +289,7 @@
             🌱
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 shadow-sm max-w-[92%] text-sm text-slate-800 space-y-2">
-            <div class="flex items-center justify-between">
-              <p class="font-bold text-brand-700 text-base" id="welcomeTitle">Hujambo rafiki yangu mpendwa! 🌟</p>
-              <span id="welcomeEcoPill" class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📍 Eneo: Kisumu & Ziwa Victoria</span>
-            </div>
+            <p class="font-bold text-brand-700 text-base" id="welcomeTitle">Hujambo rafiki yangu mpendwa! 🌟</p>
             <p id="welcomeText">
               Mimi ni ElewaSTEM—rafiki na mwalimu wako anayekupenda na kukuamini! Niko hapa kukusaidia kuelewa Sayansi na Hesabu (Hisabati, Aljebra, Fizikia, Kemia, Biolojia, na Kompyuta) kwa lugha yako, kwa sauti, na kwa mifano ya mazingira yako.
             </p>
@@ -302,24 +298,6 @@
               <div id="quickLocationChips" class="flex flex-wrap gap-1.5"></div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Quick Action Prompt Chips Bar with 4Ds Temperature Toggle -->
-      <div id="quickChipsBar" class="px-4 py-1.5 bg-slate-100 border-t border-slate-200 flex items-center justify-between text-xs max-w-5xl w-full mx-auto flex-shrink-0">
-        <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-0.5">
-          <!-- 4Ds Dynamic Temperature Dial Button -->
-          <button type="button" onclick="toggleAgentMode()" id="agentModeBtn" title="4Ds Framework: Badili Hali ya Kufikiri na Joto (Temperature Dial)" class="px-2.5 py-1 bg-purple-100 text-purple-900 border border-purple-300 rounded-lg font-bold flex items-center space-x-1 flex-shrink-0 hover:bg-purple-200 transition-all">
-            <span id="agentModeIcon">🎨</span>
-            <span id="agentModeText">Hadithi (Temp 0.75)</span>
-          </button>
-          
-          <button onclick="sendQuickPrompt('Nieleze kwa mifano ya mimea na wanyama wa eneo langu')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium flex-shrink-0">📍 Mfano wa Eneo</button>
-          <button onclick="sendQuickPrompt('Nionyeshe mchoro au picha ya somo hili')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 font-medium flex-shrink-0">🖼️ Mchoro (Diagram)</button>
-          <button onclick="sendQuickPrompt('Nieleze kwa mifano ya kushika kwa wasioona (tactile)')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 font-medium flex-shrink-0">👁️ Tactile</button>
-          <button onclick="sendQuickPrompt('Nieleze kwa mifano rahisi sana')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium flex-shrink-0">💡 Rahisisha</button>
-          <button onclick="sendQuickPrompt('Nipe jaribio rahisi la kufanya nyumbani')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium flex-shrink-0">🧪 Jaribio</button>
-          <button onclick="sendQuickPrompt('Nipe swali la mtihani la kujipima')" class="px-2 py-0.5 bg-white border border-slate-300 rounded text-slate-700 hover:bg-brand-50 hover:text-brand-700 font-medium flex-shrink-0">🎯 Quiz</button>
         </div>
       </div>
 
@@ -1321,8 +1299,9 @@
     </div>
   </div>
 
-  <script src="/app.js"></script>
+  <script src="/app.js?v=2.2"></script>
   <script>
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
