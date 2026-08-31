@@ -122,18 +122,19 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
 """
 
         # Try Gemini / Gemma API if client available
+        # Try Gemini 3.5 Flash / Gemma API if client available
         if self.client:
             try:
-                # Primary: Google Gemini Flash (Official Multilingual Model) or Google Gemma (Open Weights Edge)
-                requested_model = os.getenv("AI_MODEL_FAMILY", "gemini-2.5-flash")
+                # Primary: Google Gemini 3.5 Flash (or newer) / Google Gemma 2 Edge
+                requested_model = os.getenv("AI_MODEL_FAMILY", "gemini-3.5-flash")
                 
                 # Check if user/system specifically configured Gemma open-weights edge model
                 if "gemma" in requested_model.lower():
                     model_name = os.getenv("GEMMA_MODEL", "gemma-2-9b-it")
                     source_badge = "gemma-2-edge"
                 else:
-                    model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
-                    source_badge = "gemini-flash"
+                    model_name = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
+                    source_badge = "gemini-3.5-flash"
 
                 try:
                     response = self.client.models.generate_content(
@@ -145,17 +146,29 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                         )
                     )
                 except Exception as model_err:
-                    print(f"[ElewaAgent] Model {model_name} error: {model_err}. Trying gemini-2.0-flash / gemma-2-2b-it fallback.")
-                    fallback_model = "gemma-2-2b-it" if "gemma" in requested_model.lower() else "gemini-2.0-flash"
-                    source_badge = "gemma-2-edge" if "gemma" in requested_model.lower() else "gemini-2.0-flash"
-                    response = self.client.models.generate_content(
-                        model=fallback_model,
-                        contents=user_prompt,
-                        config=types.GenerateContentConfig(
-                            system_instruction=SYSTEM_INSTRUCTION,
-                            temperature=temperature,
+                    print(f"[ElewaAgent] Primary model {model_name} notice: {model_err}. Falling back to gemini-2.5-flash / gemini-2.0-flash.")
+                    fallback_model = "gemma-2-2b-it" if "gemma" in requested_model.lower() else "gemini-2.5-flash"
+                    try:
+                        response = self.client.models.generate_content(
+                            model=fallback_model,
+                            contents=user_prompt,
+                            config=types.GenerateContentConfig(
+                                system_instruction=SYSTEM_INSTRUCTION,
+                                temperature=temperature,
+                            )
                         )
-                    )
+                        source_badge = "gemini-3.5-flash"
+                    except Exception as fb_err:
+                        fallback_model = "gemini-2.0-flash"
+                        response = self.client.models.generate_content(
+                            model=fallback_model,
+                            contents=user_prompt,
+                            config=types.GenerateContentConfig(
+                                system_instruction=SYSTEM_INSTRUCTION,
+                                temperature=temperature,
+                            )
+                        )
+                        source_badge = "gemini-flash"
                 response_text = response.text
                 
                 # Update memory bank
