@@ -56,6 +56,7 @@ class ChatRequest(BaseModel):
     jurisdiction: str = "KE"
     country: Optional[str] = "Kenya"
     subject: Optional[str] = "all"
+    topic_id: Optional[str] = None
     grade_level: Optional[str] = "Grade 6 (Upper Primary)"
     gps_coordinates: Optional[Dict[str, float]] = None
     simplify: bool = False
@@ -180,6 +181,7 @@ async def chat_with_agent(req: ChatRequest):
         simplify=req.simplify,
         mode=req.mode or "creative",
         subject=req.subject or "all",
+        topic_id=req.topic_id,
         grade_level=req.grade_level or "Grade 6 (Upper Primary)",
         country=req.country or "Kenya"
     )

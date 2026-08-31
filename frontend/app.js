@@ -1810,7 +1810,8 @@ async function executeAgentQuery(query, simplify = false) {
         region: STATE.region,
         jurisdiction: STATE.jurisdiction,
         country: STATE.country || 'Kenya',
-        subject: STATE.subject || 'all',
+        subject: STATE.selectedSubject || STATE.subject || 'all',
+        topic_id: STATE.selectedTopicId || undefined,
         grade_level: STATE.gradeLevel || 'Grade 6 (Upper Primary)',
         gps_coordinates: STATE.gpsCoords,
         simplify: simplify,
@@ -1842,8 +1843,13 @@ function generateLocalOfflineAnswer(query, simplify) {
   const qLower = query.toLowerCase();
   let matched = null;
   
-  // 1. Biology: Digestive System
-  if (qLower.includes('digest') || qLower.includes('mmeng\'enyo') || qLower.includes('stomach') || qLower.includes('tumbo') || qLower.includes('esophagus') || qLower.includes('umio') || qLower.includes('kinywa') || qLower.includes('utumbo') || qLower.includes('enzyme') || qLower.includes('saliva') || qLower.includes('mate')) {
+  // 0. If user explicitly selected a topic in the menu
+  if (STATE.selectedTopicId) {
+    matched = STATE.offlineModules.find(m => m.id === STATE.selectedTopicId);
+  }
+
+  // 1. Biology: Digestive System (including villi, ileum, enzymes, absorption)
+  if (!matched && (qLower.includes('digest') || qLower.includes('villi') || qLower.includes('vili') || qLower.includes('microvilli') || qLower.includes('ileum') || qLower.includes('duodenum') || qLower.includes('absorption') || qLower.includes('mmeng\'enyo') || qLower.includes('stomach') || qLower.includes('tumbo') || qLower.includes('esophagus') || qLower.includes('umio') || qLower.includes('kinywa') || qLower.includes('utumbo') || qLower.includes('enzyme') || qLower.includes('saliva') || qLower.includes('mate') || qLower.includes('bile') || qLower.includes('nyongo') || qLower.includes('pancreas') || qLower.includes('pepsin'))) {
     matched = STATE.offlineModules.find(m => m.id === 'human_digestive_system');
   }
 

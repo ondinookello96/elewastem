@@ -324,59 +324,63 @@ def get_related_topics_recommendations(topic_id_or_query: str) -> List[Dict[str,
     return RELATED_TOPIC_GRAPH.get(tid, RELATED_TOPIC_GRAPH.get("photosynthesis", []))
 
 
-def find_offline_topic(query: str, preferred_subject: str = "all") -> Dict[str, Any]:
+def find_offline_topic(query: str, preferred_subject: str = "all", preferred_topic_id: Optional[str] = None) -> Dict[str, Any]:
     query_lower = query.lower().strip()
     
-    # 0. Direct match against topic ID
+    # 0a. Explicit topic_id passed from frontend
+    if preferred_topic_id and preferred_topic_id in CURRICULUM_BY_ID:
+        return CURRICULUM_BY_ID[preferred_topic_id]
+
+    # 0b. Direct match against topic ID
     if query_lower in CURRICULUM_BY_ID:
         return CURRICULUM_BY_ID[query_lower]
 
-    # 1. High-Precision Domain Keyword Detection across all 52 modules:
+    # 1. High-Precision Domain Keyword Detection across all 53 modules:
     
     # --- BIOLOGY ---
-    if any(k in query_lower for k in ["digest", "mmeng'enyo", "stomach", "tumbo", "esophagus", "umio", "mouth", "kinywa", "saliva", "mate", "intestine", "utumbo", "enzyme", "virutubisho", "chakula mwilini"]):
+    if any(k in query_lower for k in ["digest", "mmeng'enyo", "villi", "vili", "microvilli", "ileum", "duodenum", "absorption", "peristalsis", "bile", "nyongo", "pancreas", "pepsin", "amylase", "stomach", "tumbo", "esophagus", "umio", "mouth", "kinywa", "saliva", "mate", "intestine", "utumbo", "enzyme", "virutubisho", "chakula mwilini", "colon", "rectum"]):
         return CURRICULUM_BY_ID.get("human_digestive_system", OFFLINE_STEM_VAULT[0])
     
-    if any(k in query_lower for k in ["heart", "moyo", "circulat", "mzunguko wa damu", "blood", "damu", "artery", "ateri", "vein", "vena", "pulse", "mapigo"]):
+    if any(k in query_lower for k in ["heart", "moyo", "circulat", "mzunguko wa damu", "blood", "damu", "artery", "ateri", "vein", "vena", "pulse", "mapigo", "ventricle", "atrium", "aorta"]):
         return CURRICULUM_BY_ID.get("circulatory_heart", OFFLINE_STEM_VAULT[0])
     
-    if any(k in query_lower for k in ["kidney", "figo", "excret", "mkojo", "nephron", "uchafu wa damu", "dialysis"]):
+    if any(k in query_lower for k in ["kidney", "figo", "excret", "mkojo", "nephron", "uchafu wa damu", "dialysis", "ureter", "bladder"]):
         return CURRICULUM_BY_ID.get("human_excretion_kidney", OFFLINE_STEM_VAULT[0])
 
-    if any(k in query_lower for k in ["nervous system", "ubongo wa binadamu", "mfumo wa fahamu", "nerve cell", "mishipa ya fahamu", "sense organs", "milango ya hisia", "reflex arc"]):
+    if any(k in query_lower for k in ["nervous system", "ubongo wa binadamu", "mfumo wa fahamu", "nerve cell", "mishipa ya fahamu", "sense organs", "milango ya hisia", "reflex arc", "neuron"]):
         return CURRICULUM_BY_ID.get("nervous_sense_organs", OFFLINE_STEM_VAULT[0])
 
-    if any(k in query_lower for k in ["vertebrate", "invertebrate", "uti wa mgongo", "classify", "uainishaji", "mammal", "mamalia", "reptile", "reptilia", "amphibian", "amfibea", "insect", "wadudu"]):
+    if any(k in query_lower for k in ["vertebrate", "invertebrate", "uti wa mgongo", "classify", "uainishaji", "mammal", "mamalia", "reptile", "reptilia", "amphibian", "amfibea", "insect", "wadudu", "arthropod"]):
         return CURRICULUM_BY_ID.get("living_things_classification", OFFLINE_STEM_VAULT[0])
 
-    if any(k in query_lower for k in ["bone", "mifupa", "skeleton", "muscl", "misuli", "joint", "kiungio", "tendon", "ligament", "fupa la mgongo", "fupa"]):
+    if any(k in query_lower for k in ["bone", "mifupa", "skeleton", "muscl", "misuli", "joint", "kiungio", "tendon", "ligament", "fupa la mgongo", "fupa", "cartilage"]):
         return CURRICULUM_BY_ID.get("skeletal_muscular_system", OFFLINE_STEM_VAULT[0])
 
     if any(k in query_lower for k in ["bacteria", "bakteria", "virus", "virusi", "fungi", "ukungu", "microorganism", "vijidudu", "microbe", "pathogen", "hygiene", "cholera", "kipindupindu"]):
         return CURRICULUM_BY_ID.get("microorganisms_health", OFFLINE_STEM_VAULT[0])
 
-    if any(k in query_lower for k in ["transpirat", "mvuke wa mmea", "xylem", "phloem", "transport in plant", "mizizi inanyonya maji", "usafirishaji wa maji"]):
+    if any(k in query_lower for k in ["transpirat", "mvuke wa mmea", "xylem", "phloem", "transport in plant", "mizizi inanyonya maji", "usafirishaji wa maji", "stomata ya mmea"]):
         return CURRICULUM_BY_ID.get("plant_transpiration_transport", OFFLINE_STEM_VAULT[0])
 
-    if any(k in query_lower for k in ["fish biology", "aquatic fish", "samaki", "gills ya samaki", "matamvua", "ngege", "mbuta", "upumuaji wa samaki"]):
+    if any(k in query_lower for k in ["fish biology", "aquatic fish", "samaki", "gills ya samaki", "matamvua", "ngege", "mbuta", "upumuaji wa samaki", "operculum"]):
         return CURRICULUM_BY_ID.get("aquatic_biology_kisumu", OFFLINE_STEM_VAULT[0])
 
-    if any(k in query_lower for k in ["lung", "mapafu", "respirat", "upumuaji", "breathe", "pumua", "trachea", "koromeo", "inhale", "exhale", "diaphragm", "kiwambo"]):
+    if any(k in query_lower for k in ["lung", "mapafu", "respirat", "upumuaji", "breathe", "pumua", "trachea", "koromeo", "inhale", "exhale", "diaphragm", "kiwambo", "alveoli", "bronchi"]):
         return CURRICULUM_BY_ID.get("human_respiration", OFFLINE_STEM_VAULT[0])
 
-    if any(k in query_lower for k in ["cell", "seli", "nucleus", "kiini", "cytoplasm", "saikroplasimu", "membrane", "utando", "chloroplast", "kloroplasti"]):
+    if any(k in query_lower for k in ["cell", "seli", "nucleus", "kiini", "cytoplasm", "saikroplasimu", "membrane", "utando", "chloroplast", "kloroplasti", "vacuole", "cell wall"]):
         return CURRICULUM_BY_ID.get("cell_biology", OFFLINE_STEM_VAULT[0])
 
-    if any(k in query_lower for k in ["food chain", "mnyororo wa chakula", "ecolog", "ikolojia", "ecosystem", "producer", "mtengenezaji", "consumer", "mlaji", "predator", "mwindaji", "herbivore", "carnivore", "decomposer"]):
+    if any(k in query_lower for k in ["food chain", "mnyororo wa chakula", "ecolog", "ikolojia", "ecosystem", "producer", "mtengenezaji", "consumer", "mlaji", "predator", "mwindaji", "herbivore", "carnivore", "decomposer", "trophic"]):
         return CURRICULUM_BY_ID.get("ecology_food_chains", OFFLINE_STEM_VAULT[0])
 
-    if any(k in query_lower for k in ["pollinat", "uchavushaji", "flower", "maua", "petali", "petal", "stamen", "chavulio", "pistil", "kambamaua", "poleni", "chavua", "nectar"]):
+    if any(k in query_lower for k in ["pollinat", "uchavushaji", "flower", "maua", "petali", "petal", "stamen", "chavulio", "pistil", "kambamaua", "poleni", "chavua", "nectar", "anther", "stigma"]):
         return CURRICULUM_BY_ID.get("plant_pollination", OFFLINE_STEM_VAULT[0])
 
     if any(k in query_lower for k in ["genetic", "jenetiki", "dna", "gene", "jeni", "heredity", "urithi", "chromosome", "kromosomu", "punnett", "mendel", "dominant", "recessive", "kurithi", "chotara", "hybrid crop", "inherited trait"]):
         return CURRICULUM_BY_ID.get("genetics_dna_heredity", OFFLINE_STEM_VAULT[0])
 
-    if any(k in query_lower for k in ["photo", "usanisinuru", "klorofili", "chlorophyll", "plant food", "chakula cha mmea", "stomata"]):
+    if any(k in query_lower for k in ["photo", "usanisinuru", "klorofili", "chlorophyll", "plant food", "chakula cha mmea"]):
         return CURRICULUM_BY_ID.get("photosynthesis", OFFLINE_STEM_VAULT[0])
 
     # --- PHYSICS ---

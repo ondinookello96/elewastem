@@ -72,6 +72,7 @@ class ElewaAgent:
         simplify: bool = False,
         mode: str = "creative",  # 'creative' (Temp 0.75) or 'precise' (Temp 0.2)
         subject: str = "all",
+        topic_id: Optional[str] = None,
         grade_level: Optional[str] = None,
         country: str = "Kenya"
     ) -> Dict[str, Any]:
@@ -80,7 +81,7 @@ class ElewaAgent:
         """
         profile = student_memory.get_or_create_profile(student_id, language=target_language, region=region)
         region_info = REGIONS.get(region, REGIONS["lake_basin"])
-        topic_data = find_offline_topic(message, preferred_subject=subject)
+        topic_data = find_offline_topic(message, preferred_subject=subject, preferred_topic_id=topic_id)
         
         effective_grade = grade_level or profile.grade_level
         mastery_summary = ", ".join([f"{k} ({v.mastery_score}% mastery)" for k, v in profile.mastery_graph.items()]) or "New curious learner"
@@ -94,12 +95,13 @@ class ElewaAgent:
 Student Name: {profile.name}
 Country: {country}
 Grade / Educational Level: {effective_grade}
-Selected Subject Focus: {subject.upper() if subject and subject != 'all' else 'ALL STEM (General Exploration)'}
+Selected Subject Focus: {topic_data.get('subject', subject).upper()}
+Active Topic Context: {topic_data.get('title_en', 'General STEM')}
 Target Language: {target_language.upper()}
 Eco-Region: {region_info['name_en']} ({region_info['name_sw']})
 Local Species & Ecosystem Assets: {region_info['key_ecosystems']}
 Recent Mastery Context: {mastery_summary}
-Simplify Mode: {"YES (Explain to a 9-year-old in very simple, loving terms)" if simplify else "STANDARD (Warm, Engaging, Socratic)"}
+Simplify Mode: {"YES (Explain in very simple, intuitive story terms)" if simplify else "STANDARD (Warm, Engaging, Socratic)"}
 Reasoning Mode: {mode.upper()} (Temperature: {temperature})
 
 === RECENT INTERACTION HISTORY ===
@@ -108,7 +110,7 @@ Reasoning Mode: {mode.upper()} (Temperature: {temperature})
 === STUDENT QUESTION ===
 "{message}"
 
-Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with warm African friendship persona tailored precisely to {effective_grade} level in {country}.
+Apply the 4Ds Framework: Directly answer the student's exact scientific question with warm African friendship persona and local eco-analogies tailored precisely to {effective_grade} level in {country}.
 """
 
         # Try Gemini 3.7 Flash (High Reasoning Budget) / Gemma API if client available
@@ -214,12 +216,12 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                 print(f"[ElewaAgent] Google AI (Gemini/Gemma) API call error: {e}. Falling back to regional offline engine.")
 
         # Offline fallback applying the exact same 4Ds structure
-        return self._generate_offline_response(student_id, message, target_language, region, simplify, mode, subject)
+        return self._generate_offline_response(student_id, message, target_language, region, simplify, mode, subject, topic_id=topic_id)
 
-    def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool, mode: str = "creative", subject: str = "all") -> Dict[str, Any]:
-        """Generates rich, dynamic Socratic offline responses that converse naturally without repeating static cards."""
+    def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool, mode: str = "creative", subject: str = "all", topic_id: Optional[str] = None) -> Dict[str, Any]:
+        """Generates rich, dynamic Socratic offline responses that accurately and directly answer the exact question asked."""
         profile = student_memory.get_or_create_profile(student_id, language=language, region=region)
-        topic_data = find_offline_topic(message, preferred_subject=subject)
+        topic_data = find_offline_topic(message, preferred_subject=subject, preferred_topic_id=topic_id)
         region_key = region if region in topic_data.get("regional_analogies", {}) else "lake_basin"
         region_info = REGIONS.get(region, REGIONS["lake_basin"])
         is_sw = (language.lower() != "en" and language.lower() != "english")
@@ -235,57 +237,78 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
         exp = topic_data["experiment"]
         quiz = topic_data["quiz"]
 
-        # CONVERSATIONAL TURN 2+: Dynamic Follow-up Handling
-        if is_follow_up:
-            last_user_msg = recent_turns[-2]["content"] if len(recent_turns) >= 2 else ""
-            
+        # DIRECT CONCEPT QUESTION HANDLERS (Specific anatomical / physical / chemical / mathematical components)
+        if any(w in msg_lower for w in ["villi", "villus", "vili", "microvilli", "ileum"]):
+            if is_sw:
+                text = f"""Hujambo rafiki yangu mpendwa! 🌟 Hilo ni swali zuri sana kuhusu **{title}**!
+
+### 🔬 Villi (Vilai) ni Nini?
+**Villi** (kwa Kiswahili: *vilai*) ni mamilioni ya vinyweleo vidogo sana vinavyofanana na vidole vidogo vinavyotanda ndani ya kuta za utumbo mwembamba (hasa sehemu ya **ileum**).
+
+### 🎯 Kazi Kuu 2 za Villi:
+1. **Kuongeza Eneo la Ufyonzaji (Huge Surface Area):** Vilai huongeza eneo la ndani la utumbo mara mamia ili virutubisho vyote vya chakula vifyonzwe kwa haraka na kikamilifu bila kutupwa chooni.
+2. **Kusafirisha Virutubisho Kwenye Damu:** Ndani ya kila kilai kuna mishipa midogo ya damu (capillaries) inayofyonza sukari (glucose) na amino acids, pamoja na mshipa wa *lacteal* unaofyonza mafuta (fatty acids) ili kuupa mwili wako nguvu na afya!
+
+### 💡 Mfano Halisi wa Mazingira Yetu ({region_info['locality_name']}):
+Fikiria taulo laini ya pamba yenye nyuzi nyingi ikifyonza maji mara moja ukilinganisha na mfuko wa nailoni. Nyuzi za taulo (villi) hufyonza maji yote papo hapo—ndivyo utumbo wako unavyofyonza virutubisho vya ugali, samaki au mboga!
+
+Je, ungependa kujua jinsi vimeng'enya (enzymes) vinavyovunja chakula kabla hakijafika kwenye villi? 💭"""
+            else:
+                text = f"""Hello my dear friend! 🌟 That is an excellent, sharp question about **{title}**!
+
+### 🔬 What are Villi?
+**Villi** (singular: *villus*) are millions of tiny, microscopic finger-like projections that line the inner surface of your small intestine (specifically the **ileum**).
+
+### 🎯 Key Functions of Villi:
+1. **Dramatically Expands Surface Area:** Villi increase the inner absorption area of the small intestine by up to 60 times! If smoothed out, they would cover an entire badminton court, ensuring almost zero nutrients are wasted.
+2. **Direct Nutrient Absorption into Blood:** Inside each villus is a dense network of blood capillaries that absorb digested simple sugars (glucose) and amino acids directly into the bloodstream, plus a central lymph vessel (lacteal) that absorbs fatty acids.
+
+### 💡 Everyday Real-World Analogy ({region_info['locality_name']}):
+Think of a thick cotton towel with thousands of tiny absorbent loops compared to a flat plastic sheet. The towel's loops (villi) soak up liquid instantly—just like your intestines absorb all the energy from your meals!
+
+Would you like to explore how digestive enzymes break down food before villi absorb it, or shall we try a mini quiz? 💭"""
+
+        # GENERAL TOPIC FOLLOW-UP TURNS
+        elif is_follow_up:
             # 1. Simpler Mode / "Sielewi" / "Explain simpler"
             if simplify or any(w in msg_lower for w in ["simpler", "rahisisha", "sielewi", "ngumu", "hard", "simple", "tell me simply"]):
                 if is_sw:
-                    text = f"""Usijali hata kidogo rafiki yangu! 🌟 Makosa na kutoelewa ndio ngazi ya kwanza ya ugunduzi wa kweli. Hebu nikupe mfano rahisi sana:
+                    text = f"""Usijali hata kidogo rafiki yangu! 🌟 Makosa na kutoelewa ndio ngazi ya kwanza ya ugunduzi wa kweli.
 
-Fikiria mada hii ya **{title}** kama jiko la nyumbani:
-* Jani la mmea ni kama sufuria jikoni.
-* Mwanga wa jua ni kama moto wa kuni au makaa.
-* Maji kutoka kwenye mizizi ni kama maji ya kupikia ugali.
-* Hewa ya Carbon Dioxide ni kama unga unaoingia kwenye sufuria!
+Hebu tuiweke mada ya **{title}** kwa njia rahisi sana:
+* **Kiini cha Mada:** {summary}
+* **Mfano Rahisi:** {analogy}
 
-Mmea ukichanganya vitu hivi vitatu, unatengeneza chakula kitamu (sukari ya Glucose) na kutoa hewa safi ya Oksijeni ili sisi tupumue! 🌿✨
-
-Je, unaona jinsi mimea ilivyo kama wapishi wadogo wa kijani mashambani mwetu? Ungependa tuchunguze nini kingine?"""
+Je, unaona jinsi kanuni hii inavyofanya kazi kwa urahisi? Nambie ni sehemu gani ungependa tuirudie pamoja! 🌿✨"""
                 else:
-                    text = f"""No worries at all, my dear friend! 🌟 Asking for a simpler explanation is what the smartest scientists do! Let's imagine this like a friendly kitchen story:
+                    text = f"""No worries at all, my dear friend! 🌟 Asking for a simpler explanation is what the smartest scientists do!
 
-Think of **{title}** like cooking a meal at home:
-* The plant's leaf is like your cooking pot.
-* Sunlight is the stove's heat energy.
-* Water sucked up by roots is your cooking liquid.
-* Carbon Dioxide from the air is the raw ingredients you stir in!
+Let's make **{title}** crystal clear:
+* **The Core Idea:** {summary}
+* **Everyday Metaphor:** {analogy}
 
-When the leaf mixes sunlight, water, and air, it produces sweet food (Glucose sugar) and releases fresh Oxygen for you and me to breathe! 🌿✨
-
-Isn't nature amazing? How does that feel—would you like to try a mini quiz or ask another curiosity?"""
+See how simple and logical nature is? Tell me which specific part you'd like to explore next! 🌿✨"""
 
             # 2. Deeper / "Why" / "How" / "Kwa nini"
             elif any(w in msg_lower for w in ["why", "kwa nini", "how", "vipi", "sababu", "where", "wapi", "what if", "ikitokea"]):
                 if is_sw:
-                    text = f"""Hilo ni swali la werevu wa hali ya juu! 🌟 Wewe unawaza kama mwanasayansi wa kweli wa Kiafrika.
+                    text = f"""Hilo ni swali la werevu wa hali ya juu! 🌟 Wewe unawaza kama mwanasayansi wa kweli.
 
 Kuhusu swali lako: *" {message} "*:
-1. **Sababu Kuu ya Kisayansi:** Katika mada ya **{title}**, kila hatua hufanyika kwa mpangilio maalum ili kudumisha uhai wa kiumbe.
+1. **Sababu Kuu ya Kisayansi:** Katika mada ya **{title}**, kila hatua hufanyika kwa mpangilio maalum ili kudumisha uwiano wa asili.
 2. **Kwenye Mazingira Yetu ({region_info['locality_name']}):** {analogy}
-3. **Kumbuka:** Viumbe na mimea imejenga uwezo wa kipekee wa kubadilika kulingana na mazingira yanayowazunguka (adaptation).
+3. **Kumbuka:** Kanuni hii inahakikisha nishati na rasilimali zinatumika kwa ufanisi wa hali ya juu.
 
-Je, umewahi kuona jambo kama hili likitokea kwenye mimea au wanyama hapo nyumbani au shuleni? Nambie unafikiri nini! 💭"""
+Je, unaona jambo kama hili likitokea kwenye maisha ya kila siku hapo nyumbani au shuleni? Nambie unafikiri nini! 💭"""
                 else:
                     text = f"""That is a brilliant, sharp question! 🌟 You are thinking like a true scientist!
 
 Regarding what you just asked: *" {message} "*:
-1. **The Core Scientific Reason:** In **{title}**, this happens because living systems always balance energy and resources to survive.
+1. **The Core Scientific Reason:** In **{title}**, this happens because the system operates on precise biological/physical laws to transfer energy efficiently.
 2. **In Our Local Environment ({region_info['locality_name']}):** {analogy}
-3. **Key Insight:** Living things adapt specifically to their surroundings—just like crops and animals thrive across Africa's ecosystems.
+3. **Key Insight:** Everything in nature works together in harmony to maintain life and energy.
 
-Have you ever observed something similar happening in nature around your home or school? What do you think? 💭"""
+Have you ever observed something similar happening in nature around your community? What do you think? 💭"""
 
             # 3. Another Example / "Mfano Mwingine"
             elif any(w in msg_lower for w in ["another", "mwingine", "example", "mfano", "more"]):
@@ -313,15 +336,15 @@ See how the same scientific principle of **{title}** applies across different ec
 
 Kuhusu mada yetu ya **{title}**:
 * **Ufahamu wa Haraka:** {summary}
-* **Swali la Kufikirisha:** Je, unajua ni nini kingetokea endapo mchakato huu ungekoma kwa siku tatu tu katika mazingira yetu ya {region_info['locality_name']}?
+* **Swali la Kufikirisha:** Je, unajua ni nini kingetokea endapo mchakato huu ungekoma kwa siku chache tu katika mazingira yetu ya {region_info['locality_name']}?
 
-Endelea kuuliza chochote—mimi niko hapa kufafanua hatua kwa hatua bila kukuchosha! 🚀"""
+Endelea kuuliza chochote—mimi niko hapa kufafanua hatua kwa hatua! 🚀"""
                 else:
                     text = f"""I hear you loud and clear, my dear friend! 🌟
 
 Continuing our discovery of **{title}**:
 * **Quick Insight:** {summary}
-* **Curiosity Question:** What do you think would happen if this natural process paused for just three days in our {region_info['locality_name']} environment?
+* **Curiosity Question:** What do you think would happen if this natural process paused for just a few days in our {region_info['locality_name']} environment?
 
 Keep asking anything that comes to mind—I'm right here to guide you step-by-step! 🚀"""
 
@@ -329,10 +352,10 @@ Keep asking anything that comes to mind—I'm right here to guide you step-by-st
         else:
             intro = (
                 f"Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **{region_info['icon']} {region_info['name_sw']}**! "
-                f"Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:"
+                f"Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze mada hii ya **{title}** pamoja kama marafiki:"
                 if is_sw else
                 f"Hello my dear friend! 🌟 I am so proud of your wonderful question about our beautiful **{region_info['icon']} {region_info['name_en']}**! "
-                f"You have such a sharp and curious mind. Let's explore this exciting concept together step-by-step:"
+                f"You have such a sharp and curious mind. Let's explore **{title}** together step-by-step:"
             )
 
             text = f"""{intro}
@@ -351,9 +374,6 @@ Keep asking anything that comes to mind—I'm right here to guide you step-by-st
 
 ### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):
 """
-            for term in topic_data.get("key_terms", []):
-                text += f"* **{term['sw' if is_sw else 'en']}** ({term['en' if is_sw else 'sw']})\n"
-
             text += f"\n> *\"{topic_data.get('cbc_strand', 'CBC Curriculum')}\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*"
 
         student_memory.add_interaction_history(student_id, "user", message, language)
