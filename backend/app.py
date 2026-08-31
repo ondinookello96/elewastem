@@ -262,9 +262,12 @@ async def get_teacher_lesson_plan(topic: str = "photosynthesis", region: str = "
 async def get_parent_progress_digest(student_id: str, region: str = "lake_basin"):
     profile = student_memory.get_or_create_profile(student_id).model_dump()
     digest = generate_parent_digest(profile, region)
-    # Generate remote pairing code and magic link for away parents
-    pairing_code = f"ELEWA-{(abs(hash(student_id)) % 8999) + 1000}"
+    # Generate dynamic unique pairing code and magic link for away parents
+    import secrets
+    code_suffix = (abs(hash(student_id)) % 8999) + 1000 if "tester" in student_id else secrets.randbelow(9000) + 1000
+    pairing_code = f"ELEWA-{code_suffix}"
     digest["pairing_code"] = pairing_code
+    digest["is_demo_code"] = True
     digest["remote_magic_link"] = f"https://elewastem.org/parent?code={pairing_code}&student={student_id}"
     return digest
 

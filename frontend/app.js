@@ -1238,12 +1238,36 @@ function elderDisagreement(topic) {
   appendSystemNotice('👥 <b>PRIDE Loop (Disagreement Rights):</b> Haki ya kupinga au kusahihisha jibu la AI imefunguliwa kwa Mwalimu/Mzazi.');
 }
 
+function getOrCreateStudentPairingCode() {
+  let code = localStorage.getItem('elewa_student_pairing_code');
+  if (!code) {
+    const randomNum = Math.floor(1000 + Math.random() * 9000);
+    code = `ELEWA-${randomNum}`;
+    localStorage.setItem('elewa_student_pairing_code', code);
+  }
+  return code;
+}
+
+function generateNewPairingCode() {
+  const randomNum = Math.floor(1000 + Math.random() * 9000);
+  const code = `ELEWA-${randomNum}`;
+  localStorage.setItem('elewa_student_pairing_code', code);
+  STATE.parentPairingCode = code;
+  const codeEl = document.getElementById('parentPairingCode');
+  if (codeEl) codeEl.innerText = code;
+  appendSystemNotice(`🔑 <b>Nambari Mpya ya Mzazi Imewekwa:</b> ${code} (Demo Mode)`);
+}
+
 function updateParentDigestPreview() {
   const smsEl = document.getElementById('parentSmsPreview');
   const codeEl = document.getElementById('parentPairingCode');
   const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
   const mastery = STATE.profile.mastery_graph || {};
   const count = Object.keys(mastery).length || 1;
+
+  const dynamicCode = getOrCreateStudentPairingCode();
+  STATE.parentPairingCode = dynamicCode;
+  if (codeEl) codeEl.innerText = dynamicCode;
 
   const defaultSms = `ElewaSTEM Ripoti ya Mzazi: Mwanafunzi amechunguza mada ${count} za Sayansi kwa mifano ya ${reg.name_sw}. Jaribio la wiki hii: Chunguza Oksijeni ya mimea ya jikoni na mtoto wako!`;
   if (smsEl) smsEl.innerText = defaultSms;
@@ -1253,13 +1277,14 @@ function updateParentDigestPreview() {
       .then(r => r.json())
       .then(data => {
         if (data.sms_digest_text && smsEl) smsEl.innerText = data.sms_digest_text;
-        if (data.pairing_code && codeEl) codeEl.innerText = data.pairing_code;
-        STATE.parentPairingCode = data.pairing_code;
+        if (data.pairing_code && codeEl) {
+          // If server provides a customized pairing code, sync it
+          codeEl.innerText = data.pairing_code;
+          STATE.parentPairingCode = data.pairing_code;
+        }
         STATE.parentMagicLink = data.remote_magic_link;
       })
       .catch(e => console.log('Parent digest remote fetch notice:', e));
-  } else {
-    if (codeEl) codeEl.innerText = `ELEWA-${(absHash(STATE.studentId) % 8999) + 1000}`;
   }
 }
 
@@ -1270,14 +1295,14 @@ function absHash(str) {
 }
 
 function copyPairingCode() {
-  const code = document.getElementById('parentPairingCode')?.innerText || 'ELEWA-7921';
+  const code = document.getElementById('parentPairingCode')?.innerText || getOrCreateStudentPairingCode();
   navigator.clipboard.writeText(code).then(() => {
     alert(`Nambari ya kuunganisha (${code}) imenakiliwa! Mzazi anaweza kuitumia kwenye simu yake.`);
   }).catch(() => alert('Nambari ya kuunganisha: ' + code));
 }
 
 function copyParentMagicLink() {
-  const code = document.getElementById('parentPairingCode')?.innerText || 'ELEWA-7921';
+  const code = document.getElementById('parentPairingCode')?.innerText || getOrCreateStudentPairingCode();
   const link = `https://elewastem.org/parent?code=${code}&student=${STATE.studentId}`;
   navigator.clipboard.writeText(link).then(() => {
     alert(`Kiungo cha Mzazi kimenakiliwa! Tuma kwa WhatsApp au SMS ya mzazi:\n${link}`);

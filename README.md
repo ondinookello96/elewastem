@@ -50,7 +50,7 @@
    * Enforces on-device edge processing, zero cloud tracking, and 1-click statutory consent revocation.
 
 5. **👥 360° Multi-Stakeholder Hub & Remote Parent Synchronization**:
-   * **👨‍👩‍👧 Parents**: Automated 2G feature phone SMS progress digests via Africa's Talking API, remote pairing code (`ELEWA-7921`), remote parent magic link, and weekend kitchen science challenges.
+   * **👨‍👩‍👧 Parents**: Automated 2G feature phone SMS progress digests via Africa's Talking API, dynamically generated unique parent pairing codes (e.g., `ELEWA-XXXX`), remote parent magic links, and weekend kitchen science challenges.
    * **👩‍🏫 Teachers**: Automated CBC/NECTA-aligned lesson plans mapped to national curriculum strands with zero-budget local teaching aids.
    * **🤝 Community Mentors**: Village STEM club guides (bio-sand charcoal water filters, solar dryers).
    * **🔄 360° Continuous Feedback Loop**: Live community feedback feed and aggregated stakeholder sentiment metrics.

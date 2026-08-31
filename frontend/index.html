@@ -460,12 +460,16 @@
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-1">
             <div class="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10 space-y-1">
-              <p class="text-[10px] text-blue-200 font-bold uppercase">Nambari ya Kipekee ya Mtoto (Pairing Code):</p>
+              <div class="flex items-center justify-between">
+                <p class="text-[10px] text-blue-200 font-bold uppercase">Nambari ya Mtoto (Pairing Code):</p>
+                <span class="bg-amber-400/20 text-amber-300 border border-amber-400/30 text-[9px] font-bold px-1.5 py-0.2 rounded">Demo Pairing Code</span>
+              </div>
               <div class="flex items-center space-x-2">
                 <span id="parentPairingCode" class="text-base font-black text-amber-300 font-mono tracking-wider">ELEWA-7921</span>
-                <button onclick="copyPairingCode()" class="text-[10px] bg-white/20 hover:bg-white/30 text-white px-2 py-1 rounded-lg">Nakili</button>
+                <button onclick="copyPairingCode()" class="text-[10px] bg-white/20 hover:bg-white/30 text-white px-2 py-1 rounded-lg transition-all" title="Nakili nambari">Nakili</button>
+                <button onclick="generateNewPairingCode()" class="text-[10px] bg-emerald-500/30 hover:bg-emerald-500/50 border border-emerald-400/40 text-white px-2 py-1 rounded-lg transition-all" title="Zalisha nambari mpya">🔄 Mpya</button>
               </div>
-              <p class="text-[10px] text-blue-300">Mzazi anaingiza nambari hii kwenye simu yake kufungua Dashibodi ya Mzazi.</p>
+              <p class="text-[10px] text-blue-300">Nambari hii huzalishwa kiotomatiki kwa usalama na mzazi huiingiza kufungua Dashibodi.</p>
             </div>
 
             <div class="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10 space-y-1">
