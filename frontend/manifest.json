@@ -1,7 +1,9 @@
 {
-  "name": "ElewaSTEM — Mwalimu wa Sayansi",
+  "name": "ElewaSTEM — Pan-African AI-Powered STEM Learning Platform",
   "short_name": "ElewaSTEM",
-  "description": "Multilingual Adaptive AI STEM Tutor for African Children",
+  "description": "Pan-African AI-Powered STEM Learning Platform",
+
+
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

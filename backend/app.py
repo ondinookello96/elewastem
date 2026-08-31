@@ -82,8 +82,9 @@ class QuizResultRequest(BaseModel):
 async def health_check():
     return {
         "status": "healthy",
-        "app": "ElewaSTEM Pan-African",
+        "app": "ElewaSTEM Pan-African AI-Powered STEM Learning Platform",
         "version": "1.4.0",
+
         "supported_african_languages_count": len(get_all_african_languages()),
         "data_protection_jurisdictions_count": len(get_all_jurisdictions()),
         "features": [
