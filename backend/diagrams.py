@@ -192,6 +192,93 @@ DIAGRAMS = {
   <text x="380" y="245" font-size="11" font-weight="bold" fill="#B45309">• ⁴⁄₄ = 1 Kitu Kizima (Whole)</text>
   <text x="480" y="285" font-size="9" fill="#78350F" text-anchor="middle">Jumla ya vipande 4 sawa = 1 zima</text>
 </svg>"""
+    },
+    "chemistry_reactions": {
+        "title_sw": "Mchoro wa Kemia: Mmenyuko wa Asidi na Besi (Acid-Base Reaction)",
+        "title_en": "Chemistry Acid-Base Neutralization Diagram",
+        "topic_id": "chemistry_reactions",
+        "svg": """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" class="w-full h-auto rounded-2xl shadow-inner bg-gradient-to-b from-purple-50 via-pink-50 to-indigo-50 font-sans">
+  <text x="320" y="30" font-size="13" font-weight="bold" fill="#581C87" text-anchor="middle">Kemia: Mmenyuko wa Asidi (Ndimu/Siki) na Besi (Baking Soda / Majivu)</text>
+
+  <!-- Reactant 1: Acid Flask (Left) -->
+  <path d="M120 120 L120 160 L70 260 C60 280 80 290 100 290 L180 290 C200 290 220 280 210 260 L160 160 L160 120 Z" fill="#FCE7F3" stroke="#DB2777" stroke-width="3"/>
+  <rect x="85" y="220" width="110" height="65" fill="#F472B6" opacity="0.6"/>
+  <text x="140" y="255" font-size="11" font-weight="bold" fill="#831843" text-anchor="middle">🧪 ASIDI (Acid)</text>
+  <text x="140" y="272" font-size="9" fill="#9D174D" text-anchor="middle">Juisi ya Ndimu / Siki</text>
+
+  <!-- Plus Sign -->
+  <text x="245" y="220" font-size="30" font-weight="bold" fill="#7C3AED" text-anchor="middle">+</text>
+
+  <!-- Reactant 2: Base Powder (Middle) -->
+  <path d="M300 220 Q350 170 400 220 L410 290 L290 290 Z" fill="#E0E7FF" stroke="#4F46E5" stroke-width="3"/>
+  <text x="350" y="255" font-size="11" font-weight="bold" fill="#312E81" text-anchor="middle">🥄 BESI (Base)</text>
+  <text x="350" y="272" font-size="9" fill="#3730A3" text-anchor="middle">Baking Soda / Majivu</text>
+
+  <!-- Arrow to Result -->
+  <path d="M425 210 L475 210" fill="none" stroke="#7C3AED" stroke-width="4" stroke-linecap="round"/>
+  <text x="450" y="195" font-size="10" font-weight="bold" fill="#7C3AED" text-anchor="middle">Mmenyuko ➔</text>
+
+  <!-- Result Box (Right): CO2 Bubbles + Salt Water -->
+  <rect x="490" y="130" width="135" height="155" rx="12" fill="#FFFFFF" stroke="#059669" stroke-width="2.5"/>
+  <circle cx="530" cy="180" r="10" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.5"/>
+  <circle cx="560" cy="160" r="14" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.5"/>
+  <circle cx="585" cy="190" r="8" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.5"/>
+  <text x="557" y="165" font-size="10" font-weight="bold" fill="#0284C7" text-anchor="middle">CO₂</text>
+  
+  <text x="557" y="225" font-size="11" font-weight="bold" fill="#065F46" text-anchor="middle">✨ MATOKEO:</text>
+  <text x="557" y="242" font-size="9" fill="#047857" text-anchor="middle">1. Gesi ya Viputo (CO₂)</text>
+  <text x="557" y="257" font-size="9" fill="#047857" text-anchor="middle">2. Maji & Chumvi Safi</text>
+
+  <!-- Bottom Principle Rule -->
+  <rect x="80" y="320" width="480" height="35" rx="10" fill="#4C1D95" opacity="0.95"/>
+  <text x="320" y="342" font-size="11" font-weight="bold" fill="#F5F3FF" text-anchor="middle">Asidi + Besi ➔ Chumvi (Salt) + Maji (H₂O) + Gesi ya Kaboni (CO₂)</text>
+</svg>"""
+    },
+    "computer_algorithms": {
+        "title_sw": "Mchoro wa Sayansi ya Kompyuta & Algoriti (Computer Algorithms & Logic)",
+        "title_en": "Computer Science Algorithm Flowchart",
+        "topic_id": "computer_algorithms",
+        "svg": """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" class="w-full h-auto rounded-2xl shadow-inner bg-slate-950 font-sans">
+  <text x="320" y="30" font-size="13" font-weight="bold" fill="#38BDF8" text-anchor="middle">Sayansi ya Kompyuta: Algoriti ya Maamuzi (If-Else Decision Logic)</text>
+
+  <!-- Start Node -->
+  <rect x="240" y="55" width="160" height="36" rx="18" fill="#10B981" stroke="#059669" stroke-width="2"/>
+  <text x="320" y="77" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle">🏁 MWANZO (Start)</text>
+
+  <!-- Arrow down -->
+  <line x1="320" y1="91" x2="320" y2="120" stroke="#38BDF8" stroke-width="3"/>
+
+  <!-- Decision Diamond: Is Soil Dry? -->
+  <polygon points="320,120 420,170 320,220 220,170" fill="#1E293B" stroke="#F59E0B" stroke-width="3"/>
+  <text x="320" y="165" font-size="10" font-weight="bold" fill="#FDE047" text-anchor="middle">Je, Udongo Umekauka?</text>
+  <text x="320" y="180" font-size="9" fill="#CBD5E1" text-anchor="middle">(Is Soil Dry?)</text>
+
+  <!-- Branch YES (Right) -->
+  <line x1="420" y1="170" x2="490" y2="170" stroke="#10B981" stroke-width="3"/>
+  <text x="450" y="160" font-size="10" font-weight="bold" fill="#10B981">NDIYO (True)</text>
+  <rect x="490" y="145" width="130" height="50" rx="8" fill="#064E3B" stroke="#10B981" stroke-width="2"/>
+  <text x="555" y="167" font-size="10" font-weight="bold" fill="#ECFDF5" text-anchor="middle">💧 Fungua Maji</text>
+  <text x="555" y="182" font-size="8.5" fill="#A7F3D0" text-anchor="middle">(Turn On Pump)</text>
+
+  <!-- Branch NO (Left) -->
+  <line x1="220" y1="170" x2="150" y2="170" stroke="#EF4444" stroke-width="3"/>
+  <text x="165" y="160" font-size="10" font-weight="bold" fill="#EF4444">HAPANA (False)</text>
+  <rect x="20" y="145" width="130" height="50" rx="8" fill="#450A0A" stroke="#EF4444" stroke-width="2"/>
+  <text x="85" y="167" font-size="10" font-weight="bold" fill="#FEF2F2" text-anchor="middle">🛑 Zima Maji</text>
+  <text x="85" y="182" font-size="8.5" fill="#FECACA" text-anchor="middle">(Keep Pump Off)</text>
+
+  <!-- Convergence to Loop/End -->
+  <path d="M555 195 L555 260 L320 260" fill="none" stroke="#38BDF8" stroke-width="2" stroke-dasharray="4,4"/>
+  <path d="M85 195 L85 260 L320 260" fill="none" stroke="#38BDF8" stroke-width="2" stroke-dasharray="4,4"/>
+
+  <!-- Process Node: Sleep & Repeat -->
+  <rect x="220" y="285" width="200" height="40" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
+  <text x="320" y="303" font-size="10" font-weight="bold" fill="#38BDF8" text-anchor="middle">⏱️ Subiri Dakika 10 (Loop)</text>
+  <text x="320" y="317" font-size="8.5" fill="#94A3B8" text-anchor="middle">Rudia hatua ya ukaguzi</text>
+
+  <!-- Bottom Code Concept -->
+  <text x="320" y="355" font-size="10" font-weight="bold" fill="#A855F7" text-anchor="middle">Hivi ndivyo kompyuta, simu, na roboti hufanya maamuzi (Algorithms)!</text>
+</svg>"""
     }
 }
 
@@ -199,12 +286,16 @@ DIAGRAMS = {
 def get_diagram_for_topic(query_or_id: str) -> Optional[Dict[str, Any]]:
     """Returns matching responsive SVG science diagram."""
     q = query_or_id.lower()
-    if any(k in q for k in ["photo", "mmea", "plant", "leaf", "jani", "usanisinuru", "sukuma"]):
+    if any(k in q for k in ["photo", "mmea", "plant", "leaf", "jani", "usanisinuru", "sukuma", "bio", "botany"]):
         return DIAGRAMS["photosynthesis"]
-    elif any(k in q for k in ["fish", "samaki", "ngege", "gill", "shavu", "ziwa", "lake", "respiration"]):
+    elif any(k in q for k in ["fish", "samaki", "ngege", "gill", "shavu", "ziwa", "lake", "respiration", "aquatic"]):
         return DIAGRAMS["aquatic_biology_kisumu"]
-    elif any(k in q for k in ["electr", "circuit", "umeme", "saketi", "wire", "battery", "betri", "taa"]):
+    elif any(k in q for k in ["electr", "circuit", "umeme", "saketi", "wire", "battery", "betri", "taa", "physics", "fizikia"]):
         return DIAGRAMS["electricity_circuits"]
-    elif any(k in q for k in ["fraction", "sehemu", "divide", "gawanya", "hesabu", "chapati"]):
+    elif any(k in q for k in ["fraction", "sehemu", "divide", "gawanya", "hesabu", "chapati", "math", "hisabati", "algebra"]):
         return DIAGRAMS["fractions_math"]
+    elif any(k in q for k in ["chem", "kemia", "acid", "asidi", "base", "besi", "reaction", "siki", "soda", "lemon", "chumvi"]):
+        return DIAGRAMS["chemistry_reactions"]
+    elif any(k in q for k in ["comput", "code", "coding", "program", "algorithm", "algoriti", "software", "tech", "teknolojia", "logic", "binary"]):
+        return DIAGRAMS["computer_algorithms"]
     return None

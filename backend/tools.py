@@ -376,6 +376,122 @@ OFFLINE_STEM_VAULT = [
             "explanation_sw": "Hongera! 8 yakigawanywa kwa 4 ni 2. Kila mmoja anapata robo (1/4) ya samaki wote, yaani samaki 2.",
             "explanation_en": "Great! 8 divided by 4 is 2. Each friend receives 1/4 of the total pool, which is 2 fish."
         }
+    },
+    {
+        "id": "chemistry_reactions",
+        "title_en": "Chemistry: Acids, Bases & Neutralization Reactions",
+        "title_sw": "Kemia: Asidi, Besi na Mmenyuko wa Kikemia",
+        "subject": "Chemistry",
+        "cbc_strand": "Matter & Chemical Reactions (Junior Secondary Science)",
+        "summary_en": "Acids (like lemon juice) and bases (like wood ash or baking soda) react chemically to neutralize each other, producing salt, water, and fizzing carbon dioxide gas.",
+        "summary_sw": "Asidi (kama ndimu au siki) na besi (kama baking soda au majivu) huingiliana kikemia na kutulizana, zikitengeneza chumvi, maji, na kutoa gesi yenye viputo (CO₂).",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Gusa tone la juisi ya ndimu kwenye ulimi—ladha yake kali ya uchachu inatoka kwenye Asidi. Ukigusa maji yenye baking soda au majivu laini, hisi ulaini wake unaoteleza—hiyo ni tabia ya Besi. Ukiziweka pamoja, weka sikio lako karibu na chupa usikie sauti ya viputo 'tssshhhh'—huo ni mmenyuko wa kikemia unaotoa gesi!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Kioevu chenye Asidi] + [Ishara ya Unga wa Besi] ➔ [Ishara ya Viputo vinavyotoka kwa kasi (CO₂)].",
+
+        "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Kisumu wakati mama anaposafisha samaki Ngege kwa juisi ya ndimu (Asidi ya citric), asidi inakata harufu ya shombo ya samaki (ambayo ni amini zenye tabia ya besi) kwa kutumia kanuni ya kemia ya neutralization!",
+                "analogy_en": "In Kisumu, when washing fresh Tilapia fish with lemon juice (citric acid), the acid neutralizes fishy amine bases through chemical neutralization!"
+            },
+            "coastal": {
+                "analogy_sw": "Pwani, kupika vitumbua au mandazi kwa kutumia baking soda (Besi) na maji ya tui ya nazi au siki inafanya keki kufura vizuri kwa sababu ya gesi ya kaboni dioksidi inayozalishwa!",
+                "analogy_en": "At the coast, baking mandazi with sodium bicarbonate (base) and vinegar releases bubbling CO2 that makes the dough rise fluffy and soft!"
+            },
+            "highlands": {
+                "analogy_sw": "Mashambani kule Eldoret au Nakuru, wakulima huweka chokaa (Agricultural Lime / Besi) kwenye udongo wenye asidi nyingi ili kuusawazisha (neutralize) na kusaidia mimea ya mahindi kukua vizuri!",
+                "analogy_en": "In highland farms like Eldoret, farmers add agricultural lime (base) to acidic soils to neutralize pH and boost maize yields!"
+            },
+            "arid": {
+                "analogy_sw": "Kwenye maeneo ya wafugaji, kutumia maziwa ya ngamia au majivu ya kuni kusafisha vyombo kunatokana na uwezo wa besi kuvunja mafuta kupitia mmenyuko wa kikemia!",
+                "analogy_en": "In pastoral communities, using wood ash (alkali base) to clean cooking pots relies on chemistry to saponify and dissolve grease!"
+            },
+            "urban": {
+                "analogy_sw": "Mtaani, kumeza dawa ya antacid (kama Eno au Andrews) ukiwa na kiungulia cha tumbo (stomach acid) inatuliza tumbo mara moja kwa kufanya acid-base neutralization!",
+                "analogy_en": "In the city, taking an antacid (base) for stomach acid relief instantly neutralizes excess hydrochloric acid into harmless salt and water!"
+            }
+        },
+        "key_terms": [
+            {"en": "Acid", "sw": "Asidi (Kemikali yenye ladha ya chachu na pH chini ya 7)"},
+            {"en": "Base / Alkali", "sw": "Besi (Kemikali yenye utelezi na pH juu ya 7)"},
+            {"en": "Neutralization", "sw": "Mmenyuko wa Kutuliza (Asidi + Besi ➔ Chumvi + Maji)"},
+            {"en": "Effervescence", "sw": "Uzalishaji wa Viputo vya Gesi"}
+        ],
+        "experiment": {
+            "title_sw": "Jaribio: Volkano ya Jikoni (Ndimu + Baking Soda)",
+            "title_en": "Experiment: Kitchen Acid-Base Volcano",
+            "materials_sw": "Nusu ndimu (Asidi), kijiko 1 cha baking soda (Besi), kikombe kidogo.",
+            "materials_en": "Half a lemon (Acid), 1 spoon of baking soda (Base), small cup.",
+            "steps_sw": "1. Weka baking soda kwenye kikombe.\n2. Kamulia maji ya ndimu juu yake.\n3. Tazama au sikiliza viputo vya hewa ya CO₂ vinavyotoka kwa kasi kama volkano!",
+            "steps_en": "1. Place baking soda into the cup.\n2. Squeeze fresh lemon juice directly over it.\n3. Observe the rapid bubbling eruption of carbon dioxide gas!"
+        },
+        "quiz": {
+            "question_sw": "Ni nini kinachozalishwa wakati Asidi (kama ndimu) inapokutana na Besi (kama baking soda)?",
+            "question_en": "What is produced when an Acid reacts with a Base?",
+            "options_sw": ["A) Chumvi, Maji, na Gesi ya Oksijeni/Kaboni (Neutralization)", "B) Sumu kali", "C) Umeme wa radi", "D) Dhahabu"],
+            "options_en": ["A) Salt, Water, and Carbon Dioxide gas (Neutralization)", "B) Poison", "C) Lightning electricity", "D) Gold"],
+            "correct_index": 0,
+            "explanation_sw": "Sahihi kabisa! Asidi ikikutana na Besi hutengeneza chumvi, maji, na gesi yenye viputo.",
+            "explanation_en": "Exactly right! Acids and bases react to form neutral salt, water, and bubbling gas."
+        }
+    },
+    {
+        "id": "computer_algorithms",
+        "title_en": "Computer Science & Technology: Algorithms & Logic",
+        "title_sw": "Sayansi ya Kompyuta & Teknolojia: Algoriti na Mantiki ya Maamuzi",
+        "subject": "Computer Science",
+        "cbc_strand": "Computing & Computational Thinking (Grade 6 / Junior School)",
+        "summary_en": "An algorithm is a step-by-step recipe or set of precise instructions that a computer, phone, or robot follows to solve a problem or make automated decisions.",
+        "summary_sw": "Algoriti ni mlolongo wa hatua au maagizo maalum ambayo kompyuta, simu au roboti hufuata hatua kwa hatua ili kutatua tatizo au kufanya maamuzi (kama If-Then-Else).",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Fikiria kichocheo cha kupika chai au ugali. Hatua ya 1: chemsha maji. Hatua ya 2: Kama maji yanatokota (True), weka unga. Kama bado hayajatokota (False), subiri. Mlolongo huu wa hatua za wazi na maamuzi ndio unaoitwa 'Algoriti ya Kompyuta'!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Hatua ya 1] ➔ [Ishara ya Swali/Uamuzi wa Njia Panda (If-Else)] ➔ [Ishara ya Kitendo cha NDIYO] au [Ishara ya Kitendo cha HAPANA].",
+
+        "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Kisumu ukiwasha pampu ya umeme ya kunyunyizia mashamba kando ya ziwa, unaweza kuandika algoriti: 'KAMA unyevu wa udongo uko chini ya 30%, BASI washa pampu; LA SIVYO, iache imezimwa!' Hii ni smart irrigation algorithm!",
+                "analogy_en": "In Kisumu, an automated solar pump on a lake farm uses an algorithm: 'IF soil moisture < 30% THEN turn on pump ELSE keep pump off!' That is smart automated computing!"
+            },
+            "coastal": {
+                "analogy_sw": "Pwani, taa za bandarini za Mombasa hutumia algoriti ya sensorer ya mwangaza: 'KAMA giza limeingia (usiku), BASI washa taa za lighthouse; KAMA jua limechomoza, ZIMA taa!'",
+                "analogy_en": "At Mombasa port, lighthouse buoys follow an algorithm: 'IF ambient light is dark THEN turn on lighthouse light ELSE power off!' That is automated software logic!"
+            },
+            "highlands": {
+                "analogy_sw": "Kwenye kiwanda cha majani ya chai kule Kericho, mashine ya kupima uzito hutumia algoriti: 'KAMA uzito wa gunia umefika kilo 50, BASI funga mfuko; LA SIVYO, endelea kujaza!'",
+                "analogy_en": "In a Kericho tea factory, bagging machines use an algorithm: 'IF bag weight == 50kg THEN seal bag ELSE keep filling!'",
+            },
+            "arid": {
+                "analogy_sw": "Kwenye vituo vya maji vya solar kule Turkana, kadi ya kidijitali (smart water meter) inafuata algoriti: 'KAMA salio la mtumiaji linatosha, FUNGUA bomba la maji; LA SIVYO, toa mlio wa onyo!'",
+                "analogy_en": "In Turkana solar water kiosks, digital smart meters use: 'IF user token has credit THEN open water valve ELSE sound buzzer!'",
+            },
+            "urban": {
+                "analogy_sw": "Kwenye jiji kama Nairobi, taa za barabarani (traffic lights) na mfumo wa kulipia M-PESA hutumia algoriti: 'KAMA nenosiri (PIN) ni sahihi na salio lipo, TUMA pesa mara moja!'",
+                "analogy_en": "In Nairobi, M-PESA mobile money and smart traffic lights run on algorithms: 'IF PIN is correct and balance sufficient THEN transfer funds instantly!'",
+            }
+        },
+        "key_terms": [
+            {"en": "Algorithm", "sw": "Algoriti (Mlolongo wa hatua za kimantiki)"},
+            {"en": "Condition (If-Then-Else)", "sw": "Masharti ya Maamuzi (Kama-Basi-La Sivyo)"},
+            {"en": "Loop", "sw": "Mzunguko wa Marudio ya Hatua"},
+            {"en": "Debugging", "sw": "Kurekebisha makosa kwenye mfumo"}
+        ],
+        "experiment": {
+            "title_sw": "Jaribio: Kuwa Roboti (Human Robot Algorithm Game)",
+            "title_en": "Experiment: The Human Robot Algorithm Game",
+            "materials_sw": "Marafiki wawili au mwanafunzi na mzazi.",
+            "materials_en": "Two friends or student and parent.",
+            "steps_sw": "1. Rafiki mmoja anafumba macho na kuwa 'Roboti'.\n2. Mwanafunzi anakuwa 'Programmer' na kutoa amri maalum tu: 'Piga hatua 2 mbele', 'Pinduka kulia digrii 90', 'Nyoosha mkono chukua kikombe'.\n3. Ona jinsi kompyuta inavyohitaji maagizo sahihi bila kukosea!",
+            "steps_en": "1. One friend closes eyes to act as the 'Robot'.\n2. The student acts as the 'Programmer' giving strict commands: 'Walk 2 steps forward', 'Turn right 90 degrees', 'Reach hand and grasp cup'.\n3. Discover how computers require precise, bug-free step-by-step algorithms!"
+        },
+        "quiz": {
+            "question_sw": "Ni nini maana ya Algoriti (Algorithm) katika sayansi ya kompyuta?",
+            "question_en": "What is an Algorithm in computer science?",
+            "options_sw": ["A) Mlolongo wa maagizo sahihi ya hatua kwa hatua kutatua tatizo", "B) Aina ya mchezo wa video", "C) Kioo cha simu", "D) Waya wa umeme"],
+            "options_en": ["A) A step-by-step sequence of precise instructions to solve a problem", "B) A video game", "C) Phone glass", "D) Electric wire"],
+            "correct_index": 0,
+            "explanation_sw": "Hongera sana! Algoriti ni kanuni au mlolongo wa hatua unaofuatwa na kompyuta au roboti kukamilisha kazi.",
+            "explanation_en": "Spot on! An algorithm is a precise, ordered set of steps executed by a computer to accomplish a task."
+        }
     }
 ]
 
