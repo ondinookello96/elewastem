@@ -58,17 +58,25 @@
    * **PRIDE**: Human-in-the-loop community governance (Pause points, dispute rights, Parent–Teacher–Community Advisory Panel).
    * **HORIZON**: Intergenerational & ecological stewardship (Indigenous knowledge preservation, ecological respect).
 
-6. **🗺️ Streamlined Learner Flow & Dedicated Governance/Research Hubs**:
+6. **📚 53 Approved STEM Curriculum Modules (5 Complete Disciplines)**:
+   * **🌿 Biology (15 Modules)**: Photosynthesis, Digestion, Circulatory System & Heart, Respiration & Lungs, Cell Biology (Plant vs Animal), Plant Pollination, Living Things Classification (Vertebrates/Invertebrates), Food Chains & Ecology, Aquatic Biology & Fish Respiration (Lake Victoria), Excretory System & Kidneys, Nervous System & Sense Organs, Plant Transpiration & Xylem/Phloem, Skeletal & Muscular System, Microorganisms & Hygiene, **Genetics, DNA & Heredity (Gregor Mendel, Punnett Squares & Hybrid Crops)**.
+   * **⚡ Physics (10 Modules)**: Electric Circuits, Gravity & Friction, Light Optics (Reflection & Lenses), Sound Waves & Hearing, Simple Machines (Levers & Pulleys), Heat Transfer, Magnetism & Electromagnets, Fluid Pressure & Hydraulics, Work Energy & Power, Density & Flotation.
+   * **🧪 Chemistry (10 Modules)**: Acids, Bases & Neutralization, States of Matter, Separation Techniques, Periodic Table & Atoms, Water Treatment & Hardness, Atmospheric Air Gases, Metals Reactivity Series, Chemical Bonding, Carbon Fuels & Combustion, Chemical Solutions & Solubility.
+   * **📐 Mathematics (10 Modules)**: Fractions & Decimals, Algebra & Equations, Geometry & Angles, Pythagoras Theorem, Perimeter, Area & Volume, Ratios & Rates, Statistics & Data Charts, Integers & Number Line, Commercial Arithmetic, Probability & Chance.
+   * **💻 Computer Science (8 Modules)**: Algorithms & Flowcharts, Binary Numbers (Bits/Bytes), Logic Gates (AND/OR/NOT), Python & Scratch Coding, Computer Hardware (CPU/RAM/SSD), Networks & Cybersecurity, Artificial Intelligence & Machine Learning, Databases & SQL.
+
+7. **🗺️ Streamlined Learner Flow & Dedicated Governance/Research Hubs**:
    * **Simple 6-Step Journey**: **Learn** (Interactive Socratic Tutor) ➔ **Practice** (Interactive Science Quizzes) ➔ **Progress** (Mastery Tracker & Badges) ➔ **Parent/Teacher** (Multi-Stakeholder Sync) ➔ **Accessibility** (Screen Reader, Audio Descriptions & Concept Cues) ➔ **Offline** (Offline Learning Vault).
+   * **Interactive Subject & Topic Explorer**: Seamlessly integrated into the Menu side drawer (`☰ Menyu`) allowing learners to filter by subject and select any of the 53 topics with 1 click.
    * **Dedicated Institutional Hubs**: Distinct **Governance Hub** (8 National DPAs & Privacy-by-Design Protocols) and **Research & Pedagogy Hub** (Empirical Citations & African Learning Theories Matrix).
 
-7. **👥 360° Multi-Stakeholder Hub & Remote Parent Synchronization**:
+8. **👥 360° Multi-Stakeholder Hub & Remote Parent Synchronization**:
    * **👨‍👩‍👧 Parents**: Automated 2G feature phone SMS progress digests via Africa's Talking API, dynamically generated unique parent pairing codes (e.g., `ELEWA-XXXX`), remote parent magic links, and weekend kitchen science challenges.
    * **👩‍🏫 Teachers**: Automated CBC/NECTA-aligned lesson plans mapped to national curriculum strands with zero-budget local teaching aids.
    * **🤝 Community Mentors**: Village STEM club guides (bio-sand charcoal water filters, solar dryers).
    * **🔄 360° Continuous Feedback Loop**: Live community feedback feed and aggregated stakeholder sentiment metrics.
 
-8. **📦 Offline-First Edge PWA (Core Modules Available Offline)**:
+9. **📦 Offline-First Edge PWA (Core Modules Available Offline)**:
    * Progressive Web App caching with pre-compiled offline knowledge vaults (core learning modules available offline after installation/download; online AI features seamlessly activate with connectivity).
 
 ---
