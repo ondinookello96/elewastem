@@ -1824,14 +1824,37 @@ ${isSw ? exp.steps_sw : exp.steps_en}
   };
 }
 
+// Dynamic Chat Form Position (Centered on Landing vs Bottom Docked during Dialogue)
+function updateChatInputPosition(hasMessages) {
+  const form = document.getElementById('chatForm');
+  const landingWrapper = document.getElementById('landingChatFormWrapper');
+  const bottomBar = document.getElementById('bottomChatBar');
+  const landingBlock = document.getElementById('welcomeLandingBlock');
+
+  if (hasMessages) {
+    if (landingBlock) landingBlock.classList.add('hidden');
+    if (bottomBar) {
+      bottomBar.classList.remove('hidden');
+      if (form && form.parentElement !== bottomBar) {
+        bottomBar.appendChild(form);
+      }
+    }
+  } else {
+    if (landingBlock) landingBlock.classList.remove('hidden');
+    if (bottomBar) bottomBar.classList.add('hidden');
+    if (form && landingWrapper && form.parentElement !== landingWrapper) {
+      landingWrapper.appendChild(form);
+    }
+  }
+}
+
 // UI Rendering Helpers
 function appendUserMessage(text) {
-  const welcome = document.getElementById('welcomeMessageContainer');
-  if (welcome) welcome.style.display = 'none';
+  updateChatInputPosition(true);
 
   const container = document.getElementById('chatMessages');
   const div = document.createElement('div');
-  div.className = 'flex justify-end';
+  div.className = 'flex justify-end animate-scale-up';
   div.innerHTML = `
     <div class="bg-brand-600 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-sm max-w-[88%] text-sm font-medium leading-relaxed">
       ${escapeHtml(text)}

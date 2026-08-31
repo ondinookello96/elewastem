@@ -361,45 +361,53 @@
   <main class="flex-1 flex flex-col h-full min-h-0 overflow-hidden relative">
 
     <!-- 1. CHAT VIEW (LEARNER) -->
-    <section id="chatSection" class="flex-1 flex flex-col h-full min-h-0 overflow-hidden">
+    <section id="chatSection" class="flex-1 flex flex-col h-full min-h-0 overflow-hidden relative">
       <!-- Spacious Message Stream with Smooth Auto-Scroll -->
-      <div id="chatMessages" class="flex-1 overflow-y-auto p-2.5 sm:p-6 space-y-3 sm:space-y-4 max-w-5xl w-full mx-auto" aria-live="polite">
-        <!-- Clean, Minimal Welcome Greeting (Only Shown on Landing) -->
-        <div id="welcomeMessageContainer" class="bg-white border border-slate-200 rounded-3xl p-4 sm:p-5 shadow-sm max-w-xl mx-auto flex items-center space-x-3.5 sm:space-x-4 my-2">
-          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-xl sm:text-2xl shadow-sm flex-shrink-0">
-            🌱
+      <div id="chatMessages" class="flex-1 overflow-y-auto p-2.5 sm:p-6 space-y-3 sm:space-y-4 max-w-4xl w-full mx-auto flex flex-col" aria-live="polite">
+        
+        <!-- Clean, Centered Welcome Block (Welcome Greeting + Immediate Centered Input) -->
+        <div id="welcomeLandingBlock" class="my-auto flex flex-col items-center justify-center py-6 sm:py-10 px-2 max-w-xl w-full mx-auto space-y-4 transition-all duration-300">
+          
+          <!-- 1. Welcome Greeting -->
+          <div class="bg-white border border-slate-200/90 rounded-3xl p-5 sm:p-6 shadow-sm w-full flex items-center space-x-4">
+            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-2xl sm:text-3xl shadow-sm flex-shrink-0">
+              🌱
+            </div>
+            <div>
+              <h2 class="font-black text-slate-900 text-base sm:text-lg" id="welcomeTitle">Hujambo rafiki yangu! 🌟</h2>
+              <p class="text-slate-600 text-xs sm:text-sm font-medium" id="welcomeText">Mimi ni ElewaSTEM—mwalimu wako wa Sayansi na Hesabu. Usimeze, Elewa!</p>
+            </div>
           </div>
-          <div>
-            <h2 class="font-black text-slate-900 text-base sm:text-lg" id="welcomeTitle">Hujambo rafiki yangu! 🌟</h2>
-            <p class="text-slate-600 text-xs sm:text-sm font-medium" id="welcomeText">Mimi ni ElewaSTEM—mwalimu wako wa Sayansi na Hesabu. Usimeze, Elewa!</p>
+
+          <!-- 2. Centered Chat Form (Immediately After Greeting) -->
+          <div id="landingChatFormWrapper" class="w-full">
+            <form id="chatForm" onsubmit="handleChatSubmit(event)" class="w-full flex items-center space-x-2">
+              <button type="button" id="voiceBtn" onclick="toggleVoiceInput()" title="Bonyeza hapa kuongea kwa sauti (Voice Input)" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 hover:from-brand-700 hover:to-emerald-600 text-white flex items-center justify-center text-xl active:scale-95 transition-all shadow-md flex-shrink-0">
+                🎤
+              </button>
+              
+              <div class="relative flex-1 flex items-center">
+                <input type="text" id="userInput" placeholder="Ongea au andika kwa Kiswahili, Sheng, English, Yoruba, Hausa..." autocomplete="off" class="w-full bg-white border border-slate-300 text-slate-900 text-xs sm:text-sm rounded-2xl py-3 pl-4 pr-24 sm:pr-28 focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 shadow-sm transition-all">
+                
+                <!-- Sleek Inline Language Badge (Inside Input Bar) -->
+                <button type="button" onclick="openLanguagesModal()" title="Badili Lugha ya Kujifunza" class="absolute right-2 px-2 py-1 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-[10px] sm:text-[11px] font-bold text-slate-700 flex items-center space-x-1 shadow-2xs transition-all">
+                  <span id="inputLangFlag">🇰🇪</span>
+                  <span id="inputLangName" class="hidden sm:inline">Kiswahili</span>
+                  <span class="text-[9px] text-slate-400">▾</span>
+                </button>
+              </div>
+
+              <button type="submit" id="sendBtn" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white flex items-center justify-center active:scale-95 transition-all shadow-md flex-shrink-0">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 transform rotate-90" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
+              </button>
+            </form>
           </div>
+
         </div>
       </div>
 
-
-      <!-- Chat Input Bar (Sticky, Modern, AI-Native with Multilingual Placeholder) -->
-      <div class="p-2.5 sm:p-3.5 bg-white/95 backdrop-blur-md border-t border-slate-200 flex-shrink-0 shadow-lg z-20">
-        <form id="chatForm" onsubmit="handleChatSubmit(event)" class="max-w-4xl mx-auto flex items-center space-x-2">
-          <button type="button" id="voiceBtn" onclick="toggleVoiceInput()" title="Bonyeza hapa kuongea kwa sauti (Voice Input)" class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 hover:from-brand-700 hover:to-emerald-600 text-white flex items-center justify-center text-lg sm:text-xl active:scale-95 transition-all shadow-md flex-shrink-0">
-            🎤
-          </button>
-          
-          <div class="relative flex-1 flex items-center">
-            <input type="text" id="userInput" placeholder="Ongea au andika kwa Kiswahili, Sheng, English, Yoruba, Hausa..." autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs sm:text-sm rounded-xl sm:rounded-2xl py-2.5 sm:py-3 pl-3 sm:pl-4 pr-24 sm:pr-28 focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 focus:bg-white transition-all shadow-inner-xs">
-            
-            <!-- Sleek Inline Language Badge (Inside Input Bar) -->
-            <button type="button" onclick="openLanguagesModal()" title="Badili Lugha ya Kujifunza" class="absolute right-2 px-2 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-[10px] sm:text-[11px] font-bold text-slate-700 flex items-center space-x-1 shadow-2xs transition-all">
-              <span id="inputLangFlag">🇰🇪</span>
-              <span id="inputLangName" class="hidden sm:inline">Kiswahili</span>
-              <span class="text-[9px] text-slate-400">▾</span>
-            </button>
-          </div>
-
-          <button type="submit" id="sendBtn" class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-brand-600 hover:bg-brand-700 text-white flex items-center justify-center active:scale-95 transition-all shadow-md flex-shrink-0">
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 transform rotate-90" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
-          </button>
-        </form>
-      </div>
+      <!-- Bottom Chat Bar (Mounted when conversation is active) -->
+      <div id="bottomChatBar" class="hidden p-2.5 sm:p-3.5 bg-white/95 backdrop-blur-md border-t border-slate-200 flex-shrink-0 shadow-lg z-20"></div>
     </section>
 
 
