@@ -502,7 +502,15 @@ def find_offline_topic(query: str, preferred_subject: str = "all", preferred_top
     if any(k in query_lower for k in ["probabilit", "uwezekano", "chance of", "nafasi ya kutokea", "rolling a dice", "kete", "coin toss", "kurusha sarafu"]):
         return CURRICULUM_BY_ID.get("probability_chance", OFFLINE_STEM_VAULT[0])
 
-    # 2. Match by preferred subject if selected
+    # 2. Fallback search across title / key terms
+    for item in OFFLINE_STEM_VAULT:
+        if (item["id"] in query_lower or 
+            item["title_en"].lower() in query_lower or 
+            item["title_sw"].lower() in query_lower or
+            any(k["en"].lower() in query_lower or k["sw"].lower() in query_lower for k in item.get("key_terms", []))):
+            return item
+
+    # 3. Match by preferred subject if selected
     if preferred_subject and preferred_subject.lower() != "all":
         subj_map = {
             "biology": "Biology",
@@ -517,15 +525,17 @@ def find_offline_topic(query: str, preferred_subject: str = "all", preferred_top
         if target_subj and target_subj in CURRICULUM_BY_SUBJECT:
             return CURRICULUM_BY_SUBJECT[target_subj][0]
 
-    # 3. Fallback search across title / key terms
-    for item in OFFLINE_STEM_VAULT:
-        if (item["id"] in query_lower or 
-            item["title_en"].lower() in query_lower or 
-            item["title_sw"].lower() in query_lower or
-            any(k["en"].lower() in query_lower or k["sw"].lower() in query_lower for k in item.get("key_terms", []))):
-            return item
+    # 4. Subject detection heuristics from query
+    if any(k in query_lower for k in ["math", "hesabu", "number", "calculate", "equation", "+", "-", "*", "/", "=", "angle", "fraction"]):
+        return CURRICULUM_BY_ID.get("fractions_math", OFFLINE_STEM_VAULT[0])
+    if any(k in query_lower for k in ["code", "program", "computer", "robot", "software", "kompyuta"]):
+        return CURRICULUM_BY_ID.get("computer_algorithms", OFFLINE_STEM_VAULT[0])
+    if any(k in query_lower for k in ["force", "energy", "circuit", "speed", "power", "nguvu", "mwendo"]):
+        return CURRICULUM_BY_ID.get("work_energy_power", OFFLINE_STEM_VAULT[0])
+    if any(k in query_lower for k in ["chemical", "substance", "mixture", "gas", "solid", "liquid", "kemia", "maada"]):
+        return CURRICULUM_BY_ID.get("states_of_matter", OFFLINE_STEM_VAULT[0])
 
-    return OFFLINE_STEM_VAULT[0]
+    return CURRICULUM_BY_ID.get("living_things_classification", OFFLINE_STEM_VAULT[0])
 
 
 def get_offline_starter_pack() -> List[Dict[str, Any]]:

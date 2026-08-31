@@ -85,11 +85,16 @@ class ElewaAgent:
         
         effective_grade = grade_level or profile.grade_level
         mastery_summary = ", ".join([f"{k} ({v.mastery_score}% mastery)" for k, v in profile.mastery_graph.items()]) or "New curious learner"
-        recent_history = "\n".join([f"{item['role'].upper()}: {item['content']}" for item in profile.recent_interactions[-4:]])
+        
+        # Build 8-turn conversation history with explicit role markers
+        history_turns = profile.recent_interactions[-8:]
+        recent_history = "\n".join([f"{'Student' if item['role'] == 'user' else 'ElewaSTEM Tutor'}: {item['content']}" for item in history_turns]) or "(This is the beginning of the conversation)"
         
         # Temperature Dial: Higher for storytelling/analogies (0.75), Lower for exact calculations/science formulas (0.2)
         temperature = 0.2 if mode == "precise" else 0.75
         
+        print(f"[ElewaAgent DEBUG] Student: '{student_id}' | Question: '{message}' | Subject: '{subject}' | Topic ID: '{topic_id}' -> Active: '{topic_data.get('title_en')}' | History: {len(history_turns)} turns")
+
         user_prompt = f"""
 === LEARNER CONTEXT (MAP ASSETS & MEMORY) ===
 Student Name: {profile.name}
@@ -104,13 +109,17 @@ Recent Mastery Context: {mastery_summary}
 Simplify Mode: {"YES (Explain in very simple, intuitive story terms)" if simplify else "STANDARD (Warm, Engaging, Socratic)"}
 Reasoning Mode: {mode.upper()} (Temperature: {temperature})
 
-=== RECENT INTERACTION HISTORY ===
+=== MULTI-TURN CONVERSATION HISTORY (LAST {len(history_turns)} TURNS) ===
 {recent_history}
 
-=== STUDENT QUESTION ===
+=== STUDENT'S CURRENT QUESTION ===
 "{message}"
 
-Apply the 4Ds Framework: Directly answer the student's exact scientific question with warm African friendship persona and local eco-analogies tailored precisely to {effective_grade} level in {country}.
+=== PEDAGOGICAL INSTRUCTION ===
+1. Directly answer the student's exact question: "{message}".
+2. Do NOT repeat previous answers or introductory cards if this is a follow-up. Answer the specific doubt or sub-component directly.
+3. Ground the explanation in real African everyday objects (e.g. jiko, bicycle gears, tilapia fish, village pumps, Acacia shade, solar batteries).
+4. End with a friendly, Socratic curiosity question to keep the learner engaged.
 """
 
         # Try Gemini 3.7 Flash (High Reasoning Budget) / Gemma API if client available
