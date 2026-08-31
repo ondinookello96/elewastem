@@ -2,7 +2,7 @@
 
 > **"Usimeze, Elewa!"** — *Demystifying STEM for Every African Child in Their Own Language, Local Ecosystem, and Physical Ability.*
 
-**ElewaSTEM** is an adaptive, offline-first multilingual AI STEM tutor and multi-stakeholder learning ecosystem designed specifically for children and young students across Africa. It bridges educational, language, accessibility, and connectivity barriers by explaining complex concepts in Physics, Mathematics, Biology, Chemistry, and Computing through **culturally and geographically grounded African ecological analogies**, **16+ African languages** (grounded in African NLP benchmarks like Masakhane, Lelapa AI / InkubaLM, and AfriSpeech), **universal accessibility** (tactile audio for visual accessibility, KSL visual sign cues for hearing accessibility, dyslexia-friendly typography, and ADHD bite-sized pacing), **architectures designed to support compliance with applicable African data-protection laws** (Kenya DPA 2019, Nigeria NDPA 2023, POPIA 2013, AU Malabo Convention), **multi-stakeholder portals** (Parents, Teachers, Community Mentors), and **offline-first edge architecture (core learning modules available offline after installation/download)**.
+**ElewaSTEM** is an adaptive, offline-first multilingual AI STEM tutor and multi-stakeholder learning ecosystem designed specifically for children and young students across Africa. It bridges educational, language, accessibility, and connectivity barriers by explaining complex concepts in Physics, Mathematics, Biology, Chemistry, and Computing through **culturally and geographically grounded African ecological analogies**, **16+ African languages** (grounded in African NLP benchmarks like Masakhane, Lelapa AI / InkubaLM, and AfriSpeech), **universal accessibility** (Screen Reader & Audio Description Mode for visual accessibility, visual concept & flowchart cues for deaf learners, dyslexia-friendly typography, and ADHD bite-sized pacing), **architectures designed to support compliance with applicable African data-protection laws** (Kenya DPA 2019, Nigeria NDPA 2023, POPIA 2013, AU Malabo Convention), **multi-stakeholder portals** (Parents, Teachers, Community Mentors), and **offline-first edge architecture (core learning modules available offline after installation/download)**.
 
 ---
 
@@ -28,8 +28,8 @@
    * Zero-bandwidth browser-native Speech Synthesis (TTS) and Speech Recognition (STT) localized for African phonetic systems.
 
 2. **♿ Visual, Hearing & Learning Accessibility**:
-   * 👁️ **Visual Accessibility**: Embedded **Tactile Audio Descriptions** (*"Shika jani bichi mkononi... hisi mishipa midogo ya xylem..."*) and ARIA semantic screen-reader markup.
-   * 🧏 **Hearing Accessibility**: Kenyan Sign Language (KSL) visual concept cues and process flowcharts.
+   * 👁️ **Visual Accessibility**: Embedded **Screen Reader & Audio Description Mode** (*"Shika jani bichi mkononi... hisi mishipa midogo ya xylem..."*) and ARIA semantic screen-reader markup.
+   * 🧏 **Hearing Accessibility**: **Visual Concept & Diagrammatic Cues**: Structured step-by-step visualizers and SVG flowcharts to support deaf and hard-of-hearing learners (with full animated/video sign interpreter support on roadmap).
    * 📖 **Dyslexia-Friendly Typography**: 1-click dyslexia typography, letter-spacing expansion, and anti-glare cream theme.
    * 🎯 **ADHD & Focused Pacing**: Bite-sized Socratic learning steps and clutter-free focus modes via the *"💡 Rahisisha Zaidi"* engine.
    * 🌓 **High Contrast & Scalable Fonts**: Yellow-on-black contrast mode and multi-level text scaling.
@@ -123,7 +123,7 @@ flowchart TD
 |    • 16+ African Languages Router  |                         |    • On-Device GPS Biome Mapper    |
 |    • Pan-African DPA Legal Matrix  |                         |    • Browser-Native Speech (TTS)   |
 |    • Multi-Stakeholder Feedback    |                         |    • Screen Reader & Audio Desc    |
-+------------------------------------+                         |    • Sign Language Cues for Deaf   |
++------------------------------------+                         |    • Visual Concept Cues for Deaf  |
      │              │             │                            +------------------------------------+
      ▼              ▼             ▼
 +----------+  +----------+  +----------+
@@ -165,7 +165,7 @@ python run.py
 ```bash
 python test_suite.py
 ```
-*Executes all **14 end-to-end automated test suites** validating health status, 16+ living African languages (Masakhane/Lelapa grounding), 8 Pan-African DPA statutory frameworks, adaptive Socratic Gemini chat, multi-sensory accessibility (Screen Reader & Audio Description Mode, KSL sign language for deaf), vector SVG science diagrams, CBC teacher lesson plans, remote parent 2G SMS digests, community STEM clubs, multi-stakeholder feedback loops, ethical safety guardrails (ETHOS/OASIS), Maasai Elder multi-agent swarm orchestration (RANK/HUNT/TRAIL/CYCLE), and 8 African learning theories.*
+*Executes all **14 end-to-end automated test suites** validating health status, 16+ living African languages (Masakhane/Lelapa grounding), 8 Pan-African DPA statutory frameworks, adaptive Socratic Gemini chat, multi-sensory accessibility (Screen Reader & Audio Description Mode, visual concept cues for deaf learners), vector SVG science diagrams, CBC teacher lesson plans, remote parent 2G SMS digests, community STEM clubs, multi-stakeholder feedback loops, ethical safety guardrails (ETHOS/OASIS), Maasai Elder multi-agent swarm orchestration (RANK/HUNT/TRAIL/CYCLE), and 8 African learning theories.*
 
 ---
 

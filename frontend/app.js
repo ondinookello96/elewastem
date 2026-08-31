@@ -1387,7 +1387,7 @@ function loadTeacherLessonPlan(topicId) {
 
       ${mod.sign_language_visual_cues_sw ? `
       <div class="bg-purple-50 border border-purple-200 p-3 rounded-xl">
-        <p class="font-bold text-purple-900 mb-0.5">🧏 Mwongozo wa Wanafunzi Wasiosikia (Sign Language Cues):</p>
+        <p class="font-bold text-purple-900 mb-0.5">🧏 Vielelezo vya Picha & Michoro (Visual & Concept Cues):</p>
         <p class="text-purple-950">${mod.sign_language_visual_cues_sw}</p>
       </div>` : ''}
 
@@ -1820,7 +1820,7 @@ function appendAssistantMessage(data) {
       <div class="bg-purple-50 border border-purple-200 rounded-xl p-3 text-xs space-y-1">
         <p class="font-bold text-purple-900 flex items-center space-x-1">
           <span>🧏</span>
-          <span>Alama za Lugha ya Ishara & Picha (Sign Language Cues):</span>
+          <span>Vielelezo vya Picha & Mtiririko (Visual Concept & Flowchart Cues):</span>
         </p>
         <p class="text-purple-950">${data.sign_cues}</p>
       </div>` : ''}
@@ -2084,10 +2084,10 @@ function renderVault() {
           <p class="text-[11px] text-brand-900 bg-emerald-50 p-2 rounded-xl border border-emerald-100 italic line-clamp-2"><b>💡 Mfano wa Eneo Lako:</b> ${localAnalogy}</p>
 
           ${m.tactile_audio_description_sw && STATE.screenReaderMode ? `
-          <p class="text-[11px] text-blue-900 bg-blue-50 p-2 rounded-xl border border-blue-100 line-clamp-2"><b>👁️ Tactile Description:</b> ${m.tactile_audio_description_sw}</p>` : ''}
+          <p class="text-[11px] text-blue-900 bg-blue-50 p-2 rounded-xl border border-blue-100 line-clamp-2"><b>👁️ Screen Reader / Audio Description:</b> ${m.tactile_audio_description_sw}</p>` : ''}
 
           ${m.sign_language_visual_cues_sw && STATE.signLanguageMode ? `
-          <p class="text-[11px] text-purple-900 bg-purple-50 p-2 rounded-xl border border-purple-100 line-clamp-2"><b>🧏 Sign Language Cues:</b> ${m.sign_language_visual_cues_sw}</p>` : ''}
+          <p class="text-[11px] text-purple-900 bg-purple-50 p-2 rounded-xl border border-purple-100 line-clamp-2"><b>🧏 Visual Concept Cues:</b> ${m.sign_language_visual_cues_sw}</p>` : ''}
         </div>
 
         <div class="pt-2 border-t border-slate-100 flex space-x-2">

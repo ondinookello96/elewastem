@@ -34,7 +34,7 @@ LEARNING_THEORIES = {
         "theorists": "Howard Gardner",
         "swahili_title": "Uwezo wa Akili Nyingi (Multi-Sensory Inclusivity)",
         "core_principle": "Intelligence is multi-dimensional across linguistic, logical, spatial, bodily-kinesthetic, naturalistic, and interpersonal domains.",
-        "african_context": "Provides Screen Reader & Audio Description Mode for visually impaired learners (Naturalistic/Kinesthetic), visual sign cues for deaf learners (Spatial), and voice-first oral storytelling honoring Africa's rich oral tradition (Linguistic)."
+        "african_context": "Provides Screen Reader & Audio Description Mode for visually impaired learners (Naturalistic/Kinesthetic), visual concept cues & flowcharts for deaf learners (Spatial), and voice-first oral storytelling honoring Africa's rich oral tradition (Linguistic)."
     },
     "CognitiveLoadTheory": {
         "theorists": "John Sweller, Allan Paivio (Dual Coding)",

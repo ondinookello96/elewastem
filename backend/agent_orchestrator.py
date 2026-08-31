@@ -31,7 +31,7 @@ AGENT_ROLES = {
     },
     "Storyteller": {
         "title": "🌟 Cultural & Accessibility Storyteller Agent",
-        "purpose": "Generate audio descriptions for visually impaired learners, KSL sign cues for deaf learners, and African ecological narratives.",
+        "purpose": "Generate audio descriptions for visually impaired learners, visual concept & flowchart cues for deaf learners, and African ecological narratives.",
         "authority_limits": "Must align with KICD/CBC curriculum outcomes.",
         "notification_triggers": ["Dyslexia/High-Contrast mode toggled", "Accessibility feedback submitted"]
     }
@@ -95,8 +95,8 @@ class HuntPipelineOrchestrator:
         # Step 3: Hunter Agent - Socratic Reasoning Handoff
         audit_trail.append({"agent": "Hunter", "action": f"Executed Socratic reasoning in language '{language}'."})
 
-        # Step 4: Storyteller Agent - Audio Descriptions & Sign Cues Decoration
-        audit_trail.append({"agent": "Storyteller", "action": "Decorated response with audio descriptions (Screen Reader Mode) and sign cues (Deaf)."})
+        # Step 4: Storyteller Agent - Audio Descriptions & Visual Concept Cues Decoration
+        audit_trail.append({"agent": "Storyteller", "action": "Decorated response with audio descriptions (Screen Reader Mode) and visual concept cues (Deaf)."})
 
         # Step 5: Termination & Handoff to Stakeholder Generators
         audit_trail.append({"agent": "Coordinator", "action": "Handoff ready for Parent SMS Generator & CBC Teacher Plan."})
