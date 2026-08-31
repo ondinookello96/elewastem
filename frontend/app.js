@@ -1700,39 +1700,84 @@ async function executeAgentQuery(query, simplify = false) {
 
 function generateLocalOfflineAnswer(query, simplify) {
   const qLower = query.toLowerCase();
-  
-  // 1. Direct match for Algebra & Math
   let matched = null;
-  if (qLower.includes('algebra') || qLower.includes('aljebra') || qLower.includes('equation') || qLower.includes('mlinganyo') || qLower.includes('variable') || qLower.includes('kigeuzi') || qLower.includes('solve for x')) {
+  
+  // 1. Biology: Digestive System
+  if (qLower.includes('digest') || qLower.includes('mmeng\'enyo') || qLower.includes('stomach') || qLower.includes('tumbo') || qLower.includes('esophagus') || qLower.includes('umio') || qLower.includes('kinywa') || qLower.includes('utumbo') || qLower.includes('enzyme') || qLower.includes('saliva') || qLower.includes('mate')) {
+    matched = STATE.offlineModules.find(m => m.id === 'human_digestive_system');
+  }
+
+  // 2. Biology: Heart & Circulatory System
+  if (!matched && (qLower.includes('heart') || qLower.includes('moyo') || qLower.includes('circulat') || qLower.includes('mzunguko wa damu') || qLower.includes('blood') || qLower.includes('damu') || qLower.includes('artery') || qLower.includes('ateri') || qLower.includes('vein') || qLower.includes('vena') || qLower.includes('pulse') || qLower.includes('mapigo'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'circulatory_heart');
+  }
+
+  // 3. Biology: Human Respiration & Lungs
+  if (!matched && (qLower.includes('lung') || qLower.includes('mapafu') || qLower.includes('respirat') || qLower.includes('upumuaji') || qLower.includes('breathe') || qLower.includes('pumua') || qLower.includes('trachea') || qLower.includes('koromeo') || qLower.includes('inhale') || qLower.includes('exhale'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'human_respiration');
+  }
+
+  // 4. Biology: Cell Biology
+  if (!matched && (qLower.includes('cell') || qLower.includes('seli') || qLower.includes('nucleus') || qLower.includes('kiini') || qLower.includes('cytoplasm') || qLower.includes('saikroplasimu') || qLower.includes('membrane') || qLower.includes('utando') || qLower.includes('chloroplast') || qLower.includes('kloroplasti'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'cell_biology');
+  }
+
+  // 5. Biology: Food Chains & Ecology
+  if (!matched && (qLower.includes('food chain') || qLower.includes('mnyororo wa chakula') || qLower.includes('ecolog') || qLower.includes('ikolojia') || qLower.includes('ecosystem') || qLower.includes('producer') || qLower.includes('mtengenezaji') || qLower.includes('consumer') || qLower.includes('predator') || qLower.includes('herbivore') || qLower.includes('carnivore'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'ecology_food_chains');
+  }
+
+  // 6. Biology: Pollination & Flowers
+  if (!matched && (qLower.includes('pollinat') || qLower.includes('uchavushaji') || qLower.includes('flower') || qLower.includes('maua') || qLower.includes('petal') || qLower.includes('petali') || qLower.includes('stamen') || qLower.includes('pistil') || qLower.includes('chavulio') || qLower.includes('chavua') || qLower.includes('poleni') || qLower.includes('nyuki') || qLower.includes('bee'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'plant_pollination');
+  }
+
+  // 7. Biology: Classification of Living Things
+  if (!matched && (qLower.includes('vertebrate') || qLower.includes('invertebrate') || qLower.includes('uti wa mgongo') || qLower.includes('classify') || qLower.includes('uainishaji') || qLower.includes('mammal') || qLower.includes('mamalia') || qLower.includes('reptile') || qLower.includes('amphibian') || qLower.includes('wadudu'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'living_things_classification');
+  }
+
+  // 8. Biology: Aquatic Fish Respiration
+  if (!matched && (qLower.includes('fish') || qLower.includes('samaki') || qLower.includes('gills') || qLower.includes('mashavu') || qLower.includes('matamvua') || qLower.includes('ngege') || qLower.includes('mbuta'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'aquatic_biology_kisumu');
+  }
+
+  // 9. Biology: Photosynthesis
+  if (!matched && (qLower.includes('photo') || qLower.includes('usanisinuru') || qLower.includes('klorofili') || qLower.includes('chlorophyll') || qLower.includes('plant food') || qLower.includes('chakula cha mmea') || qLower.includes('stomata'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'photosynthesis');
+  }
+
+  // 10. Mathematics: Algebra
+  if (!matched && (qLower.includes('algebra') || qLower.includes('aljebra') || qLower.includes('equation') || qLower.includes('mlinganyo') || qLower.includes('variable') || qLower.includes('kigeuzi') || qLower.includes('solve for x'))) {
     matched = STATE.offlineModules.find(m => m.id === 'algebra_math');
   }
 
-  // 2. Direct match for Fractions & Math
+  // 11. Mathematics: Fractions
   if (!matched && (qLower.includes('fraction') || qLower.includes('sehemu') || qLower.includes('gawanya') || qLower.includes('hesabu') || qLower.includes('proportion'))) {
     matched = STATE.offlineModules.find(m => m.id === 'fractions_math');
   }
 
-  // 3. Direct match for Chemistry
+  // 12. Chemistry: Acids, Bases & Reactions
   if (!matched && (qLower.includes('chem') || qLower.includes('kemia') || qLower.includes('acid') || qLower.includes('asidi') || qLower.includes('base') || qLower.includes('besi') || qLower.includes('reaction'))) {
     matched = STATE.offlineModules.find(m => m.id === 'chemistry_reactions');
   }
 
-  // 4. Direct match for Computer Science
+  // 13. Computer Science: Algorithms & Logic
   if (!matched && (qLower.includes('comput') || qLower.includes('code') || qLower.includes('algorithm') || qLower.includes('algoriti') || qLower.includes('program') || qLower.includes('logic'))) {
     matched = STATE.offlineModules.find(m => m.id === 'computer_algorithms');
   }
 
-  // 5. Direct match for Physics Circuits
+  // 14. Physics: Circuits & Electricity
   if (!matched && (qLower.includes('circuit') || qLower.includes('umeme') || qLower.includes('saketi') || qLower.includes('battery') || qLower.includes('betri') || qLower.includes('electr'))) {
     matched = STATE.offlineModules.find(m => m.id === 'electricity_circuits');
   }
 
-  // 6. Direct match for Biology Photosynthesis
-  if (!matched && (qLower.includes('photo') || qLower.includes('mmea') || qLower.includes('plant') || qLower.includes('leaf') || qLower.includes('jani') || qLower.includes('usanisinuru'))) {
-    matched = STATE.offlineModules.find(m => m.id === 'photosynthesis');
+  // 15. Physics: Gravity & Friction
+  if (!matched && (qLower.includes('gravity') || qLower.includes('grabiti') || qLower.includes('force') || qLower.includes('friction') || qLower.includes('msuguano') || qLower.includes('mvuto'))) {
+    matched = STATE.offlineModules.find(m => m.id === 'gravity_forces');
   }
 
-  // 7. Match by key terms / title
+  // 16. Match by key terms / title
   if (!matched) {
     matched = STATE.offlineModules.find(m => 
       qLower.includes(m.id) || 
@@ -1742,7 +1787,7 @@ function generateLocalOfflineAnswer(query, simplify) {
     );
   }
 
-  // 8. Match by selected subject
+  // 17. Match by selected subject
   if (!matched && STATE.subject && STATE.subject !== 'all') {
     const subjMap = {
       biology: 'Biology',

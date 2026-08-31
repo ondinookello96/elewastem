@@ -5,7 +5,9 @@ Serves 16+ African languages, 8+ Data Protection Jurisdictions, Universal Stakeh
 
 import os
 from typing import Optional, List, Dict, Any
-from fastapi import FastAPI, HTTPException, Request, Form
+import json
+from urllib.parse import parse_qs
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, PlainTextResponse
@@ -321,11 +323,24 @@ async def get_feedback_summary():
 
 
 @app.post("/api/sms", response_class=PlainTextResponse)
-async def sms_gateway(
-    from_: str = Form(None, alias="from"),
-    text: str = Form(None),
-    phoneNumber: str = Form(None)
-):
+async def sms_gateway(request: Request):
+    body_bytes = await request.body()
+    body_text = body_bytes.decode('utf-8', errors='ignore')
+    params = {}
+    if body_text:
+        try:
+            params = json.loads(body_text)
+        except Exception:
+            parsed = parse_qs(body_text)
+            params = {k: v[0] for k, v in parsed.items()}
+    
+    query_params = dict(request.query_params)
+    combined = {**query_params, **params}
+    
+    from_ = combined.get("from")
+    text = combined.get("text")
+    phoneNumber = combined.get("phoneNumber")
+    
     user_phone = phoneNumber or from_ or "sms_user"
     user_msg = text or ""
     

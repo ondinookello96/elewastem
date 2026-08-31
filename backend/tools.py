@@ -204,6 +204,412 @@ OFFLINE_STEM_VAULT = [
         }
     },
     {
+        "id": "human_digestive_system",
+        "title_en": "Human Digestive System & Nutrition",
+        "title_sw": "Mfumo wa Mmeng'enyo wa Chakula na Lishe Mwilini",
+        "subject": "Biology",
+        "cbc_strand": "Human Body Systems & Health (Grade 5/6 Science)",
+        "summary_en": "Digestion breaks down food (like ugali and greens) into microscopic nutrients that enter the bloodstream to give energy and build the body.",
+        "summary_sw": "Mmeng'enyo wa chakula huvunja chakula (kama ugali na mboga) katika chembechembe ndogo za virutubisho zinazofyonzwa na damu ili kuupa mwili nguvu na afya.",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Weka kidole chako mdomoni ambapo meno yanatafuna na mate yanalainisha. Fuata koo kuelekea tumboni (umio) ambapo asidi ya tumbo inavunja protini. Kisha hisi tumbo la chini ambapo utumbo mwembamba mrefu unafyonza virutubisho vyote kuingia kwenye damu!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Kutafuna Mdomoni] ➔ [Ishara ya Kumeza kuelekea Tumboni] ➔ [Ishara ya Utumbo unaofyonza Nguvu]. Angalia mchoro wa njia ya chakula.",
+        
+        "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Kisumu unapokula ugali wa mtama kwa samaki Ngege na mboga za Osuga (Managu), mate mdomoni yanaanza kuyeyusha wanga wa ugali, tumbo linavunja protini ya samaki, na utumbo mdogo unafyonza madini ya chuma na vitamini ili kukuza misuli yako!",
+                "analogy_en": "In Kisumu when you eat millet ugali with Tilapia and Osuga greens, mouth amylase breaks down starches, stomach acids digest fish proteins, and the small intestine absorbs nutrients into your bloodstream!"
+            },
+            "coastal": {
+                "analogy_sw": "Pwani unapokula biriani au wali wa nazi kwa samaki wa kukaanga, mafuta ya nazi yanavunjwa na nyongo (bile) kutoka kwenye ini, kisha virutubisho vinasambazwa mwilini kote!",
+                "analogy_en": "At the coast when eating coconut rice and fish, coconut fats are emulsified by liver bile in the duodenum, absorbing energy for your daily activities!"
+            },
+            "highlands": {
+                "analogy_sw": "Mashambani Nakuru au Kericho unapokula githeri (mahindi na maharagwe), mmeng'enyo wa polepole unakupa nguvu ya siku nzima ya kutembea na kufanya kazi!",
+                "analogy_en": "In the highlands when eating githeri (maize & beans), complex fiber and proteins digest steadily in the small intestine to provide sustained energy!"
+            },
+            "arid": {
+                "analogy_sw": "Kule Garissa au Turkana unywapo maziwa ya ngamia yenye virutubisho tele, utumbo mdogo unafyonza maji, madini ya kalsiamu na protini kwa haraka ili kuimarisha mifupa na kuzuia kiu!",
+                "analogy_en": "In arid regions, drinking nutrient-dense camel milk allows the digestive tract to rapidly absorb calcium, vitamins, and water for bone strength and hydration!"
+            },
+            "urban": {
+                "analogy_sw": "Mtaani unapokula chapati na maharagwe, kinywa, umio, tumbo, na utumbo vinafanya kazi pamoja kama kiwanda cha kuchuja na kusambaza nishati mwilini!",
+                "analogy_en": "In the city, digestion works like a biological processing factory, breaking chapati carbohydrates into glucose fuel for brain and muscle cells!"
+            }
+        },
+        "key_terms": [
+            {"en": "Digestion", "sw": "Mmeng'enyo wa Chakula"},
+            {"en": "Esophagus (Gullet)", "sw": "Umio (Njia ya koo kuelekea tumboni)"},
+            {"en": "Enzymes", "sw": "Vimeng'enya (Kemikali asilia za kuvunja chakula)"},
+            {"en": "Small Intestine (Villi)", "sw": "Utumbo Mdogo (Sehemu ya kufyonza virutubisho)"}
+        ],
+        "experiment": {
+            "title_sw": "Jaribio: Kuona Vimeng'enya vya Mate Mdomoni",
+            "title_en": "Experiment: Salivary Amylase Starch Test",
+            "materials_sw": "Kipande kidogo cha mkate kavu, biskuti au ugali.",
+            "materials_en": "Small piece of plain bread, cracker or ugali.",
+            "steps_sw": "1. Weka kipande kidogo cha mkate mdomoni.\n2. Tafuna taratibu kwa dakika 2 bila kukimeza.\n3. Utahisi kikianza kuwa kitamu (sukari)—hiyo inathibitisha vimeng'enya vya mate vikivunja wanga kuwa sukari!",
+            "steps_en": "1. Place a piece of bread in your mouth.\n2. Chew slowly for 2 minutes without swallowing.\n3. Notice it turns sweet—salivary amylase is breaking complex starch into simple glucose sugars!"
+        },
+        "quiz": {
+            "question_sw": "Sehemu gani ya mfumo wa mmeng'enyo inahusika zaidi na kufyonza virutubisho vya chakula kuingia kwenye damu?",
+            "question_en": "Which organ in the digestive system is primarily responsible for absorbing digested nutrients into the bloodstream?",
+            "options_sw": ["A) Utumbo Mdogo (Small Intestine)", "B) Kinywa tu", "C) Umio (Esophagus)", "D) Nywele"],
+            "options_en": ["A) Small Intestine", "B) Mouth only", "C) Esophagus", "D) Hair"],
+            "correct_index": 0,
+            "explanation_sw": "Hongera sana! Utumbo mdogo una vinyweleo vidogo (villi) vinavyofyonza virutubisho vyote na kuviingiza moja kwa moja kwenye mishipa ya damu.",
+            "explanation_en": "Spot on! The small intestine lining is covered with villi that absorb nutrients directly into blood capillaries."
+        }
+    },
+    {
+        "id": "circulatory_heart",
+        "title_en": "Human Heart & Blood Circulatory System",
+        "title_sw": "Moyo na Mzunguko wa Damu Mwilini",
+        "subject": "Biology",
+        "cbc_strand": "Human Body & Vital Organs (Grade 5/6 Science)",
+        "summary_en": "The heart acts as a muscular pump that continuously circulates blood, delivering oxygen and food nutrients to every cell while removing waste carbon dioxide.",
+        "summary_sw": "Moyo hufanya kazi kama pampu ya misuli inayozungusha damu mwilini bila kukoma, ikisafirisha oksijeni na virutubisho kwa kila seli na kuondoa uchafu.",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Weka kiganja chako katikati ya kifua chako kuelekea upande wa kushoto kidogo. Hisi mpigo thabiti wa 'du-du... du-du'. Huo ni moyo wako wenye vyumba vinne ukisukuma damu safi kuelekea kichwani, mikononi, na miguuni kupitia mishipa ya ateri!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Moyo unaopiga] ➔ [Mchoro wa Damu Nyekundu inayosafiri mwilini] ➔ [Mchoro wa Damu inayorudi kwenye Mapafu].",
+        
+        "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kama pampu ya maji ya manispaa ya Kisumu inayosukuma maji safi ya Ziwa Victoria kupitia mtandao wa mabomba kwenye nyumba zote za jiji, moyo wako unasukuma damu safi kupitia ateri kwenye seli zote za mwili!",
+                "analogy_en": "Like Kisumu water utility pumping clean Lake Victoria water through pipe networks to every household, your heart pumps oxygen-rich blood through arteries to every body cell!"
+            },
+            "coastal": {
+                "analogy_sw": "Pwani, kama meli bandarini zinazosafirisha mizigo na kurudi na bidhaa mpya, chembechembe nyekundu za damu (Red Blood Cells) zinasafirisha oksijeni na kurudisha hewa ya kaboni kwenye mapafu!",
+                "analogy_en": "At Mombasa port, like cargo ships delivering food and picking up exports, red blood cells ferry oxygen to tissues and return carbon dioxide waste to the lungs!"
+            },
+            "highlands": {
+                "analogy_sw": "Milimani, wanariadha maarufu wa Eldoret na Iten wana mioyo imara sana na chembechembe nyingi za damu zinazowezesha kusafirisha oksijeni nyingi wakati wa mbio ndefu!",
+                "analogy_en": "In high-altitude training camps in Iten, athletes develop strong cardiac muscles and high red blood cell counts to maximize oxygen delivery during endurance running!"
+            },
+            "arid": {
+                "analogy_sw": "Kwenye maeneo ya joto kali, mishipa ya damu ya ngozi hupanuka kidogo ili kutoa joto jingi nje ya mwili na kukuweka salama!",
+                "analogy_en": "In hot ASAL regions, peripheral blood vessels dilate to radiate excess body heat, maintaining vital organ temperatures!"
+            },
+            "urban": {
+                "analogy_sw": "Mtaani, mtandao wa mishipa ya damu (ateri na vena) ni kama barabara za mji zenye njia mbili—njia moja inapeleka bidhaa safi na nyingine inarudisha taka za viwandani!",
+                "analogy_en": "In urban centers, the circulatory system mirrors a dual-carriageway highway network—arteries transport vital supplies while veins return metabolic waste!"
+            }
+        },
+        "key_terms": [
+            {"en": "Heart (Atrium & Ventricle)", "sw": "Moyo (Vyumba vya juu na chini vya pampu)"},
+            {"en": "Arteries & Veins", "sw": "Mishipa ya Ateri (Damu safi) na Vena (Damu chafu)"},
+            {"en": "Red Blood Cells (Hemoglobin)", "sw": "Chembechembe Nyekundu za Damu (Zinabeba Oksijeni)"},
+            {"en": "Pulse Rate", "sw": "Kasi ya Mapigo ya Moyo"}
+        ],
+        "experiment": {
+            "title_sw": "Jaribio: Kupima Mapigo ya Moyo Kabla na Baada ya Mazoezi",
+            "title_en": "Experiment: Measuring Resting vs Active Pulse Rate",
+            "materials_sw": "Vidole viwili (cha kati na cha shahada), saa au kuhesabu kwa sekunde 60.",
+            "materials_en": "Two fingers, watch or phone timer for 60 seconds.",
+            "steps_sw": "1. Weka vidole viwili kwenye kifundo cha mkono chini ya kidole gumba.\n2. Hesabu mapigo ukiwa umepumzika (kawaida 70-85 kwa dakika).\n3. Ruka kamba au kurukaruka mara 20 kisha upime tena—moyo utapiga kwa kasi zaidi kusukuma oksijeni kwenye misuli!",
+            "steps_en": "1. Place two fingers on the inside of your wrist below the thumb.\n2. Count resting pulses for 60 seconds.\n3. Jump in place 20 times and re-measure—your pulse quickens as the heart pumps extra oxygen to working muscles!"
+        },
+        "quiz": {
+            "question_sw": "Mishipa ya Ateri inafanya kazi gani kuu mwilini?",
+            "question_en": "What is the primary function of Arteries in the circulatory system?",
+            "options_sw": ["A) Kusafirisha damu safi yenye oksijeni kutoka kwenye moyo kwenda mwilini", "B) Kutengeneza mate", "C) Kusaga chakula", "D) Kuotesha nywele"],
+            "options_en": ["A) Carrying oxygenated blood away from the heart to body tissues", "B) Producing saliva", "C) Grinding food", "D) Growing hair"],
+            "correct_index": 0,
+            "explanation_sw": "Safi sana! Ateri hubeba damu safi iliyojaa oksijeni kutoka kwenye moyo kuelekea kwenye viungo vyote vya mwili.",
+            "explanation_en": "Brilliant! Arteries carry oxygen-rich blood under high pressure from the heart to all body tissues."
+        }
+    },
+    {
+        "id": "human_respiration",
+        "title_en": "Human Respiratory System & Lungs",
+        "title_sw": "Mfumo wa Upumuaji wa Binadamu na Mapafu",
+        "subject": "Biology",
+        "cbc_strand": "Living Things & Life Processes (Grade 5/6 Science)",
+        "summary_en": "Breathing draws fresh oxygen into the lungs where it passes into the blood, while carbon dioxide waste is breathed out.",
+        "summary_sw": "Upumuaji huleta hewa safi ya oksijeni kwenye mapafu ambapo huingia kwenye damu, na kutoa nje hewa chafu ya kaboni dioksidi.",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Weka mikono yako miwili mbavuni kifuani mwako. Vuta pumzi ndefu ndani kupitia puani—hisi mbavu zako zikipanuka na kifua kikiinuka juu wakati mapafu yanapojaa hewa. Toa pumzi taratibu mdomoni—hisi kifua kikishuka chini!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Kuvuta Pumzi Puani] ➔ [Ishara ya Mapafu Yanayopanuka] ➔ [Mchoro wa Oksijeni inayoingia na Kaboni inayotoka].",
+        
+        "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Ziwa Victoria wakati upepo mwanana wa ziwani unapovuma asubuhi, unavuta hewa safi iliyojaa oksijeni kupitia koromeo (trachea) hadi kwenye mifuko midogo ya hewa (alveoli) ya mapafu yako!",
+                "analogy_en": "By Lake Victoria, breathing in cool morning lake breezes channels fresh oxygen down the trachea into millions of microscopic alveoli air sacs in your lungs!"
+            },
+            "coastal": {
+                "analogy_sw": "Pwani kwenye msitu wa mikoko au ufukweni, miti inasafisha hewa ya bahari, na mapafu yako yanatumia misuli ya kiwambo (diaphragm) kuvuta hewa ndani bila wewe kufikiria!",
+                "analogy_en": "Along coastal beaches, your diaphragm muscle contracts downward automatically to draw oxygen-rich coastal air into the lung bronchi!"
+            },
+            "highlands": {
+                "analogy_sw": "Kule milimani Mt. Kenya au Aberdares ambapo hewa ni baridi na safi, mapafu hufanya kazi kwa ufanisi mkubwa kuchuja vumbi kupitia vinyweleo vidogo (cilia) vya puani!",
+                "analogy_en": "In crisp highland climates, nasal cilia and mucus filter dust before pristine air reaches deep lung tissues!"
+            },
+            "arid": {
+                "analogy_sw": "Kwenye maeneo yenye vumbi na jua kali, mfumo wa pua hupasha hewa joto na kuinywesha unyevu kabla haijafika kwenye mapafu yako laini!",
+                "analogy_en": "In dry arid environments, nasal passages humidify and condition warm dry air to protect delicate alveoli membranes!"
+            },
+            "urban": {
+                "analogy_sw": "Mtaani, mapafu yanafanya kazi kama chujio la hewa la gari, yakilinda mwili dhidi ya chembe za moshi huku yakichukua oksijeni pekee!",
+                "analogy_en": "In urban neighborhoods, the respiratory mucosa traps airborne particles while permitting pure oxygen gas exchange!"
+            }
+        },
+        "key_terms": [
+            {"en": "Trachea (Windpipe)", "sw": "Koromeo (Njia kuu ya hewa)"},
+            {"en": "Lungs & Bronchi", "sw": "Mapafu na Matawi ya Koromeo"},
+            {"en": "Alveoli (Air Sacs)", "sw": "Mfuko midogo ya kubadilishia hewa (Alveoli)"},
+            {"en": "Diaphragm", "sw": "Kiwambo cha mbavu (Misuli inayosaidia kupumua)"}
+        ],
+        "experiment": {
+            "title_sw": "Jaribio: Kuona Mvuke na Hewa Inayotoka Mapafuni",
+            "title_en": "Experiment: Exhaled Moisture and Carbon Dioxide Test",
+            "materials_sw": "Kioo kidogo au miwani safi, pumzi yako.",
+            "materials_en": "Small pocket mirror or clean glass, your breath.",
+            "steps_sw": "1. Shikilia kioo mbele ya mdomo wako.\n2. Pumua kwa nguvu 'haaaaa' kwenye kioo.\n3. Utaona ukungu wa matone madogo ya maji—hii inathibitisha mapafu yanatoa joto na unyevu wa maji pamoja na kaboni dioksidi!",
+            "steps_en": "1. Hold a small mirror near your mouth.\n2. Exhale warmly onto the surface.\n3. Observe the fog of water condensation—proving lungs expel warm moisture alongside carbon dioxide waste!"
+        },
+        "quiz": {
+            "question_sw": "Ni gesi gani muhimu ambayo mapafu yanaivuta kutoka hewani ili kuingia kwenye damu ya binadamu?",
+            "question_en": "Which essential gas do human lungs absorb from the air into the bloodstream?",
+            "options_sw": ["A) Oksijeni (Oxygen)", "B) Dioksidi ya Kaboni", "C) Moshi", "D) Chuma"],
+            "options_en": ["A) Oxygen (O2)", "B) Carbon Dioxide", "C) Smoke", "D) Iron"],
+            "correct_index": 0,
+            "explanation_sw": "Hodari sana! Oksijeni ndiyo gesi inayohitajika na seli zote za mwili kutengeneza nishati ya uhai.",
+            "explanation_en": "Correct! Oxygen is the vital gas required by all cells for cellular respiration and energy production."
+        }
+    },
+    {
+        "id": "cell_biology",
+        "title_en": "Cell Biology: The Basic Units of Life",
+        "title_sw": "Muundo wa Seli: Matofali ya Msingi ya Viumbe Hai",
+        "subject": "Biology",
+        "cbc_strand": "Cell Structure & Basic Units of Life (Junior Secondary Science)",
+        "summary_en": "Cells are the microscopic building blocks of all living things. Plant cells have rigid cell walls and chloroplasts, while animal cells have flexible membranes.",
+        "summary_sw": "Seli ni vitengo vidogo sana vya msingi vinavyounda viumbe hai vyote. Seli za mimea zina kuta imara na kloroplasti, wakati seli za wanyama zina utando laini.",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Fikiria nyumba imejengwa kwa matofali madogo elfu nyingi. Mwili wako na mmea vimejengwa kwa 'matofali ya uhai' yanayoitwa Seli. Ndani ya kila seli kuna Kiini (Nucleus) chenye umbo la duara kinachoongoza shughuli zote, kikiwa kimezungukwa na kioevu cha jeli kinachoitwa Saikroplasimu!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Mchoro wa Seli ya Mmea (Ukuta Kijani)] + [Mchoro wa Seli ya Mnyama (Duara Laini na Kiini Katikati)].",
+        
+        "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kama ukuta wa matofali ya mawe ya ujenzi huko Kisumu unavyounda jengo zima, mamilioni ya seli za mimea ya magugu maji au mboga za Osuga zimeungana kuunda majani, mizizi na mashina!",
+                "analogy_en": "Just as brick masonry forms a sturdy house in Kisumu, billions of microscopic cells unite to construct the roots, stems, and leaves of indigenous plants!"
+            },
+            "coastal": {
+                "analogy_sw": "Pwani, seli ya mnazi ina kloroplasti zinazofanya usanisinuru kama paneli ndogo za jua, huku seli za samaki wa baharini zikiwa na utando unaobadilika ili kuruhusu mwendo!",
+                "analogy_en": "At the coast, palm leaf cells contain chloroplast solar powerhouses, while flexible marine animal cells allow fluid swimming locomotion!"
+            },
+            "highlands": {
+                "analogy_sw": "Mashambani, seli za viazi na mahindi zina chembechembe maalum za kuhifadhi wanga (starch granules) ili mmea uwe na chakula cha kutosha kukua!",
+                "analogy_en": "In highland agricultural zones, potato cells contain specialized amyloplasts packed with starch reserves to fuel rapid sprout growth!"
+            },
+            "arid": {
+                "analogy_sw": "Kwenye maeneo kame, seli za mimea ya mikakasi (succulents) na acacia zina vacuoles kubwa za kuhifadhi maji kwa miezi mingi bila kukauka!",
+                "analogy_en": "In arid ASAL zones, succulent plant cells feature massive central vacuoles designed to store water reserves through prolonged droughts!"
+            },
+            "urban": {
+                "analogy_sw": "Mtaani, kiini cha seli (nucleus) kinafanya kazi kama afisa mkuu wa jiji au kompyuta kuu inayoongoza shughuli zote za uzalishaji!",
+                "analogy_en": "In modern cities, the cell nucleus functions like a central municipal control hub, housing genetic DNA blueprints for all cellular operations!"
+            }
+        },
+        "key_terms": [
+            {"en": "Nucleus", "sw": "Kiini cha Seli (Kituo cha udhibiti na maagizo ya DNA)"},
+            {"en": "Cell Membrane", "sw": "Utando wa Seli (Geti la kuruhusu vitu kuingia na kutoka)"},
+            {"en": "Cytoplasm", "sw": "Saikroplasimu (Kioevu cha jeli kinachobeba viungo vya seli)"},
+            {"en": "Cell Wall & Chloroplast", "sw": "Ukuta wa Seli & Kloroplasti (Vipengele vya mimea pekee)"}
+        ],
+        "experiment": {
+            "title_sw": "Jaribio: Kuchunguza Tabaka Nyembamba la Seli za Kitunguu",
+            "title_en": "Experiment: Observing Onion Skin Cell Architecture",
+            "materials_sw": "Kitunguu maji kimoja, glasi yenye tone la maji, kioo cha kukuza picha au kamera ya simu.",
+            "materials_en": "One fresh onion, drop of water, magnifying glass or smartphone macro camera.",
+            "steps_sw": "1. Menya kitunguu na uvute utando mwembamba sana ulio wazi kama nailoni.\n2. Weka juu ya tone la maji kwenye uso safi.\n3. Angalia kwa karibu chini ya mwanga—utaona mistari inayofanana na matofali ya seli zilizopangwa vizuri!",
+            "steps_en": "1. Peel a fresh onion and gently separate the thin translucent membrane between layers.\n2. Float it on a clean water droplet.\n3. Examine under light with a magnifier to observe the organized brick-like grid of plant cells!"
+        },
+        "quiz": {
+            "question_sw": "Ni kiungo gani kinachopatikana kwenye seli za mimea pekee lakini hakipatikani kwenye seli za wanyama?",
+            "question_en": "Which structure is found exclusively in plant cells but absent in animal cells?",
+            "options_sw": ["A) Ukuta wa Seli (Cell Wall) & Kloroplasti", "B) Kiini (Nucleus)", "C) Maji", "D) Damu"],
+            "options_en": ["A) Cell Wall & Chloroplasts", "B) Nucleus", "C) Water", "D) Blood"],
+            "correct_index": 0,
+            "explanation_sw": "Sahihi kabisa! Mimea ina ukuta mgumu wa selulosi (Cell Wall) na Kloroplasti za kutengeneza chakula kwa jua.",
+            "explanation_en": "Spot on! Plant cells possess rigid cellulose cell walls and photosynthetic chloroplasts."
+        }
+    },
+    {
+        "id": "plant_pollination",
+        "title_en": "Plant Reproduction & Flower Pollination",
+        "title_sw": "Uchavushaji wa Maua na Uzazi wa Mimea",
+        "subject": "Biology",
+        "cbc_strand": "Plants & Reproduction (Grade 5/6 Science)",
+        "summary_en": "Pollination transfers yellow pollen grains from male stamens to female pistils, allowing flowers to form seeds and delicious fruits.",
+        "summary_sw": "Uchavushaji husafirisha chembe za chavua (poleni) kutoka kwenye chavulio (stamen) hadi kwenye kambamaua (pistil) ili kukuza mbegu na matunda matamu.",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Shika ua lililochanua mkononi mwako. Hisi petali laini zenye harufu nzuri za kuvutia nyuki. Katikati ya ua utahisi vijiti vidogo vyenye vumbi laini la unga (chavua/pollen). Ndani kabisa kuna sehemu yenye unyevu ambapo mbegu na matunda huanza kutungika!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Nyuki anayeruka] ➔ [Ishara ya Kugusa Ua na Kuchukua Poleni] ➔ [Mchoro wa Mbegu na Tunda linaloota].",
+        
+        "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Kisumu kwenye mashamba ya alizeti au maembe, nyuki wanapotua kwenye maua kunyonya majimaji matamu (nectar), miguu yao inashika unga wa chavua na kuusafirisha kwenye ua jingine ili maembe manono yatokee!",
+                "analogy_en": "In Kisumu sunflower and mango groves, foraging honeybees sipping nectar pick up pollen on their fuzzy legs, cross-pollinating blossoms into juicy fruits!"
+            },
+            "coastal": {
+                "analogy_sw": "Pwani, vipepeo wenye rangi za kuvutia na upepo wa bahari husaidia kuchavusha maua ya mikorosho na mipapai ili wakulima wavune korosho nyingi!",
+                "analogy_en": "Along coastal plantations, colorful butterflies and gentle sea breezes pollinate cashew and papaya blooms for abundant harvests!"
+            },
+            "highlands": {
+                "analogy_sw": "Kule Kitale na Nakuru, upepo wa asubuhi unatikisa mashamba ya mahindi na kurusha mamilioni ya chembe za poleni kutoka kwenye mashada ya juu (tassels) hadi kwenye nyuzi laini za mahindi (silks)!",
+                "analogy_en": "In highland maize fields, morning winds shake pollen from top tassels down onto emerging ear silks, fertilizing every single sweet corn kernel!"
+            },
+            "arid": {
+                "analogy_sw": "Kwenye maeneo kame, miti ya mshikio (acacia) hutoa maua yenye harufu kali baada ya mvua fupi ili kuvuta wadudu wengi kwa haraka kabla ya jua kali!",
+                "analogy_en": "In arid savanna zones, acacia blossoms erupt into fragrant yellow puffballs immediately after rainfall to attract pollinators quickly!"
+            },
+            "urban": {
+                "analogy_sw": "Kwenye bustani za jiji na mitaa, nyuki wa asali wanatunza mimea ya bustani na maua ya mijini kupitia uchavushaji wa asili!",
+                "analogy_en": "In urban schoolyards and community gardens, native bees provide essential pollination services to vegetables and fruit trees!"
+            }
+        },
+        "key_terms": [
+            {"en": "Pollination", "sw": "Uchavushaji (Usafirishaji wa chavua)"},
+            {"en": "Pollen Grains", "sw": "Chavua / Poleni (Unga wa mbegu za kiume za ua)"},
+            {"en": "Stamen (Male Part)", "sw": "Chavulio (Sehemu ya kiume ya ua inayotoa poleni)"},
+            {"en": "Pistil / Carpel (Female Part)", "sw": "Kambamaua (Sehemu ya kike inayotunga mbegu na matunda)"}
+        ],
+        "experiment": {
+            "title_sw": "Jaribio: Kugundua Unga wa Chavua kwenye Ua",
+            "title_en": "Experiment: Flower Anatomy and Pollen Fingerprint",
+            "materials_sw": "Ua bichi la shambani (kama ua la mpera, bamia au mahindi), kidole safi.",
+            "materials_en": "Fresh open flower (hibiscus, bean, or tomato bloom), clean index finger.",
+            "steps_sw": "1. Gusa kwa upole sehemu ya katikati ya ua (chavulio).\n2. Angalia ncha ya kidole chako—utaona unga wa njano wenye kunata.\n3. Huu ndio unga wa chavua ambao nyuki anausafirisha miguuni mwake!",
+            "steps_en": "1. Lightly tap the central stamens of an open flower.\n2. Inspect your fingertip—observe fine yellow sticky dust.\n3. That is pollen, identical to what clings to honeybee legs during pollination!"
+        },
+        "quiz": {
+            "question_sw": "Wadudu kama nyuki wanasaidiaje mimea wakati wanapotembelea maua?",
+            "question_en": "How do insects like bees assist flowering plants during their visits?",
+            "options_sw": ["A) Kusafirisha chavua (pollination) ili mimea itengeneze mbegu na matunda", "B) Kula mizizi yote", "C) Kukausha majani", "D) Kupaka rangi kwenye udongo"],
+            "options_en": ["A) Transferring pollen to facilitate fertilization and fruit production", "B) Eating all roots", "C) Drying leaves", "D) Coloring the soil"],
+            "correct_index": 0,
+            "explanation_sw": "Sahihi kabisa! Nyuki ni wachavushaji wakuu wanaosaidia mimea kutunga mbegu na matunda matamu.",
+            "explanation_en": "Spot on! Bees are vital natural pollinators that enable fertilization, seed formation, and food security."
+        }
+    },
+    {
+        "id": "living_things_classification",
+        "title_en": "Classification of Living Things: Vertebrates & Invertebrates",
+        "title_sw": "Uainishaji wa Viumbe Hai: Wanyama Wenye Uti wa Mgongo na Wasio nao",
+        "subject": "Biology",
+        "cbc_strand": "Classification of Living Things (Grade 5/6 Science)",
+        "summary_en": "Animals are classified into Vertebrates (with a backbone: mammals, birds, reptiles, amphibians, fish) and Invertebrates (without a backbone: insects, spiders, snails).",
+        "summary_sw": "Wanyama huainishwa katika Wenye Uti wa Mgongo (Vertebrates: mamalia, ndege, reptilia, amfibea, samaki) na Wasio na Uti wa Mgongo (Invertebrates: wadudu, buibui, konokono).",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Pitisha vidole vyako katikati ya mgongo wako kuanzia shingoni hadi kiunoni. Utahisi mfupa mgumu uliopinda wenye vifundo vidogo—huo ndio Uti wa Mgongo (Backbone). Wanyama kama binadamu, mbwa, na samaki wana uti wa mgongo (Vertebrates), lakini wadudu kama panzi na konokono hawana mifupa ndani (Invertebrates)!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Kushika Uti wa Mgongo] ➔ [Makundi 5 ya Vertebrates: Mamalia, Ndege, Samaki, Reptilia, Amfibea] vs [Invertebrates: Wadudu].",
+        
+        "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Ziwa Victoria, samaki Ngege ana mifupa na uti wa mgongo mgumu (Vertebrate), lakini konokono wa majini na wadudu wa ziwani hawana mfupa wowote ndani (Invertebrates)!",
+                "analogy_en": "In Lake Victoria, Tilapia fish possess an internal bony vertebral column (Vertebrate), whereas freshwater snails and lake flies lack backbones (Invertebrates)!"
+            },
+            "coastal": {
+                "analogy_sw": "Pwani, kasa wa baharini na pomboo ni wenye uti wa mgongo (Vertebrates), wakati kaa na ngisi wana maganda ya nje au miili laini bila mifupa ya ndani (Invertebrates)!",
+                "analogy_en": "Along coastal reefs, sea turtles and dolphins are vertebrates, while crabs and octopuses are invertebrates with exoskeletons or soft bodies!"
+            },
+            "highlands": {
+                "analogy_sw": "Mashambani, ng'ombe na kuku wana mifupa ya ndani yenye uti wa mgongo, wakati minyoo ya ardhini na panzi ni wanyama wasio na mifupa ya ndani!",
+                "analogy_en": "On highland farms, cattle and chickens are backboned vertebrates, while soil earthworms and grasshoppers are invertebrates!"
+            },
+            "arid": {
+                "analogy_sw": "Kwenye maeneo kame, ngamia na mbuni ni wanyama wenye uti wa mgongo imara, wakati nge na mchwa ni wanyama wasio na uti wa mgongo!",
+                "analogy_en": "In desert expanses, camels and ostriches are vertebrates, whereas desert scorpions and termites are invertebrates!"
+            },
+            "urban": {
+                "analogy_sw": "Mtaani, ndege wa njiwa na paka ni vertebrates, wakati mbu na vipepeo ni invertebrates wenye miguu yenye viungo sita!",
+                "analogy_en": "In urban centers, pigeons and domestic cats are vertebrates, while mosquitoes and houseflies are six-legged invertebrates!"
+            }
+        },
+        "key_terms": [
+            {"en": "Vertebrates", "sw": "Wanyama Wenye Uti wa Mgongo (Mammals, Birds, Reptiles, Amphibians, Fish)"},
+            {"en": "Invertebrates", "sw": "Wanyama Wasio na Uti wa Mgongo (Insects, Arachnids, Molluscs)"},
+            {"en": "Warm-blooded (Endothermic)", "sw": "Viumbe wenye damu vuguvugu (Hujitengenezea joto)"},
+            {"en": "Cold-blooded (Ectothermic)", "sw": "Viumbe wenye damu baridi (Hutegemea joto la mazingira)"}
+        ],
+        "experiment": {
+            "title_sw": "Jaribio: Kuainisha Wanyama wa Mazingira Yako",
+            "title_en": "Experiment: Backyard Creature Classification Chart",
+            "materials_sw": "Daftari, kalamu, uchunguzi wa mazingira ya shule au nyumbani.",
+            "materials_en": "Notebook, pen, outdoor environmental observation.",
+            "steps_sw": "1. Orodhesha wanyama 5 unaowaona (kama kuku, mbwa, panzi, kipepeo, samaki).\n2. Wagawe katika safu mbili: Wenye Uti wa Mgongo vs Wasio na Uti wa Mgongo.\n3. Utaona jinsi sayansi ya uainishaji inavyorahisisha kuelewa viumbe!",
+            "steps_en": "1. List 5 creatures observed around your home or school (e.g. chicken, dog, grasshopper, butterfly, fish).\n2. Categorize them into two columns: Vertebrate vs Invertebrate.\n3. Observe how biological taxonomy reveals shared evolutionary traits!"
+        },
+        "quiz": {
+            "question_sw": "Ni kundi gani kati ya yafuatayo linalojumuisha wanyama wenye uti wa mgongo (Vertebrates) pekee?",
+            "question_en": "Which group contains ONLY Vertebrate animals?",
+            "options_sw": ["A) Samaki, Ndege, Mamalia, Reptilia, na Amfibea", "B) Panzi, Konokono, na Minyoo", "C) Mbu, Buibui, na Nyuki", "D) Mchwa pekee"],
+            "options_en": ["A) Fish, Birds, Mammals, Reptiles, and Amphibians", "B) Grasshoppers, Snails, and Earthworms", "C) Mosquitoes, Spiders, and Bees", "D) Termites only"],
+            "correct_index": 0,
+            "explanation_sw": "Safi sana! Samaki, ndege, mamalia (kama binadamu na ng'ombe), reptilia (kama mijusi) na amfibea (kama vyura) wote wana uti wa mgongo.",
+            "explanation_en": "Excellent! Fish, birds, mammals, reptiles, and amphibians constitute the 5 major vertebrate classes."
+        }
+    },
+    {
+        "id": "ecology_food_chains",
+        "title_en": "Ecology & Food Chains: Energy Flow in Nature",
+        "title_sw": "Mnyororo wa Chakula na Mfumo wa Ikolojia",
+        "subject": "Biology",
+        "cbc_strand": "Environment & Ecosystems (Grade 5/6 Science)",
+        "summary_en": "A food chain shows how energy flows from the sun to green plant producers, then to herbivore and carnivore consumers, and finally to decomposers.",
+        "summary_sw": "Mnyororo wa chakula huonyesha jinsi nishati inavyosafiri kuanzia jua hadi kwa mimea (watengenezaji), kisha kwa wanyama walaji, na hatimaye kwa waozeshaji.",
+        
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Fikiria mnyororo uliounganishwa kwa pete: Pete ya kwanza ni Jua linalomulika jani la nyasi (Mzalishaji). Pete ya pili ni Panzi au Mbuzi anayekula nyasi (Mlaji wa kwanza). Pete ya tatu ni Kuku au Simba anayekula mlaji wa kwanza. Kila kiumbe kinategemea kingine kuishi!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Jua] ➔ [Mmea / Mtengenezaji] ➔ [Panzi / Mlaji wa Kwanza] ➔ [Kuku / Mlaji wa Pili] ➔ [Waozeshaji / Decomposers].",
+        
+        "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Ziwa Victoria: Mwangaza wa Jua ➔ Mwani na Magugu Maji (Watengenezaji) ➔ Samaki Dagaa/Omena (Walaji wa kwanza) ➔ Samaki Mbuta/Nile Perch (Mlaji mkuu) ➔ Binadamu!",
+                "analogy_en": "In Lake Victoria: Sunlight ➔ Microscopic Algae Producers ➔ Dagaa/Omena filter feeders ➔ Nile Perch apex predator ➔ Humans!"
+            },
+            "coastal": {
+                "analogy_sw": "Pwani: Mwani wa Bahari ➔ Samaki wadogo na uduvi ➔ Samaki mkubwa wa Nguru au Papa ➔ Ndege wa baharini!",
+                "analogy_en": "Along coastal coral reefs: Seaweed producers ➔ Small herbivorous reef fish ➔ Barracuda/Shark predators!"
+            },
+            "highlands": {
+                "analogy_sw": "Mashambani: Mmea wa Mahindi ➔ Panzi ➔ Kuku wa kienyeji ➔ Mwewe (Ndege mwindaji)!",
+                "analogy_en": "In highland agricultural zones: Green Maize Plants ➔ Grasshopper ➔ Free-range Chicken ➔ Hawk raptor!"
+            },
+            "arid": {
+                "analogy_sw": "Kwenye mbuga za savanna: Nyasi za kijani ➔ Pundamilia na Swala ➔ Simba na Chui (Wawindaji wakuu) ➔ Tumbusi na Bakteria (Waozeshaji)!",
+                "analogy_en": "In African savannah grasslands: Savannah Grasses ➔ Zebras and Antelopes ➔ Lions and Cheetahs ➔ Vultures and decomposers!"
+            },
+            "urban": {
+                "analogy_sw": "Mtaani: Mti wa bustani ➔ Mabuu ya wadudu ➔ Ndege wa njiwa na kware ➔ Paka wa mtaani!",
+                "analogy_en": "In urban parks: Garden Flowers & Shrubs ➔ Caterpillars ➔ Songbirds ➔ Urban Felines!"
+            }
+        },
+        "key_terms": [
+            {"en": "Producer (Autotroph)", "sw": "Mtengenezaji (Mimea ya kijani inayotengeneza chakula kwa jua)"},
+            {"en": "Consumer (Herbivore/Carnivore)", "sw": "Mlaji (Mnyama anayekula mimea au wanyama wengine)"},
+            {"en": "Apex Predator", "sw": "Mwindaji Mkuu (Aliye kileleni mwa mnyororo wa chakula)"},
+            {"en": "Decomposer", "sw": "Mwozeshaji (Bakteria na uyoga wanaorejesha virutubisho ardhini)"}
+        ],
+        "experiment": {
+            "title_sw": "Jaribio: Kuchora Mnyororo wa Chakula wa Shuleni",
+            "title_en": "Experiment: Mapping a Local Food Chain",
+            "materials_sw": "Karatasi, penseli zenye rangi.",
+            "materials_en": "Paper, colored markers or pencils.",
+            "steps_sw": "1. Chora Jua na Mmea wa eneo lako upande wa kushoto.\n2. Weka mshale ➔ kuelekea mnyama anayekula mmea huo (mf. mbuzi au panzi).\n3. Weka mshale mwingine ➔ kuelekea kiumbe anayekula mnyama huyo.\n4. Hongera! Umetengeneza ramani ya mzunguko wa nishati!",
+            "steps_en": "1. Draw the Sun and a local green plant on the left.\n2. Add an arrow ➔ pointing to a primary herbivore (e.g. goat or insect).\n3. Add another arrow ➔ to a predator.\n4. You have mapped the vital ecological flow of solar energy through living systems!"
+        },
+        "quiz": {
+            "question_sw": "Katika mnyororo wa chakula, ni viumbe gani wanaoitwa 'Watengenezaji' (Producers) kwa sababu wanatengeneza chakula chao kwa kutumia jua?",
+            "question_en": "In a food chain, which organisms are called 'Producers' because they synthesize their own food using sunlight?",
+            "options_sw": ["A) Mimea ya kijani (Green Plants)", "B) Simba", "C) Samaki Mbuta", "D) Mawe"],
+            "options_en": ["A) Green Plants", "B) Lions", "C) Nile Perch", "D) Stones"],
+            "correct_index": 0,
+            "explanation_sw": "Sahihi kabisa! Mimea ya kijani ndiyo watengenezaji pekee wanaobadilisha nishati ya jua kuwa chakula kinacholisha viumbe vingine vyote.",
+            "explanation_en": "Spot on! Green plants are autotrophic producers that convert radiant solar energy into edible chemical energy."
+        }
+    },
+    {
         "id": "electricity_circuits",
         "title_en": "Electric Current & Circuits",
         "title_sw": "Mkondo wa Umeme na Saketi",
@@ -629,11 +1035,39 @@ def get_available_regions() -> Dict[str, Any]:
 
 RELATED_TOPIC_GRAPH = {
     "photosynthesis": [
-        {"id": "aquatic_biology_kisumu", "title_sw": "Upumuaji wa Samaki & Matamvua/Gills (Biology)", "title_en": "Aquatic Fish Respiration", "prompt": "Eleza jinsi samaki wanavyotumia oksijeni ya mimea ya ziwani kupumua", "icon": "🐟"},
-        {"id": "chemistry_reactions", "title_sw": "Kemia ya Asidi & Mmenyuko (Chemistry)", "title_en": "Acids & Chemical Reactions", "prompt": "Eleza kemia ya asidi na besi", "icon": "⚗️"}
+        {"id": "plant_pollination", "title_sw": "Uchavushaji & Uzazi wa Mimea (Biology)", "title_en": "Pollination & Plant Reproduction", "prompt": "Eleza jinsi uchavushaji na maua yanavyotengeneza mbegu", "icon": "🌸"},
+        {"id": "aquatic_biology_kisumu", "title_sw": "Upumuaji wa Samaki & Matamvua/Gills (Biology)", "title_en": "Aquatic Fish Respiration", "prompt": "Eleza jinsi samaki wanavyotumia oksijeni ya mimea kupumua", "icon": "🐟"}
+    ],
+    "human_digestive_system": [
+        {"id": "circulatory_heart", "title_sw": "Moyo & Mzunguko wa Damu (Biology)", "title_en": "Heart & Blood Circulation", "prompt": "Eleza jinsi damu inavyosambaza virutubisho vya chakula mwilini", "icon": "❤️"},
+        {"id": "chemistry_reactions", "title_sw": "Asidi ya Tumbo & Kemia (Chemistry)", "title_en": "Stomach Acid Chemistry", "prompt": "Eleza jinsi asidi ya tumbo inavyovunja chakula", "icon": "⚗️"}
+    ],
+    "circulatory_heart": [
+        {"id": "human_respiration", "title_sw": "Upumuaji wa Mapafu & Oksijeni (Biology)", "title_en": "Lungs & Oxygen Respiration", "prompt": "Eleza jinsi mapafu yanavyoingiza oksijeni kwenye damu", "icon": "🫁"},
+        {"id": "human_digestive_system", "title_sw": "Mmeng'enyo wa Chakula & Lishe (Biology)", "title_en": "Digestive System & Nutrients", "prompt": "Eleza jinsi chakula kinavyomeng'enywa na kufyonzwa", "icon": "🍎"}
+    ],
+    "human_respiration": [
+        {"id": "circulatory_heart", "title_sw": "Moyo & Mzunguko wa Damu (Biology)", "title_en": "Heart & Blood Circulation", "prompt": "Eleza jinsi damu inavyosafirisha oksijeni kutoka mapafuni", "icon": "❤️"},
+        {"id": "photosynthesis", "title_sw": "Usanisinuru & Oksijeni ya Mimea (Biology)", "title_en": "Photosynthesis & Oxygen Source", "prompt": "Eleza jinsi mimea inavyozalisha oksijeni tunayopumua", "icon": "🌿"}
+    ],
+    "cell_biology": [
+        {"id": "human_digestive_system", "title_sw": "Seli & Mmeng'enyo wa Chakula (Biology)", "title_en": "Cell Nutrition & Digestion", "prompt": "Eleza jinsi seli zinavyopata nishati ya chakula", "icon": "🔬"},
+        {"id": "photosynthesis", "title_sw": "Kloroplasti & Usanisinuru (Biology)", "title_en": "Chloroplasts & Photosynthesis", "prompt": "Eleza kazi ya kloroplasti ndani ya seli ya mmea", "icon": "🌿"}
+    ],
+    "plant_pollination": [
+        {"id": "photosynthesis", "title_sw": "Usanisinuru & Majani (Biology)", "title_en": "Photosynthesis in Leaves", "prompt": "Eleza jinsi majani ya mmea yanavyotengeneza chakula", "icon": "🌿"},
+        {"id": "ecology_food_chains", "title_sw": "Wadudu & Mnyororo wa Chakula (Biology)", "title_en": "Pollinators & Food Webs", "prompt": "Eleza nafasi ya nyuki katika mazingira na kilimo", "icon": "🐝"}
+    ],
+    "living_things_classification": [
+        {"id": "aquatic_biology_kisumu", "title_sw": "Samaki & Wenye Uti wa Mgongo (Biology)", "title_en": "Fish & Vertebrates", "prompt": "Eleza sifa za samaki kama wanyama wenye uti wa mgongo", "icon": "🐟"},
+        {"id": "ecology_food_chains", "title_sw": "Mnyororo wa Chakula wa Wanyama (Biology)", "title_en": "Vertebrate Food Chains", "prompt": "Eleza mnyororo wa chakula wa wanyama wa mbugani", "icon": "🦁"}
+    ],
+    "ecology_food_chains": [
+        {"id": "photosynthesis", "title_sw": "Mimea kama Watengenezaji Wakuu (Biology)", "title_en": "Plants as Producers", "prompt": "Eleza jinsi mimea inavyoanzisha mnyororo wa chakula", "icon": "🌿"},
+        {"id": "living_things_classification", "title_sw": "Uainishaji wa Wanyama Walaji (Biology)", "title_en": "Herbivores & Carnivores", "prompt": "Eleza tofauti kati ya wanyama walaji majani na walaji nyama", "icon": "🐾"}
     ],
     "aquatic_biology_kisumu": [
-        {"id": "photosynthesis", "title_sw": "Usanisinuru & Oksijeni ya Mimea (Biology)", "title_en": "Photosynthesis & Oxygen", "prompt": "Eleza jinsi mimea inavyotengeneza chakula na kutoa oksijeni", "icon": "🌿"},
+        {"id": "human_respiration", "title_sw": "Upumuaji wa Binadamu vs Samaki (Biology)", "title_en": "Human vs Fish Respiration", "prompt": "Eleza tofauti ya upumuaji wa mapafu na mashavu ya samaki", "icon": "🫁"},
         {"id": "electricity_circuits", "title_sw": "Saketi za Umeme wa Kuvulia Ziwani (Physics)", "title_en": "Night Fishing Electric Circuits", "prompt": "Eleza jinsi saketi za taa za kuvulia samaki zinavyofanya kazi", "icon": "⚡"}
     ],
     "electricity_circuits": [
@@ -641,20 +1075,24 @@ RELATED_TOPIC_GRAPH = {
         {"id": "gravity_forces", "title_sw": "Nguvu za Mvuto & Msuguano (Physics)", "title_en": "Gravity & Friction Forces", "prompt": "Eleza nguvu ya mvuto na msuguano", "icon": "🌍"}
     ],
     "chemistry_reactions": [
-        {"id": "photosynthesis", "title_sw": "Klorofili & Mmenyuko wa Jua (Biology)", "title_en": "Photosynthesis Reaction", "prompt": "Eleza usanisinuru kama mmenyuko wa kikemia", "icon": "🌿"},
+        {"id": "human_digestive_system", "title_sw": "Kemia ya Mmeng'enyo wa Chakula (Biology)", "title_en": "Digestive Enzymes & Chemistry", "prompt": "Eleza jinsi asidi ya tumbo inavyomeng'enya chakula", "icon": "🍎"},
         {"id": "fractions_math", "title_sw": "Sehemu & Uwiano wa Vipimo (Mathematics)", "title_en": "Fractions & Proportions", "prompt": "Eleza sehemu na uwiano katika kugawa vitu", "icon": "🍕"}
     ],
     "computer_algorithms": [
         {"id": "electricity_circuits", "title_sw": "Saketi & Swichi za Kompyuta (Physics)", "title_en": "Circuits & Logic Gates", "prompt": "Eleza jinsi umeme na swichi zinavyoendesha kompyuta", "icon": "⚡"},
-        {"id": "fractions_math", "title_sw": "Hisabati & Nambari (Mathematics)", "title_en": "Fractions & Math", "prompt": "Eleza sehemu za hesabu", "icon": "📐"}
+        {"id": "algebra_math", "title_sw": "Aljebra & Vigeuzi vya Kompyuta (Mathematics)", "title_en": "Algebra & Variables", "prompt": "Eleza aljebra na vigeuzi", "icon": "📐"}
     ],
     "fractions_math": [
-        {"id": "computer_algorithms", "title_sw": "Algoriti & Hatua za Hesabu (Computer Science)", "title_en": "Algorithms & Logic", "prompt": "Eleza algoriti za kompyuta", "icon": "💻"},
+        {"id": "algebra_math", "title_sw": "Aljebra & Milinganyo ya Hesabu (Mathematics)", "title_en": "Algebra & Equations", "prompt": "Eleza jinsi ya kutatua mlinganyo wa aljebra", "icon": "📐"},
         {"id": "chemistry_reactions", "title_sw": "Uwiano wa Kemia ya Asidi (Chemistry)", "title_en": "Chemical Ratios & Reactions", "prompt": "Eleza mmenyuko wa asidi na besi", "icon": "⚗️"}
     ],
     "gravity_forces": [
         {"id": "electricity_circuits", "title_sw": "Saketi za Umeme & Nguvu (Physics)", "title_en": "Electric Circuits & Energy", "prompt": "Eleza saketi kamili za umeme", "icon": "⚡"},
         {"id": "fractions_math", "title_sw": "Sehemu za Hesabu (Mathematics)", "title_en": "Fractions & Math", "prompt": "Eleza sehemu za nambari", "icon": "📐"}
+    ],
+    "algebra_math": [
+        {"id": "fractions_math", "title_sw": "Sehemu & Nambari (Mathematics)", "title_en": "Fractions & Numbers", "prompt": "Eleza sehemu za nambari", "icon": "🍕"},
+        {"id": "computer_algorithms", "title_sw": "Vigeuzi vya Kompyuta & Algoriti (Computer Science)", "title_en": "Variables & Algorithms", "prompt": "Eleza vigeuzi katika programu za kompyuta", "icon": "💻"}
     ]
 }
 
@@ -663,16 +1101,101 @@ def get_related_topics_recommendations(topic_id_or_query: str) -> List[Dict[str,
     """Returns structured next topic recommendations based on current learning."""
     topic = find_offline_topic(topic_id_or_query)
     tid = topic.get("id", "photosynthesis")
-    return RELATED_TOPIC_GRAPH.get(tid, RELATED_TOPIC_GRAPH["photosynthesis"])
+    return RELATED_TOPIC_GRAPH.get(tid, RELATED_TOPIC_GRAPH.get("photosynthesis", []))
 
 
 def find_offline_topic(query: str, preferred_subject: str = "all") -> Dict[str, Any]:
     query_lower = query.lower()
     
-    # 1. Direct algebra match
+    # 1. Direct specific domain keyword matching (High Precision)
+    # Digestion / Nutrition
+    if any(k in query_lower for k in ["digest", "mmeng'enyo", "stomach", "tumbo", "esophagus", "umio", "mouth", "kinywa", "saliva", "mate", "intestine", "utumbo", "enzyme", "virutubisho", "chakula mwilini"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "human_digestive_system":
+                return item
+
+    # Circulatory / Heart / Blood
+    if any(k in query_lower for k in ["heart", "moyo", "circulat", "mzunguko wa damu", "blood", "damu", "artery", "ateri", "vein", "vena", "pulse", "mapigo"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "circulatory_heart":
+                return item
+
+    # Aquatic fish respiration
+    if any(k in query_lower for k in ["fish", "samaki", "gills", "mashavu", "matamvua", "ngege", "mbuta"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "aquatic_biology_kisumu":
+                return item
+
+    # Human Respiration / Lungs
+    if any(k in query_lower for k in ["lung", "mapafu", "respirat", "upumuaji", "breathe", "pumua", "trachea", "koromeo", "inhale", "exhale", "diaphragm", "kiwambo"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "human_respiration":
+                return item
+
+    # Cell Biology
+    if any(k in query_lower for k in ["cell", "seli", "nucleus", "kiini", "cytoplasm", "saikroplasimu", "membrane", "utando", "chloroplast", "kloroplasti"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "cell_biology":
+                return item
+
+    # Ecology & Food chains
+    if any(k in query_lower for k in ["food chain", "mnyororo wa chakula", "ecolog", "ikolojia", "ecosystem", "producer", "mtengenezaji", "consumer", "mlaji", "predator", "mwindaji", "herbivore", "carnivore", "decomposer", "mwozeshaji"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "ecology_food_chains":
+                return item
+
+    # Pollination & Flowers
+    if any(k in query_lower for k in ["pollinat", "uchavushaji", "flower", "maua", "petali", "petal", "stamen", "chavulio", "pistil", "kambamaua", "poleni", "chavua", "nectar"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "plant_pollination":
+                return item
+
+    # Living things classification
+    if any(k in query_lower for k in ["vertebrate", "invertebrate", "uti wa mgongo", "classify", "uainishaji", "mammal", "mamalia", "reptile", "reptilia", "amphibian", "amfibea", "insect", "wadudu", "konokono", "buibui"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "living_things_classification":
+                return item
+
+    # Photosynthesis & Plant food
+    if any(k in query_lower for k in ["photo", "usanisinuru", "klorofili", "chlorophyll", "plant food", "chakula cha mmea", "stomata", "majani yanavyopika"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "photosynthesis":
+                return item
+
+    # Algebra & Math
     if any(k in query_lower for k in ["algebra", "aljebra", "equation", "mlinganyo", "variable", "kigeuzi", "solve for x", "x +", "x -", "x ="]):
         for item in OFFLINE_STEM_VAULT:
             if item["id"] == "algebra_math":
+                return item
+
+    # Fractions
+    if any(k in query_lower for k in ["fraction", "sehemu", "divide", "gawanya", "theluthi", "robo", "nusu", "proportion", "ratio"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "fractions_math":
+                return item
+
+    # Chemistry reactions
+    if any(k in query_lower for k in ["chem", "kemia", "acid", "asidi", "base", "besi", "reaction", "neutraliz", "siki", "soda", "lemon", "chumvi"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "chemistry_reactions":
+                return item
+
+    # Computer science & algorithms
+    if any(k in query_lower for k in ["comput", "code", "coding", "algorithm", "algoriti", "program", "logic", "software", "binary"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "computer_algorithms":
+                return item
+
+    # Physics Electricity & Circuits
+    if any(k in query_lower for k in ["electr", "circuit", "umeme", "saketi", "wire", "waya", "battery", "betri", "voltage", "current"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "electricity_circuits":
+                return item
+
+    # Physics Gravity & Friction
+    if any(k in query_lower for k in ["gravity", "grabiti", "force", "nguvu ya mvuto", "friction", "msuguano", "motion", "anguka"]):
+        for item in OFFLINE_STEM_VAULT:
+            if item["id"] == "gravity_forces":
                 return item
 
     # 2. Exact match on ID or key terms
@@ -715,9 +1238,10 @@ def find_offline_topic(query: str, preferred_subject: str = "all") -> Dict[str, 
         for item in OFFLINE_STEM_VAULT:
             if item["subject"] == "Physics":
                 return item
-    elif any(k in query_lower for k in ["plant", "mmea", "fish", "samaki", "leaf", "jani", "bio", "botany", "cell", "living"]):
+    elif any(k in query_lower for k in ["plant", "mmea", "fish", "samaki", "leaf", "jani", "cell", "living", "digest", "heart", "lung"]):
         for item in OFFLINE_STEM_VAULT:
             if item["subject"] == "Biology":
                 return item
 
     return OFFLINE_STEM_VAULT[0]
+

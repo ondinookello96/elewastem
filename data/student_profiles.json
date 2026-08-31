@@ -313,8 +313,28 @@
         "topic": "Photosynthesis: How Plants Make Food",
         "subject": "Biology",
         "mastery_score": 100,
-        "times_explored": 55,
-        "last_studied": "2026-08-31T13:12:02.329851",
+        "times_explored": 56,
+        "last_studied": "2026-08-31T13:12:26.876461",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      },
+      "Human Respiratory System & Lungs": {
+        "topic": "Human Respiratory System & Lungs",
+        "subject": "Biology",
+        "mastery_score": 35,
+        "times_explored": 3,
+        "last_studied": "2026-08-31T17:06:59.066345",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      },
+      "Aquatic Respiration & Fish Biology (Lake Ecosystem)": {
+        "topic": "Aquatic Respiration & Fish Biology (Lake Ecosystem)",
+        "subject": "Biology",
+        "mastery_score": 35,
+        "times_explored": 3,
+        "last_studied": "2026-08-31T17:11:34.136691",
         "misconceptions": [],
         "quizzes_taken": 0,
         "quizzes_passed": 0
@@ -322,97 +342,98 @@
     },
     "badges": [
       "🌟 Mwanzo Bora (Great Start)",
-      "⚡ Bingwa wa Sayansi (Science Champ)"
+      "⚡ Bingwa wa Sayansi (Science Champ)",
+      "🔬 Mvumbuzi Chipukizi (Junior Explorer)"
     ],
     "recent_interactions": [
-      {
-        "timestamp": "2026-08-31T12:30:16.747417",
-        "role": "assistant",
-        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T12:51:05.838608",
-        "role": "user",
-        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T12:51:05.846835",
-        "role": "assistant",
-        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T12:51:38.082746",
-        "role": "user",
-        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T12:51:38.088634",
-        "role": "assistant",
-        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T12:58:45.009296",
-        "role": "user",
-        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T12:58:45.019490",
-        "role": "assistant",
-        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T12:59:17.583169",
-        "role": "user",
-        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T12:59:17.586536",
-        "role": "assistant",
-        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T13:07:55.735355",
-        "role": "user",
-        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T13:07:55.738914",
-        "role": "assistant",
-        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T13:08:37.465050",
-        "role": "user",
-        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T13:08:37.467790",
-        "role": "assistant",
-        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
-        "language": "sw"
-      },
-      {
-        "timestamp": "2026-08-31T13:12:02.322530",
-        "role": "user",
-        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
-        "language": "sw"
-      },
       {
         "timestamp": "2026-08-31T13:12:02.326189",
         "role": "assistant",
         "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T13:12:26.868979",
+        "role": "user",
+        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T13:12:26.872363",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:03:25.811358",
+        "role": "user",
+        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:03:25.828958",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Mfumo wa Upumuaji wa Binadamu na Mapafu\nUpumuaji huleta hewa safi ya oksijeni kwenye mapafu ambapo huingia kwenye damu, na kutoa nje hewa chafu ya kaboni dioksidi.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Ziwa Victoria wakati upepo mwanana wa ziwani unapovuma asubuhi, unavuta hewa safi iliyojaa oksijeni kupitia koromeo (trachea) hadi kwenye mifuko midogo ya hewa (alveoli) ya mapafu yako!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kuona Mvuke na Hewa Inayotoka Mapafuni**\n* **Vifaa / Materials:** Kioo kidogo au miwani safi, pumzi yako.\n* **Hatua / Steps:**\n1. Shikilia kioo mbele ya mdomo wako.\n2. Pumua kwa nguvu 'haaaaa' kwenye kioo.\n3. Utaona ukungu wa matone madogo ya maji—hii inathibitisha mapafu yanatoa joto na unyevu wa maji pamoja na kaboni dioksidi!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Koromeo (Njia kuu ya hewa)** (Trachea (Windpipe))\n* **Mapafu na Matawi ya Koromeo** (Lungs & Bronchi)\n* **Mfuko midogo ya kubadilishia hewa (Alveoli)** (Alveoli (Air Sacs))\n* **Kiwambo cha mbavu (Misuli inayosaidia kupumua)** (Diaphragm)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:04:54.494462",
+        "role": "user",
+        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:04:54.500001",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Mfumo wa Upumuaji wa Binadamu na Mapafu\nUpumuaji huleta hewa safi ya oksijeni kwenye mapafu ambapo huingia kwenye damu, na kutoa nje hewa chafu ya kaboni dioksidi.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Ziwa Victoria wakati upepo mwanana wa ziwani unapovuma asubuhi, unavuta hewa safi iliyojaa oksijeni kupitia koromeo (trachea) hadi kwenye mifuko midogo ya hewa (alveoli) ya mapafu yako!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kuona Mvuke na Hewa Inayotoka Mapafuni**\n* **Vifaa / Materials:** Kioo kidogo au miwani safi, pumzi yako.\n* **Hatua / Steps:**\n1. Shikilia kioo mbele ya mdomo wako.\n2. Pumua kwa nguvu 'haaaaa' kwenye kioo.\n3. Utaona ukungu wa matone madogo ya maji—hii inathibitisha mapafu yanatoa joto na unyevu wa maji pamoja na kaboni dioksidi!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Koromeo (Njia kuu ya hewa)** (Trachea (Windpipe))\n* **Mapafu na Matawi ya Koromeo** (Lungs & Bronchi)\n* **Mfuko midogo ya kubadilishia hewa (Alveoli)** (Alveoli (Air Sacs))\n* **Kiwambo cha mbavu (Misuli inayosaidia kupumua)** (Diaphragm)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:06:59.045291",
+        "role": "user",
+        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:06:59.054460",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Mfumo wa Upumuaji wa Binadamu na Mapafu\nUpumuaji huleta hewa safi ya oksijeni kwenye mapafu ambapo huingia kwenye damu, na kutoa nje hewa chafu ya kaboni dioksidi.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Ziwa Victoria wakati upepo mwanana wa ziwani unapovuma asubuhi, unavuta hewa safi iliyojaa oksijeni kupitia koromeo (trachea) hadi kwenye mifuko midogo ya hewa (alveoli) ya mapafu yako!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kuona Mvuke na Hewa Inayotoka Mapafuni**\n* **Vifaa / Materials:** Kioo kidogo au miwani safi, pumzi yako.\n* **Hatua / Steps:**\n1. Shikilia kioo mbele ya mdomo wako.\n2. Pumua kwa nguvu 'haaaaa' kwenye kioo.\n3. Utaona ukungu wa matone madogo ya maji—hii inathibitisha mapafu yanatoa joto na unyevu wa maji pamoja na kaboni dioksidi!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Koromeo (Njia kuu ya hewa)** (Trachea (Windpipe))\n* **Mapafu na Matawi ya Koromeo** (Lungs & Bronchi)\n* **Mfuko midogo ya kubadilishia hewa (Alveoli)** (Alveoli (Air Sacs))\n* **Kiwambo cha mbavu (Misuli inayosaidia kupumua)** (Diaphragm)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:08:28.436559",
+        "role": "user",
+        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:08:28.447862",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Upumuaji wa Samaki na Uhai Ziwani (Mfano wa Ziwa Victoria)\nSamaki kama Ngege (Tilapia) na Mbuta (Nile Perch) wanapumua ndani ya maji kwa kutumia matamvua au mashavu (gills) yanayochuja oksijeni iliyoyeyushwa kwenye maji ya ziwa.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Dunga Beach au Luanda Kotieno kando ya Ziwa Victoria, unapoangalia samaki Ngege (Tilapia), vifuniko vya mashavu yake yakifunguka na kufunga, maji hupita kwenye matamvua (gills) yanayofanya kazi kama chujio maalum linalofyonza oksijeni kutoka majini na kuingiza kwenye damu yake!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kuona Oksijeni Ndani ya Maji ya Kunywa**\n* **Vifaa / Materials:** Glasi safi ya maji ya baridi.\n* **Hatua / Steps:**\n1. Jaza glasi na maji ya baridi kisha uiache mezani kwa saa 3 bila kuitikisa.\n2. Utaona viputo vidogo vya hewa vikijitokeza pembeni ya glasi.\n3. Hiyo ndiyo hewa ya oksijeni ambayo samaki Ngege anaitumia kupumua!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Matamvua / Mashavu ya samaki (Gills)** (Gills (Operculum))\n* **Oksijeni iliyoyeyuka majini** (Dissolved Oxygen)\n* **Mfumo wa ikolojia ya viumbe hai** (Ecosystem)\n* **Mimea vamizi (kama Magugu Maji / Akech)** (Invasive Species)\n\n> *\"Animals & Environmental Adaptations (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:09:41.788423",
+        "role": "user",
+        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:09:41.801473",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Upumuaji wa Samaki na Uhai Ziwani (Mfano wa Ziwa Victoria)\nSamaki kama Ngege (Tilapia) na Mbuta (Nile Perch) wanapumua ndani ya maji kwa kutumia matamvua au mashavu (gills) yanayochuja oksijeni iliyoyeyushwa kwenye maji ya ziwa.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Dunga Beach au Luanda Kotieno kando ya Ziwa Victoria, unapoangalia samaki Ngege (Tilapia), vifuniko vya mashavu yake yakifunguka na kufunga, maji hupita kwenye matamvua (gills) yanayofanya kazi kama chujio maalum linalofyonza oksijeni kutoka majini na kuingiza kwenye damu yake!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kuona Oksijeni Ndani ya Maji ya Kunywa**\n* **Vifaa / Materials:** Glasi safi ya maji ya baridi.\n* **Hatua / Steps:**\n1. Jaza glasi na maji ya baridi kisha uiache mezani kwa saa 3 bila kuitikisa.\n2. Utaona viputo vidogo vya hewa vikijitokeza pembeni ya glasi.\n3. Hiyo ndiyo hewa ya oksijeni ambayo samaki Ngege anaitumia kupumua!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Matamvua / Mashavu ya samaki (Gills)** (Gills (Operculum))\n* **Oksijeni iliyoyeyuka majini** (Dissolved Oxygen)\n* **Mfumo wa ikolojia ya viumbe hai** (Ecosystem)\n* **Mimea vamizi (kama Magugu Maji / Akech)** (Invasive Species)\n\n> *\"Animals & Environmental Adaptations (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:11:34.107103",
+        "role": "user",
+        "content": "Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:11:34.120871",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Upumuaji wa Samaki na Uhai Ziwani (Mfano wa Ziwa Victoria)\nSamaki kama Ngege (Tilapia) na Mbuta (Nile Perch) wanapumua ndani ya maji kwa kutumia matamvua au mashavu (gills) yanayochuja oksijeni iliyoyeyushwa kwenye maji ya ziwa.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Dunga Beach au Luanda Kotieno kando ya Ziwa Victoria, unapoangalia samaki Ngege (Tilapia), vifuniko vya mashavu yake yakifunguka na kufunga, maji hupita kwenye matamvua (gills) yanayofanya kazi kama chujio maalum linalofyonza oksijeni kutoka majini na kuingiza kwenye damu yake!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kuona Oksijeni Ndani ya Maji ya Kunywa**\n* **Vifaa / Materials:** Glasi safi ya maji ya baridi.\n* **Hatua / Steps:**\n1. Jaza glasi na maji ya baridi kisha uiache mezani kwa saa 3 bila kuitikisa.\n2. Utaona viputo vidogo vya hewa vikijitokeza pembeni ya glasi.\n3. Hiyo ndiyo hewa ya oksijeni ambayo samaki Ngege anaitumia kupumua!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Matamvua / Mashavu ya samaki (Gills)** (Gills (Operculum))\n* **Oksijeni iliyoyeyuka majini** (Dissolved Oxygen)\n* **Mfumo wa ikolojia ya viumbe hai** (Ecosystem)\n* **Mimea vamizi (kama Magugu Maji / Akech)** (Invasive Species)\n\n> *\"Animals & Environmental Adaptations (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
         "language": "sw"
       }
     ]
@@ -431,8 +452,8 @@
         "topic": "Photosynthesis: How Plants Make Food",
         "subject": "Biology",
         "mastery_score": 100,
-        "times_explored": 40,
-        "last_studied": "2026-08-31T13:08:59.942703",
+        "times_explored": 48,
+        "last_studied": "2026-08-31T17:11:56.679309",
         "misconceptions": [],
         "quizzes_taken": 0,
         "quizzes_passed": 0
@@ -444,91 +465,289 @@
     ],
     "recent_interactions": [
       {
-        "timestamp": "2026-08-31T12:30:07.149053",
+        "timestamp": "2026-08-31T13:12:24.773537",
         "role": "assistant",
         "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T12:30:39.144389",
+        "timestamp": "2026-08-31T13:12:49.300840",
         "role": "user",
         "content": "Nionyeshe mchoro wa picha wa Usanisinuru (Photosynthesis diagram)",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T12:30:39.147189",
+        "timestamp": "2026-08-31T13:12:49.313577",
         "role": "assistant",
         "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T12:51:28.275853",
+        "timestamp": "2026-08-31T17:03:48.270933",
         "role": "user",
         "content": "Nionyeshe mchoro wa picha wa Usanisinuru (Photosynthesis diagram)",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T12:51:28.279082",
+        "timestamp": "2026-08-31T17:03:48.283515",
         "role": "assistant",
         "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T12:52:00.585677",
+        "timestamp": "2026-08-31T17:05:16.973461",
         "role": "user",
         "content": "Nionyeshe mchoro wa picha wa Usanisinuru (Photosynthesis diagram)",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T12:52:00.589522",
+        "timestamp": "2026-08-31T17:05:16.985431",
         "role": "assistant",
         "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T12:59:07.495505",
+        "timestamp": "2026-08-31T17:07:21.509492",
         "role": "user",
         "content": "Nionyeshe mchoro wa picha wa Usanisinuru (Photosynthesis diagram)",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T12:59:07.499619",
+        "timestamp": "2026-08-31T17:07:21.522015",
         "role": "assistant",
         "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T12:59:39.955014",
+        "timestamp": "2026-08-31T17:08:50.935789",
         "role": "user",
         "content": "Nionyeshe mchoro wa picha wa Usanisinuru (Photosynthesis diagram)",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T12:59:39.963737",
+        "timestamp": "2026-08-31T17:08:50.954403",
         "role": "assistant",
         "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T13:08:18.123013",
+        "timestamp": "2026-08-31T17:10:04.217492",
         "role": "user",
         "content": "Nionyeshe mchoro wa picha wa Usanisinuru (Photosynthesis diagram)",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T13:08:18.126358",
+        "timestamp": "2026-08-31T17:10:04.239389",
         "role": "assistant",
         "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T13:08:59.936457",
+        "timestamp": "2026-08-31T17:11:56.643000",
         "role": "user",
         "content": "Nionyeshe mchoro wa picha wa Usanisinuru (Photosynthesis diagram)",
         "language": "sw"
       },
       {
-        "timestamp": "2026-08-31T13:08:59.939657",
+        "timestamp": "2026-08-31T17:11:56.662804",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      }
+    ]
+  },
+  "bio_tester": {
+    "student_id": "bio_tester",
+    "name": "Mwanafunzi",
+    "grade_level": "Grade 6 (Upper Primary)",
+    "preferred_language": "sw",
+    "current_region": "lake_basin",
+    "gps_coordinates": null,
+    "learning_style": "analogies_and_experiments",
+    "created_at": "2026-08-31T17:03:50.354877",
+    "mastery_graph": {
+      "Human Digestive System & Nutrition": {
+        "topic": "Human Digestive System & Nutrition",
+        "subject": "Biology",
+        "mastery_score": 50,
+        "times_explored": 6,
+        "last_studied": "2026-08-31T17:11:58.786842",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      },
+      "Human Heart & Blood Circulatory System": {
+        "topic": "Human Heart & Blood Circulatory System",
+        "subject": "Biology",
+        "mastery_score": 45,
+        "times_explored": 5,
+        "last_studied": "2026-08-31T17:12:00.871988",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      },
+      "Human Respiratory System & Lungs": {
+        "topic": "Human Respiratory System & Lungs",
+        "subject": "Biology",
+        "mastery_score": 50,
+        "times_explored": 6,
+        "last_studied": "2026-08-31T17:12:02.970398",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      },
+      "Cell Biology: The Basic Units of Life": {
+        "topic": "Cell Biology: The Basic Units of Life",
+        "subject": "Biology",
+        "mastery_score": 40,
+        "times_explored": 4,
+        "last_studied": "2026-08-31T17:12:05.076021",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      },
+      "Plant Reproduction & Flower Pollination": {
+        "topic": "Plant Reproduction & Flower Pollination",
+        "subject": "Biology",
+        "mastery_score": 45,
+        "times_explored": 5,
+        "last_studied": "2026-08-31T17:12:07.195055",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      },
+      "Classification of Living Things: Vertebrates & Invertebrates": {
+        "topic": "Classification of Living Things: Vertebrates & Invertebrates",
+        "subject": "Biology",
+        "mastery_score": 40,
+        "times_explored": 4,
+        "last_studied": "2026-08-31T17:12:09.303224",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      },
+      "Ecology & Food Chains: Energy Flow in Nature": {
+        "topic": "Ecology & Food Chains: Energy Flow in Nature",
+        "subject": "Biology",
+        "mastery_score": 35,
+        "times_explored": 3,
+        "last_studied": "2026-08-31T17:12:11.410247",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      },
+      "Photosynthesis: How Plants Make Food": {
+        "topic": "Photosynthesis: How Plants Make Food",
+        "subject": "Biology",
+        "mastery_score": 35,
+        "times_explored": 3,
+        "last_studied": "2026-08-31T17:12:15.586183",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      },
+      "Aquatic Respiration & Fish Biology (Lake Ecosystem)": {
+        "topic": "Aquatic Respiration & Fish Biology (Lake Ecosystem)",
+        "subject": "Biology",
+        "mastery_score": 30,
+        "times_explored": 2,
+        "last_studied": "2026-08-31T17:12:13.484550",
+        "misconceptions": [],
+        "quizzes_taken": 0,
+        "quizzes_passed": 0
+      }
+    },
+    "badges": [
+      "🌟 Mwanzo Bora (Great Start)",
+      "🔬 Mvumbuzi Chipukizi (Junior Explorer)"
+    ],
+    "recent_interactions": [
+      {
+        "timestamp": "2026-08-31T17:12:00.853932",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Moyo na Mzunguko wa Damu Mwilini\nMoyo hufanya kazi kama pampu ya misuli inayozungusha damu mwilini bila kukoma, ikisafirisha oksijeni na virutubisho kwa kila seli na kuondoa uchafu.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKama pampu ya maji ya manispaa ya Kisumu inayosukuma maji safi ya Ziwa Victoria kupitia mtandao wa mabomba kwenye nyumba zote za jiji, moyo wako unasukuma damu safi kupitia ateri kwenye seli zote za mwili!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kupima Mapigo ya Moyo Kabla na Baada ya Mazoezi**\n* **Vifaa / Materials:** Vidole viwili (cha kati na cha shahada), saa au kuhesabu kwa sekunde 60.\n* **Hatua / Steps:**\n1. Weka vidole viwili kwenye kifundo cha mkono chini ya kidole gumba.\n2. Hesabu mapigo ukiwa umepumzika (kawaida 70-85 kwa dakika).\n3. Ruka kamba au kurukaruka mara 20 kisha upime tena—moyo utapiga kwa kasi zaidi kusukuma oksijeni kwenye misuli!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Moyo (Vyumba vya juu na chini vya pampu)** (Heart (Atrium & Ventricle))\n* **Mishipa ya Ateri (Damu safi) na Vena (Damu chafu)** (Arteries & Veins)\n* **Chembechembe Nyekundu za Damu (Zinabeba Oksijeni)** (Red Blood Cells (Hemoglobin))\n* **Kasi ya Mapigo ya Moyo** (Pulse Rate)\n\n> *\"Human Body & Vital Organs (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:02.947822",
+        "role": "user",
+        "content": "Jinsi mapafu yanavyofanya kazi wakati wa kupumua hewa",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:02.958908",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Mfumo wa Upumuaji wa Binadamu na Mapafu\nUpumuaji huleta hewa safi ya oksijeni kwenye mapafu ambapo huingia kwenye damu, na kutoa nje hewa chafu ya kaboni dioksidi.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Ziwa Victoria wakati upepo mwanana wa ziwani unapovuma asubuhi, unavuta hewa safi iliyojaa oksijeni kupitia koromeo (trachea) hadi kwenye mifuko midogo ya hewa (alveoli) ya mapafu yako!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kuona Mvuke na Hewa Inayotoka Mapafuni**\n* **Vifaa / Materials:** Kioo kidogo au miwani safi, pumzi yako.\n* **Hatua / Steps:**\n1. Shikilia kioo mbele ya mdomo wako.\n2. Pumua kwa nguvu 'haaaaa' kwenye kioo.\n3. Utaona ukungu wa matone madogo ya maji—hii inathibitisha mapafu yanatoa joto na unyevu wa maji pamoja na kaboni dioksidi!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Koromeo (Njia kuu ya hewa)** (Trachea (Windpipe))\n* **Mapafu na Matawi ya Koromeo** (Lungs & Bronchi)\n* **Mfuko midogo ya kubadilishia hewa (Alveoli)** (Alveoli (Air Sacs))\n* **Kiwambo cha mbavu (Misuli inayosaidia kupumua)** (Diaphragm)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:05.038927",
+        "role": "user",
+        "content": "Tofauti kati ya seli ya mmea na seli ya mnyama na kiini",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:05.056271",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Muundo wa Seli: Matofali ya Msingi ya Viumbe Hai\nSeli ni vitengo vidogo sana vya msingi vinavyounda viumbe hai vyote. Seli za mimea zina kuta imara na kloroplasti, wakati seli za wanyama zina utando laini.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKama ukuta wa matofali ya mawe ya ujenzi huko Kisumu unavyounda jengo zima, mamilioni ya seli za mimea ya magugu maji au mboga za Osuga zimeungana kuunda majani, mizizi na mashina!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kuchunguza Tabaka Nyembamba la Seli za Kitunguu**\n* **Vifaa / Materials:** Kitunguu maji kimoja, glasi yenye tone la maji, kioo cha kukuza picha au kamera ya simu.\n* **Hatua / Steps:**\n1. Menya kitunguu na uvute utando mwembamba sana ulio wazi kama nailoni.\n2. Weka juu ya tone la maji kwenye uso safi.\n3. Angalia kwa karibu chini ya mwanga—utaona mistari inayofanana na matofali ya seli zilizopangwa vizuri!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Kiini cha Seli (Kituo cha udhibiti na maagizo ya DNA)** (Nucleus)\n* **Utando wa Seli (Geti la kuruhusu vitu kuingia na kutoka)** (Cell Membrane)\n* **Saikroplasimu (Kioevu cha jeli kinachobeba viungo vya seli)** (Cytoplasm)\n* **Ukuta wa Seli & Kloroplasti (Vipengele vya mimea pekee)** (Cell Wall & Chloroplast)\n\n> *\"Cell Structure & Basic Units of Life (Junior Secondary Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:07.153855",
+        "role": "user",
+        "content": "Uchavushaji wa maua na nyuki unavyotengeneza mbegu",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:07.172605",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Uchavushaji wa Maua na Uzazi wa Mimea\nUchavushaji husafirisha chembe za chavua (poleni) kutoka kwenye chavulio (stamen) hadi kwenye kambamaua (pistil) ili kukuza mbegu na matunda matamu.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kwenye mashamba ya alizeti au maembe, nyuki wanapotua kwenye maua kunyonya majimaji matamu (nectar), miguu yao inashika unga wa chavua na kuusafirisha kwenye ua jingine ili maembe manono yatokee!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kugundua Unga wa Chavua kwenye Ua**\n* **Vifaa / Materials:** Ua bichi la shambani (kama ua la mpera, bamia au mahindi), kidole safi.\n* **Hatua / Steps:**\n1. Gusa kwa upole sehemu ya katikati ya ua (chavulio).\n2. Angalia ncha ya kidole chako—utaona unga wa njano wenye kunata.\n3. Huu ndio unga wa chavua ambao nyuki anausafirisha miguuni mwake!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Uchavushaji (Usafirishaji wa chavua)** (Pollination)\n* **Chavua / Poleni (Unga wa mbegu za kiume za ua)** (Pollen Grains)\n* **Chavulio (Sehemu ya kiume ya ua inayotoa poleni)** (Stamen (Male Part))\n* **Kambamaua (Sehemu ya kike inayotunga mbegu na matunda)** (Pistil / Carpel (Female Part))\n\n> *\"Plants & Reproduction (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:09.275019",
+        "role": "user",
+        "content": "Wanyama wenye uti wa mgongo vertebrates na wasio nao invertebrates",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:09.288517",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Uainishaji wa Viumbe Hai: Wanyama Wenye Uti wa Mgongo na Wasio nao\nWanyama huainishwa katika Wenye Uti wa Mgongo (Vertebrates: mamalia, ndege, reptilia, amfibea, samaki) na Wasio na Uti wa Mgongo (Invertebrates: wadudu, buibui, konokono).\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Ziwa Victoria, samaki Ngege ana mifupa na uti wa mgongo mgumu (Vertebrate), lakini konokono wa majini na wadudu wa ziwani hawana mfupa wowote ndani (Invertebrates)!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kuainisha Wanyama wa Mazingira Yako**\n* **Vifaa / Materials:** Daftari, kalamu, uchunguzi wa mazingira ya shule au nyumbani.\n* **Hatua / Steps:**\n1. Orodhesha wanyama 5 unaowaona (kama kuku, mbwa, panzi, kipepeo, samaki).\n2. Wagawe katika safu mbili: Wenye Uti wa Mgongo vs Wasio na Uti wa Mgongo.\n3. Utaona jinsi sayansi ya uainishaji inavyorahisisha kuelewa viumbe!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Wanyama Wenye Uti wa Mgongo (Mammals, Birds, Reptiles, Amphibians, Fish)** (Vertebrates)\n* **Wanyama Wasio na Uti wa Mgongo (Insects, Arachnids, Molluscs)** (Invertebrates)\n* **Viumbe wenye damu vuguvugu (Hujitengenezea joto)** (Warm-blooded (Endothermic))\n* **Viumbe wenye damu baridi (Hutegemea joto la mazingira)** (Cold-blooded (Ectothermic))\n\n> *\"Classification of Living Things (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:11.383605",
+        "role": "user",
+        "content": "Mnyororo wa chakula jinsi nishati ya jua inavyosafiri kwa mimea na wanyama",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:11.399340",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Mnyororo wa Chakula na Mfumo wa Ikolojia\nMnyororo wa chakula huonyesha jinsi nishati inavyosafiri kuanzia jua hadi kwa mimea (watengenezaji), kisha kwa wanyama walaji, na hatimaye kwa waozeshaji.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Ziwa Victoria: Mwangaza wa Jua ➔ Mwani na Magugu Maji (Watengenezaji) ➔ Samaki Dagaa/Omena (Walaji wa kwanza) ➔ Samaki Mbuta/Nile Perch (Mlaji mkuu) ➔ Binadamu!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kuchora Mnyororo wa Chakula wa Shuleni**\n* **Vifaa / Materials:** Karatasi, penseli zenye rangi.\n* **Hatua / Steps:**\n1. Chora Jua na Mmea wa eneo lako upande wa kushoto.\n2. Weka mshale ➔ kuelekea mnyama anayekula mmea huo (mf. mbuzi au panzi).\n3. Weka mshale mwingine ➔ kuelekea kiumbe anayekula mnyama huyo.\n4. Hongera! Umetengeneza ramani ya mzunguko wa nishati!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Mtengenezaji (Mimea ya kijani inayotengeneza chakula kwa jua)** (Producer (Autotroph))\n* **Mlaji (Mnyama anayekula mimea au wanyama wengine)** (Consumer (Herbivore/Carnivore))\n* **Mwindaji Mkuu (Aliye kileleni mwa mnyororo wa chakula)** (Apex Predator)\n* **Mwozeshaji (Bakteria na uyoga wanaorejesha virutubisho ardhini)** (Decomposer)\n\n> *\"Environment & Ecosystems (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:13.466474",
+        "role": "user",
+        "content": "Jinsi samaki Ngege anavyopumua kwa matamvua ziwani",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:13.477133",
+        "role": "assistant",
+        "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Upumuaji wa Samaki na Uhai Ziwani (Mfano wa Ziwa Victoria)\nSamaki kama Ngege (Tilapia) na Mbuta (Nile Perch) wanapumua ndani ya maji kwa kutumia matamvua au mashavu (gills) yanayochuja oksijeni iliyoyeyushwa kwenye maji ya ziwa.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Dunga Beach au Luanda Kotieno kando ya Ziwa Victoria, unapoangalia samaki Ngege (Tilapia), vifuniko vya mashavu yake yakifunguka na kufunga, maji hupita kwenye matamvua (gills) yanayofanya kazi kama chujio maalum linalofyonza oksijeni kutoka majini na kuingiza kwenye damu yake!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kuona Oksijeni Ndani ya Maji ya Kunywa**\n* **Vifaa / Materials:** Glasi safi ya maji ya baridi.\n* **Hatua / Steps:**\n1. Jaza glasi na maji ya baridi kisha uiache mezani kwa saa 3 bila kuitikisa.\n2. Utaona viputo vidogo vya hewa vikijitokeza pembeni ya glasi.\n3. Hiyo ndiyo hewa ya oksijeni ambayo samaki Ngege anaitumia kupumua!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Matamvua / Mashavu ya samaki (Gills)** (Gills (Operculum))\n* **Oksijeni iliyoyeyuka majini** (Dissolved Oxygen)\n* **Mfumo wa ikolojia ya viumbe hai** (Ecosystem)\n* **Mimea vamizi (kama Magugu Maji / Akech)** (Invasive Species)\n\n> *\"Animals & Environmental Adaptations (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:15.553298",
+        "role": "user",
+        "content": "Usanisinuru jinsi majani ya mmea yanavyopika chakula kwa jua",
+        "language": "sw"
+      },
+      {
+        "timestamp": "2026-08-31T17:12:15.570557",
         "role": "assistant",
         "content": "Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **🏞️ Bonde la Ziwa (Kisumu & Lake Victoria)**! Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:\n\n### 🌟 Usanisinuru: Jinsi Mimea Inavyotengeneza Chakula\nMimea hutumia mwangaza wa jua, maji kutoka ardhini, na hewa ya kaboni kutengeneza chakula chake (glukosi) huku ikitoa hewa safi ya oksijeni.\n\n### 🏞️ Mfano Halisi wa Eneo Lako (Kisumu / Ziwa Victoria):\nKule Kisumu kando ya Ziwa Victoria, tazama magugu maji (Water Hyacinth / Akech) au mboga za kienyeji kama Osuga (Managu) na Mitoo! Majani yake mapana ya kijani yamejaa 'Klorofili' inayofyonza mwangaza mkali wa jua la ziwani na maji tele ya Ziwa Victoria ili kupika virutubisho na kutoa hewa safi ya oksijeni inayosaidia samaki Ngege (Tilapia) kupumua ziwani!\n\n### 🧪 Jaribio la Nyumbani Lisilo na Gharama:\n**Jaribio: Kushuhudia Oksijeni ya Mmea wa Eneo Lako**\n* **Vifaa / Materials:** Jani bichi la eneo lako (jani la Osuga/managu kule Kisumu, mnazi Pwani, au mahindi milimani), chupa ya maji safi, jua.\n* **Hatua / Steps:**\n1. Weka jani ndani ya chupa ya maji.\n2. Weka chupa juani kwa saa moja.\n3. Tazama au hisi viputo vidogo vya hewa vinavyojitokeza kwenye jani - hiyo ni Oksijeni safi ya mmea wako!\n\n### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):\n* **Klorofili (Rangi ya kijani inayovuta mwangaza)** (Chlorophyll)\n* **Gesi ya Kaboni Dioksidi** (Carbon Dioxide)\n* **Hewa Safi ya Oksijeni** (Oxygen)\n* **Mvukizo wa maji kupitia majani** (Transpiration)\n\n> *\"Living Things & Life Processes (Grade 5/6 Science)\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*",
         "language": "sw"

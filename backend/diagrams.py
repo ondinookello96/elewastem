@@ -336,6 +336,280 @@ DIAGRAMS = {
   <text x="320" y="322" font-size="11" font-weight="bold" fill="#E2E8F0" text-anchor="middle">Hatua: Ondoa 3 pande zote mbili ➔ x = 10 - 3</text>
   <text x="320" y="342" font-size="13" font-weight="900" fill="#FACC15" text-anchor="middle">JIBU: x = 7 (Mizani Imetulia Sawasawa!)</text>
 </svg>"""
+    },
+    "human_digestive_system": {
+        "title_sw": "Mchoro wa Mfumo wa Mmeng'enyo wa Chakula (Digestive System)",
+        "title_en": "Human Digestive System Pathway",
+        "topic_id": "human_digestive_system",
+        "svg": """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" class="w-full h-auto rounded-2xl shadow-inner bg-gradient-to-b from-amber-50 via-orange-50 to-emerald-50 font-sans">
+  <text x="320" y="30" font-size="14" font-weight="900" fill="#7C2D12" text-anchor="middle">MFUMO WA MMENG'ENYO WA CHAKULA (DIGESTIVE TRACT)</text>
+  <!-- Step 1: Mouth -->
+  <rect x="30" y="60" width="160" height="60" rx="10" fill="#FEE2E2" stroke="#EF4444" stroke-width="2"/>
+  <text x="110" y="82" font-size="11" font-weight="bold" fill="#991B1B" text-anchor="middle">1. Kinywa & Meno 👄</text>
+  <text x="110" y="100" font-size="9" fill="#B91C1C" text-anchor="middle">Mate yanayeyusha wanga</text>
+  <!-- Arrow -->
+  <path d="M195 90 L 235 90" fill="none" stroke="#EA580C" stroke-width="3" marker-end="url(#arrow-orange)"/>
+  <!-- Step 2: Esophagus -->
+  <rect x="240" y="60" width="160" height="60" rx="10" fill="#FFEDD5" stroke="#F97316" stroke-width="2"/>
+  <text x="320" y="82" font-size="11" font-weight="bold" fill="#9A3412" text-anchor="middle">2. Umio (Esophagus) 🥖</text>
+  <text x="320" y="100" font-size="9" fill="#C2410C" text-anchor="middle">Misuli inasukuma chakula chini</text>
+  <!-- Arrow -->
+  <path d="M405 90 L 445 90" fill="none" stroke="#EA580C" stroke-width="3"/>
+  <!-- Step 3: Stomach -->
+  <rect x="450" y="60" width="160" height="60" rx="10" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/>
+  <text x="530" y="82" font-size="11" font-weight="bold" fill="#92400E" text-anchor="middle">3. Tumbo (Stomach) 🥣</text>
+  <text x="530" y="100" font-size="9" fill="#B45309" text-anchor="middle">Asidi inavunja protini</text>
+  <!-- Arrow down -->
+  <path d="M530 125 L 530 175" fill="none" stroke="#10B981" stroke-width="3"/>
+  <!-- Step 4: Small Intestine -->
+  <rect x="420" y="180" width="200" height="75" rx="10" fill="#D1FAE5" stroke="#10B981" stroke-width="2"/>
+  <text x="520" y="202" font-size="11" font-weight="bold" fill="#064E3B" text-anchor="middle">4. Utumbo Mdogo (Small Intestine) 🩸</text>
+  <text x="520" y="220" font-size="9" fill="#047857" text-anchor="middle">Kufyonza virutubisho vyote</text>
+  <text x="520" y="238" font-size="9" font-weight="bold" fill="#065F46" text-anchor="middle">kuingia moja kwa moja kwenye damu!</text>
+  <!-- Arrow left -->
+  <path d="M415 215 L 345 215" fill="none" stroke="#3B82F6" stroke-width="3"/>
+  <!-- Step 5: Large Intestine -->
+  <rect x="140" y="180" width="200" height="75" rx="10" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2"/>
+  <text x="240" y="202" font-size="11" font-weight="bold" fill="#1E3A8A" text-anchor="middle">5. Utumbo Mkubwa (Large Intestine) 💧</text>
+  <text x="240" y="220" font-size="9" fill="#1D4ED8" text-anchor="middle">Kufyonza maji na madini chumvi</text>
+  <text x="240" y="238" font-size="9" fill="#2563EB" text-anchor="middle">kuzuia mwili usikauke maji</text>
+  <!-- Bottom summary banner -->
+  <rect x="80" y="290" width="480" height="65" rx="12" fill="#1E293B" stroke="#F97316" stroke-width="2"/>
+  <text x="320" y="315" font-size="11" font-weight="bold" fill="#FED7AA" text-anchor="middle">Ugali + Mboga za Kienyeji (Osuga/Sukuma) + Samaki Ngege</text>
+  <text x="320" y="338" font-size="13" font-weight="900" fill="#34D399" text-anchor="middle">➔ Nishati ya Misuli 💪 + Ubongo Mkali 🧠 + Ukuaji Bora 🌟</text>
+</svg>"""
+    },
+    "circulatory_heart": {
+        "title_sw": "Mchoro wa Moyo na Mzunguko wa Damu (Circulatory System)",
+        "title_en": "Heart & Circulatory Blood Circuit",
+        "topic_id": "circulatory_heart",
+        "svg": """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" class="w-full h-auto rounded-2xl shadow-inner bg-gradient-to-b from-rose-50 via-red-50 to-blue-50 font-sans">
+  <text x="320" y="30" font-size="14" font-weight="900" fill="#881337" text-anchor="middle">MOYO NA MZUNGUKO WA DAMU (CARDIAC CIRCUIT)</text>
+  <!-- Left Box: Lungs -->
+  <rect x="40" y="70" width="160" height="70" rx="12" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+  <text x="120" y="95" font-size="12" font-weight="bold" fill="#0369A1" text-anchor="middle">🫁 MAPAFU (Lungs)</text>
+  <text x="120" y="115" font-size="9" fill="#0284C7" text-anchor="middle">Hutoa CO₂ na kupokea O₂ safi</text>
+  <!-- Center: Heart -->
+  <circle cx="320" cy="180" r="70" fill="#FFE4E6" stroke="#E11D48" stroke-width="3"/>
+  <text x="320" y="165" font-size="28" text-anchor="middle">❤️</text>
+  <text x="320" y="190" font-size="12" font-weight="900" fill="#9F1239" text-anchor="middle">MOYO (Heart)</text>
+  <text x="320" y="205" font-size="9" fill="#BE123C" text-anchor="middle">Pampu yenye vyumba 4</text>
+  <!-- Right Box: Body Tissues -->
+  <rect x="440" y="70" width="160" height="70" rx="12" fill="#FCE7F3" stroke="#DB2777" stroke-width="2"/>
+  <text x="520" y="95" font-size="12" font-weight="bold" fill="#9D174D" text-anchor="middle">💪 VIUNGO VYA MWILI</text>
+  <text x="520" y="115" font-size="9" fill="#BE185D" text-anchor="middle">Ubongo, Misuli, na Viungo</text>
+  <!-- Red Path (Oxygenated Blood / Arteries) -->
+  <path d="M205 95 C 260 70 380 70 435 95" fill="none" stroke="#EF4444" stroke-width="4"/>
+  <text x="320" y="75" font-size="10" font-weight="bold" fill="#DC2626" text-anchor="middle">Ateri: Damu Safi yenye Oksijeni (O₂) ➔</text>
+  <!-- Blue Path (Deoxygenated Blood / Veins) -->
+  <path d="M440 130 C 380 270 260 270 200 130" fill="none" stroke="#2563EB" stroke-width="4"/>
+  <text x="320" y="280" font-size="10" font-weight="bold" fill="#1D4ED8" text-anchor="middle">⬅️ Vena: Damu inayorudi Mapafuni kusafishwa</text>
+  <!-- Bottom note -->
+  <rect x="90" y="305" width="460" height="55" rx="10" fill="#1E293B" stroke="#E11D48" stroke-width="1.5"/>
+  <text x="320" y="327" font-size="11" font-weight="bold" fill="#FDA4AF" text-anchor="middle">Mapigo ya Kawaida: 70–85 kwa dakika</text>
+  <text x="320" y="347" font-size="11" font-weight="bold" fill="#FACC15" text-anchor="middle">Mazoezi ya kukimbia huongeza kasi ya kusukuma damu mwilini!</text>
+</svg>"""
+    },
+    "cell_biology": {
+        "title_sw": "Mchoro wa Seli ya Mmea vs Seli ya Mnyama (Cell Structure)",
+        "title_en": "Plant Cell vs Animal Cell Comparison",
+        "topic_id": "cell_biology",
+        "svg": """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" class="w-full h-auto rounded-2xl shadow-inner bg-gradient-to-b from-slate-900 via-slate-800 to-slate-950 text-white font-sans">
+  <text x="320" y="28" font-size="14" font-weight="900" fill="#38BDF8" text-anchor="middle">MUUNDO WA SELI: MATOFALI YA UHAI (CELL BIOLOGY)</text>
+  <!-- Plant Cell (Left) -->
+  <rect x="40" y="55" width="260" height="240" rx="16" fill="#064E3B" stroke="#10B981" stroke-width="5"/>
+  <text x="170" y="80" font-size="12" font-weight="900" fill="#34D399" text-anchor="middle">🌿 Seli ya Mmea (Plant Cell)</text>
+  <!-- Nucleus -->
+  <circle cx="120" cy="140" r="28" fill="#7C2D12" stroke="#F97316" stroke-width="2"/>
+  <text x="120" y="145" font-size="10" font-weight="bold" fill="#FED7AA" text-anchor="middle">Kiini</text>
+  <!-- Chloroplasts -->
+  <ellipse cx="220" cy="120" rx="18" ry="12" fill="#047857" stroke="#34D399" stroke-width="2"/>
+  <text x="220" y="124" font-size="8" font-weight="bold" fill="#A7F3D0" text-anchor="middle">Kloroplasti</text>
+  <!-- Vacuole -->
+  <ellipse cx="170" cy="210" rx="50" ry="30" fill="#0284C7" stroke="#38BDF8" stroke-width="2"/>
+  <text x="170" y="214" font-size="9" font-weight="bold" fill="#E0F2FE" text-anchor="middle">Hifadhi ya Maji (Vacuole)</text>
+  <text x="170" y="280" font-size="9" fill="#6EE7B7" text-anchor="middle">✅ Ina Ukuta Mgumu (Cell Wall)</text>
+
+  <!-- Animal Cell (Right) -->
+  <ellipse cx="460" cy="175" rx="130" ry="115" fill="#831843" stroke="#F43F5E" stroke-width="3"/>
+  <text x="460" y="80" font-size="12" font-weight="900" fill="#FDA4AF" text-anchor="middle">🐾 Seli ya Mnyama (Animal Cell)</text>
+  <!-- Nucleus -->
+  <circle cx="460" cy="170" r="32" fill="#7C2D12" stroke="#F97316" stroke-width="2"/>
+  <text x="460" y="172" font-size="10" font-weight="bold" fill="#FED7AA" text-anchor="middle">Kiini (Nucleus)</text>
+  <text x="460" y="185" font-size="8" fill="#FDBA74" text-anchor="middle">Kituo cha DNA</text>
+  <!-- Cytoplasm text -->
+  <text x="460" y="235" font-size="9" fill="#FBCFE8" text-anchor="middle">Saikroplasimu (Jeli ya seli)</text>
+  <text x="460" y="280" font-size="9" fill="#FDA4AF" text-anchor="middle">✅ Ina Utando Laini (Membrane)</text>
+
+  <!-- Bottom key -->
+  <rect x="60" y="315" width="520" height="45" rx="10" fill="#1E293B" stroke="#64748B" stroke-width="1"/>
+  <text x="320" y="342" font-size="11" font-weight="bold" fill="#E2E8F0" text-anchor="middle">Seli zote zina Kiini (Nucleus), Saikroplasimu, na Utando wa Seli!</text>
+</svg>"""
+    },
+    "plant_pollination": {
+        "title_sw": "Mchoro wa Uchavushaji wa Maua na Nyuki (Pollination)",
+        "title_en": "Flower Anatomy & Bee Pollination",
+        "topic_id": "plant_pollination",
+        "svg": """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" class="w-full h-auto rounded-2xl shadow-inner bg-gradient-to-b from-sky-100 via-pink-50 to-emerald-50 font-sans">
+  <text x="320" y="28" font-size="14" font-weight="900" fill="#831843" text-anchor="middle">UCHAVUSHAJI WA MAUA & UZAZI WA MIMEA (POLLINATION)</text>
+  <!-- Flower Petals -->
+  <circle cx="240" cy="200" r="90" fill="#F472B6" opacity="0.4"/>
+  <circle cx="200" cy="160" r="50" fill="#EC4899" opacity="0.6"/>
+  <circle cx="280" cy="160" r="50" fill="#EC4899" opacity="0.6"/>
+  <circle cx="200" cy="240" r="50" fill="#EC4899" opacity="0.6"/>
+  <circle cx="280" cy="240" r="50" fill="#EC4899" opacity="0.6"/>
+  <!-- Flower Center (Pistil & Stamen) -->
+  <circle cx="240" cy="200" r="35" fill="#FACC15" stroke="#CA8A04" stroke-width="3"/>
+  <text x="240" y="195" font-size="10" font-weight="bold" fill="#713F12" text-anchor="middle">Kambamaua</text>
+  <text x="240" y="210" font-size="8" fill="#854D0E" text-anchor="middle">(Pistil / Kike)</text>
+  <!-- Stamens with Pollen -->
+  <circle cx="175" cy="150" r="10" fill="#FEF08A" stroke="#EAB308" stroke-width="2"/>
+  <circle cx="305" cy="150" r="10" fill="#FEF08A" stroke="#EAB308" stroke-width="2"/>
+  <text x="175" y="135" font-size="9" font-weight="bold" fill="#713F12" text-anchor="middle">Chavua (Pollen)</text>
+
+  <!-- Honeybee on right -->
+  <g transform="translate(420, 130)">
+    <ellipse cx="40" cy="30" rx="35" ry="25" fill="#FBBF24" stroke="#78350F" stroke-width="3"/>
+    <path d="M25 10 L25 50 M40 6 L40 54 M55 10 L55 50" stroke="#1E293B" stroke-width="4"/>
+    <ellipse cx="30" cy="-5" rx="20" ry="12" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.5" opacity="0.8"/>
+    <text x="40" y="75" font-size="11" font-weight="900" fill="#78350F" text-anchor="middle">🐝 Nyuki Mchavushaji</text>
+  </g>
+
+  <!-- Pollen Transfer Arc -->
+  <path d="M305 140 Q 380 90 420 130" fill="none" stroke="#F59E0B" stroke-width="4" stroke-dasharray="6,4"/>
+  <text x="370" y="100" font-size="10" font-weight="bold" fill="#B45309" text-anchor="middle">Nyuki hubeba poleni miguuni ➔</text>
+
+  <!-- Bottom Result Banner -->
+  <rect x="70" y="300" width="500" height="60" rx="12" fill="#1E293B" stroke="#EC4899" stroke-width="2"/>
+  <text x="320" y="323" font-size="11" font-weight="bold" fill="#FCE7F3" text-anchor="middle">Chavua (Pollen) + Yai la Kambamaua (Ovule) = Tunda 🥑 & Mbegu Mpya 🌱</text>
+  <text x="320" y="345" font-size="12" font-weight="900" fill="#FACC15" text-anchor="middle">Bila nyuki, hatuwezi kupata maembe, parachichi, wala mboga!</text>
+</svg>"""
+    },
+    "ecology_food_chains": {
+        "title_sw": "Mchoro wa Mnyororo wa Chakula (Food Chain & Ecology)",
+        "title_en": "Savannah Ecological Food Chain",
+        "topic_id": "ecology_food_chains",
+        "svg": """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" class="w-full h-auto rounded-2xl shadow-inner bg-gradient-to-b from-amber-50 via-emerald-50 to-sky-50 font-sans">
+  <text x="320" y="28" font-size="14" font-weight="900" fill="#065F46" text-anchor="middle">MNYORORO WA CHAKULA & MZUNGUKO WA NISHATI (FOOD CHAIN)</text>
+  
+  <!-- Step 1: Sun -->
+  <rect x="25" y="60" width="105" height="110" rx="12" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/>
+  <text x="77" y="105" font-size="28" text-anchor="middle">☀️</text>
+  <text x="77" y="130" font-size="10" font-weight="bold" fill="#92400E" text-anchor="middle">JUA</text>
+  <text x="77" y="145" font-size="8" fill="#B45309" text-anchor="middle">Chanzo Kikuu</text>
+
+  <!-- Arrow -->
+  <path d="M135 115 L 150 115" fill="none" stroke="#10B981" stroke-width="3"/>
+
+  <!-- Step 2: Producer (Plant) -->
+  <rect x="155" y="60" width="115" height="110" rx="12" fill="#D1FAE5" stroke="#10B981" stroke-width="2"/>
+  <text x="212" y="105" font-size="28" text-anchor="middle">🌿</text>
+  <text x="212" y="130" font-size="10" font-weight="bold" fill="#065F46" text-anchor="middle">MTENGENEZAJI</text>
+  <text x="212" y="145" font-size="8" fill="#047857" text-anchor="middle">Mimea ya Kijani</text>
+
+  <!-- Arrow -->
+  <path d="M275 115 L 290 115" fill="none" stroke="#10B981" stroke-width="3"/>
+
+  <!-- Step 3: Primary Consumer (Herbivore) -->
+  <rect x="295" y="60" width="115" height="110" rx="12" fill="#E0E7FF" stroke="#6366F1" stroke-width="2"/>
+  <text x="352" y="105" font-size="28" text-anchor="middle">🦗</text>
+  <text x="352" y="130" font-size="10" font-weight="bold" fill="#312E81" text-anchor="middle">MLAJI WA 1</text>
+  <text x="352" y="145" font-size="8" fill="#4338CA" text-anchor="middle">Panzi / Mbuzi</text>
+
+  <!-- Arrow -->
+  <path d="M415 115 L 430 115" fill="none" stroke="#10B981" stroke-width="3"/>
+
+  <!-- Step 4: Secondary Consumer / Predator -->
+  <rect x="435" y="60" width="115" height="110" rx="12" fill="#FEE2E2" stroke="#EF4444" stroke-width="2"/>
+  <text x="492" y="105" font-size="28" text-anchor="middle">🦁</text>
+  <text x="492" y="130" font-size="10" font-weight="bold" fill="#991B1B" text-anchor="middle">MWINDAJI MKUU</text>
+  <text x="492" y="145" font-size="8" fill="#B91C1C" text-anchor="middle">Simba / Mwewe</text>
+
+  <!-- Decomposers -->
+  <rect x="180" y="195" width="280" height="75" rx="12" fill="#F5F5F4" stroke="#78716C" stroke-width="2"/>
+  <text x="320" y="222" font-size="12" font-weight="900" fill="#44403C" text-anchor="middle">🍄 Waozeshaji (Bakteria & Uyoga)</text>
+  <text x="320" y="242" font-size="9" fill="#57534E" text-anchor="middle">Huoza viumbe vilivyokufa na kurudisha mbolea na virutubisho ardhini</text>
+  <text x="320" y="258" font-size="8" font-weight="bold" fill="#16A34A" text-anchor="middle">Mzunguko unaanza tena kwa mimea! 🔁</text>
+
+  <!-- Bottom banner -->
+  <rect x="60" y="295" width="520" height="60" rx="12" fill="#1E293B" stroke="#10B981" stroke-width="1.5"/>
+  <text x="320" y="320" font-size="11" font-weight="bold" fill="#E2E8F0" text-anchor="middle">Jua ➔ Mmea (Watengenezaji) ➔ Walaji ➔ Waozeshaji</text>
+  <text x="320" y="342" font-size="12" font-weight="900" fill="#34D399" text-anchor="middle">Kila kiumbe kina umuhimu wa kipekee katika mazingira yetu!</text>
+</svg>"""
+    },
+    "human_respiration": {
+        "title_sw": "Mchoro wa Mfumo wa Upumuaji wa Binadamu (Lungs & Respiratory)",
+        "title_en": "Human Respiratory System & Gas Exchange",
+        "topic_id": "human_respiration",
+        "svg": """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" class="w-full h-auto rounded-2xl shadow-inner bg-gradient-to-b from-sky-50 via-cyan-50 to-blue-50 font-sans">
+  <text x="320" y="28" font-size="14" font-weight="900" fill="#0369A1" text-anchor="middle">MFUMO WA UPUMUAJI WA BINADAMU (RESPIRATION & LUNGS)</text>
+  
+  <!-- Nose & Trachea -->
+  <rect x="260" y="55" width="120" height="65" rx="10" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+  <text x="320" y="80" font-size="11" font-weight="bold" fill="#0369A1" text-anchor="middle">Pua & Koromeo</text>
+  <text x="320" y="98" font-size="9" fill="#0284C7" text-anchor="middle">(Nose & Trachea)</text>
+
+  <!-- Left Lung -->
+  <ellipse cx="200" cy="190" rx="80" ry="65" fill="#DBEAFE" stroke="#2563EB" stroke-width="3"/>
+  <text x="200" y="180" font-size="12" font-weight="bold" fill="#1E40AF" text-anchor="middle">🫁 Pafu la Kushoto</text>
+  <text x="200" y="202" font-size="9" fill="#1D4ED8" text-anchor="middle">Matawi ya Bronchi</text>
+
+  <!-- Right Lung -->
+  <ellipse cx="440" cy="190" rx="80" ry="65" fill="#DBEAFE" stroke="#2563EB" stroke-width="3"/>
+  <text x="440" y="180" font-size="12" font-weight="bold" fill="#1E40AF" text-anchor="middle">🫁 Pafu la Kulia</text>
+  <text x="440" y="202" font-size="9" fill="#1D4ED8" text-anchor="middle">Mifuko ya Alveoli</text>
+
+  <!-- Inhale/Exhale Indicators -->
+  <text x="80" y="130" font-size="11" font-weight="900" fill="#059669">⬇️ Oksijeni Safi (O₂)</text>
+  <text x="80" y="150" font-size="9" fill="#047857">Inaingia kwenye Damu</text>
+
+  <text x="500" y="130" font-size="11" font-weight="900" fill="#DC2626">⬆️ Kaboni Dioksidi (CO₂)</text>
+  <text x="500" y="150" font-size="9" fill="#B91C1C">Inatolewa Nje</text>
+
+  <!-- Diaphragm -->
+  <path d="M120 270 Q 320 240 520 270" fill="none" stroke="#F59E0B" stroke-width="4"/>
+  <text x="320" y="285" font-size="10" font-weight="bold" fill="#B45309" text-anchor="middle">Kiwambo cha Mbavu (Diaphragm Muscle)</text>
+
+  <!-- Bottom Banner -->
+  <rect x="60" y="305" width="520" height="55" rx="12" fill="#1E293B" stroke="#0284C7" stroke-width="1.5"/>
+  <text x="320" y="327" font-size="11" font-weight="bold" fill="#E0F2FE" text-anchor="middle">Mamilioni ya Alveoli hubadilisha O₂ na CO₂ kwa sekunde chache!</text>
+  <text x="320" y="347" font-size="12" font-weight="900" fill="#38BDF8" text-anchor="middle">Upumuaji ni chanzo kikuu cha oksijeni inayozalisha nishati ya seli zote.</text>
+</svg>"""
+    },
+    "living_things_classification": {
+        "title_sw": "Mchoro wa Uainishaji wa Wanyama (Classification of Animals)",
+        "title_en": "Classification of Animals: Vertebrates vs Invertebrates",
+        "topic_id": "living_things_classification",
+        "svg": """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" class="w-full h-auto rounded-2xl shadow-inner bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-900 text-white font-sans">
+  <text x="320" y="28" font-size="14" font-weight="900" fill="#FACC15" text-anchor="middle">UAINISHAJI WA WANYAMA (VERTEBRATES &amp; INVERTEBRATES)</text>
+
+  <!-- Vertebrates (Left) -->
+  <rect x="30" y="55" width="275" height="235" rx="14" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+  <text x="167" y="80" font-size="12" font-weight="900" fill="#60A5FA" text-anchor="middle">🦴 WENYE UTI WA MGONGO</text>
+  <text x="167" y="96" font-size="9" fill="#93C5FD" text-anchor="middle">(Vertebrates: Makundi 5 Makuu)</text>
+
+  <text x="50" y="125" font-size="10" fill="#E2E8F0">1. 🦁 **Mamalia** (Mammals) - Hujitengenezea joto</text>
+  <text x="50" y="155" font-size="10" fill="#E2E8F0">2. 🦅 **Ndege** (Birds) - Manyoya &amp; Mayai</text>
+  <text x="50" y="185" font-size="10" fill="#E2E8F0">3. 🦎 **Reptilia** (Reptiles) - Magamba kavu</text>
+  <text x="50" y="215" font-size="10" fill="#E2E8F0">4. 🐸 **Amfibea** (Amphibians) - Majini &amp; Nchi kavu</text>
+  <text x="50" y="245" font-size="10" fill="#E2E8F0">5. 🐟 **Samaki** (Fish) - Matamvua ya kupumua</text>
+
+  <!-- Invertebrates (Right) -->
+  <rect x="335" y="55" width="275" height="235" rx="14" fill="#1E293B" stroke="#EC4899" stroke-width="2"/>
+  <text x="472" y="80" font-size="12" font-weight="900" fill="#F472B6" text-anchor="middle">🦗 WASIO NA UTI WA MGONGO</text>
+  <text x="472" y="96" font-size="9" fill="#FBCFE8" text-anchor="middle">(Invertebrates: Hawana Mifupa ya Ndani)</text>
+
+  <text x="355" y="125" font-size="10" fill="#E2E8F0">1. 🐝 **Wadudu** (Insects) - Miguu 6 &amp; Mabawa</text>
+  <text x="355" y="155" font-size="10" fill="#E2E8F0">2. 🕷️ **Buibui** (Arachnids) - Miguu 8</text>
+  <text x="355" y="185" font-size="10" fill="#E2E8F0">3. 🐌 **Konokono** (Molluscs) - Miili laini</text>
+  <text x="355" y="215" font-size="10" fill="#E2E8F0">4. 🪱 **Minyoo** (Annelids) - Sehemu za duara</text>
+  <text x="355" y="245" font-size="10" fill="#E2E8F0">5. 🦀 **Kaa &amp; Uduvi** (Crustaceans) - Ganda la nje</text>
+
+  <!-- Bottom banner -->
+  <rect x="50" y="305" width="540" height="55" rx="12" fill="#0F172A" stroke="#FACC15" stroke-width="1.5"/>
+  <text x="320" y="327" font-size="11" font-weight="bold" fill="#FEF08A" text-anchor="middle">Binadamu, Samaki na Ndege wana uti wa mgongo; Wadudu na Buibui hawana!</text>
+  <text x="320" y="347" font-size="12" font-weight="900" fill="#34D399" text-anchor="middle">Sayansi ya Uainishaji (Taxonomy) hutusaidia kutambua tabia za kila kiumbe.</text>
+</svg>"""
     }
 }
 
@@ -343,18 +617,44 @@ DIAGRAMS = {
 def get_diagram_for_topic(query_or_id: str) -> Optional[Dict[str, Any]]:
     """Returns matching responsive SVG science diagram."""
     q = query_or_id.lower()
+    
+    # Mathematics
     if any(k in q for k in ["algebra", "aljebra", "equation", "mlinganyo", "variable", "kigeuzi", "solve for x"]):
         return DIAGRAMS["algebra_math"]
-    elif any(k in q for k in ["fraction", "sehemu", "divide", "gawanya", "chapati", "proportion", "math", "hisabati"]):
+    elif any(k in q for k in ["fraction", "sehemu", "divide", "gawanya", "chapati", "proportion"]):
         return DIAGRAMS["fractions_math"]
+    
+    # Chemistry
     elif any(k in q for k in ["chem", "kemia", "acid", "asidi", "base", "besi", "reaction", "siki", "soda", "lemon", "chumvi"]):
         return DIAGRAMS["chemistry_reactions"]
+    
+    # Computer Science
     elif any(k in q for k in ["comput", "code", "coding", "program", "algorithm", "algoriti", "software", "tech", "teknolojia", "logic", "binary"]):
         return DIAGRAMS["computer_algorithms"]
-    elif any(k in q for k in ["electr", "circuit", "umeme", "saketi", "wire", "battery", "betri", "taa", "physics", "fizikia"]):
+    
+    # Physics
+    elif any(k in q for k in ["electr", "circuit", "umeme", "saketi", "wire", "battery", "betri", "taa"]):
         return DIAGRAMS["electricity_circuits"]
-    elif any(k in q for k in ["fish", "samaki", "ngege", "gill", "shavu", "ziwa", "lake", "respiration", "aquatic"]):
+    
+    # Biology Domains
+    elif any(k in q for k in ["digest", "mmeng'enyo", "stomach", "tumbo", "esophagus", "umio", "mouth", "kinywa", "intestine", "utumbo", "enzyme", "nutrition"]):
+        return DIAGRAMS["human_digestive_system"]
+    elif any(k in q for k in ["heart", "moyo", "circulat", "mzunguko wa damu", "blood", "damu", "artery", "ateri", "vein", "vena", "pulse"]):
+        return DIAGRAMS["circulatory_heart"]
+    elif any(k in q for k in ["fish", "samaki", "ngege", "gill", "shavu", "matamvua", "aquatic_biology"]):
         return DIAGRAMS["aquatic_biology_kisumu"]
-    elif any(k in q for k in ["photo", "mmea", "plant", "leaf", "jani", "usanisinuru", "sukuma", "bio", "botany"]):
+    elif any(k in q for k in ["lung", "mapafu", "human_respiration", "respirat", "upumuaji", "breathe", "pumua", "trachea", "koromeo"]):
+        return DIAGRAMS["human_respiration"]
+    elif any(k in q for k in ["cell", "seli", "nucleus", "kiini", "cytoplasm", "membrane", "chloroplast"]):
+        return DIAGRAMS["cell_biology"]
+    elif any(k in q for k in ["food chain", "mnyororo wa chakula", "ecolog", "ikolojia", "ecosystem", "producer", "consumer"]):
+        return DIAGRAMS["ecology_food_chains"]
+    elif any(k in q for k in ["pollinat", "uchavushaji", "flower", "maua", "petali", "stamen", "pistil", "nyuki", "bee"]):
+        return DIAGRAMS["plant_pollination"]
+    elif any(k in q for k in ["vertebrate", "invertebrate", "uti wa mgongo", "classify", "uainishaji", "mammal", "mamalia", "reptile", "amphibian"]):
+        return DIAGRAMS["living_things_classification"]
+    elif any(k in q for k in ["photo", "usanisinuru", "klorofili", "chlorophyll", "plant food", "chakula cha mmea"]):
         return DIAGRAMS["photosynthesis"]
+    
     return None
+

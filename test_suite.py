@@ -156,9 +156,39 @@ def run_tests():
     print(f"   * Diagram Title: {diag_res['diagram']['title_sw']}")
     print(f"   * SVG Vector Payload Length: {len(diag_res['diagram']['svg'])} characters")
 
+    # 15. Comprehensive Biology Curriculum Diversity Verification
+    bio_queries = [
+        ("Nieleze kuhusu mmeng'enyo wa chakula tumboni na utumbo mdogo", "human_digestive_system", "Digestive"),
+        ("Moyo unafanya kazi gani kusukuma damu na ateri?", "circulatory_heart", "Heart"),
+        ("Jinsi mapafu yanavyofanya kazi wakati wa kupumua hewa", "human_respiration", "Respiration"),
+        ("Tofauti kati ya seli ya mmea na seli ya mnyama na kiini", "cell_biology", "Cell"),
+        ("Uchavushaji wa maua na nyuki unavyotengeneza mbegu", "plant_pollination", "Pollination"),
+        ("Wanyama wenye uti wa mgongo vertebrates na wasio nao invertebrates", "living_things_classification", "Classification"),
+        ("Mnyororo wa chakula jinsi nishati ya jua inavyosafiri kwa mimea na wanyama", "ecology_food_chains", "Food Chain"),
+        ("Jinsi samaki Ngege anavyopumua kwa matamvua ziwani", "aquatic_biology_kisumu", "Fish"),
+        ("Usanisinuru jinsi majani ya mmea yanavyopika chakula kwa jua", "photosynthesis", "Photosynthesis")
+    ]
+
+    print("\n[TEST] 15. Comprehensive CBC Biology Curriculum Diversity:")
+    for query, expected_id, label in bio_queries:
+        r = requests.post(f'{BASE_URL}/api/chat', json={
+            'student_id': 'bio_tester',
+            'message': query,
+            'language': 'sw',
+            'region': 'lake_basin'
+        })
+        assert r.status_code == 200
+        data = r.json()
+        topic_name = data.get('topic')
+        module_id = data.get('offline_module_id') or data.get('topic_id')
+        diag = data.get('diagram')
+        print(f"   * [{label}] -> Topic: '{topic_name}' | Module: '{module_id}' | Diagram: '{diag['topic_id'] if diag else 'None'}'")
+        assert module_id == expected_id, f"Expected module {expected_id} but got {module_id}"
+
     print("\n============================================================")
-    print(" 🎉 ALL 14 COMPREHENSIVE FEATURES & DIAGRAM SYSTEMS VERIFIED!")
+    print(" 🎉 ALL 15 COMPREHENSIVE FEATURES & BIOLOGY SYSTEMS VERIFIED!")
     print("============================================================")
 
 if __name__ == '__main__':
     run_tests()
+

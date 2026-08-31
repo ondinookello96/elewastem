@@ -179,13 +179,15 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                     "region": region,
                     "topic": detected_topic["topic"],
                     "subject": detected_topic["subject"],
+                    "topic_id": topic_data["id"] if has_matching_topic else "general_stem",
+                    "offline_module_id": topic_data["id"] if has_matching_topic else "general_stem",
                     "mode": mode,
                     "temperature": temperature,
                     "tactile_description": topic_data.get("tactile_audio_description_sw", "") if has_matching_topic else "",
                     "sign_cues": topic_data.get("sign_language_visual_cues_sw", "") if has_matching_topic else "",
                     "diagram": get_diagram_for_topic(message) or get_diagram_for_topic(detected_topic["topic"]),
                     "quiz_data": topic_data.get("quiz") if has_matching_topic else None,
-                    "related_topics": get_related_topics_recommendations(detected_topic["topic"]),
+                    "related_topics": get_related_topics_recommendations(topic_data["id"] if has_matching_topic else detected_topic["topic"]),
                     "student_profile": student_memory.get_or_create_profile(student_id).model_dump()
                 }
             except Exception as e:
@@ -255,6 +257,8 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
             "region": region,
             "topic": topic_data["title_en"],
             "subject": topic_data["subject"],
+            "topic_id": topic_data["id"],
+            "offline_module_id": topic_data["id"],
             "mode": mode,
             "temperature": 0.2 if mode == "precise" else 0.75,
             "tactile_description": topic_data.get("tactile_audio_description_sw", ""),
@@ -281,10 +285,26 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
             return {"topic": "Forces & Gravity", "subject": "Physics"}
         elif any(w in combined for w in ["solar", "jua", "energy", "nishati", "sun"]):
             return {"topic": "Solar Energy & Heat", "subject": "Physics"}
-        elif any(w in combined for w in ["fish", "samaki", "gills", "mashavu", "lake", "ziwa", "ngege", "mbuta"]):
+        elif any(w in combined for w in ["digest", "mmeng'enyo", "stomach", "tumbo", "esophagus", "umio", "mouth", "kinywa", "intestine", "utumbo", "saliva", "mate", "enzyme", "virutubisho"]):
+            return {"topic": "Human Digestive System & Nutrition", "subject": "Biology"}
+        elif any(w in combined for w in ["heart", "moyo", "circulat", "mzunguko wa damu", "blood", "damu", "artery", "ateri", "vein", "vena", "pulse", "mapigo"]):
+            return {"topic": "Human Heart & Blood Circulatory System", "subject": "Biology"}
+        elif any(w in combined for w in ["fish", "samaki", "gills", "mashavu", "matamvua", "ngege", "mbuta"]):
             return {"topic": "Aquatic Biology & Respiration", "subject": "Biology"}
-        elif any(w in combined for w in ["plant", "mmea", "leaf", "jani", "photo", "cell", "uhai", "biology", "botany"]):
-            return {"topic": "Photosynthesis & Plant Biology", "subject": "Biology"}
+        elif any(w in combined for w in ["lung", "mapafu", "respirat", "upumuaji", "breathe", "pumua", "trachea", "koromeo", "inhale", "exhale", "diaphragm", "kiwambo"]):
+            return {"topic": "Human Respiratory System & Lungs", "subject": "Biology"}
+        elif any(w in combined for w in ["cell", "seli", "nucleus", "kiini", "cytoplasm", "saikroplasimu", "membrane", "utando", "chloroplast", "kloroplasti"]):
+            return {"topic": "Cell Biology: Basic Units of Life", "subject": "Biology"}
+        elif any(w in combined for w in ["food chain", "mnyororo wa chakula", "ecolog", "ikolojia", "ecosystem", "producer", "mtengenezaji", "consumer", "mlaji", "predator", "mwindaji", "herbivore", "carnivore", "decomposer", "mwozeshaji"]):
+            return {"topic": "Ecology & Food Chains: Energy Flow", "subject": "Biology"}
+        elif any(w in combined for w in ["pollinat", "uchavushaji", "flower", "maua", "petali", "petal", "stamen", "chavulio", "pistil", "kambamaua", "poleni", "chavua", "nectar"]):
+            return {"topic": "Plant Reproduction & Flower Pollination", "subject": "Biology"}
+        elif any(w in combined for w in ["vertebrate", "invertebrate", "uti wa mgongo", "classify", "uainishaji", "mammal", "mamalia", "reptile", "reptilia", "amphibian", "amfibea", "insect", "wadudu"]):
+            return {"topic": "Classification of Living Things", "subject": "Biology"}
+        elif any(w in combined for w in ["photo", "usanisinuru", "klorofili", "chlorophyll", "plant food", "chakula cha mmea", "stomata"]):
+            return {"topic": "Photosynthesis: How Plants Make Food", "subject": "Biology"}
+        elif any(w in combined for w in ["plant", "mmea", "leaf", "jani", "botany", "tree", "mti"]):
+            return {"topic": "Plant Biology & Botany", "subject": "Biology"}
         else:
             subj_map = {
                 "mathematics": "Mathematics",
