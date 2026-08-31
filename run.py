@@ -18,12 +18,12 @@ BACKEND_DIR = os.path.join(PROJECT_DIR, "backend")
 if __name__ == "__main__":
     print("=" * 60)
     print("ElewaSTEM -- Mwalimu wa Sayansi na Hesabu")
-    print("Multilingual Adaptive AI STEM Tutor for African Children")
-    print("=" * 60)
-    print("Starting server on http://localhost:8000 ...")
+    port = int(os.environ.get("PORT", 8000))
+    print(f"Starting server on http://0.0.0.0:{port} ...")
 
     # Run uvicorn
     import uvicorn
     sys.path.insert(0, BACKEND_DIR)
     from app import app
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=port)
+
