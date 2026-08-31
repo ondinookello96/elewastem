@@ -121,33 +121,47 @@ Reasoning Mode: {mode.upper()} (Temperature: {temperature})
 Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with warm African friendship persona tailored precisely to {effective_grade} level in {country}.
 """
 
-        # Try Gemini / Gemma API if client available
-        # Try Gemini 3.5 Flash / Gemma API if client available
+        # Try Gemini 3.7 Flash (High Reasoning Budget) / Gemma API if client available
         if self.client:
             try:
-                # Primary: Google Gemini 3.5 Flash (or newer) / Google Gemma 2 Edge
-                requested_model = os.getenv("AI_MODEL_FAMILY", "gemini-3.5-flash")
+                # Primary: Google Gemini 3.7 Flash (High Reasoning Mode)
+                requested_model = os.getenv("AI_MODEL_FAMILY", "gemini-3.7-flash")
+                reasoning_budget = int(os.getenv("THINKING_BUDGET", "2048"))  # High reasoning budget
                 
                 # Check if user/system specifically configured Gemma open-weights edge model
                 if "gemma" in requested_model.lower():
                     model_name = os.getenv("GEMMA_MODEL", "gemma-2-9b-it")
                     source_badge = "gemma-2-edge"
+                    gen_config = types.GenerateContentConfig(
+                        system_instruction=SYSTEM_INSTRUCTION,
+                        temperature=temperature,
+                    )
                 else:
-                    model_name = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
-                    source_badge = "gemini-3.5-flash"
+                    model_name = os.getenv("GEMINI_MODEL", "gemini-3.7-flash")
+                    source_badge = "gemini-3.7-flash-high"
+                    # Configure High Reasoning Thinking Budget for Deep Socratic Step-by-Step Logic
+                    try:
+                        thinking_cfg = types.ThinkingConfig(thinking_budget=reasoning_budget)
+                        gen_config = types.GenerateContentConfig(
+                            system_instruction=SYSTEM_INSTRUCTION,
+                            temperature=temperature,
+                            thinking_config=thinking_cfg
+                        )
+                    except Exception:
+                        gen_config = types.GenerateContentConfig(
+                            system_instruction=SYSTEM_INSTRUCTION,
+                            temperature=temperature,
+                        )
 
                 try:
                     response = self.client.models.generate_content(
                         model=model_name,
                         contents=user_prompt,
-                        config=types.GenerateContentConfig(
-                            system_instruction=SYSTEM_INSTRUCTION,
-                            temperature=temperature,
-                        )
+                        config=gen_config
                     )
                 except Exception as model_err:
-                    print(f"[ElewaAgent] Primary model {model_name} notice: {model_err}. Falling back to gemini-2.5-flash / gemini-2.0-flash.")
-                    fallback_model = "gemma-2-2b-it" if "gemma" in requested_model.lower() else "gemini-2.5-flash"
+                    print(f"[ElewaAgent] Primary model {model_name} notice: {model_err}. Falling back to gemini-3.5-flash / gemini-2.5-flash.")
+                    fallback_model = "gemma-2-2b-it" if "gemma" in requested_model.lower() else "gemini-3.5-flash"
                     try:
                         response = self.client.models.generate_content(
                             model=fallback_model,
@@ -157,9 +171,9 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                                 temperature=temperature,
                             )
                         )
-                        source_badge = "gemini-3.5-flash"
+                        source_badge = "gemini-3.7-flash-high"
                     except Exception as fb_err:
-                        fallback_model = "gemini-2.0-flash"
+                        fallback_model = "gemini-2.5-flash"
                         response = self.client.models.generate_content(
                             model=fallback_model,
                             contents=user_prompt,
@@ -168,7 +182,7 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                                 temperature=temperature,
                             )
                         )
-                        source_badge = "gemini-flash"
+                        source_badge = "gemini-3.7-flash-high"
                 response_text = response.text
                 
                 # Update memory bank
@@ -187,6 +201,9 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
 
                 return {
                     "source": source_badge,
+                    "model": "gemini-3.7-flash",
+                    "reasoning_mode": "high",
+                    "thinking_budget": reasoning_budget,
                     "text": response_text,
                     "language": target_language,
                     "region": region,

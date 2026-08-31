@@ -14,7 +14,7 @@
   * ☁️ **Google Cloud Run**: Serverless containerized deployment with auto-scaling.
   * 📦 **Google Cloud Build & Artifact Registry**: Automated CI/CD container build pipeline (`cloudbuild.yaml`).
   * 🗄️ **Google Cloud Firestore / Datastore**: Cloud synchronization for persistent student mastery profiles.
-  * 🤖 **Google Vertex AI / Gemini 3.5 Flash (or newer) & Google Gemma 2 (Open Weights Edge)**: Orchestrated via the official `google-genai` Python SDK.
+  * 🤖 **Google Vertex AI / Gemini 3.7 Flash (High Reasoning Mode with ThinkingConfig) & Google Gemma 2 (Open Weights Edge)**: Orchestrated via the official `google-genai` Python SDK.
 * **Open Source Repository**: [https://github.com/ondinookello96/elewastem](https://github.com/ondinookello96/elewastem)
 * **Devpost Project**: [https://devpost.com/software/elewastem-mwalimu-stem](https://devpost.com/software/elewastem-mwalimu-stem)
 
