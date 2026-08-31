@@ -1,6 +1,6 @@
 """
 ElewaSTEM Specialized Agent Tools with Deep Hyper-Local African Ecosystems, Stakeholder Resources, and Universal Accessibility
-Includes tactile audio descriptions for visually impaired/blind learners, visual sign language cues for deaf learners, and dyslexia adaptations.
+Includes Screen Reader & Audio Description Mode for visually impaired learners, visual sign language cues for deaf learners, and dyslexia adaptations.
 """
 
 from typing import Dict, List, Any

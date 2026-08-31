@@ -42,7 +42,7 @@ ETHICAL_FRAMEWORKS = {
             },
             "R": {
                 "name": "Representation of Marginalized Groups",
-                "description": "Ensures blind learners (tactile audio), deaf learners (KSL sign cues), and rural pastoralists (ASAL biomes) are first-class participants."
+                "description": "Ensures visually impaired learners (Screen Reader & Audio Description Mode), deaf learners (KSL sign cues), and rural pastoralists (ASAL biomes) are first-class participants."
             },
             "A": {
                 "name": "Amplification Prevention",

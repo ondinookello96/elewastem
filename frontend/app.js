@@ -1811,7 +1811,7 @@ function appendAssistantMessage(data) {
       <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs space-y-1">
         <p class="font-bold text-blue-900 flex items-center space-x-1">
           <span>👁️</span>
-          <span>Maelezo ya Sauti & Kushika (Tactile Audio):</span>
+          <span>Screen Reader & Audio Description Mode (Maelezo ya Sauti):</span>
         </p>
         <p class="text-blue-950">${data.tactile_description}</p>
       </div>` : ''}

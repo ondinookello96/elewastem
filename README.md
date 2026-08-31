@@ -122,7 +122,7 @@ flowchart TD
 |    FastAPI Multilingual Gateway    |                         |    • Service Worker Vault          |
 |    • 16+ African Languages Router  |                         |    • On-Device GPS Biome Mapper    |
 |    • Pan-African DPA Legal Matrix  |                         |    • Browser-Native Speech (TTS)   |
-|    • Multi-Stakeholder Feedback    |                         |    • Tactile Audio for Blind       |
+|    • Multi-Stakeholder Feedback    |                         |    • Screen Reader & Audio Desc    |
 +------------------------------------+                         |    • Sign Language Cues for Deaf   |
      │              │             │                            +------------------------------------+
      ▼              ▼             ▼
@@ -165,7 +165,7 @@ python run.py
 ```bash
 python test_suite.py
 ```
-*Executes all **14 end-to-end automated test suites** validating health status, 16+ living African languages (Masakhane/Lelapa grounding), 8 Pan-African DPA statutory frameworks, adaptive Socratic Gemini chat, multi-sensory accessibility (tactile audio for blind, KSL sign language for deaf), vector SVG science diagrams, CBC teacher lesson plans, remote parent 2G SMS digests, community STEM clubs, multi-stakeholder feedback loops, ethical safety guardrails (ETHOS/OASIS), Maasai Elder multi-agent swarm orchestration (RANK/HUNT/TRAIL/CYCLE), and 8 African learning theories.*
+*Executes all **14 end-to-end automated test suites** validating health status, 16+ living African languages (Masakhane/Lelapa grounding), 8 Pan-African DPA statutory frameworks, adaptive Socratic Gemini chat, multi-sensory accessibility (Screen Reader & Audio Description Mode, KSL sign language for deaf), vector SVG science diagrams, CBC teacher lesson plans, remote parent 2G SMS digests, community STEM clubs, multi-stakeholder feedback loops, ethical safety guardrails (ETHOS/OASIS), Maasai Elder multi-agent swarm orchestration (RANK/HUNT/TRAIL/CYCLE), and 8 African learning theories.*
 
 ---
 
