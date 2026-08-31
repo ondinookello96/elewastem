@@ -1422,43 +1422,43 @@ function renderJurisdictionDetails(countryCode) {
       flag: '🇰🇪', country: 'Kenya', law: 'Data Protection Act 2019',
       authority: 'Office of the Data Protection Commissioner (ODPC)',
       child_section: 'Section 29 (Processing Personal Data of Children)',
-      compliance: 'Strict parental consent gatekeeper; 100% on-device edge calculation; zero cloud retention of student telemetry.'
+      compliance: 'Designed to support compliance via strict parental consent gatekeeper, on-device edge calculation, and zero cloud retention of student telemetry.'
     },
     NG: {
       flag: '🇳🇬', country: 'Nigeria', law: 'Nigeria Data Protection Act 2023 (NDPA)',
       authority: 'Nigeria Data Protection Commission (NDPC)',
       child_section: 'Section 31 (Processing of Personal Data of a Child)',
-      compliance: 'Parental consent verified; strict duty of care in educational software; data minimization enforced.'
+      compliance: 'Designed to support compliance with parental consent verification, duty of care in educational software, and strict data minimization.'
     },
     ZA: {
       flag: '🇿🇦', country: 'South Africa', law: 'Protection of Personal Information Act 2013 (POPIA)',
       authority: 'Information Regulator (South Africa)',
       child_section: 'Section 34 & 35 (Prohibition on Processing Child Personal Information)',
-      compliance: 'Authorized pedagogical use with competent person consent; zero marketing profiling.'
+      compliance: 'Designed to support compliance for authorized pedagogical use with competent person consent and zero marketing profiling.'
     },
     GH: {
       flag: '🇬🇭', country: 'Ghana', law: 'Data Protection Act 2012 (Act 843)',
       authority: 'Data Protection Commission (DPC Ghana)',
       child_section: 'Section 37 & 38 (Special Personal Data & Minors)',
-      compliance: 'Explicit parental assent; educational data strictly siloed.'
+      compliance: 'Designed to support compliance with explicit parental assent and educational data silo isolation.'
     },
     UG: {
       flag: '🇺🇬', country: 'Uganda', law: 'Data Protection and Privacy Act 2019',
       authority: 'Personal Data Protection Office (PDPO Uganda)',
       child_section: 'Section 8 (Data on Children)',
-      compliance: 'Zero-knowledge client PWA architecture preventing non-consensual transmission.'
+      compliance: 'Designed to support compliance through client PWA architecture preventing non-consensual transmission.'
     },
     TZ: {
       flag: '🇹🇿', country: 'Tanzania', law: 'Personal Data Protection Act 2022',
       authority: 'Personal Data Protection Commission (PDPC Tanzania)',
       child_section: 'Section 30 (Special Categories & Protection of Children)',
-      compliance: '100% compliant through on-device local storage custody.'
+      compliance: 'Designed to support compliance through on-device local storage custody.'
     },
     RW: {
       flag: '🇷🇼', country: 'Rwanda', law: 'Law No. 058/2021 on Personal Data and Privacy',
       authority: 'National Cyber Security Authority (NCSA Rwanda)',
       child_section: 'Article 10 (Processing of Personal Data of a Child)',
-      compliance: 'Parental authorization under 16; instant data erasure controls.'
+      compliance: 'Designed to support compliance with parental authorization and instant data erasure controls.'
     },
     AU_CONTINENTAL: {
       flag: '🌍', country: 'Pan-African Union', law: 'AU Malabo Convention on Cyber Security & Personal Data (2014)',
@@ -1480,7 +1480,7 @@ function renderJurisdictionDetails(countryCode) {
             <p class="text-[10px] text-slate-500 font-bold">Mamlaka ya Udhibiti: ${jur.authority}</p>
           </div>
         </div>
-        <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">100% Compliant</span>
+        <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Designed for Compliance</span>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
@@ -1774,7 +1774,7 @@ function appendAssistantMessage(data) {
     </div>
     <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-4 sm:p-5 shadow-sm max-w-[94%] w-full text-sm text-slate-800 space-y-3">
       <div class="flex items-center space-x-2 flex-wrap gap-1 mb-1">
-        ${isOffline ? '<span class="inline-block bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📦 Offline Vault</span>' : (data.source && data.source.includes('gemma') ? '<span class="inline-block bg-sky-100 text-sky-800 text-[10px] font-bold px-2 py-0.5 rounded-full">💎 Google Gemma 2 (Edge)</span>' : '<span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">✨ Gemini 3.7 Flash</span>')}
+        ${isOffline ? '<span class="inline-block bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">📦 Offline Vault</span>' : (data.source && data.source.includes('gemma') ? '<span class="inline-block bg-sky-100 text-sky-800 text-[10px] font-bold px-2 py-0.5 rounded-full">💎 Google Gemma 2 (Edge)</span>' : '<span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">✨ Google Gemini Flash</span>')}
         <span class="inline-block bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full">${regMeta.icon} ${regMeta.name_sw}</span>
         ${langMeta ? `<span class="inline-block bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full">${langMeta.flag} ${langMeta.native_name}</span>` : ''}
       </div>

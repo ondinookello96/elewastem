@@ -124,16 +124,16 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
         # Try Gemini / Gemma API if client available
         if self.client:
             try:
-                # Primary: Google Gemini 3.7 Flash (Hybrid Reasoning) or Google Gemma (Open Weights Edge)
-                requested_model = os.getenv("AI_MODEL_FAMILY", "gemini-3.7-flash")
+                # Primary: Google Gemini Flash (Official Multilingual Model) or Google Gemma (Open Weights Edge)
+                requested_model = os.getenv("AI_MODEL_FAMILY", "gemini-2.5-flash")
                 
                 # Check if user/system specifically configured Gemma open-weights edge model
                 if "gemma" in requested_model.lower():
                     model_name = os.getenv("GEMMA_MODEL", "gemma-2-9b-it")
                     source_badge = "gemma-2-edge"
                 else:
-                    model_name = os.getenv("GEMINI_MODEL", "gemini-3.7-flash")
-                    source_badge = "gemini-3.7-flash"
+                    model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+                    source_badge = "gemini-flash"
 
                 try:
                     response = self.client.models.generate_content(

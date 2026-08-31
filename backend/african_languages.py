@@ -1,6 +1,6 @@
 """
 ElewaSTEM Pan-African Languages & Open NLP Integration Engine
-Connects frontier hybrid reasoning LLMs (Google Gemini 3.7 Flash) with African NLP innovations (Masakhane, Lelapa AI, Suno/AfriSpeech, NLLB).
+Connects frontier multilingual LLMs (Google Gemini Flash) with African NLP innovations (Masakhane, Lelapa AI, Suno/AfriSpeech, NLLB).
 """
 
 from typing import Dict, List, Any

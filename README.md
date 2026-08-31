@@ -2,7 +2,7 @@
 
 > **"Usimeze, Elewa!"** — *Demystifying STEM for Every African Child in Their Own Language, Local Ecosystem, and Physical Ability.*
 
-**ElewaSTEM** is an adaptive, offline-first multilingual AI STEM tutor and multi-stakeholder learning ecosystem designed specifically for children and young students across Africa. It bridges educational, language, accessibility, and connectivity barriers by explaining complex concepts in Physics, Mathematics, Biology, Chemistry, and Computing through **culturally and geographically grounded African ecological analogies**, **16+ African languages** (grounded in African NLP benchmarks like Masakhane, Lelapa AI / InkubaLM, and AfriSpeech), **universal special needs accessibility** (tactile audio for the blind, visual sign cues for the deaf, dyslexia typography), **statutory compliance across 8+ African Data Protection Acts** (Kenya DPA 2019, Nigeria NDPA 2023, POPIA 2013, AU Malabo Convention), **multi-stakeholder portals** (Parents, Teachers, Community Mentors), and **offline-first edge architecture (core learning modules available offline after installation/download)**.
+**ElewaSTEM** is an adaptive, offline-first multilingual AI STEM tutor and multi-stakeholder learning ecosystem designed specifically for children and young students across Africa. It bridges educational, language, accessibility, and connectivity barriers by explaining complex concepts in Physics, Mathematics, Biology, Chemistry, and Computing through **culturally and geographically grounded African ecological analogies**, **16+ African languages** (grounded in African NLP benchmarks like Masakhane, Lelapa AI / InkubaLM, and AfriSpeech), **universal special needs accessibility** (tactile audio for the blind, visual sign cues for the deaf, dyslexia typography), **architectures designed to support compliance with applicable African data-protection laws** (Kenya DPA 2019, Nigeria NDPA 2023, POPIA 2013, AU Malabo Convention), **multi-stakeholder portals** (Parents, Teachers, Community Mentors), and **offline-first edge architecture (core learning modules available offline after installation/download)**.
 
 ---
 
@@ -14,7 +14,7 @@
   * ☁️ **Google Cloud Run**: Serverless containerized deployment with auto-scaling.
   * 📦 **Google Cloud Build & Artifact Registry**: Automated CI/CD container build pipeline (`cloudbuild.yaml`).
   * 🗄️ **Google Cloud Firestore / Datastore**: Cloud synchronization for persistent student mastery profiles.
-  * 🤖 **Google Vertex AI / Gemini 3.7 Flash & Google Gemma 2 (Open Weights Edge)**: Orchestrated via the official `google-genai` Python SDK.
+  * 🤖 **Google Vertex AI / Gemini 2.5 Flash & Google Gemma 2 (Open Weights Edge)**: Orchestrated via the official `google-genai` Python SDK.
 * **Open Source Repository**: [https://github.com/ondinookello96/elewastem](https://github.com/ondinookello96/elewastem)
 * **Devpost Project**: [https://devpost.com/software/elewastem-mwalimu-stem](https://devpost.com/software/elewastem-mwalimu-stem)
 
@@ -37,8 +37,8 @@
    * Dynamically adapts science analogies to 5 African biomes (**Lake Victoria Basin / Kisumu**, **Coastal Mangroves / Mombasa / Lagos**, **Agricultural Highlands / Eldoret / Mt. Kenya**, **Arid ASAL & Sahel / Turkana / Garissa / Kano**, and **Urban Metropolises**).
    * On-device GPS bounding box mapping with explicit parental consent gatekeepers.
 
-4. **🛡️ Pan-African Cross-Border Data Protection Legal Hub**:
-   * Native compliance across **8+ national data protection frameworks**:
+4. **🛡️ Pan-African Data Protection Legal Governance Hub**:
+   * Designed to support compliance with **8+ national data protection frameworks**, including:
      * 🇰🇪 **Kenya**: *Data Protection Act, 2019* (Section 29 on Children's Data; ODPC).
      * 🇳🇬 **Nigeria**: *Nigeria Data Protection Act, 2023 (NDPA)* (Section 31 on Child Protection; NDPC).
      * 🇿🇦 **South Africa**: *POPIA 2013* (Section 34/35 Special Information of Children; Information Regulator).
@@ -47,7 +47,7 @@
      * 🇹🇿 **Tanzania**: *Personal Data Protection Act, 2022* (Section 30; PDPC).
      * 🇷🇼 **Rwanda**: *Law No. 058/2021 on Personal Data and Privacy* (Article 10; NCSA).
      * 🌍 **Pan-African Union**: *AU Malabo Convention on Cyber Security and Personal Data (2014)*.
-   * Enforces 100% on-device edge processing, zero cloud tracking, and 1-click statutory consent revocation.
+   * Enforces on-device edge processing, zero cloud tracking, and 1-click statutory consent revocation.
 
 5. **👥 360° Multi-Stakeholder Hub & Remote Parent Synchronization**:
    * **👨‍👩‍👧 Parents**: Automated 2G feature phone SMS progress digests via Africa's Talking API, remote pairing code (`ELEWA-7921`), remote parent magic link, and weekend kitchen science challenges.
@@ -82,7 +82,7 @@ flowchart TD
 
     subgraph Cloud["☁️ Google Cloud Infrastructure"]
         GCR["Google Cloud Run (FastAPI Server)"]
-        Vertex["Google Vertex AI / Gemini 3.7 Flash"]
+        Vertex["Google Vertex AI / Gemini 2.5 Flash"]
         Firestore["Google Cloud Firestore (Mastery Graph)"]
         
         GCR -->|Socratic Pedagogy Prompt| Vertex
@@ -128,8 +128,8 @@ flowchart TD
 +----------+  +----------+  +----------+
 |  Google  |  |  Google  |  | Africa's |
 |  Gemini  |  |  Cloud   |  | Talking  |
-| 3.7/2.0  |  |Firestore|  | 2G SMS   |
-|  Flash   |  | Mastery  |  | Webhook  |
+|2.5 Flash |  |Firestore|  | 2G SMS   |
+|  & Gemma |  | Mastery  |  | Webhook  |
 +----------+  +----------+  +----------+
 ```
 

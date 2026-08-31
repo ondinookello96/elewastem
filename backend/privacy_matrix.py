@@ -13,7 +13,7 @@ PAN_AFRICAN_DPA_REGISTRY: Dict[str, Dict[str, Any]] = {
         "regulatory_body": "Office of the Data Protection Commissioner (ODPC)",
         "child_data_section": "Section 29 (Processing of Personal Data Relating to Children)",
         "consent_requirement": "Explicit, verifiable parental/guardian consent required before processing any child telemetric or location data.",
-        "edge_processing_mandate": "Compliant via zero-cloud retention and client-side on-device geolocation mapping.",
+        "edge_processing_mandate": "Designed to support compliance via zero-cloud retention and client-side on-device geolocation mapping.",
         "cross_border_transfer_rules": "Permitted with adequate safeguards (Section 48/49); ElewaSTEM operates local-first."
     },
     "NG": {
@@ -34,7 +34,7 @@ PAN_AFRICAN_DPA_REGISTRY: Dict[str, Dict[str, Any]] = {
         "child_data_section": "Section 34 & 35 (Prohibition and Authorization on Processing Personal Information of Children)",
         "consent_requirement": "General prohibition on processing child data unless competent person consents or in the child's educational best interest.",
         "edge_processing_mandate": "Zero profiling of minors; local storage only on device hardware.",
-        "cross_border_transfer_rules": "Section 72 compliance; no cloud transmission of student interaction records."
+        "cross_border_transfer_rules": "Supports Section 72 alignment; no cloud transmission of student interaction records."
     },
     "GH": {
         "country": "Ghana",
@@ -63,7 +63,7 @@ PAN_AFRICAN_DPA_REGISTRY: Dict[str, Dict[str, Any]] = {
         "regulatory_body": "Personal Data Protection Commission (PDPC Tanzania)",
         "child_data_section": "Section 30 (Special Categories & Protection of Children)",
         "consent_requirement": "Explicit consent for processing minors' data; local storage preference.",
-        "edge_processing_mandate": "100% compliant through on-device offline storage.",
+        "edge_processing_mandate": "Designed to support compliance through on-device offline storage.",
         "cross_border_transfer_rules": "Section 31 regulations respected."
     },
     "RW": {
