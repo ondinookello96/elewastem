@@ -33,33 +33,24 @@
 </head>
 <body id="appBody" class="bg-slate-50 text-slate-800 flex flex-col h-screen overflow-hidden font-sans antialiased">
 
-  <!-- TOP HEADER -->
-  <header class="bg-white border-b border-slate-200 px-3 sm:px-4 py-2 flex items-center justify-between shadow-sm flex-shrink-0">
+  <!-- TOP HEADER (CLEAN & COMPACT) -->
+  <header class="bg-white border-b border-slate-200 px-3 sm:px-4 py-1.5 flex items-center justify-between shadow-sm flex-shrink-0">
     <div class="flex items-center space-x-2 sm:space-x-3">
-      <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-xl shadow-md">
+      <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-lg shadow-sm">
         🌱
       </div>
-      <div>
-        <div class="flex items-center space-x-1.5">
-          <h1 class="font-black text-base sm:text-lg text-slate-900 tracking-tight">Elewa<span class="text-brand-600">STEM</span></h1>
-          <span class="text-[9px] sm:text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800">Pan-Africa AI</span>
-        </div>
-        <p class="text-[10px] sm:text-xs text-slate-500 font-medium hidden sm:block">16+ African Languages • 360° Stakeholder Feedback Loop • Pan-African DPA</p>
+      <div class="flex items-center space-x-1.5">
+        <h1 class="font-black text-base sm:text-lg text-slate-900 tracking-tight">Elewa<span class="text-brand-600">STEM</span></h1>
+        <span class="text-[9px] sm:text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-100 text-brand-800">Pan-Africa AI</span>
       </div>
     </div>
 
-    <!-- Controls: Accessibility, Voice, Region, Network, Pan-African Languages, Feedback -->
+    <!-- Controls: Accessibility, Voice, Region, Pan-African Languages, ABOUT DROPDOWN -->
     <div class="flex items-center space-x-1 sm:space-x-2">
       <!-- Universal Accessibility Button -->
       <button onclick="openA11yModal()" id="a11yBtn" title="Mipangilio ya Ujumuishi (Blind, Deaf, Dyslexia)" class="flex items-center space-x-1 px-2 py-1 rounded-lg text-xs font-bold bg-blue-50 text-blue-900 border border-blue-300 hover:bg-blue-100 transition-all">
         <span>♿</span>
         <span class="hidden md:inline">Ujumuishi</span>
-      </button>
-
-      <!-- Feedback Shortcut Button -->
-      <button onclick="openFeedbackModal('student')" id="quickFeedbackBtn" title="Toa Maoni ya Mfumo" class="flex items-center space-x-1 px-2 py-1 rounded-lg text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300 hover:bg-amber-100 transition-all">
-        <span>💬</span>
-        <span class="hidden lg:inline">Maoni (Feedback)</span>
       </button>
 
       <!-- Auto-Speak Toggle -->
@@ -99,10 +90,60 @@
           <svg class="fill-current h-3 w-3" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
         </div>
       </div>
+
+      <!-- ABOUT DROPDOWN (Consolidates 16+ Languages, Stakeholder Loop & Pan-African DPA) -->
+      <div class="relative inline-block text-left" id="aboutDropdownContainer">
+        <button type="button" onclick="toggleAboutDropdown(event)" id="aboutDropdownBtn" title="Kuhusu ElewaSTEM (About)" class="flex items-center space-x-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300 hover:bg-amber-100 transition-all shadow-xs">
+          <span>ℹ️</span>
+          <span>About</span>
+          <svg class="w-3 h-3 text-amber-700 transition-transform" id="aboutChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+
+        <!-- Dropdown Menu items under single heading 'About' -->
+        <div id="aboutDropdownMenu" class="hidden absolute right-0 mt-2 w-80 rounded-2xl bg-white shadow-2xl border border-slate-200 py-2 z-50 transform origin-top-right transition-all">
+          <div class="px-3.5 py-2 border-b border-slate-100 bg-slate-50 rounded-t-xl">
+            <p class="text-[10px] uppercase font-black text-brand-700 tracking-wider">Kuhusu / About ElewaSTEM</p>
+            <p class="text-xs font-bold text-slate-800">Pan-African Multilingual STEM AI</p>
+          </div>
+
+          <!-- 1. 16+ African Languages -->
+          <button type="button" onclick="openLanguagesInfoModal(); closeAboutDropdown();" class="w-full text-left px-3.5 py-2.5 hover:bg-emerald-50 flex items-start space-x-2.5 transition-colors border-b border-slate-100">
+            <span class="text-lg flex-shrink-0">🌍</span>
+            <div>
+              <p class="text-xs font-bold text-slate-800">16+ African Languages</p>
+              <p class="text-[11px] text-slate-500">Masakhane NLP & Gemini Multilingual models (Kiswahili, Sheng, Yoruba, Hausa, Igbo, Amharic, Zulu, etc.)</p>
+            </div>
+          </button>
+
+          <!-- 2. 360° Stakeholder Feedback Loop -->
+          <button type="button" onclick="switchTab('stakeholders'); closeAboutDropdown();" class="w-full text-left px-3.5 py-2.5 hover:bg-amber-50 flex items-start space-x-2.5 transition-colors border-b border-slate-100">
+            <span class="text-lg flex-shrink-0">👥</span>
+            <div>
+              <p class="text-xs font-bold text-slate-800">360° Stakeholder Feedback Loop</p>
+              <p class="text-[11px] text-slate-500">Teacher CBC lesson plans, Parent 2G SMS digest, Community Mentors & Continuous Feedback</p>
+            </div>
+          </button>
+
+          <!-- 3. Pan-African DPA -->
+          <button type="button" onclick="switchTab('privacy_hub'); closeAboutDropdown();" class="w-full text-left px-3.5 py-2.5 hover:bg-blue-50 flex items-start space-x-2.5 transition-colors">
+            <span class="text-lg flex-shrink-0">🛡️</span>
+            <div>
+              <p class="text-xs font-bold text-slate-800">Pan-African DPA & Data Protection</p>
+              <p class="text-[11px] text-slate-500">8 Legal jurisdictions (Kenya ODPC, Nigeria NDPC, SA POPIA, AU Malabo) & Student Data Sovereignty</p>
+            </div>
+          </button>
+
+          <!-- Footer with Feedback & Version -->
+          <div class="border-t border-slate-100 mt-1 pt-2 px-3.5 py-1 bg-slate-50 rounded-b-xl flex items-center justify-between text-[10px] text-slate-500">
+            <span class="font-medium">v1.4.0 • Google DeepMind / Gemini</span>
+            <button onclick="openFeedbackModal('general'); closeAboutDropdown();" class="text-brand-600 font-bold hover:underline">Toa Maoni 💬</button>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- NAVIGATION TABS -->
+  <!-- STREAMLINED NAVIGATION TABS -->
   <nav class="bg-white border-b border-slate-200 px-4 py-1.5 flex items-center justify-between overflow-x-auto no-scrollbar flex-shrink-0 text-xs font-semibold">
     <div class="flex space-x-2">
       <button onclick="switchTab('chat')" id="tabBtn-chat" class="tab-btn active-tab flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-brand-700 bg-brand-50 border border-brand-200">
@@ -118,14 +159,6 @@
         <span>🏆</span>
         <span data-i18n="tab_mastery">Maendeleo</span>
         <span id="badgeCount" class="bg-amber-500 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">1</span>
-      </button>
-      <button onclick="switchTab('stakeholders')" id="tabBtn-stakeholders" class="tab-btn flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 border border-transparent">
-        <span>👥</span>
-        <span>Kituo cha Wadau & Maoni</span>
-      </button>
-      <button onclick="switchTab('privacy_hub')" id="tabBtn-privacy_hub" class="tab-btn flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 border border-transparent">
-        <span>🛡️</span>
-        <span>Sheria za Data (Pan-Africa DPA)</span>
       </button>
     </div>
   </nav>
@@ -1116,8 +1149,81 @@
       <div id="quizOptions" class="space-y-2"></div>
       <div id="quizFeedback" class="hidden p-3 rounded-xl text-xs font-semibold leading-relaxed"></div>
 
-      <div class="flex justify-end pt-2">
-        <button onclick="closeQuizModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-2 rounded-xl transition-all">Funga</button>
+  <!-- 16+ AFRICAN LANGUAGES & MASAKHANE OVERVIEW MODAL -->
+  <div id="languagesInfoModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl max-w-xl w-full p-6 shadow-2xl space-y-4 animate-scale-up max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-shrink-0">
+        <div class="flex items-center space-x-2.5">
+          <span class="text-2xl">🌍</span>
+          <div>
+            <h3 class="font-black text-slate-900 text-base">16+ Pan-African Languages</h3>
+            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Masakhane NLP & Multilingual Google Gemini 3.7</p>
+          </div>
+        </div>
+        <button onclick="closeLanguagesInfoModal()" class="text-slate-400 hover:text-slate-600 font-bold text-lg p-1">&times;</button>
+      </div>
+
+      <div class="text-xs text-slate-600 space-y-3 overflow-y-auto pr-1 leading-relaxed flex-1">
+        <p>
+          ElewaSTEM is built on the philosophy: <b>"Usimeze Maneno Tu, Elewa Sayansi!"</b> (Don't just cram, understand!). Every child has the fundamental right to learn STEM concepts in the language they dream in.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5 space-y-1">
+            <p class="font-bold text-emerald-900">🇰🇪 🇹🇿 East & Central Africa</p>
+            <ul class="text-[11px] text-emerald-950 space-y-0.5">
+              <li>• <b>Kiswahili</b> (Swahili)</li>
+              <li>• <b>Sheng</b> (Nairobi Youth Slang)</li>
+              <li>• <b>Oluganda</b> (Uganda)</li>
+              <li>• <b>Ikinyarwanda</b> (Rwanda)</li>
+              <li>• <b>Lingála</b> (DR Congo)</li>
+            </ul>
+          </div>
+
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-2.5 space-y-1">
+            <p class="font-bold text-amber-900">🇳🇬 🇬🇭 West Africa</p>
+            <ul class="text-[11px] text-amber-950 space-y-0.5">
+              <li>• <b>Èdè Yorùbá</b> (Nigeria/Benin)</li>
+              <li>• <b>Hausa</b> (Nigeria/Niger)</li>
+              <li>• <b>Asụsụ Igbo</b> (Nigeria)</li>
+              <li>• <b>Naija Pidgin</b> (West Africa)</li>
+              <li>• <b>Twi (Akan)</b> (Ghana)</li>
+            </ul>
+          </div>
+
+          <div class="bg-blue-50 border border-blue-200 rounded-xl p-2.5 space-y-1">
+            <p class="font-bold text-blue-900">🇪🇹 🇸🇴 Horn of Africa</p>
+            <ul class="text-[11px] text-blue-950 space-y-0.5">
+              <li>• <b>አማርኛ (Amharic)</b> (Ethiopia)</li>
+              <li>• <b>Afaan Oromoo</b> (Ethiopia/Kenya)</li>
+              <li>• <b>Af-Soomaali</b> (Somalia/Kenya)</li>
+            </ul>
+          </div>
+
+          <div class="bg-purple-50 border border-purple-200 rounded-xl p-2.5 space-y-1">
+            <p class="font-bold text-purple-900">🇿🇦 🇿🇼 Southern Africa</p>
+            <ul class="text-[11px] text-purple-950 space-y-0.5">
+              <li>• <b>isiZulu</b> (South Africa)</li>
+              <li>• <b>isiXhosa</b> (South Africa)</li>
+              <li>• <b>chiShona</b> (Zimbabwe)</li>
+              <li>• <b>English</b> (African Context)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-slate-100 rounded-xl p-3 text-[11px] text-slate-700 space-y-1">
+          <p class="font-bold text-slate-900">🔊 Voice & Multimodal Inclusivity:</p>
+          <p>Features zero-cost text-to-speech, speech recognition, tactile descriptions for blind learners, and Kenya Sign Language (KSL) visual cues for deaf students.</p>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-2 border-t border-slate-100 flex-shrink-0">
+        <button onclick="closeLanguagesInfoModal(); document.getElementById('langSelect').focus();" class="text-xs font-bold text-brand-700 hover:underline">
+          Badili Lugha Sasa (Switch Language) ➔
+        </button>
+        <button onclick="closeLanguagesInfoModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-2 rounded-xl transition-all">
+          Funga (Close)
+        </button>
       </div>
     </div>
   </div>

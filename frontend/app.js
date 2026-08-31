@@ -1888,3 +1888,46 @@ function closeQuizModal() {
   STATE.currentQuiz = null;
   if ('speechSynthesis' in window) window.speechSynthesis.cancel();
 }
+
+// About Dropdown Handlers
+function toggleAboutDropdown(e) {
+  if (e) e.stopPropagation();
+  const menu = document.getElementById('aboutDropdownMenu');
+  const chevron = document.getElementById('aboutChevron');
+  if (menu) {
+    const isHidden = menu.classList.contains('hidden');
+    if (isHidden) {
+      menu.classList.remove('hidden');
+      if (chevron) chevron.classList.add('rotate-180');
+    } else {
+      menu.classList.add('hidden');
+      if (chevron) chevron.classList.remove('rotate-180');
+    }
+  }
+}
+
+function closeAboutDropdown() {
+  const menu = document.getElementById('aboutDropdownMenu');
+  const chevron = document.getElementById('aboutChevron');
+  if (menu) menu.classList.add('hidden');
+  if (chevron) chevron.classList.remove('rotate-180');
+}
+
+// Close About dropdown when clicking anywhere outside
+document.addEventListener('click', (e) => {
+  const container = document.getElementById('aboutDropdownContainer');
+  if (container && !container.contains(e.target)) {
+    closeAboutDropdown();
+  }
+});
+
+// Languages Info Modal Handlers
+function openLanguagesInfoModal() {
+  const modal = document.getElementById('languagesInfoModal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeLanguagesInfoModal() {
+  const modal = document.getElementById('languagesInfoModal');
+  if (modal) modal.classList.add('hidden');
+}
