@@ -2018,3 +2018,31 @@ function closeLanguagesInfoModal() {
   if (modal) modal.classList.add('hidden');
 }
 
+// PWA Install Handlers
+let deferredPWAInstallPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPWAInstallPrompt = e;
+});
+
+function promptPWAInstall() {
+  if (deferredPWAInstallPrompt) {
+    deferredPWAInstallPrompt.prompt();
+    deferredPWAInstallPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        appendSystemNotice('📲 <b>Hongera!</b> ElewaSTEM imewekwa kwenye skrini ya simu yako.');
+      }
+      deferredPWAInstallPrompt = null;
+    });
+  } else {
+    const modal = document.getElementById('installAppModal');
+    if (modal) modal.classList.remove('hidden');
+  }
+}
+
+function closeInstallAppModal() {
+  const modal = document.getElementById('installAppModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+

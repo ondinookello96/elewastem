@@ -6,8 +6,13 @@
   <title>ElewaSTEM — Pan-African Inclusive AI STEM Learning & Feedback Platform</title>
   <meta name="description" content="Jukwaa la AI la STEM lenye mfumo thabiti wa maoni ya wanafunzi, wazazi, walimu, na jamii kote barani Afrika.">
   <meta name="theme-color" content="#10b981">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ElewaSTEM">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23059669%22/><text y=%22.75em%22 x=%22.15em%22 font-size=%2270%22>🌱</text></svg>">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -264,6 +269,18 @@
               </div>
               <span class="text-xs font-bold text-slate-400">➜</span>
             </button>
+
+            <!-- Install as Mobile App PWA Button -->
+            <button type="button" onclick="promptPWAInstall(); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100 border border-emerald-300 rounded-xl flex items-center justify-between transition-all shadow-xs">
+              <div class="flex items-center space-x-2">
+                <span class="text-base">📲</span>
+                <div>
+                  <p class="font-bold text-emerald-950 text-xs">Sakinisha Kama App (Install App)</p>
+                  <p class="text-[10px] text-emerald-700 font-medium">Weka kwenye skrini ya simu, inafanya kazi 100% bila mtandao</p>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold text-white bg-emerald-600 px-2 py-0.5 rounded-full">Install</span>
+            </button>
           </div>
         </div>
 
@@ -273,6 +290,7 @@
           <button onclick="openFeedbackModal('student'); closeAppMenuDropdown();" class="text-brand-700 font-bold hover:underline">💬 Toa Maoni</button>
         </div>
       </div>
+
     </div>
   </header>
 
@@ -1293,14 +1311,69 @@
         <button onclick="closeLanguagesInfoModal(); document.getElementById('langSelect').focus();" class="text-xs font-bold text-brand-700 hover:underline">
           Badili Lugha Sasa (Switch Language) ➔
         </button>
-        <button onclick="closeLanguagesInfoModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-2 rounded-xl transition-all">
-          Funga (Close)
+  <!-- PWA INSTALL INSTRUCTIONS MODAL -->
+  <div id="installAppModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4 animate-scale-up text-xs">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 rounded-xl bg-emerald-600 flex items-center justify-center text-white text-base">
+            🌱
+          </div>
+          <div>
+            <h3 class="font-black text-slate-900 text-sm sm:text-base">Sakinisha ElewaSTEM kwenye Simu</h3>
+            <p class="text-[10px] text-emerald-700 font-bold uppercase">Progressive Web App (PWA) • 0 KB Data Offline</p>
+          </div>
+        </div>
+        <button onclick="closeInstallAppModal()" class="text-slate-400 hover:text-slate-600 font-bold text-lg p-1">&times;</button>
+      </div>
+
+      <div class="space-y-3 text-slate-700">
+        <p class="font-semibold text-slate-800">
+          Unaweza kupakua na kuweka ElewaSTEM kwenye skrini ya kwanza ya simu yako kama App kamili ya Android au iPhone:
+        </p>
+
+        <!-- Android Instructions -->
+        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3 space-y-1.5">
+          <p class="font-bold text-emerald-950 flex items-center space-x-1.5">
+            <span>🤖</span>
+            <span>Simu ya Android (Google Chrome):</span>
+          </p>
+          <ol class="list-decimal pl-4 space-y-1 text-[11px] text-emerald-900">
+            <li>Bonyeza vitone vitatu (<b>⋮</b>) juu kulia mwa browser ya Chrome.</li>
+            <li>Chagua <b>"Install app"</b> au <b>"Add to Home screen"</b> (Weka kwenye skrini).</li>
+            <li>Bonyeza <b>"Install"</b>. Programu itatokea kwenye skrini yako mara moja!</li>
+          </ol>
+        </div>
+
+        <!-- iPhone / iOS Instructions -->
+        <div class="bg-blue-50 border border-blue-200 rounded-2xl p-3 space-y-1.5">
+          <p class="font-bold text-blue-950 flex items-center space-x-1.5">
+            <span>🍏</span>
+            <span>Simu ya iPhone / iPad (Safari):</span>
+          </p>
+          <ol class="list-decimal pl-4 space-y-1 text-[11px] text-blue-900">
+            <li>Bonyeza kitufe cha <b>Share</b> (<svg class="inline w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>) chini mwa Safari.</li>
+            <li>Sogeza chini kisha uchague <b>"Add to Home Screen"</b> (➕).</li>
+            <li>Bonyeza <b>"Add"</b> juu kulia.</li>
+          </ol>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-[11px] text-slate-600 flex items-center space-x-2">
+          <span class="text-base">⚡</span>
+          <p><b>Faida:</b> Inafunguka kwa kasi ya ajabu, inatumia 0 KB ya bando bila mtandao, na inahifadhi maendeleo ya mwanafunzi!</p>
+        </div>
+      </div>
+
+      <div class="pt-2 border-t border-slate-100 flex items-center justify-end">
+        <button onclick="closeInstallAppModal()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-2 rounded-xl transition-all text-xs">
+          Nimeelewa (Sawa) 👍
         </button>
       </div>
     </div>
   </div>
 
   <script src="/app.js?v=2.2"></script>
+
   <script>
 
     if ('serviceWorker' in navigator) {
