@@ -73,6 +73,7 @@ def run_tests():
         ("Jinsi samaki Ngege anavyopumua kwa matamvua ziwani", "aquatic_biology_kisumu", "Biology: Fish Respiration"),
         ("Kazi ya figo na nephron katika kutoa taka na mkojo", "human_excretion_kidney", "Biology: Kidneys"),
         ("Mfumo wa fahamu, ubongo na milango ya hisia", "nervous_sense_organs", "Biology: Nervous"),
+        ("I want to learn about Genetics, DNA and inherited traits from parents", "genetics_dna_heredity", "Biology: Genetics & DNA"),
 
         # --- PHYSICS ---
         ("Eleza saketi za umeme, waya na betri", "electricity_circuits", "Physics: Circuits"),

@@ -373,6 +373,9 @@ def find_offline_topic(query: str, preferred_subject: str = "all") -> Dict[str, 
     if any(k in query_lower for k in ["pollinat", "uchavushaji", "flower", "maua", "petali", "petal", "stamen", "chavulio", "pistil", "kambamaua", "poleni", "chavua", "nectar"]):
         return CURRICULUM_BY_ID.get("plant_pollination", OFFLINE_STEM_VAULT[0])
 
+    if any(k in query_lower for k in ["genetic", "jenetiki", "dna", "gene", "jeni", "heredity", "urithi", "chromosome", "kromosomu", "punnett", "mendel", "dominant", "recessive", "kurithi", "chotara", "hybrid crop", "inherited trait"]):
+        return CURRICULUM_BY_ID.get("genetics_dna_heredity", OFFLINE_STEM_VAULT[0])
+
     if any(k in query_lower for k in ["photo", "usanisinuru", "klorofili", "chlorophyll", "plant food", "chakula cha mmea", "stomata"]):
         return CURRICULUM_BY_ID.get("photosynthesis", OFFLINE_STEM_VAULT[0])
 

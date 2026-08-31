@@ -789,5 +789,63 @@ BIOLOGY_TOPICS: List[Dict[str, Any]] = [
             "explanation_sw": "Sahihi kabisa! Chembechembe nyeupe za damu (White Blood Cells) huzalisha kingamwili za kupigana na magonjwa na kuua vijidudu.",
             "explanation_en": "Spot on! White blood cells produce neutralizing antibodies and engulf harmful pathogens."
         }
+    },
+    {
+        "id": "genetics_dna_heredity",
+        "title_en": "Genetics, DNA & Heredity: How Traits are Inherited",
+        "title_sw": "Jenetiki, DNA na Urithi wa Tabia: Jinsi Sifa Zinavyorithiwa",
+        "subject": "Biology",
+        "cbc_strand": "Genetics, Heredity & Evolution (Grade 8/9 Integrated Science & Senior Secondary Biology)",
+        "summary_en": "Genetics explores how traits (eye color, height, blood group, crop yield) pass from parents to offspring via DNA, genes, and chromosomes following Gregor Mendel's laws.",
+        "summary_sw": "Jenetiki huchunguza jinsi sifa za kimwili (urefu, rangi ya macho, kundi la damu, mavuno ya mbegu) zinavyorithiwa kutoka kwa wazazi kwenda kwa watoto kupitia DNA na jeni kulingana na sheria za Gregor Mendel.",
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Fikiria kamba ndefu ya herufi zilizosokotwa kwa namna ya ngazi inayozunguka (Double Helix). Kila ngazi ndogo inashikilia maelekezo ya jinsi mwili wako utakavyokua, kuanzia urefu wako hadi unene wa sauti yako!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Wazazi (Baba + Mama)] ➔ [Kusokota Nyuzi za DNA] ➔ [Sifa za Mtoto (Kufanana Sura au Urefu)]. Angalia jedwali la Punnett Square: Jeni kuu (Dominant) na jeni hafifu (Recessive).",
+        "regional_analogies": {
+            "lake_basin": {
+                "analogy_sw": "Kule Kisumu na Siaya, tazama ng'ombe wa kienyeji wa Zebu (wenye nundu na ustahimilivu wa joto) wakizalishwa na ng'ombe wa kisasa wa maziwa kupata ndama wa chotara (Hybrid) anayerithi sifa ya kutoa maziwa mengi huku akistahimili kupe na joto la ziwani!",
+                "analogy_en": "In Lake Victoria communities, cross-breeding indigenous heat-resistant Zebu cattle with high-yielding dairy breeds produces hybrid calves inheriting both disease tolerance and high milk production!"
+            },
+            "coastal": {
+                "analogy_sw": "Pwani kule Kilifi na Kwale, minazi mirefu ya asili inapopandikizwa na minazi mifupi ya mseto (Dwarf Hybrids), kizazi kipya kinarithi jeni za kukua haraka na kuzaa nazi tamu nyingi bila kupanda miti mirefu!",
+                "analogy_en": "In coastal palm groves, hybrid cross-pollination between tall indigenous palms and dwarf varieties yields progeny with rapid maturation and heavy sweet coconut yields!"
+            },
+            "highlands": {
+                "analogy_sw": "Mashambani kule Kitale, Nakuru na Nyeri, wakulima hupanda mbegu za mahindi ya chotara (Hybrid Maize kama H614) ambayo yamerithi jeni zenye nguvu za kutoa mahindi makubwa yenye punje nyingi!",
+                "analogy_en": "In highland agricultural zones, hybrid maize varieties combine parental genetics to achieve vigorous growth (heterosis), high grain yield, and fungal resistance!"
+            },
+            "arid": {
+                "analogy_sw": "Kwenye maeneo kame ya kaskazini, mbuzi wa asili wa Galla wanarithisha jeni za kustahimili ukame mkali na kutoa maziwa hata wakati wa kiangazi kirefu!",
+                "analogy_en": "In arid pastoral regions, Galla goats pass down resilient genetic traits allowing sustained lactation and drought tolerance!"
+            },
+            "urban": {
+                "analogy_sw": "Mtaani, unaweza kuona jinsi unavyofanana na wazazi wako kwa kuangalia jeni kama vile uwezo wa kukunjakunja ulimi (Tongue Rolling Gene) au kuwa na vishimo vya mashavu (Dimples)!",
+                "analogy_en": "In daily life, observable inherited traits like tongue rolling ability, attached earlobes, and cheek dimples demonstrate dominant and recessive genetic inheritance!"
+            }
+        },
+        "key_terms": [
+            {"en": "DNA (Deoxyribonucleic Acid)", "sw": "DNA (Msimbo wa maisha ulio ndani ya kiini cha seli)"},
+            {"en": "Gene (Unit of Heredity)", "sw": "Jeni (Sehemu ya DNA inayobeba sifa maalum)"},
+            {"en": "Chromosomes (46 in humans)", "sw": "Kromosomu (Nyuzi 46 za DNA ndani ya kiini)"},
+            {"en": "Dominant vs Recessive", "sw": "Jeni Yenye Nguvu (Dominant) na Iliyojificha (Recessive)"},
+            {"en": "Gregor Mendel & Punnett Square", "sw": "Gregor Mendel na Jedwali la Urithi la Punnett"}
+        ],
+        "experiment": {
+            "title_sw": "Jaribio: Uchunguzi wa Sifa za Kurithi Mwilini (Family Genetic Traits Survey)",
+            "title_en": "Experiment: Human Genetic Traits Survey & Punnett Model",
+            "materials_sw": "Kalamu na karatasi, kioo cha kujiangalia, wanafamilia au marafiki 2-3.",
+            "materials_en": "Pen and paper, small mirror, 2-3 family members or classmates.",
+            "steps_sw": "1. Jaribu kukunjakunja ulimi wako uwe kama bomba la duara (Tongue rolling). Hii ni sifa ya jeni yenye nguvu (Dominant gene)!\n2. Angalia kwenye kioo kama mashina ya masikio yako yameungana na shingo au yako huru (Free vs Attached earlobes).\n3. Waulize wanafamilia yako—chora orodha kuona nani anashiriki sifa hizi za DNA na wewe!",
+            "steps_en": "1. Try to roll the edges of your tongue into a U-tube shape—this is a dominant genetic allele!\n2. Check in a mirror whether your earlobes are free or attached.\n3. Survey your relatives to map how these dominant and recessive traits travel across generations!"
+        },
+        "quiz": {
+            "question_sw": "Ni molekuli gani iliyo ndani ya kiini cha seli inayobeba maelekezo na msimbo wote wa kurithi sifa kutoka kwa wazazi kwenda kwa watoto?",
+            "question_en": "Which molecule located within cell nuclei carries the hereditary genetic blueprint passed from parents to offspring?",
+            "options_sw": ["A) DNA na Jeni (DNA & Genes)", "B) Maji safi ya kunywa", "C) Mifupa ya miguu", "D) Mate ya mdomo"],
+            "options_en": ["A) DNA & Genes", "B) Drinking water", "C) Leg bones", "D) Saliva"],
+            "correct_index": 0,
+            "explanation_sw": "Hongera sana! DNA ndiyo molekuli ya urithi inayobeba jeni zenye maelekezo yote ya jinsi kiumbe kitakavyofanana na kukuza sifa zake.",
+            "explanation_en": "Spot on! Deoxyribonucleic Acid (DNA) is the hereditary material containing the genetic code for all organismal traits."
+        }
     }
 ]
+
