@@ -40,7 +40,7 @@ LEARNING_THEORIES = {
         "theorists": "John Sweller, Allan Paivio (Dual Coding)",
         "swahili_title": "Kupunguza Mzigo wa Akili & Uwasilishaji wa Picha na Sauti",
         "core_principle": "Working memory is limited. Multi-channel dual coding (visual flowcharts + auditory narration) and chunking prevent cognitive overload.",
-        "african_context": "The '💡 Rahisisha Zaidi' (Simplify) feature instantly breaks complex STEM concepts into bite-sized, non-intimidating chunks for 9-year-olds and neurodiverse learners (ADHD, Dyslexia)."
+        "african_context": "The '💡 Rahisisha Zaidi' (Simplify) feature instantly breaks complex STEM concepts into bite-sized, non-intimidating chunks for learners needing focused cognitive pacing (ADHD) and clear visual reading formats (Dyslexia)."
     },
     "GrowthMindset": {
         "theorists": "Carol Dweck, B.F. Skinner (Positive Reinforcement)",
