@@ -475,6 +475,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderJurisdictionDetails(STATE.jurisdiction);
   updateHeaderStatusPill();
   initDynamicPlaceholder();
+  selectLearnerSubject('Biology');
 
   const input = document.getElementById('userInput');
   if (input) {
@@ -1017,6 +1018,159 @@ const SUBJECT_PROMPT_CHIPS = {
   ]
 };
 
+// 53 Comprehensive STEM Modules Grouped by Subject for Direct Learner Topic Selection
+const CURRICULUM_SUBJECT_TOPICS = {
+  'Biology': [
+    { id: 'photosynthesis', title_sw: '1. Usanisinuru: Mimea Inavyotengeneza Chakula', title_en: '1. Photosynthesis: Plant Food Making', icon: '🌿' },
+    { id: 'human_digestive_system', title_sw: "2. Mfumo wa Mmeng'enyo wa Chakula & Lishe", title_en: '2. Digestive System & Nutrition', icon: '🍎' },
+    { id: 'circulatory_heart', title_sw: '3. Moyo na Mzunguko wa Damu Mwilini', title_en: '3. Human Heart & Blood Circulation', icon: '🫀' },
+    { id: 'human_respiration', title_sw: '4. Mfumo wa Upumuaji na Mapafu', title_en: '4. Respiratory System & Lungs', icon: '🫁' },
+    { id: 'cell_biology', title_sw: '5. Muundo wa Seli: Mmea na Mnyama', title_en: '5. Cell Biology: Plant vs Animal', icon: '🔬' },
+    { id: 'plant_pollination', title_sw: '6. Uchavushaji wa Maua & Uzalishaji', title_en: '6. Flower Pollination & Reproduction', icon: '🌸' },
+    { id: 'living_things_classification', title_sw: '7. Uainishaji wa Viumbe: Uti wa Mgongo', title_en: '7. Classification: Vertebrates & Invertebrates', icon: '🦁' },
+    { id: 'ecology_food_chains', title_sw: '8. Mnyororo wa Chakula & Ikolojia', title_en: '8. Ecology & Food Chains', icon: '🌾' },
+    { id: 'aquatic_biology_kisumu', title_sw: '9. Upumuaji wa Samaki & Yavuyavu (Gills)', title_en: '9. Aquatic Respiration & Fish Biology', icon: '🐟' },
+    { id: 'human_excretion_kidney', title_sw: '10. Figo & Mfumo wa Kutoa Taka', title_en: '10. Excretory System: Kidneys', icon: '💧' },
+    { id: 'nervous_sense_organs', title_sw: '11. Mfumo wa Fahamu & Milango ya Hisia', title_en: '11. Nervous System & Sense Organs', icon: '🧠' },
+    { id: 'plant_transpiration_transport', title_sw: '12. Mvuke wa Mimea & Xylem/Phloem', title_en: '12. Plant Transpiration & Transport', icon: '🌱' },
+    { id: 'skeletal_muscular_system', title_sw: '13. Mifupa na Misuli: Mwendo wa Mwili', title_en: '13. Skeletal & Muscular System', icon: '🦴' },
+    { id: 'microorganisms_health', title_sw: '14. Vijidudu, Kingamwili na Usafi', title_en: '14. Microorganisms, Immunity & Hygiene', icon: '🦠' },
+    { id: 'genetics_dna_heredity', title_sw: '15. Jenetiki, DNA & Urithi wa Tabia', title_en: '15. Genetics, DNA & Heredity Traits', icon: '🧬' }
+  ],
+  'Physics': [
+    { id: 'electricity_circuits', title_sw: '1. Mkondo wa Umeme, Saketi & Betri', title_en: '1. Electric Current & Circuits', icon: '⚡' },
+    { id: 'gravity_forces', title_sw: '2. Nguvu ya Grabiti, Mvuto & Msuguano', title_en: '2. Gravity & Friction Forces', icon: '🌍' },
+    { id: 'light_reflection_refraction', title_sw: '3. Mwangaza, Miwani, Vioo & Lenzi', title_en: '3. Light Optics: Reflection & Lenses', icon: '🔦' },
+    { id: 'sound_waves_hearing', title_sw: '4. Mawimbi ya Sauti, Marudio & Sikio', title_en: '4. Sound Waves, Frequency & Hearing', icon: '🔊' },
+    { id: 'simple_machines_levers', title_sw: '5. Mashine Rahisi: Wenzo, Kapi & Mteremko', title_en: '5. Simple Machines: Levers & Pulleys', icon: '🛠️' },
+    { id: 'heat_transfer_methods', title_sw: '6. Uhamishaji wa Joto: Miale & Mkondo', title_en: '6. Heat Transfer: Conduction & Radiation', icon: '🔥' },
+    { id: 'magnetism_electromagnets', title_sw: '7. Sumaku, Ncha & Sumaku-Umeme', title_en: '7. Magnetism & Electromagnets', icon: '🧲' },
+    { id: 'pressure_fluids_hydraulics', title_sw: '8. Shinikizo la Maji, Hewa & Haidroliki', title_en: '8. Fluid Pressure & Hydraulics', icon: '🌊' },
+    { id: 'work_energy_power', title_sw: '9. Kazi, Nishati & Nguvu (Power)', title_en: '9. Work, Energy Transformations & Power', icon: '⚡' },
+    { id: 'density_floating_sinking', title_sw: '10. Uzito wa Kiasi, Kuelea na Kuzama', title_en: '10. Density, Upthrust & Flotation', icon: '⛵' }
+  ],
+  'Chemistry': [
+    { id: 'chemistry_reactions', title_sw: '1. Asidi, Besi, Viashiria & Chumvi', title_en: '1. Acids, Bases & Neutralization', icon: '🧪' },
+    { id: 'states_of_matter', title_sw: '2. Hali 3 za Maada: Mango, Maji & Gesi', title_en: '2. States of Matter & Particle Theory', icon: '🧊' },
+    { id: 'separation_techniques', title_sw: '3. Kutenganisha Michanganyiko: Kuchuja & Kunereka', title_en: '3. Separation: Filtration & Distillation', icon: '⚗️' },
+    { id: 'periodic_table_atoms', title_sw: '4. Atomu, Protoni & Jedwali la Periodiki', title_en: '4. Atoms, Protons & Periodic Table', icon: '⚛️' },
+    { id: 'water_purification_hardness', title_sw: '5. Utakaso wa Maji, Usafishaji & Maji Magumu', title_en: '5. Water Purification & Hardness', icon: '🚰' },
+    { id: 'air_gases_pollution', title_sw: '6. Muundo wa Hewa, Oksijeni & Uchafuzi', title_en: '6. Atmospheric Air Gases & Pollution', icon: '💨' },
+    { id: 'metals_reactivity_series', title_sw: '7. Metali, Kutu & Mfuatano wa Mmenyuko', title_en: '7. Metals, Rusting & Reactivity Series', icon: '🔩' },
+    { id: 'chemical_bonding_compounds', title_sw: '8. Muungano wa Kikemia: Ionic & Covalent', title_en: '8. Chemical Bonding: Ionic & Covalent', icon: '🔗' },
+    { id: 'carbon_fuels_combustion', title_sw: '9. Kaboni, Mafuta, Mkaa & Kuungua', title_en: '9. Carbon, Fuels & Combustion', icon: '🔥' },
+    { id: 'chemical_solutions_solubility', title_sw: '10. Myeyusho, Kiyeyushwa & Kiwango cha Kuyeyuka', title_en: '10. Chemical Solutions & Solubility', icon: '🥣' }
+  ],
+  'Mathematics': [
+    { id: 'fractions_math', title_sw: '1. Sehemu za Nambari, Desimali & Asilimia', title_en: '1. Fractions, Decimals & Percentages', icon: '🍕' },
+    { id: 'algebra_math', title_sw: '2. Aljebra, Milinganyo & Vigeuzi (Variables)', title_en: '2. Algebra & Linear Equations', icon: '🔣' },
+    { id: 'geometry_shapes_angles', title_sw: '3. Jiometria: Pembe, Pembetatu & Poligoni', title_en: '3. Geometry: Angles & 2D/3D Shapes', icon: '📐' },
+    { id: 'pythagoras_trigonometry', title_sw: '4. Nadharia ya Pythagoras (a² + b² = c²)', title_en: '4. Pythagoras Theorem & Triangles', icon: '📐' },
+    { id: 'perimeter_area_volume', title_sw: '5. Mzingo, Eneo la Shamba & Ujazo (Volume)', title_en: '5. Perimeter, Area & Volume', icon: '📦' },
+    { id: 'ratios_proportions_rates', title_sw: '6. Uwiano, Uwiano Linganifu & Kasi (Rates)', title_en: '6. Ratios, Proportions & Speed Rates', icon: '⚖️' },
+    { id: 'statistics_data_charts', title_sw: '7. Takwimu, Wastani (Mean) & Grafu za Chati', title_en: '7. Statistics, Mean & Data Charts', icon: '📊' },
+    { id: 'integers_number_line', title_sw: '8. Nambari Nzima & Nambari Hasi (-1, -2)', title_en: '8. Integers & Number Line', icon: '➖' },
+    { id: 'commercial_arithmetic', title_sw: '9. Hesabu za Biashara: Faida, Hasara & Riba', title_en: '9. Commercial Math: Profit, Loss & Interest', icon: '💰' },
+    { id: 'probability_chance', title_sw: '10. Uwezekano & Nafasi ya Matukio (Chance)', title_en: '10. Probability & Chance Events', icon: '🎲' }
+  ],
+  'Computer Science': [
+    { id: 'computer_algorithms', title_sw: '1. Algoriti za Kompyuta & Michoro ya Flowchart', title_en: '1. Computer Algorithms & Flowcharts', icon: '📝' },
+    { id: 'binary_data_representation', title_sw: '2. Nambari Mbili za Binary (Bits & Bytes)', title_en: '2. Binary Numbers (0 & 1) & Data', icon: '💡' },
+    { id: 'logic_gates_circuits', title_sw: '3. Milango ya Mantiki: AND, OR, NOT & Swichi', title_en: '3. Logic Gates: AND, OR, NOT & Truth Tables', icon: '🔌' },
+    { id: 'programming_python_scratch', title_sw: '4. Utayarishaji wa Programu (Python & Scratch)', title_en: '4. Coding in Python & Scratch', icon: '🐍' },
+    { id: 'computer_hardware_components', title_sw: '5. Vifaa vya Ndani: CPU, RAM, SSD & Motherboard', title_en: '5. Computer Hardware: CPU, RAM & SSD', icon: '🖥️' },
+    { id: 'networks_internet_security', title_sw: '6. Mtandao wa Intaneti, LAN & Usalama wa Data', title_en: '6. Computer Networks & Cybersecurity', icon: '🌐' },
+    { id: 'ai_machine_learning_concepts', title_sw: '7. Akili Unde (AI) & Mafunzo ya Mashine (ML)', title_en: '7. Artificial Intelligence & Machine Learning', icon: '🤖' },
+    { id: 'databases_information_systems', title_sw: '8. Hifadhidata (Databases), Majedwali & SQL', title_en: '8. Relational Databases & SQL Queries', icon: '🗄️' }
+  ]
+};
+
+// Interactive Learner Subject Selection & Dynamic Topic Dropdown Handlers
+function selectLearnerSubject(subjectName) {
+  STATE.selectedSubject = subjectName;
+  
+  const subjects = ['Biology', 'Physics', 'Chemistry', 'Mathematics', 'Computer Science'];
+  subjects.forEach(s => {
+    const welcomeBtn = document.getElementById(`welcomeSubj-${s}`);
+    const chatBtn = document.getElementById(`chatSubj-${s}`);
+    
+    if (welcomeBtn) {
+      if (s === subjectName) {
+        welcomeBtn.className = 'px-2 py-2 rounded-xl text-xs font-bold transition-all flex flex-col items-center justify-center bg-emerald-600 text-white shadow-xs';
+      } else {
+        welcomeBtn.className = 'px-2 py-2 rounded-xl text-xs font-bold transition-all flex flex-col items-center justify-center bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200';
+      }
+    }
+    
+    if (chatBtn) {
+      if (s === subjectName) {
+        chatBtn.className = 'px-2 py-0.5 rounded-lg text-[11px] font-bold bg-emerald-600 text-white shadow-2xs transition-all flex-shrink-0';
+      } else {
+        chatBtn.className = 'px-2 py-0.5 rounded-lg text-[11px] font-bold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all flex-shrink-0';
+      }
+    }
+  });
+
+  populateLearnerTopicDropdowns(subjectName);
+}
+
+function populateLearnerTopicDropdowns(subjectName) {
+  const topics = CURRICULUM_SUBJECT_TOPICS[subjectName] || CURRICULUM_SUBJECT_TOPICS['Biology'];
+  const isSw = STATE.language !== 'en';
+  
+  const landingSelect = document.getElementById('learnerLandingTopicSelect');
+  const chatSelect = document.getElementById('chatTopicSelect');
+  
+  const optionsHtml = topics.map(t => `
+    <option value="${t.id}">${t.icon} ${isSw ? t.title_sw : t.title_en}</option>
+  `).join('');
+
+  if (landingSelect) {
+    landingSelect.innerHTML = optionsHtml;
+    STATE.selectedTopicId = landingSelect.value;
+  }
+  if (chatSelect) {
+    chatSelect.innerHTML = optionsHtml;
+    if (landingSelect) chatSelect.value = landingSelect.value;
+  }
+}
+
+function handleLearnerTopicSelect(topicId) {
+  STATE.selectedTopicId = topicId;
+  const landingSelect = document.getElementById('learnerLandingTopicSelect');
+  const chatSelect = document.getElementById('chatTopicSelect');
+  if (landingSelect && landingSelect.value !== topicId) landingSelect.value = topicId;
+  if (chatSelect && chatSelect.value !== topicId) chatSelect.value = topicId;
+}
+
+function startSelectedTopicLesson() {
+  const topicId = STATE.selectedTopicId || document.getElementById('learnerLandingTopicSelect')?.value || 'photosynthesis';
+  
+  let topicObj = null;
+  for (let s in CURRICULUM_SUBJECT_TOPICS) {
+    const found = CURRICULUM_SUBJECT_TOPICS[s].find(t => t.id === topicId);
+    if (found) { topicObj = found; break; }
+  }
+  
+  const isSw = STATE.language !== 'en';
+  const topicTitle = topicObj ? (isSw ? topicObj.title_sw : topicObj.title_en) : topicId;
+  
+  let promptText = '';
+  if (STATE.language === 'en') {
+    promptText = `Teach me about ${topicTitle}`;
+  } else if (STATE.language === 'sheng') {
+    promptText = `Nielezange kuhusu ${topicTitle}`;
+  } else if (STATE.language === 'yo') {
+    promptText = `Kọ́ mi nípa ${topicTitle}`;
+  } else if (STATE.language === 'ha') {
+    promptText = `Koya mini game da ${topicTitle}`;
+  } else {
+    promptText = `Nifundishe kuhusu ${topicTitle}`;
+  }
+  
+  sendQuickPrompt(promptText);
+}
+
 function handleSubjectChange(e) {
   STATE.subject = e.target.value;
   const labels = {
@@ -1140,6 +1294,7 @@ function changeLanguage(langCode) {
   renderRegionUI();
   renderVault();
   renderMastery();
+  populateLearnerTopicDropdowns(STATE.selectedSubject || 'Biology');
 
   if (langMeta) {
     appendSystemNotice(`🌍 Lugha: <b>${langMeta.flag} ${langMeta.native_name}</b> (${langMeta.motto}).`);
