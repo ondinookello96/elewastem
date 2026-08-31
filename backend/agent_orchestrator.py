@@ -13,7 +13,7 @@ from datetime import datetime
 AGENT_ROLES = {
     "Scout": {
         "title": "🌍 Geo-Eco Scout Agent",
-        "purpose": "Detect and map the learner's African ecological biome (Lake Basin, Coastal, Highlands, Arid, Urban) with zero data leak.",
+        "purpose": "Detect and map the learner's African ecological biome (Lake Basin, Coastal, Highlands, Arid, Urban) using local bounding-box resolution.",
         "authority_limits": "Cannot transmit raw GPS coordinates to cloud; operates strictly on client-side bounding boxes.",
         "notification_triggers": ["GPS consent granted/revoked", "Unknown geographic coordinate detected"]
     },
@@ -25,8 +25,8 @@ AGENT_ROLES = {
     },
     "Guardian": {
         "title": "🛡️ Safety & Data Protection Guardian Agent",
-        "purpose": "Enforce child safety guardrails, harm prevention (ETHOS), and statutory compliance across 8+ African DPAs.",
-        "authority_limits": "Immediate veto power over hazardous home experiment suggestions or PII collection.",
+        "purpose": "Enforce child safety guardrails, harm prevention (ETHOS), and statutory alignment across 8+ African DPAs.",
+        "authority_limits": "Immediate veto power over hazardous home experiment suggestions or unnecessary PII collection.",
         "notification_triggers": ["Hazardous keyword detected (acids, mains electricity, flames)", "Non-consensual tracking attempt"]
     },
     "Storyteller": {
@@ -55,7 +55,7 @@ class TrailMemoryEngine:
             "R_Relational": "Opt-in student mastery graph, badges, preferred language, and eco-zone stored in client localStorage.",
             "A_Archival": "Aggregated, anonymized community mastery metrics (e.g. Lake Basin 85% aquatic biology mastery).",
             "I_Inheritance": "Contextual handover rules: Socratic Tutor passes topic mastery to CBC Teacher Planner and Parent SMS Dispatcher.",
-            "L_LandRights": "Data Sovereignty: 100% of student memories belong to the learner/family and remain under African legal custody."
+            "L_LandRights": "Data Sovereignty: Student learning records belong to the learner/family with local-first custody and statutory 1-click erasure."
         }
 
 

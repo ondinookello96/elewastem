@@ -1497,7 +1497,7 @@ function renderJurisdictionDetails(countryCode) {
       <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl flex items-center justify-between">
         <div class="flex items-center space-x-2 text-[11px] text-emerald-950">
           <span>🔒</span>
-          <span><b>Data Sovereignty:</b> Hakuna data ya mtoto inayopelekwa kwenye seva za kigeni bila idhini.</span>
+          <span><b>Ulinzi wa Data:</b> Taarifa za mwanafunzi zinalindwa kwa misingi ya kupunguza ukusanyaji wa data (Data Minimization), huku huduma za mtandao zikitumia mawasiliano yaliyosimbwa (Encrypted).</span>
         </div>
         <button onclick="revokeLocationConsent()" class="text-[10px] bg-white border border-emerald-300 text-red-600 font-bold px-2 py-1 rounded-lg">
           Futa Data

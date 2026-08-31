@@ -67,12 +67,12 @@ ETHICAL_FRAMEWORKS = {
                 "description": "Never assumes consent. Explicit, plain-language parental consent modals (Kenya DPA Section 29, Nigeria NDPA Section 31, POPIA Section 34)."
             },
             "A": {
-                "name": "Anonymization Depth",
-                "description": "Strips all PII (names, exact GPS coordinates) on the client side; only coarse bounding-box eco-zones (e.g., Lake Basin) are processed."
+                "name": "Anonymization Depth & Data Minimization",
+                "description": "Applies client-side data minimization; raw GPS coordinates are mapped to coarse regional eco-zones locally, and live AI queries transmit only necessary pedagogical context."
             },
             "S": {
-                "name": "Sovereignty First",
-                "description": "Data generated in Africa stays under African governance and 100% on-device edge storage; zero non-consensual foreign telemetry extraction."
+                "name": "Sovereignty & Local-First Custody",
+                "description": "Local-first storage by default; when online AI or SMS features are utilized, data is transmitted over encrypted channels under applicable African data protection frameworks."
             },
             "I": {
                 "name": "Intentional Retention",
