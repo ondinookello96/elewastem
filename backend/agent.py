@@ -8,7 +8,7 @@ import os
 import json
 from typing import Dict, Any, Optional
 from memory import student_memory, StudentProfile
-from tools import find_offline_topic, REGIONS
+from tools import find_offline_topic, REGIONS, get_related_topics_recommendations
 from diagrams import get_diagram_for_topic
 
 # Optional google-genai SDK import
@@ -177,6 +177,7 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
                     "sign_cues": topic_data.get("sign_language_visual_cues_sw", ""),
                     "diagram": get_diagram_for_topic(message) or get_diagram_for_topic(detected_topic["topic"]),
                     "quiz_data": topic_data.get("quiz"),
+                    "related_topics": get_related_topics_recommendations(detected_topic["topic"]),
                     "student_profile": student_memory.get_or_create_profile(student_id).model_dump()
                 }
             except Exception as e:
@@ -209,37 +210,26 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
             f"You have such a sharp and curious mind. Let's explore this exciting concept together step-by-step:"
         )
 
-        terms_formatted = "\n".join([f"• **{t['en']}** ➔ {t['sw']}" for t in topic_data["key_terms"]])
+        text = f"""{intro}
 
-        text = f"""### 🔬 {title}
-
-{intro}
-
+### 🌟 {title}
 {summary}
 
----
-
-#### 💡 Mfano Halisi wa Eneo Lako ({region_info['icon']} {region_info['name_sw'] if is_sw else region_info['name_en']})
+### 🏞️ Mfano Halisi wa Eneo Lako ({region_info['locality_name']}):
 {analogy}
 
----
+### 🧪 Jaribio la Nyumbani Lisilo na Gharama:
+**{exp['title_sw' if is_sw else 'title_en']}**
+* **Vifaa / Materials:** {exp['materials_sw' if is_sw else 'materials_en']}
+* **Hatua / Steps:**
+{exp['steps_sw' if is_sw else 'steps_en']}
 
-#### 📚 Kamusi ya Sayansi (Maneno ya Kujivunia Kujua!)
-{terms_formatted}
-
----
-
-#### 🧪 Jaribu Hili Nyumbani ({exp['title_sw'] if is_sw else exp['title_en']})
-**Vifaa:** {exp['materials_sw'] if is_sw else exp['materials_en']}
-**Hatua:**
-{exp['steps_sw'] if is_sw else exp['steps_en']}
-
----
-
-#### 🎯 Swali la Kirafiki la Kujipima (Unaweza Kujaribu Bila Wasiwasi!)
-**{quiz['question_sw'] if is_sw else quiz['question_en']}**
-{chr(10).join(quiz['options_sw'] if is_sw else quiz['options_en'])}
+### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):
 """
+        for term in topic_data.get("key_terms", []):
+            text += f"* **{term['sw' if is_sw else 'en']}** ({term['en' if is_sw else 'sw']})\n"
+
+        text += f"\n> *\"{topic_data.get('cbc_strand', 'CBC Curriculum')}\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*"
 
         student_memory.add_interaction_history(student_id, "user", message, language)
         student_memory.add_interaction_history(student_id, "assistant", text, language)
@@ -263,6 +253,7 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
             "sign_cues": topic_data.get("sign_language_visual_cues_sw", ""),
             "diagram": get_diagram_for_topic(message) or get_diagram_for_topic(topic_data["id"]),
             "quiz_data": quiz,
+            "related_topics": get_related_topics_recommendations(topic_data["id"]),
             "student_profile": student_memory.get_or_create_profile(student_id).model_dump()
         }
 
@@ -270,6 +261,10 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
         combined = (user_msg + " " + bot_response).lower()
         if any(w in combined for w in ["fish", "samaki", "gills", "mashavu", "lake", "ziwa", "ngege", "mbuta"]):
             return {"topic": "Aquatic Biology & Respiration", "subject": "Biology"}
+        elif any(w in combined for w in ["chem", "kemia", "acid", "asidi", "base", "besi", "neutraliz", "lemon", "soda"]):
+            return {"topic": "Chemistry: Acids, Bases & Reactions", "subject": "Chemistry"}
+        elif any(w in combined for w in ["comput", "code", "coding", "algorithm", "algoriti", "program", "logic", "binary"]):
+            return {"topic": "Computer Science: Algorithms & Logic", "subject": "Computer Science"}
         elif any(w in combined for w in ["plant", "mmea", "leaf", "jani", "photo", "cell", "uhai", "biology"]):
             return {"topic": "Photosynthesis & Plant Biology", "subject": "Biology"}
         elif any(w in combined for w in ["electric", "umeme", "circuit", "saketi", "wire", "battery", "betri"]):

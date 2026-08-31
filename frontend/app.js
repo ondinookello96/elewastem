@@ -1275,6 +1275,23 @@ function appendAssistantMessage(data) {
         </button>` : ''}
       </div>
 
+      <!-- Recommended Next Topics / Learning Pathway -->
+      ${data.related_topics && data.related_topics.length > 0 ? `
+      <div class="pt-2 border-t border-slate-100 space-y-1.5">
+        <p class="text-[11px] font-bold text-slate-600 flex items-center space-x-1">
+          <span>🚀</span>
+          <span>Mada Zinazofuata (Next Steps to Explore):</span>
+        </p>
+        <div class="flex flex-wrap gap-1.5">
+          ${data.related_topics.map(rt => `
+            <button onclick="executeAgentQuery('${escapeHtml(rt.prompt)}', false)" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 flex items-center space-x-1 transition-all shadow-xs">
+              <span>${rt.icon || '👉'}</span>
+              <span>${STATE.language === 'en' ? rt.title_en : rt.title_sw}</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>` : ''}
+
       <!-- Stakeholder Quick Reaction & Feedback Bar -->
       <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
         <div class="flex items-center space-x-1.5">

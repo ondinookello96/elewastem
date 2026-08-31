@@ -569,6 +569,45 @@ def get_available_regions() -> Dict[str, Any]:
     return REGIONS
 
 
+RELATED_TOPIC_GRAPH = {
+    "photosynthesis": [
+        {"id": "aquatic_biology_kisumu", "title_sw": "Upumuaji wa Samaki & Yavuyavu (Biology)", "title_en": "Aquatic Fish Respiration", "prompt": "Eleza jinsi samaki wanavyotumia oksijeni ya mimea ya ziwani kupumua", "icon": "🐟"},
+        {"id": "chemistry_reactions", "title_sw": "Kemia ya Asidi & Mmenyuko (Chemistry)", "title_en": "Acids & Chemical Reactions", "prompt": "Eleza kemia ya asidi na besi", "icon": "⚗️"}
+    ],
+    "aquatic_biology_kisumu": [
+        {"id": "photosynthesis", "title_sw": "Usanisinuru & Oksijeni ya Mimea (Biology)", "title_en": "Photosynthesis & Oxygen", "prompt": "Eleza jinsi mimea inavyotengeneza chakula na kutoa oksijeni", "icon": "🌿"},
+        {"id": "electricity_circuits", "title_sw": "Saketi za Umeme wa Kuvulia Ziwani (Physics)", "title_en": "Night Fishing Electric Circuits", "prompt": "Eleza jinsi saketi za taa za kuvulia samaki zinavyofanya kazi", "icon": "⚡"}
+    ],
+    "electricity_circuits": [
+        {"id": "computer_algorithms", "title_sw": "Algoriti & Mantiki ya Kompyuta (Computer Science)", "title_en": "Computer Algorithms & Logic", "prompt": "Eleza jinsi kompyuta inavyofanya maamuzi ya If-Else", "icon": "💻"},
+        {"id": "gravity_forces", "title_sw": "Nguvu za Mvuto & Msuguano (Physics)", "title_en": "Gravity & Friction Forces", "prompt": "Eleza nguvu ya mvuto na msuguano", "icon": "🌍"}
+    ],
+    "chemistry_reactions": [
+        {"id": "photosynthesis", "title_sw": "Klorofili & Mmenyuko wa Jua (Biology)", "title_en": "Photosynthesis Reaction", "prompt": "Eleza usanisinuru kama mmenyuko wa kikemia", "icon": "🌿"},
+        {"id": "fractions_math", "title_sw": "Sehemu & Uwiano wa Vipimo (Mathematics)", "title_en": "Fractions & Proportions", "prompt": "Eleza sehemu na uwiano katika kugawa vitu", "icon": "🍕"}
+    ],
+    "computer_algorithms": [
+        {"id": "electricity_circuits", "title_sw": "Saketi & Swichi za Kompyuta (Physics)", "title_en": "Circuits & Logic Gates", "prompt": "Eleza jinsi umeme na swichi zinavyoendesha kompyuta", "icon": "⚡"},
+        {"id": "fractions_math", "title_sw": "Hisabati & Nambari (Mathematics)", "title_en": "Fractions & Math", "prompt": "Eleza sehemu za hesabu", "icon": "📐"}
+    ],
+    "fractions_math": [
+        {"id": "computer_algorithms", "title_sw": "Algoriti & Hatua za Hesabu (Computer Science)", "title_en": "Algorithms & Logic", "prompt": "Eleza algoriti za kompyuta", "icon": "💻"},
+        {"id": "chemistry_reactions", "title_sw": "Uwiano wa Kemia ya Asidi (Chemistry)", "title_en": "Chemical Ratios & Reactions", "prompt": "Eleza mmenyuko wa asidi na besi", "icon": "⚗️"}
+    ],
+    "gravity_forces": [
+        {"id": "electricity_circuits", "title_sw": "Saketi za Umeme & Nguvu (Physics)", "title_en": "Electric Circuits & Energy", "prompt": "Eleza saketi kamili za umeme", "icon": "⚡"},
+        {"id": "fractions_math", "title_sw": "Sehemu za Hesabu (Mathematics)", "title_en": "Fractions & Math", "prompt": "Eleza sehemu za nambari", "icon": "📐"}
+    ]
+}
+
+
+def get_related_topics_recommendations(topic_id_or_query: str) -> List[Dict[str, Any]]:
+    """Returns structured next topic recommendations based on current learning."""
+    topic = find_offline_topic(topic_id_or_query)
+    tid = topic.get("id", "photosynthesis")
+    return RELATED_TOPIC_GRAPH.get(tid, RELATED_TOPIC_GRAPH["photosynthesis"])
+
+
 def find_offline_topic(query: str) -> Dict[str, Any]:
     query_lower = query.lower()
     for item in OFFLINE_STEM_VAULT:
