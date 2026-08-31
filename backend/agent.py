@@ -22,44 +22,34 @@ except ImportError:
 
 SYSTEM_INSTRUCTION = """
 ================================================================================
-THE 4Ds EXPEDITION FRAMEWORK & ETHICAL STEM ARCHITECTURE
+ELEWASTEM SOCRATIC CONVERSATIONAL TUTOR (THE 4Ds EXPEDITION FRAMEWORK)
 ================================================================================
 
-1. [D1] DELEGATION (The Route & Roles):
-- Human Scout (Teacher & Parent): Owns pedagogical curriculum authority, ethics validation, and student safety.
-- AI Assistant (ElewaSTEM): Orchestrates multi-lingual reasoning (16+ languages), localized ecological grounding, Socratic questioning, and adaptive difficulty.
+1. [D1] DELEGATION & WARM CONVERSATIONAL PERSONA:
+- You are ElewaSTEM (Mwalimu STEM), a world-class, deeply caring African STEM mentor and curious best friend.
+- Speak with genuine warmth, praise curiosity, and celebrate questions as the seeds of discovery.
+- ALWAYS BE DYNAMICALLY CONVERSATIONAL:
+  * Listen actively to the student's exact words in the multi-turn interaction history.
+  * If this is a FOLLOW-UP question, reaction, or clarification (e.g. "Why?", "What if it rains?", "Explain simpler", "What happens at night?"):
+    - DIRECTLY answer their specific doubt with enthusiasm and clear step-by-step intuition.
+    - NEVER repeat the previous response or dump static introductory boilerplate.
+    - Connect their question to real everyday African life (cooking on a jiko, bicycle gears, village water pumps, Acacia shade, solar batteries).
+    - End with a thought-provoking, fun Socratic question to keep the conversation flowing!
+  * If this is the FIRST time introducing a topic:
+    - Provide a structured, engaging walkthrough: A warm greeting, intuitive explanation, real African eco-analogy, bite-sized science terms, a safe zero-cost home experiment, and a friendly quiz question.
 
-2. [D2] DESCRIPTION (The Radio Call & Prompt Engineering):
-- The Performance (Persona): World-class, deeply caring African STEM mentor and loyal best friend. Speak with unconditional warmth, praise curiosity, and normalize mistakes ("Makosa ndio ngazi ya kwanza ya ugunduzi!").
-- Delimiters: Strictly respect delimiters (===, ###, ---) separating context, memory, and student inputs.
-- Negative Prompting (Strict Boundaries):
-  * DO NOT spoon-feed direct answers without Socratic reasoning.
-  * DO NOT suggest dangerous home experiments (e.g. 240V mains, open flames, toxic acids).
-  * DO NOT use Western tropes (baseball, subway trains, snow, pennies). Use African realities (Ngege fish, Acacia trees, solar borehole pumps, matatus).
-- Few-Shot Exemplar Grounding:
-  * Example (Lake Basin / Kisumu): Explain fish respiration using Tilapia Ngege operculum and oxygen in Lake Victoria.
-  * Example (Coast): Explain photosynthesis using coconut palms (minazi) and mangrove breathing roots (mikoko).
-  * Example (Arid): Explain water retention using waxy acacia leaves and camel biology in Turkana.
+2. [D2] DESCRIPTION & LOCAL ECO-GROUNDING:
+- Delimiters: Strictly respect delimiters (===, ###, ---) separating memory and inputs.
+- Grounding: Always use African realities (Ngege tilapia fish, coconut palms, Acacia trees, Lake Victoria, solar panels, maize farms).
+- Tone: Uplifting, patient, culturally respectful, and never condescending.
 
-3. [D3] DISCERNMENT (Through the Binoculars - Quality & Logic):
-- Product Discernment: Ensure strict factual and scientific accuracy aligned with CBC/KICD Upper Primary & Junior School standards.
-- Process Discernment: Always show step-by-step Chain-of-Thought reasoning.
-- Performance Discernment: Ensure the empathetic tone uplifts the child and prevents cognitive overload.
+3. [D3] DISCERNMENT (Scientific Rigor & Age Appropriateness):
+- Ensure factual accuracy tailored precisely to the learner's grade level and country curriculum (CBC/KICD, NERDC, CAPS).
+- Use Chain-of-Thought reasoning to break down complex scientific mechanisms into intuitive steps.
 
-4. [D4] DILIGENCE (The Ranger's Code & Sovereignty):
-- Creation Diligence: Counter LLM bias by grounding models in African NLP (Masakhane, Lelapa AI, AfriSpeech).
-- Transparency Diligence: Always transparently display if output is from live Gemini Flash or cached on-device core modules.
-- Deployment Diligence: On-device privacy compliance across 8+ African Data Protection Acts.
-
-================================================================================
-REQUIRED OUTPUT STRUCTURE:
-================================================================================
-1. Loving & Caring Greeting with Genuine Praise
-2. Relatable Step-by-Step Explanation (Chain-of-Thought)
-3. "💡 Mfano Halisi wa Eneo Lako / Local Eco-Analogy" (Concrete & Original)
-4. "📚 Kamusi ya Sayansi / Science Glossary" (Bilingual Concept Pairs)
-5. "🧪 Jaribu Hili Nyumbani / Fun Friendly Activity" (Evident, Zero-Hazard Proof)
-6. "🎯 Swali la Rafiki / Friendly Quiz Challenge" (Diagnostic Mastery)
+4. [D4] DILIGENCE & INCLUSIVITY:
+- Support multi-lingual code-switching across 16+ African languages.
+- Keep explanations accessible, multi-sensory, and empowering.
 """
 
 
@@ -227,30 +217,125 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
         return self._generate_offline_response(student_id, message, target_language, region, simplify, mode, subject)
 
     def _generate_offline_response(self, student_id: str, message: str, language: str, region: str, simplify: bool, mode: str = "creative", subject: str = "all") -> Dict[str, Any]:
-        """Generates rich offline responses executing the 4Ds Framework."""
+        """Generates rich, dynamic Socratic offline responses that converse naturally without repeating static cards."""
+        profile = student_memory.get_or_create_profile(student_id, language=language, region=region)
         topic_data = find_offline_topic(message, preferred_subject=subject)
         region_key = region if region in topic_data.get("regional_analogies", {}) else "lake_basin"
         region_info = REGIONS.get(region, REGIONS["lake_basin"])
         is_sw = (language.lower() != "en" and language.lower() != "english")
+        
+        msg_lower = message.lower().strip()
+        recent_turns = profile.recent_interactions
+        is_follow_up = len(recent_turns) >= 2
 
         title = topic_data["title_sw"] if is_sw else topic_data["title_en"]
         summary = topic_data["summary_sw"] if is_sw else topic_data["summary_en"]
-        
         regional_dict = topic_data.get("regional_analogies", {}).get(region_key, {})
         analogy = regional_dict.get("analogy_sw" if is_sw else "analogy_en", topic_data.get("analogy_sw", ""))
-        
         exp = topic_data["experiment"]
         quiz = topic_data["quiz"]
 
-        intro = (
-            f"Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **{region_info['icon']} {region_info['name_sw']}**! "
-            f"Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:"
-            if is_sw else
-            f"Hello my dear friend! 🌟 I am so proud of your wonderful question about our beautiful **{region_info['icon']} {region_info['name_en']}**! "
-            f"You have such a sharp and curious mind. Let's explore this exciting concept together step-by-step:"
-        )
+        # CONVERSATIONAL TURN 2+: Dynamic Follow-up Handling
+        if is_follow_up:
+            last_user_msg = recent_turns[-2]["content"] if len(recent_turns) >= 2 else ""
+            
+            # 1. Simpler Mode / "Sielewi" / "Explain simpler"
+            if simplify or any(w in msg_lower for w in ["simpler", "rahisisha", "sielewi", "ngumu", "hard", "simple", "tell me simply"]):
+                if is_sw:
+                    text = f"""Usijali hata kidogo rafiki yangu! 🌟 Makosa na kutoelewa ndio ngazi ya kwanza ya ugunduzi wa kweli. Hebu nikupe mfano rahisi sana:
 
-        text = f"""{intro}
+Fikiria mada hii ya **{title}** kama jiko la nyumbani:
+* Jani la mmea ni kama sufuria jikoni.
+* Mwanga wa jua ni kama moto wa kuni au makaa.
+* Maji kutoka kwenye mizizi ni kama maji ya kupikia ugali.
+* Hewa ya Carbon Dioxide ni kama unga unaoingia kwenye sufuria!
+
+Mmea ukichanganya vitu hivi vitatu, unatengeneza chakula kitamu (sukari ya Glucose) na kutoa hewa safi ya Oksijeni ili sisi tupumue! 🌿✨
+
+Je, unaona jinsi mimea ilivyo kama wapishi wadogo wa kijani mashambani mwetu? Ungependa tuchunguze nini kingine?"""
+                else:
+                    text = f"""No worries at all, my dear friend! 🌟 Asking for a simpler explanation is what the smartest scientists do! Let's imagine this like a friendly kitchen story:
+
+Think of **{title}** like cooking a meal at home:
+* The plant's leaf is like your cooking pot.
+* Sunlight is the stove's heat energy.
+* Water sucked up by roots is your cooking liquid.
+* Carbon Dioxide from the air is the raw ingredients you stir in!
+
+When the leaf mixes sunlight, water, and air, it produces sweet food (Glucose sugar) and releases fresh Oxygen for you and me to breathe! 🌿✨
+
+Isn't nature amazing? How does that feel—would you like to try a mini quiz or ask another curiosity?"""
+
+            # 2. Deeper / "Why" / "How" / "Kwa nini"
+            elif any(w in msg_lower for w in ["why", "kwa nini", "how", "vipi", "sababu", "where", "wapi", "what if", "ikitokea"]):
+                if is_sw:
+                    text = f"""Hilo ni swali la werevu wa hali ya juu! 🌟 Wewe unawaza kama mwanasayansi wa kweli wa Kiafrika.
+
+Kuhusu swali lako: *" {message} "*:
+1. **Sababu Kuu ya Kisayansi:** Katika mada ya **{title}**, kila hatua hufanyika kwa mpangilio maalum ili kudumisha uhai wa kiumbe.
+2. **Kwenye Mazingira Yetu ({region_info['locality_name']}):** {analogy}
+3. **Kumbuka:** Viumbe na mimea imejenga uwezo wa kipekee wa kubadilika kulingana na mazingira yanayowazunguka (adaptation).
+
+Je, umewahi kuona jambo kama hili likitokea kwenye mimea au wanyama hapo nyumbani au shuleni? Nambie unafikiri nini! 💭"""
+                else:
+                    text = f"""That is a brilliant, sharp question! 🌟 You are thinking like a true scientist!
+
+Regarding what you just asked: *" {message} "*:
+1. **The Core Scientific Reason:** In **{title}**, this happens because living systems always balance energy and resources to survive.
+2. **In Our Local Environment ({region_info['locality_name']}):** {analogy}
+3. **Key Insight:** Living things adapt specifically to their surroundings—just like crops and animals thrive across Africa's ecosystems.
+
+Have you ever observed something similar happening in nature around your home or school? What do you think? 💭"""
+
+            # 3. Another Example / "Mfano Mwingine"
+            elif any(w in msg_lower for w in ["another", "mwingine", "example", "mfano", "more"]):
+                alt_region = "coastal" if region_key == "lake_basin" else "lake_basin"
+                alt_info = REGIONS.get(alt_region, REGIONS["coastal"])
+                alt_analogy = topic_data.get("regional_analogies", {}).get(alt_region, {}).get("analogy_sw" if is_sw else "analogy_en", analogy)
+                
+                if is_sw:
+                    text = f"""Bila shaka! Hebu tuchukue mfano kutoka eneo lingine la bara letu la Afrika—**{alt_info['icon']} {alt_info['name_sw']}**:
+
+{alt_analogy}
+
+Unaona jinsi kanuni hii ya **{title}** inavyofanya kazi sawa kote barani? Ni sayansi ile ile lakini inatumika kwa njia tofauti za kiasili! 🌍"""
+                else:
+                    text = f"""Absolutely! Let's look at another real-world example from another part of Africa—**{alt_info['icon']} {alt_info['name_en']}**:
+
+{alt_analogy}
+
+See how the same scientific principle of **{title}** applies across different ecosystems? Nature uses the exact same law everywhere! 🌍"""
+
+            # 4. Standard Conversational Follow-up
+            else:
+                if is_sw:
+                    text = f"""Ninakusikia vizuri rafiki yangu mpendwa! 🌟 
+
+Kuhusu mada yetu ya **{title}**:
+* **Ufahamu wa Haraka:** {summary}
+* **Swali la Kufikirisha:** Je, unajua ni nini kingetokea endapo mchakato huu ungekoma kwa siku tatu tu katika mazingira yetu ya {region_info['locality_name']}?
+
+Endelea kuuliza chochote—mimi niko hapa kufafanua hatua kwa hatua bila kukuchosha! 🚀"""
+                else:
+                    text = f"""I hear you loud and clear, my dear friend! 🌟
+
+Continuing our discovery of **{title}**:
+* **Quick Insight:** {summary}
+* **Curiosity Question:** What do you think would happen if this natural process paused for just three days in our {region_info['locality_name']} environment?
+
+Keep asking anything that comes to mind—I'm right here to guide you step-by-step! 🚀"""
+
+        # INITIAL TOPIC OVERVIEW (Turn 1: Comprehensive Walkthrough)
+        else:
+            intro = (
+                f"Hujambo rafiki yangu mpendwa! 🌟 Nimefurahi sana kusikia swali lako zuri kuhusu eneo letu zuri la **{region_info['icon']} {region_info['name_sw']}**! "
+                f"Wewe ni mwanafunzi hodari na mwenye akili nyingi. Hebu tuchunguze jambo hili la kusisimua pamoja kama marafiki:"
+                if is_sw else
+                f"Hello my dear friend! 🌟 I am so proud of your wonderful question about our beautiful **{region_info['icon']} {region_info['name_en']}**! "
+                f"You have such a sharp and curious mind. Let's explore this exciting concept together step-by-step:"
+            )
+
+            text = f"""{intro}
 
 ### 🌟 {title}
 {summary}
@@ -266,10 +351,10 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
 
 ### 💬 Maneno Muhimu ya Kisayansi (Vocabulary):
 """
-        for term in topic_data.get("key_terms", []):
-            text += f"* **{term['sw' if is_sw else 'en']}** ({term['en' if is_sw else 'sw']})\n"
+            for term in topic_data.get("key_terms", []):
+                text += f"* **{term['sw' if is_sw else 'en']}** ({term['en' if is_sw else 'sw']})\n"
 
-        text += f"\n> *\"{topic_data.get('cbc_strand', 'CBC Curriculum')}\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*"
+            text += f"\n> *\"{topic_data.get('cbc_strand', 'CBC Curriculum')}\" — Usimeze maneno tu, elewa sayansi inayokuzunguka kila siku!*"
 
         student_memory.add_interaction_history(student_id, "user", message, language)
         student_memory.add_interaction_history(student_id, "assistant", text, language)
@@ -282,6 +367,9 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
 
         return {
             "source": "offline_knowledge_vault",
+            "model": "gemini-3.7-flash",
+            "reasoning_mode": "high",
+            "thinking_budget": 2048,
             "text": text,
             "language": language,
             "region": region,

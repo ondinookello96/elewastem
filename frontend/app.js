@@ -5,7 +5,7 @@
 // Application State
 const STATE = {
   studentId: 'demo_student',
-  language: 'sw',
+  language: localStorage.getItem('elewa_user_lang') || 'en',
   jurisdiction: 'KE',
   country: 'Kenya',
   subject: 'all',
@@ -464,6 +464,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   applyAccessibilityClasses();
   await loadOfflinePack();
   await loadLanguagesAndJurisdictions();
+  changeLanguage(STATE.language);
   await refreshProfile();
   await loadFeedbackFeed();
   renderRegionUI();
