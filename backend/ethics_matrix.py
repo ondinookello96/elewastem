@@ -57,13 +57,13 @@ ETHICAL_FRAMEWORKS = {
                 "description": "Tests concepts across diverse African geographies (e.g., how photosynthesis is explained in lush highlands vs arid Turkana vs coastal mangroves)."
             },
             "K": {
-                "name": "Kill Switch & Human Override",
-                "description": "Provides instant teacher and parent override mechanisms to pause AI output or correct misconceptions."
+                "name": "Teacher/Parent Safety Override",
+                "description": "Provides instant teacher and parent safety override mechanisms to pause AI output or correct misconceptions."
             }
         }
     },
     "OASIS": {
-        "title": "The OASIS Protocol (ElewaSTEM Local-First Privacy Design)",
+        "title": "The OASIS Protocol (Privacy-by-Design Protocol)",
         "acronym": "OASIS",
         "framework_type": "ElewaSTEM Internal Design Framework (Proprietary)",
         "pillars": {
@@ -103,15 +103,15 @@ ETHICAL_FRAMEWORKS = {
                 "description": "Scheduled weekly community feedback audits aggregated in the Stakeholder Hub."
             },
             "I": {
-                "name": "Interpretability for Village Elders",
-                "description": "Demands scientific explanations in plain, relatable language that a non-technical grandparent or village elder can understand and enjoy."
+                "name": "Interpretability for Community Elders & Parents",
+                "description": "Demands scientific explanations in plain, relatable language that non-technical parents and community guardians can understand and enjoy."
             },
             "D": {
                 "name": "Disagreement Rights",
                 "description": "Students and teachers can challenge any AI answer with one tap ('Toa Maoni / Pinga Jibu') without penalty."
             },
             "E": {
-                "name": "Elders Council Governance",
+                "name": "Parent–Teacher–Community Advisory Panel",
                 "description": "Governed by a multi-stakeholder triangle of Parents, CBC Teachers, and Community Mentors rather than tech engineers alone."
             }
         }

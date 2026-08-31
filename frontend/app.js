@@ -1171,10 +1171,10 @@ function updateUIStrings() {
 }
 
 
-// Navigation Tabs
+// Navigation Tabs (Learn -> Practice -> Progress -> Parent/Teacher -> Accessibility -> Offline, with Governance & Research as separate dedicated hubs)
 function switchTab(tabId) {
   STATE.activeTab = tabId;
-  ['chat', 'vault', 'mastery', 'stakeholders', 'privacy_hub'].forEach(t => {
+  ['chat', 'vault', 'mastery', 'stakeholders', 'privacy_hub', 'research_hub'].forEach(t => {
     const section = document.getElementById(`${t}Section`);
     const btn = document.getElementById(`tabBtn-${t}`);
     if (t === tabId) {
@@ -1186,6 +1186,17 @@ function switchTab(tabId) {
     }
   });
 
+  // Update Journey Navigation Bar Buttons
+  ['chat', 'mastery', 'stakeholders', 'vault'].forEach(t => {
+    const jBtn = document.getElementById(`journeyBtn-${t}`);
+    if (jBtn) {
+      if (t === tabId) {
+        jBtn.className = 'px-2.5 sm:px-3 py-1 rounded-xl flex items-center space-x-1 transition-all bg-brand-600 text-white shadow-xs font-bold';
+      } else {
+        jBtn.className = 'px-2.5 sm:px-3 py-1 rounded-xl flex items-center space-x-1 transition-all bg-white hover:bg-slate-200 text-slate-700 border border-slate-200 font-bold';
+      }
+    }
+  });
 
   if (tabId === 'mastery') refreshProfile();
   if (tabId === 'stakeholders') {
@@ -1193,6 +1204,17 @@ function switchTab(tabId) {
     loadFeedbackFeed();
   }
   if (tabId === 'privacy_hub') renderJurisdictionDetails(STATE.jurisdiction);
+}
+
+function openPracticeHub() {
+  const isSw = STATE.language !== 'en';
+  // Open the interactive quiz for current active topic or default module
+  const mod = STATE.offlineModules.find(m => m.id === 'photosynthesis') || STATE.offlineModules[0];
+  if (mod && mod.quiz) {
+    openQuizModal(JSON.stringify(mod.quiz), isSw ? mod.title_sw : mod.title_en);
+  } else {
+    switchTab('vault');
+  }
 }
 
 // Stakeholders Sub-Tabs
@@ -1212,9 +1234,9 @@ function switchStakeholderTab(subTab) {
   if (subTab === 'feedback_feed') loadFeedbackFeed();
 }
 
-// Ethics, Privacy, Statistics & Theories Sub-Tabs
+// Governance & Privacy Hub Sub-Tabs (National DPAs & ElewaSTEM Design Frameworks)
 function switchEthicsSubTab(subTab) {
-  ['dpas', 'frameworks', 'statistics', 'theories'].forEach(e => {
+  ['dpas', 'frameworks'].forEach(e => {
     const view = document.getElementById(`ethicsView-${e}`);
     const btn = document.getElementById(`ethicsSubTab-${e}`);
     if (e === subTab) {
@@ -1227,15 +1249,34 @@ function switchEthicsSubTab(subTab) {
   });
 }
 
-function triggerKillSwitch() {
+// Research & Pedagogy Hub Sub-Tabs (Empirical Statistics & African Learning Theories)
+function switchResearchSubTab(subTab) {
+  ['statistics', 'theories'].forEach(r => {
+    const view = document.getElementById(`researchView-${r}`);
+    const btn = document.getElementById(`researchSubTab-${r}`);
+    if (r === subTab) {
+      if (view) view.classList.remove('hidden');
+      if (btn) btn.className = 'px-3.5 py-2 rounded-xl bg-blue-50 text-blue-900 border border-blue-200';
+    } else {
+      if (view) view.classList.add('hidden');
+      if (btn) btn.className = 'px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200';
+    }
+  });
+}
+
+function triggerSafetyOverride() {
   stopSpeech();
-  appendSystemNotice('🛑 <b>TRACK Kill Switch Activated:</b> Mwalimu/Mzazi amesimamisha mazungumzo ya AI mara moja kwa usalama.');
-  alert('🛑 AI Override: Mazungumzo yamesimamishwa. Unaweza kuuliza swali jipya au kusahihisha dhana darasani.');
+  appendSystemNotice('🛑 <b>Teacher/Parent Safety Override Activated:</b> Mwalimu au mzazi amesimamisha mazungumzo ya AI mara moja kwa ajili ya usalama.');
+  alert('🛑 Safety Override: Mazungumzo yamesimamishwa. Unaweza kuuliza swali jipya au kusahihisha dhana darasani.');
+}
+
+function triggerKillSwitch() {
+  triggerSafetyOverride();
 }
 
 function elderDisagreement(topic) {
   openFeedbackModal('teacher');
-  appendSystemNotice('👥 <b>PRIDE Loop (Disagreement Rights):</b> Haki ya kupinga au kusahihisha jibu la AI imefunguliwa kwa Mwalimu/Mzazi.');
+  appendSystemNotice('👥 <b>Parent–Teacher–Community Advisory Panel:</b> Haki ya kupinga au kusahihisha jibu la AI imefunguliwa kwa Mwalimu/Mzazi.');
 }
 
 function getOrCreateStudentPairingCode() {

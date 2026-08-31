@@ -192,69 +192,100 @@
           </div>
         </div>
 
-        <!-- 4. STUDIES, DEVELOPMENT & STAKEHOLDERS HUBS -->
+        <!-- 4. CORE LEARNING JOURNEY & INSTITUTIONAL HUBS -->
         <div class="space-y-1.5 pt-1 border-t border-slate-100">
-          <span class="text-[10px] font-black uppercase text-amber-700 tracking-wider" data-i18n="hubs_title">📂 Masomo, Maendeleo & Wadau</span>
+          <span class="text-[10px] font-black uppercase text-amber-700 tracking-wider">📂 Safari ya Masomo & Wadau</span>
           
           <div class="space-y-1.5">
-            <!-- Return to Chat -->
+            <!-- 1. Learn (Chat) -->
             <button type="button" onclick="switchTab('chat'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl flex items-center justify-between transition-all">
               <div class="flex items-center space-x-2">
                 <span class="text-base">💬</span>
                 <div>
-                  <p class="font-bold text-emerald-950 text-xs" data-i18n="hub_chat_title">Gumzo la Masomo</p>
-                  <p class="text-[10px] text-emerald-700" data-i18n="hub_chat_sub">Rudi kwenye ukurasa wa gumzo la masomo</p>
+                  <p class="font-bold text-emerald-950 text-xs">1. Learn (Gumzo la Masomo)</p>
+                  <p class="text-[10px] text-emerald-700">Mwalimu wa AI wa Socratic STEM</p>
                 </div>
               </div>
               <span class="text-xs font-bold text-emerald-700">➜</span>
             </button>
 
-            <!-- Offline Vault Studies -->
-            <button type="button" onclick="switchTab('vault'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
+            <!-- 2. Practice -->
+            <button type="button" onclick="openPracticeHub(); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
               <div class="flex items-center space-x-2">
-                <span class="text-base">📦</span>
+                <span class="text-base">🎯</span>
                 <div>
-                  <p class="font-bold text-slate-900 text-xs" data-i18n="hub_vault_title">Hifadhi ya Masomo (Offline Vault)</p>
-                  <p class="text-[10px] text-slate-500" data-i18n="hub_vault_sub">Masomo makuu yanapatikana bila mtandao baada ya kusakinisha</p>
+                  <p class="font-bold text-slate-900 text-xs">2. Practice (Majaribio & Maswali)</p>
+                  <p class="text-[10px] text-slate-500">Majaribio ya jikoni na maswali ya kujipima</p>
                 </div>
               </div>
               <span class="text-xs font-bold text-slate-400">➜</span>
             </button>
 
-            <!-- Development & Mastery (Maendeleo) -->
+            <!-- 3. Progress (Mastery) -->
             <button type="button" onclick="switchTab('mastery'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
               <div class="flex items-center space-x-2">
                 <span class="text-base">🏆</span>
                 <div>
-                  <p class="font-bold text-slate-900 text-xs" data-i18n="hub_mastery_title">Maendeleo & Beji za Ushindi</p>
-                  <p class="text-[10px] text-slate-500" data-i18n="hub_mastery_sub">Kiwango cha uelewa wa mada na beji</p>
+                  <p class="font-bold text-slate-900 text-xs">3. Progress (Maendeleo & Beji)</p>
+                  <p class="text-[10px] text-slate-500">Kiwango cha uelewa wa mada na beji</p>
                 </div>
               </div>
               <span class="text-xs font-bold text-slate-400">➜</span>
             </button>
 
-            <!-- Stakeholder & Feedback Center -->
+            <!-- 4. Parent / Teacher Hub -->
             <button type="button" onclick="switchTab('stakeholders'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
               <div class="flex items-center space-x-2">
-                <span class="text-base">👥</span>
+                <span class="text-base">👨‍👩‍👧</span>
                 <div>
-                  <p class="font-bold text-slate-900 text-xs" data-i18n="hub_stakeholders_title">Kituo cha Wadau & Maoni</p>
-                  <p class="text-[10px] text-slate-500" data-i18n="hub_stakeholders_sub">Mipango ya walimu, SMS za wazazi na maoni</p>
+                  <p class="font-bold text-slate-900 text-xs">4. Parent / Teacher (Wazazi & Walimu)</p>
+                  <p class="text-[10px] text-slate-500">Mipango ya CBC, SMS za wazazi na vilabu</p>
                 </div>
               </div>
               <span class="text-xs font-bold text-slate-400">➜</span>
             </button>
 
-            <!-- Data Protection (Pan-African DPA) -->
-            <button type="button" onclick="switchTab('privacy_hub'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
+            <!-- 5. Offline Vault -->
+            <button type="button" onclick="switchTab('vault'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-between transition-all">
+              <div class="flex items-center space-x-2">
+                <span class="text-base">📦</span>
+                <div>
+                  <p class="font-bold text-slate-900 text-xs">5. Offline (Hifadhi ya Masomo)</p>
+                  <p class="text-[10px] text-slate-500">Masomo makuu yanapatikana bila mtandao</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-slate-400">➜</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. INSTITUTIONAL, GOVERNANCE & RESEARCH -->
+        <div class="space-y-1.5 pt-1 border-t border-slate-100">
+          <span class="text-[10px] font-black uppercase text-indigo-700 tracking-wider">🏛️ Utawala, Utafiti & Maadili</span>
+          
+          <div class="space-y-1.5">
+            <!-- Governance Hub (DPAs & Privacy-by-Design Protocols) -->
+            <button type="button" onclick="switchTab('privacy_hub'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-xl flex items-center justify-between transition-all">
               <div class="flex items-center space-x-2">
                 <span class="text-base">🛡️</span>
                 <div>
-                  <p class="font-bold text-slate-900 text-xs" data-i18n="hub_privacy_title">Ulinzi wa Data za Kibinafsi</p>
-                  <p class="text-[10px] text-slate-500" data-i18n="hub_privacy_sub">Sheria 8 za nchi za Afrika (DPA)</p>
+                  <p class="font-bold text-indigo-950 text-xs">Governance Hub (Utawala & Sheria)</p>
+                  <p class="text-[10px] text-indigo-700">Sheria 8 za Data za Afrika & Mifumo ya Maadili</p>
                 </div>
               </div>
-              <span class="text-xs font-bold text-slate-400">➜</span>
+              <span class="text-xs font-bold text-indigo-700">➜</span>
+            </button>
+
+            <!-- Research & Pedagogy Hub (Empirical Statistics & Learning Theories) -->
+            <button type="button" onclick="switchTab('research_hub'); closeAppMenuDropdown();" class="w-full text-left px-3 py-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl flex items-center justify-between transition-all">
+              <div class="flex items-center space-x-2">
+                <span class="text-base">🔬</span>
+                <div>
+                  <p class="font-bold text-blue-950 text-xs">Research & Pedagogy (Utafiti wa Elimu)</p>
+                  <p class="text-[10px] text-blue-700">Takwimu rasmi & Nadharia 8 za Mafunzo</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-blue-700">➜</span>
             </button>
 
             <!-- 16+ African Languages NLP -->
@@ -262,8 +293,8 @@
               <div class="flex items-center space-x-2">
                 <span class="text-base">🌍</span>
                 <div>
-                  <p class="font-bold text-slate-900 text-xs" data-i18n="hub_languages_title">Lugha 16+ za Kiafrika</p>
-                  <p class="text-[10px] text-slate-500" data-i18n="hub_languages_sub">Tathmini za Masakhane na Gemini Multilingual</p>
+                  <p class="font-bold text-slate-900 text-xs">Lugha 16+ za Kiafrika (NLP Matrix)</p>
+                  <p class="text-[10px] text-slate-500">Tathmini za Masakhane na Gemini Multilingual</p>
                 </div>
               </div>
               <span class="text-xs font-bold text-slate-400">➜</span>
@@ -291,6 +322,39 @@
       </div>
     </div>
   </header>
+
+  <!-- CORE USER JOURNEY BAR (Learn -> Practice -> Progress -> Parent/Teacher -> Accessibility -> Offline) -->
+  <nav class="bg-white/95 border-b border-slate-200 px-2 sm:px-4 py-1.5 flex items-center justify-start sm:justify-center gap-1 sm:gap-2 text-[11px] font-bold flex-shrink-0 z-20 overflow-x-auto no-scrollbar shadow-xs">
+    <button onclick="switchTab('chat')" id="journeyBtn-chat" class="px-2.5 sm:px-3 py-1 rounded-xl flex items-center space-x-1 transition-all bg-brand-600 text-white shadow-xs flex-shrink-0">
+      <span>💬</span>
+      <span>1. Learn</span>
+    </button>
+    <span class="text-slate-300 hidden sm:inline flex-shrink-0">➔</span>
+    <button onclick="openPracticeHub()" id="journeyBtn-practice" class="px-2.5 sm:px-3 py-1 rounded-xl flex items-center space-x-1 transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 flex-shrink-0">
+      <span>🎯</span>
+      <span>2. Practice</span>
+    </button>
+    <span class="text-slate-300 hidden sm:inline flex-shrink-0">➔</span>
+    <button onclick="switchTab('mastery')" id="journeyBtn-mastery" class="px-2.5 sm:px-3 py-1 rounded-xl flex items-center space-x-1 transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 flex-shrink-0">
+      <span>🏆</span>
+      <span>3. Progress</span>
+    </button>
+    <span class="text-slate-300 hidden sm:inline flex-shrink-0">➔</span>
+    <button onclick="switchTab('stakeholders')" id="journeyBtn-stakeholders" class="px-2.5 sm:px-3 py-1 rounded-xl flex items-center space-x-1 transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 flex-shrink-0">
+      <span>👨‍👩‍👧</span>
+      <span>4. Parent/Teacher</span>
+    </button>
+    <span class="text-slate-300 hidden sm:inline flex-shrink-0">➔</span>
+    <button onclick="openA11yModal()" id="journeyBtn-a11y" class="px-2.5 sm:px-3 py-1 rounded-xl flex items-center space-x-1 transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 flex-shrink-0">
+      <span>♿</span>
+      <span>5. Accessibility</span>
+    </button>
+    <span class="text-slate-300 hidden sm:inline flex-shrink-0">➔</span>
+    <button onclick="switchTab('vault')" id="journeyBtn-vault" class="px-2.5 sm:px-3 py-1 rounded-xl flex items-center space-x-1 transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 flex-shrink-0">
+      <span>📦</span>
+      <span>6. Offline</span>
+    </button>
+  </nav>
 
   <!-- MAIN CONTAINER (100% PURE CHAT WORKSPACE) -->
   <main class="flex-1 flex flex-col h-full min-h-0 overflow-hidden relative">
@@ -615,12 +679,12 @@
 
     </section>
 
-    <!-- 5. PAN-AFRICAN PRIVACY & ETHICAL AI HUB (DPA, OASIS, ETHOS, PRIDE, HORIZON) -->
+    <!-- 5. GOVERNANCE & PRIVACY HUB (NATIONAL DPAS & PRIVACY-BY-DESIGN PROTOCOLS) -->
     <section id="privacy_hubSection" class="hidden flex-1 overflow-y-auto p-4 max-w-4xl w-full mx-auto space-y-6">
       <div class="flex items-center justify-between bg-white border border-slate-200 px-4 py-2.5 rounded-2xl shadow-xs">
         <div class="flex items-center space-x-2">
           <span class="text-xl">🛡️</span>
-          <span class="font-bold text-slate-800 text-sm" data-i18n="hub_privacy_title">Ulinzi wa Data za Kibinafsi</span>
+          <span class="font-bold text-slate-800 text-sm">Governance Hub (Utawala & Sheria za Data)</span>
         </div>
         <button onclick="switchTab('chat')" class="flex items-center space-x-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs rounded-xl border border-emerald-200 transition-all shadow-xs">
           <span>💬</span>
@@ -631,26 +695,20 @@
       <div class="bg-gradient-to-r from-emerald-900 to-teal-800 rounded-3xl p-6 text-white shadow-lg space-y-2">
         <div class="flex items-center space-x-2">
           <span class="text-2xl">🛡️</span>
-          <h2 class="text-lg font-black tracking-tight" data-i18n="privacy_banner_title">Ulinzi wa Data & Maadili ya AI</h2>
+          <h2 class="text-lg font-black tracking-tight">Kituo cha Utawala wa Kisheria & Maadili ya AI (Governance Hub)</h2>
         </div>
-        <p class="text-xs text-emerald-200 leading-relaxed" data-i18n="privacy_banner_sub">
-          Kuzingatia sheria za ulinzi wa data za watoto na mifumo ya maadili ya AI barani Afrika.
+        <p class="text-xs text-emerald-200 leading-relaxed">
+          Kuzingatia sheria 8 za kitaifa za ulinzi wa data za watoto na mifumo ya usanifu wa maadili ya AI (Privacy-by-Design) barani Afrika.
         </p>
       </div>
 
-      <!-- Ethics & Privacy Sub-Tabs -->
+      <!-- Governance Sub-Tabs -->
       <div class="flex space-x-2 border-b border-slate-200 pb-2 overflow-x-auto no-scrollbar text-xs font-bold">
         <button onclick="switchEthicsSubTab('dpas')" id="ethicsSubTab-dpas" class="px-3.5 py-2 rounded-xl bg-emerald-50 text-emerald-900 border border-emerald-200">
-          📜 Sheria za Data
+          📜 Sheria za Data za Nchi (National DPAs)
         </button>
         <button onclick="switchEthicsSubTab('frameworks')" id="ethicsSubTab-frameworks" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200">
-          ⚖️ Mifumo ya Maadili ya AI
-        </button>
-        <button onclick="switchEthicsSubTab('statistics')" id="ethicsSubTab-statistics" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200">
-          📊 Takwimu za Elimu
-        </button>
-        <button onclick="switchEthicsSubTab('theories')" id="ethicsSubTab-theories" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200">
-          🧠 Nadharia za Mafunzo
+          ⚖️ Mifumo ya Usanifu wa Maadili (Design Frameworks)
         </button>
       </div>
 
@@ -679,7 +737,7 @@
         </div>
       </div>
 
-      <!-- 5B. ETHICS FRAMEWORKS VIEW (ETHOS, TRACK, OASIS, PRIDE, HORIZON) -->
+      <!-- 5B. ETHICS FRAMEWORKS VIEW -->
       <div id="ethicsView-frameworks" class="hidden space-y-4">
         <!-- Proprietary/Internal Design Notice Banner -->
         <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 text-xs text-blue-900 space-y-1">
@@ -714,9 +772,9 @@
             <div class="flex items-center justify-between border-b border-emerald-200 pb-2">
               <h4 class="font-black text-emerald-950 text-sm flex items-center space-x-2">
                 <span>💧</span>
-                <span>The OASIS Protocol (ElewaSTEM Local-First Privacy Design)</span>
+                <span>The OASIS Protocol (Privacy-by-Design Protocol)</span>
               </h4>
-              <span class="bg-emerald-200 text-emerald-900 text-[10px] font-bold px-2 py-0.5 rounded-full">Local-First Privacy</span>
+              <span class="bg-emerald-200 text-emerald-900 text-[10px] font-bold px-2 py-0.5 rounded-full">Privacy-by-Design</span>
             </div>
             <p class="text-emerald-900"><b>O (Opt-in by Design):</b> Kuomba idhini ya wazi ya mzazi kama mgeni mwenye heshima.</p>
             <p class="text-emerald-900"><b>A (Anonymization Depth):</b> Kupunguza na kuficha taarifa binafsi (Data Minimization & Privacy by Design).</p>
@@ -734,10 +792,11 @@
               </h4>
               <span class="bg-purple-200 text-purple-900 text-[10px] font-bold px-2 py-0.5 rounded-full">NLP & Equity</span>
             </div>
+            <p class="text-purple-900"><b>T (Testing across Dialects):</b> Jaribio la mifano ya lugha za kiasili (Sheng, Kiswahili, Yoruba, Hausa, Pidgin).</p>
             <p class="text-purple-900"><b>R (Representation):</b> Ushirikishwaji wa ulemavu wa kuona (audio descriptions) na vielelezo vya picha/michoro (visual concept cues).</p>
             <p class="text-purple-900"><b>A (Amplification):</b> Kuondoa ubaguzi wa kijinsia katika masomo ya Sayansi na Uhandisi.</p>
             <p class="text-purple-900"><b>C (Counterfactuals):</b> Kujaribu mifano ya mazingira tofauti (ziwani, milimani, jangwani, pwani).</p>
-            <p class="text-purple-900"><b>K (Kill Switch):</b> Kitufe cha mwalimu/mzazi kusimamisha jibu lolote la AI mara moja.</p>
+            <p class="text-purple-900"><b>K (Safety Override):</b> Kitufe cha mwalimu au mzazi kusimamisha jibu lolote la AI mara moja (Teacher/Parent Safety Override).</p>
           </div>
 
           <!-- PRIDE -->
@@ -751,9 +810,9 @@
             </div>
             <p class="text-indigo-900"><b>P (Pause Points):</b> Uhakiki wa mwalimu kabla ya vyeti au mitihani mikubwa.</p>
             <p class="text-indigo-900"><b>R (Review Cadence):</b> Ukaguzi wa mara kwa mara wa maoni ya jamii na wadau.</p>
-            <p class="text-indigo-900"><b>I (Interpretability):</b> Maelezo mepesi na ya moja kwa moja yanayoeleweka hata na wazee wa kijiji.</p>
+            <p class="text-indigo-900"><b>I (Interpretability):</b> Maelezo mepesi na ya moja kwa moja yanayoeleweka na wazazi na walezi wa jamii.</p>
             <p class="text-indigo-900"><b>D (Disagreement Rights):</b> Mtoto au mwalimu ana haki ya kupinga jibu lolote la AI ("Pinga Jibu").</p>
-            <p class="text-indigo-900"><b>E (Elders Council):</b> Baraza la Wadau (Wazazi, Walimu, Jamii) ndio wasimamizi wakuu wa mfumo.</p>
+            <p class="text-indigo-900"><b>E (Community Advisory Panel):</b> Baraza la Ushauri la Jamii (Parent-Teacher-Community Advisory Panel) ndio wasimamizi wakuu wa mfumo.</p>
           </div>
 
           <!-- HORIZON -->
@@ -775,9 +834,43 @@
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- 5C. EMPIRICAL STATISTICS VIEW (WORLD BANK, UNESCO, UNICEF, USAWA AGENDA) -->
-      <div id="ethicsView-statistics" class="hidden space-y-4">
+    <!-- 6. RESEARCH & PEDAGOGY HUB (EMPIRICAL STATISTICS & AFRICAN LEARNING THEORIES) -->
+    <section id="research_hubSection" class="hidden flex-1 overflow-y-auto p-4 max-w-4xl w-full mx-auto space-y-6">
+      <div class="flex items-center justify-between bg-white border border-slate-200 px-4 py-2.5 rounded-2xl shadow-xs">
+        <div class="flex items-center space-x-2">
+          <span class="text-xl">🔬</span>
+          <span class="font-bold text-slate-800 text-sm">Research & Pedagogy (Utafiti wa Elimu & Nadharia)</span>
+        </div>
+        <button onclick="switchTab('chat')" class="flex items-center space-x-1.5 px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-800 font-bold text-xs rounded-xl border border-blue-200 transition-all shadow-xs">
+          <span>💬</span>
+          <span data-i18n="back_to_chat">Rudi kwenye Gumzo</span>
+        </button>
+      </div>
+
+      <div class="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-3xl p-6 text-white shadow-lg space-y-2">
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">🔬</span>
+          <h2 class="text-lg font-black tracking-tight">Kituo cha Utafiti wa Elimu & Nadharia za Mafunzo (Research Hub)</h2>
+        </div>
+        <p class="text-xs text-blue-200 leading-relaxed">
+          Uchambuzi wa takwimu rasmi za elimu (World Bank, UNESCO, UNICEF, Usawa Agenda) na misingi 8 ya nadharia za mafunzo ya watoto (African Pedagogy Matrix).
+        </p>
+      </div>
+
+      <!-- Research Sub-Tabs -->
+      <div class="flex space-x-2 border-b border-slate-200 pb-2 overflow-x-auto no-scrollbar text-xs font-bold">
+        <button onclick="switchResearchSubTab('statistics')" id="researchSubTab-statistics" class="px-3.5 py-2 rounded-xl bg-blue-50 text-blue-900 border border-blue-200">
+          📊 Takwimu za Elimu & Vyanzo Rasmi
+        </button>
+        <button onclick="switchResearchSubTab('theories')" id="researchSubTab-theories" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200">
+          🧠 Nadharia 8 za Mafunzo ya Kiafrika
+        </button>
+      </div>
+
+      <!-- 6A. EMPIRICAL STATISTICS VIEW -->
+      <div id="researchView-statistics" class="space-y-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
           <!-- Card 1: 89% Learning Poverty -->
           <div class="bg-red-50 border border-red-200 rounded-2xl p-4 shadow-sm space-y-2.5 flex flex-col justify-between">
@@ -873,8 +966,8 @@
         </div>
       </div>
 
-      <!-- 5D. LEARNING THEORIES & AFRICAN PEDAGOGY VIEW -->
-      <div id="ethicsView-theories" class="hidden space-y-4">
+      <!-- 6B. LEARNING THEORIES & AFRICAN PEDAGOGY VIEW -->
+      <div id="researchView-theories" class="hidden space-y-4">
         <div class="grid grid-cols-1 gap-3 text-xs">
           <!-- 1. Constructivism -->
           <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">

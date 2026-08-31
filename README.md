@@ -53,18 +53,22 @@
 5. **🛡️ ElewaSTEM Proprietary Ethical & Architectural Design Frameworks**:
    * *(Custom internal AI engineering & governance protocols developed specifically for ElewaSTEM, distinct from statutory national laws)*:
    * **ETHOS**: Ethical guardrails by design (Harm prevention, transparency, child safety filters).
-   * **OASIS**: Local-first privacy architecture (Opt-in consent, data minimization, 1-click erasure).
-   * **TRACK**: Bias mitigation & inclusion (Diverse African datasets, spatial/visual cues, kill switch).
-   * **PRIDE**: Human-in-the-loop community governance (Pause points, dispute rights, educator oversight).
+   * **OASIS**: Privacy-by-Design Protocol (Opt-in consent, data minimization, 1-click erasure).
+   * **TRACK**: Bias mitigation & inclusion (Diverse African datasets, spatial/visual cues, Teacher/Parent Safety Override).
+   * **PRIDE**: Human-in-the-loop community governance (Pause points, dispute rights, Parent–Teacher–Community Advisory Panel).
    * **HORIZON**: Intergenerational & ecological stewardship (Indigenous knowledge preservation, ecological respect).
 
-6. **👥 360° Multi-Stakeholder Hub & Remote Parent Synchronization**:
+6. **🗺️ Streamlined Learner Flow & Dedicated Governance/Research Hubs**:
+   * **Simple 6-Step Journey**: **Learn** (Interactive Socratic Tutor) ➔ **Practice** (Interactive Science Quizzes) ➔ **Progress** (Mastery Tracker & Badges) ➔ **Parent/Teacher** (Multi-Stakeholder Sync) ➔ **Accessibility** (Screen Reader, Audio Descriptions & Concept Cues) ➔ **Offline** (Offline Learning Vault).
+   * **Dedicated Institutional Hubs**: Distinct **Governance Hub** (8 National DPAs & Privacy-by-Design Protocols) and **Research & Pedagogy Hub** (Empirical Citations & African Learning Theories Matrix).
+
+7. **👥 360° Multi-Stakeholder Hub & Remote Parent Synchronization**:
    * **👨‍👩‍👧 Parents**: Automated 2G feature phone SMS progress digests via Africa's Talking API, dynamically generated unique parent pairing codes (e.g., `ELEWA-XXXX`), remote parent magic links, and weekend kitchen science challenges.
    * **👩‍🏫 Teachers**: Automated CBC/NECTA-aligned lesson plans mapped to national curriculum strands with zero-budget local teaching aids.
    * **🤝 Community Mentors**: Village STEM club guides (bio-sand charcoal water filters, solar dryers).
    * **🔄 360° Continuous Feedback Loop**: Live community feedback feed and aggregated stakeholder sentiment metrics.
 
-7. **📦 Offline-First Edge PWA (Core Modules Available Offline)**:
+8. **📦 Offline-First Edge PWA (Core Modules Available Offline)**:
    * Progressive Web App caching with pre-compiled offline knowledge vaults (core learning modules available offline after installation/download; online AI features seamlessly activate with connectivity).
 
 ---
