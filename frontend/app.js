@@ -474,6 +474,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderCommunityActivities();
   renderJurisdictionDetails(STATE.jurisdiction);
   updateHeaderStatusPill();
+  initDynamicPlaceholder();
 
   const input = document.getElementById('userInput');
   if (input) {
@@ -1118,20 +1119,20 @@ function detectGPSLocation() {
   );
 }
 
-// Pan-African Language Switching (Instant Language Switcher)
+// Pan-African Language Switching (Instant Language Switcher & Inline Badge)
 function changeLanguage(langCode) {
   STATE.language = langCode;
   localStorage.setItem('elewa_user_lang', langCode);
 
-  const hSelect = document.getElementById('headerLangSelect');
-  if (hSelect) hSelect.value = langCode;
   const mSelect = document.getElementById('langSelect');
   if (mSelect) mSelect.value = langCode;
 
   const langMeta = STATE.languagesMeta[langCode];
-  const hFlag = document.getElementById('headerLangFlag');
-  if (hFlag && langMeta && langMeta.flag) {
-    hFlag.innerText = langMeta.flag;
+  const inFlag = document.getElementById('inputLangFlag');
+  const inName = document.getElementById('inputLangName');
+  if (langMeta) {
+    if (inFlag) inFlag.innerText = langMeta.flag || '🌍';
+    if (inName) inName.innerText = langMeta.native_name || langMeta.name_en;
   }
 
   updateUIStrings();
@@ -2446,6 +2447,43 @@ function promptPWAInstall() {
 function closeInstallAppModal() {
   const modal = document.getElementById('installAppModal');
   if (modal) modal.classList.add('hidden');
+}
+
+// Interactive Languages Modal Handlers
+function openLanguagesModal() {
+  const modal = document.getElementById('languagesModal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeLanguagesModal() {
+  const modal = document.getElementById('languagesModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function selectLanguageFromModal(langCode) {
+  changeLanguage(langCode);
+  closeLanguagesModal();
+}
+
+// Dynamic Multilingual & STEM Prompt Placeholder Cycling
+const PLACEHOLDER_PROMPTS = [
+  "Ongea au andika kwa Kiswahili, Sheng, English, Yoruba, Hausa...",
+  "Uliza swali: Mimea inavyopika chakula kwa jua? 🌿",
+  "Uliza swali: Kwanini samaki wanatumia matamvua ziwani? 🐟",
+  "Uliza swali: Saketi za umeme na taa hufanya kazi vipi? ⚡",
+  "Uliza swali: Jinsi ya kugawa sehemu katika hesabu? 📐",
+  "Ask any Science or Math question in your African language... 🎤"
+];
+let currentPlaceholderIndex = 0;
+function initDynamicPlaceholder() {
+  const input = document.getElementById('userInput');
+  if (!input) return;
+  setInterval(() => {
+    if (document.activeElement !== input && input.value.trim() === '') {
+      currentPlaceholderIndex = (currentPlaceholderIndex + 1) % PLACEHOLDER_PROMPTS.length;
+      input.placeholder = PLACEHOLDER_PROMPTS[currentPlaceholderIndex];
+    }
+  }, 4200);
 }
 
 

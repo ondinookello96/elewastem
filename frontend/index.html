@@ -39,52 +39,26 @@
 
 <body id="appBody" class="bg-slate-50 text-slate-800 flex flex-col h-screen h-[100dvh] min-h-[100dvh] max-h-[100dvh] w-full overflow-hidden font-sans antialiased fixed inset-0">
 
-  <!-- TOP HEADER (CLEAN, MINIMALIST, POLISHED & PROMINENT INSTANT LANGUAGE SWITCHER) -->
+  <!-- TOP HEADER (CLEAN, MINIMALIST & POLISHED) -->
   <header class="glass-header border-b border-slate-200/80 px-3 sm:px-5 py-2.5 flex items-center justify-between shadow-xs flex-shrink-0 relative z-30">
     <!-- Left: Pure Logo -->
     <div class="flex items-center space-x-2.5 cursor-pointer group" onclick="switchTab('chat')">
       <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-2xl bg-gradient-to-tr from-brand-600 via-emerald-500 to-teal-400 flex items-center justify-center text-white text-base sm:text-lg shadow-sm group-hover:scale-105 transition-transform">
         🌱
       </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
+      <div class="flex items-center space-x-2">
         <h1 class="font-black text-base sm:text-lg text-slate-900 tracking-tight">Elewa<span class="text-brand-600">STEM</span></h1>
         <span class="text-[7.5px] sm:text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-100/80 text-emerald-900 tracking-tight hidden sm:inline-block">Mwalimu wa Sayansi & Hesabu</span>
       </div>
     </div>
 
-    <!-- Right Controls: PROMINENT INSTANT LANGUAGE SWITCHER + MENU BUTTON -->
-    <div class="flex items-center space-x-2">
-      <!-- Instant Top-Level Language Switcher Dropdown (Instantly visible on landing) -->
-      <div class="relative flex items-center bg-slate-100 hover:bg-slate-200/90 border border-slate-300/80 rounded-xl px-2.5 py-1.5 transition-all shadow-2xs">
-        <span class="text-sm mr-1.5 flex-shrink-0" id="headerLangFlag">🇰🇪</span>
-        <select id="headerLangSelect" onchange="changeLanguage(this.value);" title="Badili Lugha Mara Moja (Instant Language Switcher)" class="bg-transparent font-bold text-xs text-slate-800 outline-none cursor-pointer pr-1">
-          <option value="sw">🇰🇪 🇹🇿 Kiswahili</option>
-          <option value="sheng">🇰🇪 Sheng (Mtaani)</option>
-          <option value="yo">🇳🇬 Èdè Yorùbá</option>
-          <option value="ha">🇳🇬 🇳🇪 Hausa</option>
-          <option value="ig">🇳🇬 Asụsụ Igbo</option>
-          <option value="pcm">🇳🇬 🇬🇭 Naija Pidgin</option>
-          <option value="am">🇪🇹 አማርኛ (Amharic)</option>
-          <option value="om">🇪🇹 Afaan Oromoo</option>
-          <option value="so">🇸🇴 Af-Soomaali</option>
-          <option value="zu">🇿🇦 isiZulu</option>
-          <option value="xh">🇿🇦 isiXhosa</option>
-          <option value="rw">🇷🇼 Ikinyarwanda</option>
-          <option value="lg">🇺🇬 Oluganda</option>
-          <option value="tw">🇬🇭 Twi (Akan)</option>
-          <option value="sn">🇿🇼 chiShona</option>
-          <option value="ln">🇨🇩 Lingála</option>
-          <option value="en">🌍 English</option>
-        </select>
-      </div>
-
-      <!-- Settings Menu Container -->
-      <div class="relative inline-block text-left" id="appMenuContainer">
-        <button type="button" onclick="toggleAppMenuDropdown(event)" id="appMenuBtn" title="Fungua Mipangilio" class="flex items-center space-x-1.5 px-3 py-1.5 bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-700 hover:to-emerald-700 text-white rounded-xl font-bold text-xs shadow-md active:scale-95 transition-all">
-          <span>☰</span>
-          <span class="hidden sm:inline" data-i18n="menu_btn">Mipangilio</span>
-          <svg class="w-3.5 h-3.5 text-emerald-200 transition-transform" id="appMenuChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
+    <!-- Right Controls: Clean Settings Drawer Button -->
+    <div class="relative inline-block text-left" id="appMenuContainer">
+      <button type="button" onclick="toggleAppMenuDropdown(event)" id="appMenuBtn" title="Fungua Mipangilio" class="flex items-center space-x-1.5 px-3 py-1.5 bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-700 hover:to-emerald-700 text-white rounded-xl font-bold text-xs shadow-md active:scale-95 transition-all">
+        <span>☰</span>
+        <span class="hidden sm:inline" data-i18n="menu_btn">Mipangilio</span>
+        <svg class="w-3.5 h-3.5 text-emerald-200 transition-transform" id="appMenuChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+      </button>
 
       <!-- All-in-One Comprehensive Dropdown Menu -->
       <div id="appMenuDropdown" class="hidden absolute right-0 mt-2 w-[320px] sm:w-[390px] rounded-3xl bg-white shadow-2xl border border-slate-200 p-3.5 sm:p-4 z-50 transform origin-top-right transition-all max-h-[85vh] overflow-y-auto space-y-3.5 sm:space-y-4 text-xs">
@@ -441,18 +415,25 @@
       </div>
 
 
-      <!-- Chat Input Bar (Sticky, Mobile Optimized & Comfortable) -->
-      <div class="p-2 sm:p-3 bg-white border-t border-slate-200 flex-shrink-0 shadow-lg z-20">
-        <form id="chatForm" onsubmit="handleChatSubmit(event)" class="max-w-5xl mx-auto flex items-center space-x-1.5 sm:space-x-2">
-          <button type="button" id="voiceBtn" onclick="toggleVoiceInput()" title="Bonyeza hapa kuongea kwa sauti" class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 text-white flex items-center justify-center text-lg sm:text-xl hover:from-brand-700 hover:to-emerald-600 active:scale-95 transition-all shadow-md flex-shrink-0">
+      <!-- Chat Input Bar (Sticky, Modern, AI-Native with Multilingual Placeholder) -->
+      <div class="p-2.5 sm:p-3.5 bg-white/95 backdrop-blur-md border-t border-slate-200 flex-shrink-0 shadow-lg z-20">
+        <form id="chatForm" onsubmit="handleChatSubmit(event)" class="max-w-4xl mx-auto flex items-center space-x-2">
+          <button type="button" id="voiceBtn" onclick="toggleVoiceInput()" title="Bonyeza hapa kuongea kwa sauti (Voice Input)" class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 hover:from-brand-700 hover:to-emerald-600 text-white flex items-center justify-center text-lg sm:text-xl active:scale-95 transition-all shadow-md flex-shrink-0">
             🎤
           </button>
           
-          <div class="relative flex-1">
-            <input type="text" id="userInput" placeholder="Ongea kwa sauti au andika swali..." autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs sm:text-sm rounded-xl py-2.5 sm:py-3 pl-3 sm:pl-4 pr-3 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all">
+          <div class="relative flex-1 flex items-center">
+            <input type="text" id="userInput" placeholder="Ongea au andika kwa Kiswahili, Sheng, English, Yoruba, Hausa..." autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs sm:text-sm rounded-xl sm:rounded-2xl py-2.5 sm:py-3 pl-3 sm:pl-4 pr-24 sm:pr-28 focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 focus:bg-white transition-all shadow-inner-xs">
+            
+            <!-- Sleek Inline Language Badge (Inside Input Bar) -->
+            <button type="button" onclick="openLanguagesModal()" title="Badili Lugha ya Kujifunza" class="absolute right-2 px-2 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg text-[10px] sm:text-[11px] font-bold text-slate-700 flex items-center space-x-1 shadow-2xs transition-all">
+              <span id="inputLangFlag">🇰🇪</span>
+              <span id="inputLangName" class="hidden sm:inline">Kiswahili</span>
+              <span class="text-[9px] text-slate-400">▾</span>
+            </button>
           </div>
 
-          <button type="submit" id="sendBtn" class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-brand-600 text-white flex items-center justify-center hover:bg-brand-700 active:scale-95 transition-all shadow-md flex-shrink-0">
+          <button type="submit" id="sendBtn" class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-brand-600 hover:bg-brand-700 text-white flex items-center justify-center active:scale-95 transition-all shadow-md flex-shrink-0">
             <svg class="w-4 h-4 sm:w-5 sm:h-5 transform rotate-90" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
           </button>
         </form>
@@ -1535,9 +1516,203 @@
       </div>
 
       <div class="flex items-center justify-between pt-2 border-t border-slate-100 flex-shrink-0">
-        <button onclick="closeLanguagesInfoModal(); document.getElementById('langSelect').focus();" class="text-xs font-bold text-brand-700 hover:underline">
+        <button onclick="closeLanguagesInfoModal(); openLanguagesModal();" class="text-xs font-bold text-brand-700 hover:underline">
           Badili Lugha Sasa (Switch Language) ➔
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE AFRICAN LANGUAGES SELECTOR MODAL -->
+  <div id="languagesModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl max-w-xl w-full p-5 sm:p-6 shadow-2xl space-y-4 animate-scale-up max-h-[85vh] flex flex-col">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-shrink-0">
+        <div class="flex items-center space-x-2.5">
+          <span class="text-2xl">🌍</span>
+          <div>
+            <h3 class="font-black text-slate-900 text-base">Chagua Lugha ya Kujifunza</h3>
+            <p class="text-[11px] text-slate-500">Mwalimu wa AI ataongea na kufundisha kwa lugha uliyochagua:</p>
+          </div>
+        </div>
+        <button onclick="closeLanguagesModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-sm font-bold transition-all">&times;</button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs overflow-y-auto pr-1 flex-1" id="languagesGridContainer">
+        <!-- Dynamically populated or static cards -->
+        <button type="button" onclick="selectLanguageFromModal('sw')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇰🇪</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Kiswahili</p>
+              <p class="text-[10px] text-slate-500">Mwalimu wa Sayansi (Kenya / Tanzania)</p>
+            </div>
+          </div>
+          <span class="text-xs text-emerald-600 font-bold">✓</span>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('sheng')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇰🇪</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Sheng (Mtaani)</p>
+              <p class="text-[10px] text-slate-500">Msee wa STEM (Nairobi Urban)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('yo')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇳🇬</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Èdè Yorùbá</p>
+              <p class="text-[10px] text-slate-500">Olùkọ́ STEM (Nigeria / Benin)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('ha')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇳🇬</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Hausa</p>
+              <p class="text-[10px] text-slate-500">Malamin STEM (Nigeria / Niger)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('ig')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇳🇬</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Asụsụ Igbo</p>
+              <p class="text-[10px] text-slate-500">Onye Ozizi STEM (Nigeria)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('pcm')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇳🇬</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Naija Pidgin</p>
+              <p class="text-[10px] text-slate-500">STEM Teacher (West Africa)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('am')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇪🇹</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">አማርኛ (Amharic)</p>
+              <p class="text-[10px] text-slate-500">የሳይንስ መምህር (Ethiopia)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('om')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇪🇹</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Afaan Oromoo</p>
+              <p class="text-[10px] text-slate-500">Barsiisaa STEM (Ethiopia)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('so')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇸🇴</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Af-Soomaali</p>
+              <p class="text-[10px] text-slate-500">Macallinka Sayniska (Somalia / HOA)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('zu')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇿🇦</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">isiZulu</p>
+              <p class="text-[10px] text-slate-500">Uthisha we-STEM (South Africa)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('xh')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇿🇦</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">isiXhosa</p>
+              <p class="text-[10px] text-slate-500">Utitshala we-STEM (South Africa)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('rw')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇷🇼</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Ikinyarwanda</p>
+              <p class="text-[10px] text-slate-500">Mwarimu wa STEM (Rwanda)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('lg')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇺🇬</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Oluganda</p>
+              <p class="text-[10px] text-slate-500">Omusomesa wa STEM (Uganda)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('tw')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇬🇭</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Twi (Akan)</p>
+              <p class="text-[10px] text-slate-500">STEM Kyerɛkyerɛfo (Ghana)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('sn')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇿🇼</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">chiShona</p>
+              <p class="text-[10px] text-slate-500">Mudzidzisi weSTEM (Zimbabwe)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('ln')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🇨🇩</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">Lingála</p>
+              <p class="text-[10px] text-slate-500">Molakisi ya STEM (DR Congo)</p>
+            </div>
+          </div>
+        </button>
+
+        <button type="button" onclick="selectLanguageFromModal('en')" class="lang-modal-card text-left p-2.5 rounded-2xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 transition-all flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🌍</span>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">English</p>
+              <p class="text-[10px] text-slate-500">Pan-African Contextual STEM</p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="flex justify-end pt-2 border-t border-slate-100 flex-shrink-0">
+        <button onclick="closeLanguagesModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-2 rounded-xl transition-all">Funga</button>
       </div>
     </div>
   </div>
