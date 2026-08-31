@@ -60,8 +60,51 @@
 
 ---
 
-## 🏗️ System Architecture
+## 🏗️ System Architecture & Visual Diagram
 
+![ElewaSTEM Google Cloud & Gemini Architecture](docs/architecture_diagram.jpg)
+
+### End-to-End Component Flow:
+
+```mermaid
+flowchart TD
+    subgraph Client["📱 Learner Edge Layer (PWA)"]
+        UI["Child / Learner Interface"]
+        TTS["Web Speech TTS & Audio"]
+        STT["Phonetic Voice STT"]
+        SW["Offline Service Worker (0 KB)"]
+        GPS["Offline Biome Geolocation"]
+        UI --> TTS
+        UI --> STT
+        UI --> SW
+        UI --> GPS
+    end
+
+    subgraph Cloud["☁️ Google Cloud Infrastructure"]
+        GCR["Google Cloud Run (FastAPI Server)"]
+        Vertex["Google Vertex AI / Gemini 3.7 Flash"]
+        Firestore["Google Cloud Firestore (Mastery Graph)"]
+        
+        GCR -->|Socratic Pedagogy Prompt| Vertex
+        Vertex -->|Multilingual Response| GCR
+        GCR -->|Sync Learner Profile| Firestore
+    end
+
+    subgraph Stakeholders["👥 360° Community Loop"]
+        Parent["👨‍👩‍👧 Parents (2G SMS Digest)"]
+        Teacher["👩‍🏫 Teachers (CBC Lesson Plans)"]
+        Mentor["🤝 Community STEM Clubs"]
+        
+        GCR --> Parent
+        GCR --> Teacher
+        GCR --> Mentor
+    end
+
+    SW -.->|Offline Fallback| UI
+    UI ==>|HTTPS API Requests| GCR
+```
+
+### High-Level Connectivity Flow:
 ```
 +---------------------------------------------------------------------------------------------------+
 |                                  CHILD / LEARNER IN AFRICA                                        |
