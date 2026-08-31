@@ -1085,28 +1085,19 @@ const CURRICULUM_SUBJECT_TOPICS = {
   ]
 };
 
-// Interactive Learner Subject Selection & Dynamic Topic Dropdown Handlers
+// Interactive Learner Subject Selection & Dynamic Topic Dropdown Handlers (Menu Side)
 function selectLearnerSubject(subjectName) {
   STATE.selectedSubject = subjectName;
   
   const subjects = ['Biology', 'Physics', 'Chemistry', 'Mathematics', 'Computer Science'];
   subjects.forEach(s => {
-    const welcomeBtn = document.getElementById(`welcomeSubj-${s}`);
-    const chatBtn = document.getElementById(`chatSubj-${s}`);
+    const menuBtn = document.getElementById(`menuSubj-${s}`);
     
-    if (welcomeBtn) {
+    if (menuBtn) {
       if (s === subjectName) {
-        welcomeBtn.className = 'px-2 py-2 rounded-xl text-xs font-bold transition-all flex flex-col items-center justify-center bg-emerald-600 text-white shadow-xs';
+        menuBtn.className = 'px-2 py-1.5 rounded-xl text-xs font-bold transition-all flex flex-col items-center justify-center bg-emerald-600 text-white shadow-2xs';
       } else {
-        welcomeBtn.className = 'px-2 py-2 rounded-xl text-xs font-bold transition-all flex flex-col items-center justify-center bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200';
-      }
-    }
-    
-    if (chatBtn) {
-      if (s === subjectName) {
-        chatBtn.className = 'px-2 py-0.5 rounded-lg text-[11px] font-bold bg-emerald-600 text-white shadow-2xs transition-all flex-shrink-0';
-      } else {
-        chatBtn.className = 'px-2 py-0.5 rounded-lg text-[11px] font-bold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all flex-shrink-0';
+        menuBtn.className = 'px-2 py-1.5 rounded-xl text-xs font-bold transition-all flex flex-col items-center justify-center bg-white hover:bg-slate-100 text-slate-700 border border-slate-200';
       }
     }
   });
@@ -1118,33 +1109,26 @@ function populateLearnerTopicDropdowns(subjectName) {
   const topics = CURRICULUM_SUBJECT_TOPICS[subjectName] || CURRICULUM_SUBJECT_TOPICS['Biology'];
   const isSw = STATE.language !== 'en';
   
-  const landingSelect = document.getElementById('learnerLandingTopicSelect');
-  const chatSelect = document.getElementById('chatTopicSelect');
+  const menuSelect = document.getElementById('menuTopicSelect');
   
   const optionsHtml = topics.map(t => `
     <option value="${t.id}">${t.icon} ${isSw ? t.title_sw : t.title_en}</option>
   `).join('');
 
-  if (landingSelect) {
-    landingSelect.innerHTML = optionsHtml;
-    STATE.selectedTopicId = landingSelect.value;
-  }
-  if (chatSelect) {
-    chatSelect.innerHTML = optionsHtml;
-    if (landingSelect) chatSelect.value = landingSelect.value;
+  if (menuSelect) {
+    menuSelect.innerHTML = optionsHtml;
+    STATE.selectedTopicId = menuSelect.value;
   }
 }
 
 function handleLearnerTopicSelect(topicId) {
   STATE.selectedTopicId = topicId;
-  const landingSelect = document.getElementById('learnerLandingTopicSelect');
-  const chatSelect = document.getElementById('chatTopicSelect');
-  if (landingSelect && landingSelect.value !== topicId) landingSelect.value = topicId;
-  if (chatSelect && chatSelect.value !== topicId) chatSelect.value = topicId;
+  const menuSelect = document.getElementById('menuTopicSelect');
+  if (menuSelect && menuSelect.value !== topicId) menuSelect.value = topicId;
 }
 
 function startSelectedTopicLesson() {
-  const topicId = STATE.selectedTopicId || document.getElementById('learnerLandingTopicSelect')?.value || 'photosynthesis';
+  const topicId = STATE.selectedTopicId || document.getElementById('menuTopicSelect')?.value || 'photosynthesis';
   
   let topicObj = null;
   for (let s in CURRICULUM_SUBJECT_TOPICS) {
