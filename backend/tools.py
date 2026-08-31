@@ -152,18 +152,18 @@ OFFLINE_STEM_VAULT = [
         "subject": "Biology",
         "cbc_strand": "Animals & Environmental Adaptations (Grade 5/6 Science)",
         "summary_en": "Fish like Tilapia (Ngege) and Nile Perch (Mbuta) breathe underwater using specialized gills that extract dissolved oxygen from water.",
-        "summary_sw": "Samaki kama Ngege (Tilapia) na Mbuta (Nile Perch) wanapumua ndani ya maji kwa kutumia yavuyavu (gills/mashavu) zinazochuja oksijeni iliyoyeyushwa kwenye maji ya ziwa.",
+        "summary_sw": "Samaki kama Ngege (Tilapia) na Mbuta (Nile Perch) wanapumua ndani ya maji kwa kutumia matamvua au mashavu (gills) yanayochuja oksijeni iliyoyeyushwa kwenye maji ya ziwa.",
         
-        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Fikiria kichwa cha samaki Ngege. Kando ya kichwa kuna mashavu mawili yanayojifungua na kujifunga. Ndani yake kuna tabaka nyembamba laini zenye rangi nyekundu ya damu zinazofanya kazi kama chujio la hewa. Maji yakipita, chujio hili linafyonza hewa ya oksijeni na kuituma kwenye damu ya samaki!",
-        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Samaki anayeogelea] + [Ishara ya Mashavu yanayopumua] + [Mchoro wa Chujio linalovuta Oksijeni].",
+        "tactile_audio_description_sw": "Kwa wanafunzi wasioona: Fikiria kichwa cha samaki Ngege. Kando ya kichwa kuna vifuniko vya mashavu vinavyojifungua na kujifunga. Ndani yake kuna matamvua (gills) laini yenye rangi nyekundu ya damu yanayofanya kazi kama chujio la hewa. Maji yakipita, matamvua haya yanafyonza hewa ya oksijeni na kuituma kwenye damu ya samaki!",
+        "sign_language_visual_cues_sw": "Kwa wanafunzi wasiosikia: [Ishara ya Samaki anayeogelea] + [Ishara ya Matamvua/Gills yanayopumua] + [Mchoro wa Chujio linalovuta Oksijeni].",
 
         "regional_analogies": {
             "lake_basin": {
-                "analogy_sw": "Kule Dunga Beach au Luanda Kotieno kando ya Ziwa Victoria, unapoangalia samaki Ngege (Tilapia), mashavu yake yakifunguka na kufunga, yanafanya kazi kama chujio maalum (filter) linalofyonza oksijeni kutoka majini na kuingiza kwenye damu yake!",
+                "analogy_sw": "Kule Dunga Beach au Luanda Kotieno kando ya Ziwa Victoria, unapoangalia samaki Ngege (Tilapia), vifuniko vya mashavu yake yakifunguka na kufunga, maji hupita kwenye matamvua (gills) yanayofanya kazi kama chujio maalum linalofyonza oksijeni kutoka majini na kuingiza kwenye damu yake!",
                 "analogy_en": "At Dunga Beach in Kisumu, when you watch a fresh Tilapia (Ngege), its operculum gills flap to pump lake water across gill filaments that filter dissolved oxygen directly into its bloodstream!"
             },
             "coastal": {
-                "analogy_sw": "Kule Pwani, samaki wa baharini kama Changwa au Taa wanatumia mashavu yao kuchuja oksijeni kwenye maji yenye chumvi ya Bahari ya Hindi!",
+                "analogy_sw": "Kule Pwani, samaki wa baharini kama Changwa au Taa wanatumia matamvua/mashavu (gills) yao kuchuja oksijeni kwenye maji yenye chumvi ya Bahari ya Hindi!",
                 "analogy_en": "At the coast, marine fish filter dissolved oxygen through gill lamellae in Indian Ocean saltwater!"
             },
             "highlands": {
@@ -180,7 +180,7 @@ OFFLINE_STEM_VAULT = [
             }
         },
         "key_terms": [
-            {"en": "Gills (Operculum)", "sw": "Mashavu / Yavuyavu ya samaki"},
+            {"en": "Gills (Operculum)", "sw": "Matamvua / Mashavu ya samaki (Gills)"},
             {"en": "Dissolved Oxygen", "sw": "Oksijeni iliyoyeyuka majini"},
             {"en": "Ecosystem", "sw": "Mfumo wa ikolojia ya viumbe hai"},
             {"en": "Invasive Species", "sw": "Mimea vamizi (kama Magugu Maji / Akech)"}
@@ -196,10 +196,10 @@ OFFLINE_STEM_VAULT = [
         "quiz": {
             "question_sw": "Samaki aina ya Ngege (Tilapia) kule Kisumu anatumia kiungo gani kupumua ndani ya maji?",
             "question_en": "What organ does a Tilapia fish use to breathe underwater in Lake Victoria?",
-            "options_sw": ["A) Yavuyavu / Mashavu (Gills)", "B) Mapafu kama ya binadamu", "C) Mkia", "D) Macho"],
-            "options_en": ["A) Gills (Yavuyavu)", "B) Human-like lungs", "C) Tail fin", "D) Eyes"],
+            "options_sw": ["A) Matamvua / Mashavu (Gills)", "B) Mapafu kama ya binadamu", "C) Mkia", "D) Macho"],
+            "options_en": ["A) Gills (Matamvua/Mashavu)", "B) Human-like lungs", "C) Tail fin", "D) Eyes"],
             "correct_index": 0,
-            "explanation_sw": "Hodari sana! Samaki hutumia yavuyavu (gills) kuchuja oksijeni moja kwa moja kutoka kwenye maji ya ziwa.",
+            "explanation_sw": "Hodari sana! Samaki hutumia matamvua au mashavu (gills) kuchuja oksijeni moja kwa moja kutoka kwenye maji ya ziwa.",
             "explanation_en": "Brilliant! Fish use their gills to extract dissolved oxygen directly from water."
         }
     },
@@ -629,7 +629,7 @@ def get_available_regions() -> Dict[str, Any]:
 
 RELATED_TOPIC_GRAPH = {
     "photosynthesis": [
-        {"id": "aquatic_biology_kisumu", "title_sw": "Upumuaji wa Samaki & Yavuyavu (Biology)", "title_en": "Aquatic Fish Respiration", "prompt": "Eleza jinsi samaki wanavyotumia oksijeni ya mimea ya ziwani kupumua", "icon": "🐟"},
+        {"id": "aquatic_biology_kisumu", "title_sw": "Upumuaji wa Samaki & Matamvua/Gills (Biology)", "title_en": "Aquatic Fish Respiration", "prompt": "Eleza jinsi samaki wanavyotumia oksijeni ya mimea ya ziwani kupumua", "icon": "🐟"},
         {"id": "chemistry_reactions", "title_sw": "Kemia ya Asidi & Mmenyuko (Chemistry)", "title_en": "Acids & Chemical Reactions", "prompt": "Eleza kemia ya asidi na besi", "icon": "⚗️"}
     ],
     "aquatic_biology_kisumu": [

@@ -58,7 +58,7 @@ DIAGRAMS = {
 </svg>"""
     },
     "aquatic_biology_kisumu": {
-        "title_sw": "Mchoro wa Yavuyavu za Samaki Ngege (Fish Gill Respiration in Lake Victoria)",
+        "title_sw": "Mchoro wa Matamvua/Gills ya Samaki Ngege (Fish Gill Respiration in Lake Victoria)",
         "title_en": "Fish Gill Aquatic Respiration Diagram",
         "topic_id": "aquatic_biology_kisumu",
         "svg": """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" class="w-full h-auto rounded-2xl shadow-inner bg-gradient-to-b from-cyan-100 via-blue-50 to-teal-100 font-sans">
@@ -89,7 +89,7 @@ DIAGRAMS = {
   
   <!-- Gill Label Box -->
   <rect x="180" y="70" width="160" height="45" rx="8" fill="#FEE2E2" stroke="#EF4444" stroke-width="2"/>
-  <text x="260" y="88" font-size="11" font-weight="bold" fill="#991B1B" text-anchor="middle">Yavuyavu / Mashavu (Gills)</text>
+  <text x="260" y="88" font-size="11" font-weight="bold" fill="#991B1B" text-anchor="middle">Matamvua / Mashavu (Gills)</text>
   <text x="260" y="103" font-size="8.5" fill="#B91C1C" text-anchor="middle">Mishipa ya damu inavuta O₂</text>
   <line x1="260" y1="115" x2="250" y2="145" stroke="#EF4444" stroke-width="2" stroke-dasharray="3,3"/>
 
