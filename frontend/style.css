@@ -101,6 +101,43 @@ html, body {
   border-color: #a7f3d0 !important;
 }
 
+/* Modern UI & Aesthetic Refinements */
+.glass-header {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+}
+
+.journey-pill {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.journey-pill:hover {
+  transform: translateY(-1px);
+}
+.journey-pill:active {
+  transform: scale(0.97);
+}
+
+.quick-chip {
+  transition: all 0.2s ease-in-out;
+}
+.quick-chip:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 12px -2px rgba(16, 185, 129, 0.2);
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 70%),
+              radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.06), transparent 70%);
+}
+
 /* STEM Card Markdown rendering styles */
 .stem-card h3 {
   font-size: 1.05rem;

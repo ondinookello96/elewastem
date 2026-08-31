@@ -832,6 +832,12 @@ function loadSavedPreferences() {
     STATE.language = savedLang;
     const select = document.getElementById('langSelect');
     if (select) select.value = savedLang;
+    const hSelect = document.getElementById('headerLangSelect');
+    if (hSelect) hSelect.value = savedLang;
+    const hFlag = document.getElementById('headerLangFlag');
+    if (hFlag && STATE.languagesMeta[savedLang]?.flag) {
+      hFlag.innerText = STATE.languagesMeta[savedLang].flag;
+    }
   }
 
   if (localStorage.getItem('elewa_auto_speak') !== null) {
@@ -1112,19 +1118,30 @@ function detectGPSLocation() {
   );
 }
 
-// Pan-African Language Switching
+// Pan-African Language Switching (Instant Language Switcher)
 function changeLanguage(langCode) {
   STATE.language = langCode;
   localStorage.setItem('elewa_user_lang', langCode);
+
+  const hSelect = document.getElementById('headerLangSelect');
+  if (hSelect) hSelect.value = langCode;
+  const mSelect = document.getElementById('langSelect');
+  if (mSelect) mSelect.value = langCode;
+
+  const langMeta = STATE.languagesMeta[langCode];
+  const hFlag = document.getElementById('headerLangFlag');
+  if (hFlag && langMeta && langMeta.flag) {
+    hFlag.innerText = langMeta.flag;
+  }
+
   updateUIStrings();
   updateNetworkUI();
   renderRegionUI();
   renderVault();
   renderMastery();
 
-  const langMeta = STATE.languagesMeta[langCode];
   if (langMeta) {
-    appendSystemNotice(`🌍 Lugha imebadilishwa kuwa: <b>${langMeta.flag} ${langMeta.native_name}</b> (${langMeta.motto}).`);
+    appendSystemNotice(`🌍 Lugha: <b>${langMeta.flag} ${langMeta.native_name}</b> (${langMeta.motto}).`);
   }
 }
 
