@@ -52,6 +52,9 @@ class ChatRequest(BaseModel):
     language: str = "sw"
     region: str = "lake_basin"
     jurisdiction: str = "KE"
+    country: Optional[str] = "Kenya"
+    subject: Optional[str] = "all"
+    grade_level: Optional[str] = "Grade 6 (Upper Primary)"
     gps_coordinates: Optional[Dict[str, float]] = None
     simplify: bool = False
     mode: Optional[str] = "creative"
@@ -172,7 +175,10 @@ async def chat_with_agent(req: ChatRequest):
         target_language=req.language,
         region=req.region,
         simplify=req.simplify,
-        mode=req.mode or "creative"
+        mode=req.mode or "creative",
+        subject=req.subject or "all",
+        grade_level=req.grade_level or "Grade 6 (Upper Primary)",
+        country=req.country or "Kenya"
     )
     
     if not safety_check["safe"]:

@@ -80,7 +80,10 @@ class ElewaAgent:
         target_language: str = "swahili",
         region: str = "lake_basin",
         simplify: bool = False,
-        mode: str = "creative"  # 'creative' (Temp 0.75) or 'precise' (Temp 0.2)
+        mode: str = "creative",  # 'creative' (Temp 0.75) or 'precise' (Temp 0.2)
+        subject: str = "all",
+        grade_level: Optional[str] = None,
+        country: str = "Kenya"
     ) -> Dict[str, Any]:
         """
         Generates an adaptive Socratic response implementing the 4Ds Framework with Dynamic Temperature Dialing.
@@ -89,6 +92,7 @@ class ElewaAgent:
         region_info = REGIONS.get(region, REGIONS["lake_basin"])
         topic_data = find_offline_topic(message)
         
+        effective_grade = grade_level or profile.grade_level
         mastery_summary = ", ".join([f"{k} ({v.mastery_score}% mastery)" for k, v in profile.mastery_graph.items()]) or "New curious learner"
         recent_history = "\n".join([f"{item['role'].upper()}: {item['content']}" for item in profile.recent_interactions[-4:]])
         
@@ -98,7 +102,9 @@ class ElewaAgent:
         user_prompt = f"""
 === LEARNER CONTEXT (MAP ASSETS & MEMORY) ===
 Student Name: {profile.name}
-Grade Level: {profile.grade_level}
+Country: {country}
+Grade / Educational Level: {effective_grade}
+Selected Subject Focus: {subject.upper() if subject and subject != 'all' else 'ALL STEM (General Exploration)'}
 Target Language: {target_language.upper()}
 Eco-Region: {region_info['name_en']} ({region_info['name_sw']})
 Local Species & Ecosystem Assets: {region_info['key_ecosystems']}
@@ -112,7 +118,7 @@ Reasoning Mode: {mode.upper()} (Temperature: {temperature})
 === STUDENT QUESTION ===
 "{message}"
 
-Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with warm African friendship persona.
+Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with warm African friendship persona tailored precisely to {effective_grade} level in {country}.
 """
 
         # Try Gemini / Gemma API if client available

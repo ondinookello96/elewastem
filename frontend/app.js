@@ -7,6 +7,9 @@ const STATE = {
   studentId: 'demo_student',
   language: 'sw',
   jurisdiction: 'KE',
+  country: 'Kenya',
+  subject: 'all',
+  gradeLevel: 'Grade 6 (Upper Primary)',
   region: 'lake_basin',
   autoSpeak: true,
   screenReaderMode: true,
@@ -649,13 +652,157 @@ function renderRegionUI() {
 
   const chipsContainer = document.getElementById('quickLocationChips');
   if (chipsContainer) {
-    const chips = REGIONAL_PROMPT_CHIPS[STATE.region] || REGIONAL_PROMPT_CHIPS.lake_basin;
+    const chips = (STATE.subject && STATE.subject !== 'all' && SUBJECT_PROMPT_CHIPS[STATE.subject]) 
+      ? SUBJECT_PROMPT_CHIPS[STATE.subject] 
+      : (REGIONAL_PROMPT_CHIPS[STATE.region] || REGIONAL_PROMPT_CHIPS.lake_basin);
     chipsContainer.innerHTML = chips.map(c => `
       <button onclick="sendQuickPrompt('${escapeHtml(c.query)}')" class="quick-chip bg-emerald-50 text-emerald-800 border border-emerald-300 px-2.5 py-1 rounded-full text-xs hover:bg-emerald-100 font-medium transition-all">
         ${c.title}
       </button>
     `).join('');
   }
+}
+
+const SUBJECT_PROMPT_CHIPS = {
+  all: [
+    { title: '🌿 Usanisinuru (Biology)', query: 'Nieleze kuhusu Usanisinuru na jinsi mimea inavyopika chakula' },
+    { title: '⚡ Saketi za Umeme (Physics)', query: 'Nieleze kuhusu saketi kamili za umeme' },
+    { title: '⚗️ Asidi na Besi (Chemistry)', query: 'Nieleze kuhusu kemia ya asidi, ndimu na majivu' },
+    { title: '📐 Sehemu & Uwiano (Math)', query: 'Nieleze kuhusu sehemu za hesabu na jinsi ya kugawa' },
+    { title: '💻 Algoriti & Mantiki (CS)', query: 'Nieleze kuhusu algoriti za kompyuta na roboti' }
+  ],
+  biology: [
+    { title: '🌿 Usanisinuru & Oksijeni', query: 'Nieleze jinsi mimea inavyotumia jua kupika chakula na kutoa oksijeni' },
+    { title: '🐟 Yavuyavu za Samaki', query: 'Nieleze jinsi samaki wanavyotumia mashavu yao kupumua majini' },
+    { title: '🌾 Mboga za Asili & Mimea', query: 'Nieleze muundo wa majani ya mboga za kienyeji na klorofili' }
+  ],
+  physics: [
+    { title: '💡 Saketi za Taa & Betri', query: 'Nieleze jinsi ya kutengeneza saketi kamili ya umeme wa betri na taa' },
+    { title: '🌍 Mvuto na Msuguano', query: 'Nieleze nguvu ya mvuto na jinsi msuguano unavyosaidia breki za baiskeli' },
+    { title: '☀️ Paneli za Jua (Solar PV)', query: 'Nieleze jinsi mwangaza wa jua unavyobadilishwa kuwa umeme wa solar' }
+  ],
+  chemistry: [
+    { title: '🧪 Asidi, Siki na Ndimu', query: 'Nieleze sifa za asidi kama maji ya ndimu au siki' },
+    { title: '🥄 Besi, Majivu na Soda', query: 'Nieleze sifa za besi kama majivu ya jikoni au baking soda' },
+    { title: '💥 Volkano ya Jikoni (CO₂)', query: 'Nieleze mmenyuko wa asidi na besi unaotoa gesi ya kaboni' }
+  ],
+  mathematics: [
+    { title: '🍕 Sehemu (1/4, 1/2, 3/4)', query: 'Nieleze jinsi ya kuelewa sehemu za nambari kama robo na nusu' },
+    { title: '📊 Uwiano & Mgawanyo', query: 'Nieleze jinsi ya kugawa samaki au mavuno kwa uwiano sawa' },
+    { title: '📐 Eneo na Mzingo (Area)', query: 'Nieleze jinsi ya kupima eneo la shamba la mstatili' }
+  ],
+  computer_science: [
+    { title: '🤖 Algoriti za Maamuzi (If-Else)', query: 'Nieleze jinsi kompyuta inavyofanya maamuzi kwa kutumia If-Else' },
+    { title: '💧 Smart Irrigation Logic', query: 'Nieleze jinsi ya kuandika mpango wa kuwasha pampu ya maji kiotomatiki' },
+    { title: '📱 Binary & Logic Gates', query: 'Nieleze jinsi swichi za umeme zinavyoendesha programu za simu' }
+  ],
+  agriculture: [
+    { title: '🌱 Afya ya Udongo na pH', query: 'Nieleze jinsi asidi ya udongo inavyoathiri mavuno ya mahindi' },
+    { title: '☀️ Uhifadhi wa Maji ya Kilimo', query: 'Nieleze mbinu za kuhifadhi maji shambani wakati wa kiangazi' },
+    { title: '🦗 Udhibiti wa Wadudu Kiasili', query: 'Nieleze sayansi ya kuzuia wadudu waharibifu kwa kutumia mimea' }
+  ]
+};
+
+function handleSubjectChange(e) {
+  STATE.subject = e.target.value;
+  const labels = {
+    all: 'Masomo Yote (All STEM)',
+    biology: 'Biolojia (Biology)',
+    physics: 'Fizikia (Physics)',
+    chemistry: 'Kemia (Chemistry)',
+    mathematics: 'Hesabu (Mathematics)',
+    computer_science: 'Sayansi ya Kompyuta (CS)',
+    agriculture: 'Kilimo & Mazingira (Agri)'
+  };
+  appendSystemNotice(`📚 <b>Somo Limebadilishwa:</b> Umelenga <b>${labels[STATE.subject] || STATE.subject}</b>.`);
+  renderRegionUI();
+}
+
+function handleGradeChange(e) {
+  STATE.gradeLevel = e.target.value;
+  if (STATE.profile) STATE.profile.grade_level = STATE.gradeLevel;
+  appendSystemNotice(`🎓 <b>Kiwango cha Mwanafunzi:</b> Kimebadilishwa kuwa <b>${STATE.gradeLevel}</b>.`);
+}
+
+function handleCountryChange(e) {
+  STATE.country = e.target.value;
+  const countryJurisdictions = {
+    Kenya: 'KE',
+    Tanzania: 'TZ',
+    Uganda: 'UG',
+    Rwanda: 'RW',
+    Nigeria: 'NG',
+    Ghana: 'GH',
+    'South Africa': 'ZA',
+    Ethiopia: 'ET'
+  };
+  if (countryJurisdictions[STATE.country]) {
+    STATE.jurisdiction = countryJurisdictions[STATE.country];
+    const jSelect = document.getElementById('jurisdictionSelect');
+    if (jSelect) jSelect.value = STATE.jurisdiction;
+  }
+  appendSystemNotice(`🌍 <b>Nchi Imewekwa:</b> <b>${STATE.country}</b> (Sheria ya Data: ${STATE.jurisdiction}).`);
+}
+
+function handleRegionChange(e) {
+  STATE.region = e.target.value;
+  renderRegionUI();
+  appendSystemNotice(`🏞️ <b>Eneo la Mazingira:</b> Limewekwa kuwa <b>${STATE.regionsMeta[STATE.region]?.name_sw || STATE.region}</b>.`);
+}
+
+function detectGPSLocation() {
+  if (!navigator.geolocation) {
+    alert('Kifaa hiki hakina huduma ya GPS. Tafadhali chagua nchi na eneo kwa mikono.');
+    return;
+  }
+  const btn = document.getElementById('gpsDetectBtn');
+  const text = document.getElementById('gpsDetectText');
+  if (text) text.innerText = 'Inatambua... 📡';
+  
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+      STATE.gpsCoords = { lat, lon };
+      
+      if (lat >= -4.7 && lat <= 5.5 && lon >= 33.9 && lon <= 41.9) {
+        STATE.country = 'Kenya';
+        STATE.jurisdiction = 'KE';
+        if (lon < 35.0) STATE.region = 'lake_basin';
+        else if (lon > 39.0) STATE.region = 'coastal';
+        else if (lat > 2.0) STATE.region = 'arid';
+        else STATE.region = 'highlands';
+      } else if (lat < -4.7 && lat > -11.8 && lon >= 29.3 && lon <= 40.5) {
+        STATE.country = 'Tanzania';
+        STATE.jurisdiction = 'TZ';
+        STATE.region = (lon > 38.5) ? 'coastal' : 'lake_basin';
+      } else if (lat >= 4.0 && lat <= 14.0 && lon >= 2.5 && lon <= 15.0) {
+        STATE.country = 'Nigeria';
+        STATE.jurisdiction = 'NG';
+        STATE.region = (lat < 7.0) ? 'coastal' : ((lat > 11.0) ? 'arid' : 'urban');
+      } else if (lat < -22.0) {
+        STATE.country = 'South Africa';
+        STATE.jurisdiction = 'ZA';
+        STATE.region = 'urban';
+      }
+
+      const cSelect = document.getElementById('learnerCountrySelect');
+      if (cSelect) cSelect.value = STATE.country;
+      const rSelect = document.getElementById('learnerRegionSelect');
+      if (rSelect) rSelect.value = STATE.region;
+      
+      if (text) text.innerText = 'GPS: ' + STATE.country + ' 📍';
+      if (btn) btn.className = 'flex items-center space-x-1 px-2.5 py-1 bg-teal-700 text-white rounded-xl font-bold shadow-xs transition-all flex-shrink-0';
+
+      renderRegionUI();
+      appendSystemNotice(`📍 <b>GPS Imethibitishwa:</b> Lat ${lat.toFixed(2)}, Lon ${lon.toFixed(2)} ➔ Nchi: <b>${STATE.country}</b>, Eneo: <b>${STATE.regionsMeta[STATE.region]?.name_sw || STATE.region}</b>.`);
+    },
+    (err) => {
+      if (text) text.innerText = 'GPS Auto-Detect';
+      appendSystemNotice('📍 <i>GPS haikupatikana (ruhusa imezimwa). Unaweza kuchagua nchi na eneo kwa mikono hapo juu.</i>');
+    },
+    { timeout: 8000 }
+  );
 }
 
 // Pan-African Language Switching
@@ -1097,6 +1244,9 @@ async function executeAgentQuery(query, simplify = false) {
         language: STATE.language,
         region: STATE.region,
         jurisdiction: STATE.jurisdiction,
+        country: STATE.country || 'Kenya',
+        subject: STATE.subject || 'all',
+        grade_level: STATE.gradeLevel || 'Grade 6 (Upper Primary)',
         gps_coordinates: STATE.gpsCoords,
         simplify: simplify,
         mode: STATE.agentMode
