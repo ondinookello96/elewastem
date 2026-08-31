@@ -614,47 +614,98 @@ DIAGRAMS = {
 }
 
 
+def generate_concept_diagram_svg(topic: Dict[str, Any]) -> str:
+    """Generates an aesthetic, responsive vector SVG concept diagram for any STEM curriculum topic."""
+    title_sw = topic.get("title_sw", "Mchoro wa Dhana ya Sayansi")
+    title_en = topic.get("title_en", "STEM Science Concept Diagram")
+    subject = topic.get("subject", "Science")
+    strand = topic.get("cbc_strand", "CBC Integrated Science")
+    key_terms = topic.get("key_terms", [])
+    
+    # Subject badge color themes
+    color_schemes = {
+        "Biology": {"primary": "#047857", "secondary": "#10B981", "bg_from": "#ECFDF5", "bg_to": "#D1FAE5", "text": "#064E3B", "icon": "🌿"},
+        "Physics": {"primary": "#1D4ED8", "secondary": "#3B82F6", "bg_from": "#EFF6FF", "bg_to": "#DBEAFE", "text": "#1E3A8A", "icon": "⚡"},
+        "Chemistry": {"primary": "#7C3AED", "secondary": "#8B5CF6", "bg_from": "#F5F3FF", "bg_to": "#EDE9FE", "text": "#5B21B6", "icon": "🧪"},
+        "Mathematics": {"primary": "#B45309", "secondary": "#F59E0B", "bg_from": "#FFFBEB", "bg_to": "#FEF3C7", "text": "#78350F", "icon": "📐"},
+        "Computer Science": {"primary": "#0E7490", "secondary": "#06B6D4", "bg_from": "#ECFEFF", "bg_to": "#CFFAFE", "text": "#155E75", "icon": "💻"}
+    }
+    theme = color_schemes.get(subject, color_schemes["Biology"])
+    
+    term_cards_svg = ""
+    for i, term in enumerate(key_terms[:4]):
+        col = i % 2
+        row = i // 2
+        x = 40 + col * 280
+        y = 110 + row * 105
+        en_txt = term.get("en", "")[:35]
+        sw_txt = term.get("sw", "")[:42]
+        term_cards_svg += f"""
+  <!-- Card {i+1} -->
+  <rect x="{x}" y="{y}" width="260" height="90" rx="12" fill="#FFFFFF" stroke="{theme['secondary']}" stroke-width="1.5" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.05))"/>
+  <circle cx="{x + 22}" cy="{y + 25}" r="12" fill="{theme['bg_to']}"/>
+  <text x="{x + 22}" y="{y + 29}" font-size="11" font-weight="bold" fill="{theme['primary']}" text-anchor="middle">{i+1}</text>
+  <text x="{x + 42}" y="{y + 28}" font-size="11" font-weight="bold" fill="{theme['text']}">{en_txt}</text>
+  <text x="{x + 15}" y="{y + 55}" font-size="10" fill="#4B5563">{sw_txt}</text>
+  <path d="M{x+15} {y+72} L{x+245} {y+72}" stroke="{theme['bg_to']}" stroke-width="2" stroke-linecap="round"/>
+"""
+
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" class="w-full h-auto rounded-2xl shadow-inner bg-gradient-to-b from-slate-900 to-slate-800 font-sans">
+  <defs>
+    <linearGradient id="headerGrad_{topic.get('id', 'stem')}" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="{theme['primary']}"/>
+      <stop offset="100%" stop-color="{theme['secondary']}"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Header Banner -->
+  <rect x="25" y="15" width="590" height="70" rx="14" fill="url(#headerGrad_{topic.get('id', 'stem')})"/>
+  <text x="50" y="42" font-size="16" font-weight="900" fill="#FFFFFF">{theme['icon']} {title_sw[:45]}</text>
+  <text x="50" y="62" font-size="11" fill="#F3F4F6">{strand} • {title_en[:50]}</text>
+
+  <!-- Body Background Grid -->
+  <rect x="25" y="95" width="590" height="230" rx="14" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+  {term_cards_svg}
+
+  <!-- Bottom Interactive Note -->
+  <rect x="25" y="335" width="590" height="32" rx="8" fill="#1E293B"/>
+  <text x="320" y="356" font-size="11" font-weight="bold" fill="#38BDF8" text-anchor="middle">💡 ElewaSTEM Mwalimu AI • Bonyeza 'Jaribio' au 'Chemsha Bongo' kuendelea!</text>
+</svg>"""
+
+
 def get_diagram_for_topic(query_or_id: str) -> Optional[Dict[str, Any]]:
-    """Returns matching responsive SVG science diagram."""
-    q = query_or_id.lower()
+    """Returns matching responsive SVG science diagram with guaranteed universal fallback for all 52 topics."""
+    try:
+        from .tools import find_offline_topic
+    except ImportError:
+        try:
+            from tools import find_offline_topic
+        except ImportError:
+            find_offline_topic = None
+
+    q = query_or_id.lower().strip()
     
-    # Mathematics
-    if any(k in q for k in ["algebra", "aljebra", "equation", "mlinganyo", "variable", "kigeuzi", "solve for x"]):
-        return DIAGRAMS["algebra_math"]
-    elif any(k in q for k in ["fraction", "sehemu", "divide", "gawanya", "chapati", "proportion"]):
-        return DIAGRAMS["fractions_math"]
+    # 1. Direct match in pre-rendered detailed illustrations
+    if q in DIAGRAMS:
+        return DIAGRAMS[q]
     
-    # Chemistry
-    elif any(k in q for k in ["chem", "kemia", "acid", "asidi", "base", "besi", "reaction", "siki", "soda", "lemon", "chumvi"]):
-        return DIAGRAMS["chemistry_reactions"]
-    
-    # Computer Science
-    elif any(k in q for k in ["comput", "code", "coding", "program", "algorithm", "algoriti", "software", "tech", "teknolojia", "logic", "binary"]):
-        return DIAGRAMS["computer_algorithms"]
-    
-    # Physics
-    elif any(k in q for k in ["electr", "circuit", "umeme", "saketi", "wire", "battery", "betri", "taa"]):
-        return DIAGRAMS["electricity_circuits"]
-    
-    # Biology Domains
-    elif any(k in q for k in ["digest", "mmeng'enyo", "stomach", "tumbo", "esophagus", "umio", "mouth", "kinywa", "intestine", "utumbo", "enzyme", "nutrition"]):
-        return DIAGRAMS["human_digestive_system"]
-    elif any(k in q for k in ["heart", "moyo", "circulat", "mzunguko wa damu", "blood", "damu", "artery", "ateri", "vein", "vena", "pulse"]):
-        return DIAGRAMS["circulatory_heart"]
-    elif any(k in q for k in ["fish", "samaki", "ngege", "gill", "shavu", "matamvua", "aquatic_biology"]):
-        return DIAGRAMS["aquatic_biology_kisumu"]
-    elif any(k in q for k in ["lung", "mapafu", "human_respiration", "respirat", "upumuaji", "breathe", "pumua", "trachea", "koromeo"]):
-        return DIAGRAMS["human_respiration"]
-    elif any(k in q for k in ["cell", "seli", "nucleus", "kiini", "cytoplasm", "membrane", "chloroplast"]):
-        return DIAGRAMS["cell_biology"]
-    elif any(k in q for k in ["food chain", "mnyororo wa chakula", "ecolog", "ikolojia", "ecosystem", "producer", "consumer"]):
-        return DIAGRAMS["ecology_food_chains"]
-    elif any(k in q for k in ["pollinat", "uchavushaji", "flower", "maua", "petali", "stamen", "pistil", "nyuki", "bee"]):
-        return DIAGRAMS["plant_pollination"]
-    elif any(k in q for k in ["vertebrate", "invertebrate", "uti wa mgongo", "classify", "uainishaji", "mammal", "mamalia", "reptile", "amphibian"]):
-        return DIAGRAMS["living_things_classification"]
-    elif any(k in q for k in ["photo", "usanisinuru", "klorofili", "chlorophyll", "plant food", "chakula cha mmea"]):
-        return DIAGRAMS["photosynthesis"]
-    
-    return None
+    # 2. Match via smart topic resolver
+    if find_offline_topic:
+        topic = find_offline_topic(query_or_id)
+        tid = topic.get("id", "")
+        if tid in DIAGRAMS:
+            return DIAGRAMS[tid]
+        
+        # 3. Dynamic Vector SVG generator for any curriculum topic
+        if topic:
+            return {
+                "title_sw": f"Mchoro wa {topic.get('title_sw', '')}",
+                "title_en": f"{topic.get('title_en', '')} Concept Flowchart",
+                "topic_id": tid,
+                "svg": generate_concept_diagram_svg(topic)
+            }
+            
+    # Fallback to photosynthesis
+    return DIAGRAMS.get("photosynthesis")
+
 

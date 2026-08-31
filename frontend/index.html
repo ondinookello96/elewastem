@@ -635,21 +635,72 @@
 
           <div class="flex space-x-2">
             <select id="teacherTopicSelect" onchange="loadTeacherLessonPlan(this.value)" class="bg-slate-50 border border-slate-300 text-xs font-bold p-2.5 rounded-xl flex-1 focus:ring-2 focus:ring-brand-500">
-              <option value="human_digestive_system">Mfumo wa Mmeng'enyo wa Chakula (Digestive System)</option>
-              <option value="circulatory_heart">Moyo na Mzunguko wa Damu (Circulatory System)</option>
-              <option value="human_respiration">Mfumo wa Upumuaji na Mapafu (Respiration & Lungs)</option>
-              <option value="cell_biology">Muundo wa Seli: Seli za Mmea & Mnyama (Cell Biology)</option>
-              <option value="plant_pollination">Uchavushaji wa Maua & Nyuki (Plant Pollination)</option>
-              <option value="living_things_classification">Uainishaji wa Viumbe Hai: Vertebrates & Invertebrates</option>
-              <option value="ecology_food_chains">Mnyororo wa Chakula & Ikolojia (Food Chains & Ecology)</option>
-              <option value="photosynthesis">Usanisinuru (Photosynthesis)</option>
-              <option value="aquatic_biology_kisumu">Upumuaji wa Samaki: Matamvua/Gills (Lake Victoria Ecology)</option>
-              <option value="electricity_circuits">Mkondo wa Umeme & Saketi (Circuits)</option>
-              <option value="gravity_forces">Mvuto wa Ardhi & Msuguano (Gravity & Friction)</option>
-              <option value="chemistry_reactions">Kemia ya Asidi & Besi (Chemistry Reactions)</option>
-              <option value="computer_algorithms">Algoriti za Kompyuta (Computer Algorithms)</option>
-              <option value="algebra_math">Aljebra & Mlinganyo wa Hesabu (Algebra Math)</option>
-              <option value="fractions_math">Sehemu za Nambari (Fractions)</option>
+              <optgroup label="🌿 BIOLOGY (14 Mada / Topics)">
+                <option value="photosynthesis">1. Usanisinuru (Photosynthesis Process)</option>
+                <option value="human_digestive_system">2. Mfumo wa Mmeng'enyo wa Chakula (Digestive System)</option>
+                <option value="circulatory_heart">3. Moyo na Mzunguko wa Damu (Circulatory System)</option>
+                <option value="human_respiration">4. Mfumo wa Upumuaji na Mapafu (Respiration & Lungs)</option>
+                <option value="cell_biology">5. Muundo wa Seli: Seli za Mmea & Mnyama (Cell Biology)</option>
+                <option value="plant_pollination">6. Uchavushaji wa Maua & Nyuki (Plant Pollination)</option>
+                <option value="living_things_classification">7. Uainishaji wa Viumbe Hai: Vertebrates & Invertebrates</option>
+                <option value="ecology_food_chains">8. Mnyororo wa Chakula & Ikolojia (Food Chains & Ecology)</option>
+                <option value="aquatic_biology_kisumu">9. Upumuaji wa Samaki: Matamvua/Gills (Lake Victoria Ecology)</option>
+                <option value="human_excretion_kidney">10. Figo & Mfumo wa Kutoa Taka (Excretion & Kidneys)</option>
+                <option value="nervous_sense_organs">11. Mfumo wa Fahamu na Milango ya Hisia (Nervous System)</option>
+                <option value="plant_transpiration_transport">12. Mvuke na Usafirishaji wa Maji Mimeani (Transpiration)</option>
+                <option value="skeletal_muscular_system">13. Mifupa na Misuli ya Mwili (Skeletal & Muscular System)</option>
+                <option value="microorganisms_health">14. Bakteria, Virusi na Usafi wa Afya (Microorganisms)</option>
+              </optgroup>
+
+              <optgroup label="⚡ PHYSICS (10 Mada / Topics)">
+                <option value="electricity_circuits">15. Mkondo wa Umeme & Saketi (Electric Circuits)</option>
+                <option value="gravity_forces">16. Mvuto wa Ardhi & Msuguano (Gravity & Friction Forces)</option>
+                <option value="light_reflection_refraction">17. Mwangaza, Miwani & Muakisi (Light & Optics)</option>
+                <option value="sound_waves_hearing">18. Mawimbi ya Sauti & Usikivu (Sound Waves & Hearing)</option>
+                <option value="simple_machines_levers">19. Mashine Rahisi: Wenzo & Kapi (Simple Machines & Levers)</option>
+                <option value="heat_transfer_methods">20. Uhamishaji wa Joto: Mionzi & Mvuke (Heat Transfer)</option>
+                <option value="magnetism_electromagnets">21. Sumaku & Sumaku-Umeme (Magnetism & Electromagnets)</option>
+                <option value="pressure_fluids_hydraulics">22. Shinikizo la Maji & Haidroliki (Fluid Pressure)</option>
+                <option value="work_energy_power">23. Kazi, Nishati na Nguvu (Work, Energy & Power)</option>
+                <option value="density_floating_sinking">24. Uzito wa Kiasi, Kuelea & Kuzama (Density & Buoyancy)</option>
+              </optgroup>
+
+              <optgroup label="🧪 CHEMISTRY (10 Mada / Topics)">
+                <option value="chemistry_reactions">25. Kemia ya Asidi, Besi & Chumvi (Acids, Bases & Salts)</option>
+                <option value="states_of_matter">26. Hali za Maada: Mango, Kioevu & Gesi (States of Matter)</option>
+                <option value="separation_techniques">27. Mbinu za Kuchuja & Kunereka (Separation of Mixtures)</option>
+                <option value="periodic_table_atoms">28. Atomu, Elementi & Jedwali la Periodiki (Periodic Table)</option>
+                <option value="water_purification_hardness">29. Utakaso wa Maji & Maji Magumu (Water Treatment)</option>
+                <option value="air_gases_pollution">30. Muundo wa Hewa & Uchafuzi wa Mazingira (Air Composition)</option>
+                <option value="metals_reactivity_series">31. Metali & Mfuatano wa Mmenyuko (Reactivity Series)</option>
+                <option value="chemical_bonding_compounds">32. Muungano wa Kikemia: Ionic & Covalent (Chemical Bonding)</option>
+                <option value="carbon_fuels_combustion">33. Kaboni, Mafuta & Mwako wa Moto (Combustion & Fuels)</option>
+                <option value="chemical_solutions_solubility">34. Myeyusho & Kiwango cha Kuyeyuka (Solutions & Solubility)</option>
+              </optgroup>
+
+              <optgroup label="📐 MATHEMATICS (10 Mada / Topics)">
+                <option value="fractions_math">35. Sehemu, Desimali & Asilimia (Fractions & Percentages)</option>
+                <option value="algebra_math">36. Aljebra: Milinganyo & Vigeuzi (Algebra & Equations)</option>
+                <option value="geometry_shapes_angles">37. Jiometria: Maumbo & Pembe (Geometry & Angles)</option>
+                <option value="ratios_proportions_rates">38. Uwiano & Viwango vya Kasi (Ratios, Proportions & Speed)</option>
+                <option value="statistics_data_charts">39. Takwimu: Wastani & Grafu (Statistics, Mean & Charts)</option>
+                <option value="integers_number_line">40. Nambari Nzima & Hasi (Integers & Number Line)</option>
+                <option value="perimeter_area_volume">41. Mzingo, Eneo & Ujazo (Perimeter, Area & Volume)</option>
+                <option value="commercial_arithmetic">42. Hesabu za Biashara: Faida & Riba (Commercial Arithmetic)</option>
+                <option value="pythagoras_trigonometry">43. Nadharia ya Pythagoras (Pythagoras Theorem a²+b²=c²)</option>
+                <option value="probability_chance">44. Uwezekano wa Matukio (Probability & Likelihood)</option>
+              </optgroup>
+
+              <optgroup label="💻 COMPUTER SCIENCE (8 Mada / Topics)">
+                <option value="computer_algorithms">45. Algoriti & Michoro ya Mtiririko (Algorithms & Flowcharts)</option>
+                <option value="binary_data_representation">46. Nambari Mbili (Binary: 0 na 1) & Uhifadhi wa Baiti</option>
+                <option value="logic_gates_circuits">47. Milango ya Mantiki: AND, OR, NOT (Logic Gates)</option>
+                <option value="programming_python_scratch">48. Utayarishaji wa Programu: Python & Scratch (Coding)</option>
+                <option value="computer_hardware_components">49. Vifaa vya Kompyuta: CPU, RAM & Hifadhi (Hardware)</option>
+                <option value="networks_internet_security">50. Mitandao, Intaneti & Usalama wa Nenosiri (Cybersecurity)</option>
+                <option value="ai_machine_learning_concepts">51. Akili Unde (AI) & Mafunzo ya Mashine (Machine Learning)</option>
+                <option value="databases_information_systems">52. Mifumo ya Hifadhidata & Majedwali ya SQL (Databases)</option>
+              </optgroup>
             </select>
             <button onclick="openFeedbackModal('teacher')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded-xl transition-all flex items-center space-x-1">
               <span>✍️</span>

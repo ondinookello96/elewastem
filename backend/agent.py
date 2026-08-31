@@ -270,51 +270,24 @@ Apply the 4Ds Framework: Deliver a concrete, evident, step-by-step answer with w
         }
 
     def _extract_topic(self, user_msg: str, bot_response: str, preferred_subject: str = "all") -> Dict[str, str]:
-        combined = (user_msg + " " + bot_response).lower()
-        if any(w in combined for w in ["algebra", "aljebra", "equation", "mlinganyo", "variable", "kigeuzi", "solve for x", "quadratic"]):
-            return {"topic": "Algebra: Equations & Variables", "subject": "Mathematics"}
-        elif any(w in combined for w in ["fraction", "sehemu", "math", "hesabu", "divide", "gawanya", "number", "geometry", "area"]):
-            return {"topic": "Mathematics & Fractions", "subject": "Mathematics"}
-        elif any(w in combined for w in ["chem", "kemia", "acid", "asidi", "base", "besi", "neutraliz", "lemon", "soda"]):
-            return {"topic": "Chemistry: Acids, Bases & Reactions", "subject": "Chemistry"}
-        elif any(w in combined for w in ["comput", "code", "coding", "algorithm", "algoriti", "program", "logic", "binary"]):
-            return {"topic": "Computer Science: Algorithms & Logic", "subject": "Computer Science"}
-        elif any(w in combined for w in ["electric", "umeme", "circuit", "saketi", "wire", "battery", "betri"]):
-            return {"topic": "Electricity & Circuits", "subject": "Physics"}
-        elif any(w in combined for w in ["gravity", "grabiti", "force", "nguvu", "friction", "msuguano", "motion"]):
-            return {"topic": "Forces & Gravity", "subject": "Physics"}
-        elif any(w in combined for w in ["solar", "jua", "energy", "nishati", "sun"]):
-            return {"topic": "Solar Energy & Heat", "subject": "Physics"}
-        elif any(w in combined for w in ["digest", "mmeng'enyo", "stomach", "tumbo", "esophagus", "umio", "mouth", "kinywa", "intestine", "utumbo", "saliva", "mate", "enzyme", "virutubisho"]):
-            return {"topic": "Human Digestive System & Nutrition", "subject": "Biology"}
-        elif any(w in combined for w in ["heart", "moyo", "circulat", "mzunguko wa damu", "blood", "damu", "artery", "ateri", "vein", "vena", "pulse", "mapigo"]):
-            return {"topic": "Human Heart & Blood Circulatory System", "subject": "Biology"}
-        elif any(w in combined for w in ["fish", "samaki", "gills", "mashavu", "matamvua", "ngege", "mbuta"]):
-            return {"topic": "Aquatic Biology & Respiration", "subject": "Biology"}
-        elif any(w in combined for w in ["lung", "mapafu", "respirat", "upumuaji", "breathe", "pumua", "trachea", "koromeo", "inhale", "exhale", "diaphragm", "kiwambo"]):
-            return {"topic": "Human Respiratory System & Lungs", "subject": "Biology"}
-        elif any(w in combined for w in ["cell", "seli", "nucleus", "kiini", "cytoplasm", "saikroplasimu", "membrane", "utando", "chloroplast", "kloroplasti"]):
-            return {"topic": "Cell Biology: Basic Units of Life", "subject": "Biology"}
-        elif any(w in combined for w in ["food chain", "mnyororo wa chakula", "ecolog", "ikolojia", "ecosystem", "producer", "mtengenezaji", "consumer", "mlaji", "predator", "mwindaji", "herbivore", "carnivore", "decomposer", "mwozeshaji"]):
-            return {"topic": "Ecology & Food Chains: Energy Flow", "subject": "Biology"}
-        elif any(w in combined for w in ["pollinat", "uchavushaji", "flower", "maua", "petali", "petal", "stamen", "chavulio", "pistil", "kambamaua", "poleni", "chavua", "nectar"]):
-            return {"topic": "Plant Reproduction & Flower Pollination", "subject": "Biology"}
-        elif any(w in combined for w in ["vertebrate", "invertebrate", "uti wa mgongo", "classify", "uainishaji", "mammal", "mamalia", "reptile", "reptilia", "amphibian", "amfibea", "insect", "wadudu"]):
-            return {"topic": "Classification of Living Things", "subject": "Biology"}
-        elif any(w in combined for w in ["photo", "usanisinuru", "klorofili", "chlorophyll", "plant food", "chakula cha mmea", "stomata"]):
-            return {"topic": "Photosynthesis: How Plants Make Food", "subject": "Biology"}
-        elif any(w in combined for w in ["plant", "mmea", "leaf", "jani", "botany", "tree", "mti"]):
-            return {"topic": "Plant Biology & Botany", "subject": "Biology"}
-        else:
-            subj_map = {
-                "mathematics": "Mathematics",
-                "physics": "Physics",
-                "chemistry": "Chemistry",
-                "biology": "Biology",
-                "computer_science": "Computer Science"
+        # Resolve topic accurately using curriculum search
+        topic_data = find_offline_topic(user_msg, preferred_subject)
+        if topic_data and topic_data.get("title_en"):
+            return {
+                "topic": topic_data["title_en"],
+                "subject": topic_data["subject"],
+                "topic_id": topic_data["id"]
             }
-            mapped_subj = subj_map.get(preferred_subject.lower(), "General Science")
-            return {"topic": f"{mapped_subj} Exploration", "subject": mapped_subj}
+        
+        subj_map = {
+            "mathematics": "Mathematics",
+            "physics": "Physics",
+            "chemistry": "Chemistry",
+            "biology": "Biology",
+            "computer_science": "Computer Science"
+        }
+        mapped_subj = subj_map.get(preferred_subject.lower(), "General Science")
+        return {"topic": f"{mapped_subj} Exploration", "subject": mapped_subj, "topic_id": "general_stem"}
 
 
 # Singleton Agent

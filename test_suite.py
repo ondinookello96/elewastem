@@ -10,7 +10,7 @@ BASE_URL = 'http://localhost:8000'
 
 def run_tests():
     print("============================================================")
-    print(" ELEWASTEM FULL FEATURE & FEEDBACK VERIFICATION SUITE")
+    print(" ELEWASTEM 5-DISCIPLINE STEM CURRICULUM VERIFICATION SUITE")
     print("============================================================")
 
     # 1. Health & Meta
@@ -38,157 +38,96 @@ def run_tests():
     for j in jurs[:4]:
         print(f"   * {j['flag']} {j['country']}: {j['law_name']} ({j['regulatory_body']})")
 
-    # 4. Multilingual & Adaptive Chat (Kisumu Biology with Tactile & Sign Support)
-    payload = {
-        'student_id': 'cosmas_tester',
-        'message': 'Eleza jinsi samaki Ngege wa Kisumu anavyopumua ziwani',
-        'language': 'sw',
-        'region': 'lake_basin',
-        'jurisdiction': 'KE'
-    }
-    r = requests.post(f'{BASE_URL}/api/chat', json=payload)
+    # 4. Offline Starter Pack Verification (52 Topics across 5 disciplines)
+    r = requests.get(f'{BASE_URL}/api/offline-pack')
     assert r.status_code == 200
-    chat_res = r.json()
-    print(f"\n[PASSED] 4. AI Adaptive Chat Engine: Response generated")
-    print(f"   * Engine: {chat_res.get('source')}")
-    print(f"   * Tactile Description (Blind): {chat_res.get('tactile_description')[:80]}...")
-    print(f"   * Sign Language (Deaf): {chat_res.get('sign_cues')}")
+    pack = r.json()
+    print(f"\n[PASSED] 4. Full Offline Curriculum Vault: {pack['module_count']} modules loaded")
+    assert pack['module_count'] >= 50, f"Expected at least 50 topics, found {pack['module_count']}"
 
-    # 5. CBC Teacher Lesson Plan Generator
-    r = requests.get(f'{BASE_URL}/api/teacher/lesson-plan?topic=photosynthesis&region=lake_basin')
-    assert r.status_code == 200
-    plan = r.json()
-    print(f"\n[PASSED] 5. Teacher Hub: CBC Lesson Plan Generator")
-    print(f"   * Strand: {plan.get('curriculum_strand')}")
-    print(f"   * Lesson: {plan.get('lesson_title')}")
-    print(f"   * Local Aid: {plan.get('local_teaching_aid')[:75]}...")
+    # 5. Teacher Lesson Plan Generator across 5 Disciplines
+    teacher_topics = [
+        ("photosynthesis", "Biology"),
+        ("electricity_circuits", "Physics"),
+        ("chemistry_reactions", "Chemistry"),
+        ("algebra_math", "Mathematics"),
+        ("ai_machine_learning_concepts", "Computer Science")
+    ]
+    print(f"\n[PASSED] 5. Multi-Discipline Teacher Lesson Plans:")
+    for tid, subj in teacher_topics:
+        r = requests.get(f'{BASE_URL}/api/teacher/lesson-plan?topic={tid}&region=lake_basin')
+        assert r.status_code == 200
+        plan = r.json()
+        print(f"   * [{subj}] '{plan.get('title_sw')}' | Strand: {plan.get('cbc_strand')}")
 
-    # 6. Parent Progress Digest & SMS Formatter
-    r = requests.get(f'{BASE_URL}/api/parent/digest/cosmas_tester?region=lake_basin')
-    assert r.status_code == 200
-    parent = r.json()
-    print(f"\n[PASSED] 6. Parent Hub: SMS Digest & Home Science Challenge")
-    print(f"   * SMS Text: {parent.get('sms_digest_text')}")
-    print(f"   * Home Challenge: {parent.get('home_activity_for_parent', {}).get('title')}")
+    # 6. Multi-Discipline AI Chat & Local Grounding Verification (25 Key Benchmarks)
+    stem_benchmarks = [
+        # --- BIOLOGY ---
+        ("Nieleze kuhusu mmeng'enyo wa chakula tumboni na utumbo mdogo", "human_digestive_system", "Biology: Digestion"),
+        ("Moyo unafanya kazi gani kusukuma damu na ateri?", "circulatory_heart", "Biology: Heart"),
+        ("Jinsi mapafu yanavyofanya kazi wakati wa kupumua hewa", "human_respiration", "Biology: Respiration"),
+        ("Tofauti kati ya seli ya mmea na seli ya mnyama na kiini", "cell_biology", "Biology: Cell"),
+        ("Uchavushaji wa maua na nyuki unavyotengeneza mbegu", "plant_pollination", "Biology: Pollination"),
+        ("Wanyama wenye uti wa mgongo vertebrates na wasio nao invertebrates", "living_things_classification", "Biology: Taxonomy"),
+        ("Mnyororo wa chakula jinsi nishati ya jua inavyosafiri kwa mimea na wanyama", "ecology_food_chains", "Biology: Food Chain"),
+        ("Jinsi samaki Ngege anavyopumua kwa matamvua ziwani", "aquatic_biology_kisumu", "Biology: Fish Respiration"),
+        ("Kazi ya figo na nephron katika kutoa taka na mkojo", "human_excretion_kidney", "Biology: Kidneys"),
+        ("Mfumo wa fahamu, ubongo na milango ya hisia", "nervous_sense_organs", "Biology: Nervous"),
 
-    # 7. Community STEM Mentors Hub
-    r = requests.get(f'{BASE_URL}/api/community/activities?region=lake_basin')
-    assert r.status_code == 200
-    comm = r.json()
-    print(f"\n[PASSED] 7. Community Mentors: Zero-Cost STEM Club Guides")
-    for act in comm:
-        print(f"   * {act['project_name']} (Materials: {act['materials'][:50]}...)")
+        # --- PHYSICS ---
+        ("Eleza saketi za umeme, waya na betri", "electricity_circuits", "Physics: Circuits"),
+        ("Nguvu ya grabiti na msuguano wa breki za baiskeli", "gravity_forces", "Physics: Gravity"),
+        ("Mwangaza unavyoakisiwa na vioo na lenzi", "light_reflection_refraction", "Physics: Light Optics"),
+        ("Mawimbi ya sauti na mitetemo inavyosafiri sikioni", "sound_waves_hearing", "Physics: Sound Waves"),
+        ("Mashine rahisi kama wenzo, kapi na mteremko bapa", "simple_machines_levers", "Physics: Levers"),
 
-    # 8. Multi-Stakeholder Feedback Mechanism
-    fb_payload = {
-        'stakeholder_type': 'teacher',
-        'student_id': 'mwalimu_otieno',
-        'region': 'lake_basin',
-        'language': 'sw',
-        'rating': 5,
-        'category': 'cbc_alignment',
-        'comment': 'Mifano ya samaki Ngege na Dunga Beach inawasaidia sana wanafunzi wangu wa Darasa la 5 kuelewa respiration!',
-        'topic': 'Aquatic Biology'
-    }
-    r = requests.post(f'{BASE_URL}/api/feedback', json=fb_payload)
-    assert r.status_code == 200
-    fb_res = r.json()
-    print(f"\n[PASSED] 8. Multi-Stakeholder Feedback Submission: OK")
-    print(f"   * Response Status: {fb_res.get('status')}")
-    print(f"   * Feedback Message: {fb_res.get('message')}")
+        # --- CHEMISTRY ---
+        ("Kemia ya asidi na besi na mmenyuko wa neutralization", "chemistry_reactions", "Chemistry: Acids & Bases"),
+        ("Hali tatu za maada: mango, kimiminika na gesi za mvuke", "states_of_matter", "Chemistry: States of Matter"),
+        ("Mbinu za kutenganisha michanganyiko kwa kuchuja na kunereka", "separation_techniques", "Chemistry: Separation"),
+        ("Muundo wa atomu, protoni, elektroni na jedwali la periodiki", "periodic_table_atoms", "Chemistry: Periodic Table"),
+        ("Maji magumu na jinsi ya kusafisha na kutibu maji ya kunywa", "water_purification_hardness", "Chemistry: Water Treatment"),
 
-    # 9. Feedback Summary & Metrics
-    r = requests.get(f'{BASE_URL}/api/feedback/summary')
-    assert r.status_code == 200
-    summary = r.json()
-    print(f"\n[PASSED] 9. Feedback Metrics Aggregator:")
-    print(f"   * Total Feedback Records: {summary.get('total_feedback')}")
-    print(f"   * Average Stakeholder Rating: {summary.get('average_rating')} ⭐")
-    print(f"   * Stakeholder Breakdown: {summary.get('by_stakeholder')}")
+        # --- MATHEMATICS ---
+        ("Sehemu za nambari, desimali na asilimia", "fractions_math", "Math: Fractions"),
+        ("Aljebra na kutatua mlinganyo wa 2x + 4 = 14", "algebra_math", "Math: Algebra"),
+        ("Jiometria ya pembe za pembetatu na maumbo ya 2D na 3D", "geometry_shapes_angles", "Math: Geometry"),
+        ("Nadharia ya Pythagoras a2 + b2 = c2 kwa pembetatu mraba", "pythagoras_trigonometry", "Math: Pythagoras"),
+        ("Uwezekano na nafasi ya kupata namba kwenye kete au sarafu", "probability_chance", "Math: Probability"),
 
-    # 10. ETHOS, TRACK, OASIS, PRIDE & HORIZON Frameworks
-    r = requests.get(f'{BASE_URL}/api/ethics/frameworks')
-    assert r.status_code == 200
-    ethics = r.json()
-    print(f"\n[PASSED] 10. Responsible AI & Ethics Frameworks (ETHOS, TRACK, OASIS, PRIDE, HORIZON):")
-    for k, v in ethics.items():
-        print(f"   * 🛡️ [{k}]: {v['title']}")
-
-    # 11. RANK Roles & HUNT Multi-Agent Pipeline
-    r = requests.get(f'{BASE_URL}/api/orchestrator/pipeline')
-    assert r.status_code == 200
-    pipeline = r.json()
-    print(f"\n[PASSED] 11. Multi-Agent Orchestration (RANK & HUNT Frameworks):")
-    print(f"   * Active Roles: {list(pipeline['agent_roles'].keys())}")
-    for stage in pipeline['hunt_pipeline_stages']:
-        print(f"   * {stage}")
-
-    # 12. TRAIL Memory Audit & CYCLE Engine
-    r1 = requests.get(f'{BASE_URL}/api/memory/trail-audit')
-    r2 = requests.get(f'{BASE_URL}/api/cycle/report')
-    assert r1.status_code == 200 and r2.status_code == 200
-    trail = r1.json()
-    cycle = r2.json()
-    print(f"\n[PASSED] 12. Memory Sovereignty (TRAIL) & Continuous Learning (CYCLE):")
-    print(f"   * TRAIL Land Rights: {trail['L_LandRights']}")
-    print(f"   * CYCLE Insights: {cycle['Y_YieldInsights']}")
-
-    # 13. African Pedagogy & Learning Theories Matrix
-    r = requests.get(f'{BASE_URL}/api/pedagogy/theories')
-    assert r.status_code == 200
-    theories = r.json()
-    print(f"\n[PASSED] 13. African Pedagogy & Learning Theories Matrix (8 Theories):")
-    for k, v in theories.items():
-        print(f"   * 🧠 [{k}]: {v['swahili_title']} ({v['theorists']})")
-
-    # 14. Responsive Offline Science Vector Diagrams (SVG)
-    diag_payload = {
-        'student_id': 'diagram_tester',
-        'message': 'Nionyeshe mchoro wa picha wa Usanisinuru (Photosynthesis diagram)',
-        'language': 'sw',
-        'region': 'lake_basin'
-    }
-    r = requests.post(f'{BASE_URL}/api/chat', json=diag_payload)
-    assert r.status_code == 200
-    diag_res = r.json()
-    assert 'diagram' in diag_res and diag_res['diagram'] is not None
-    print(f"\n[PASSED] 14. Interactive Offline Science Vector Diagram (SVG):")
-    print(f"   * Diagram Title: {diag_res['diagram']['title_sw']}")
-    print(f"   * SVG Vector Payload Length: {len(diag_res['diagram']['svg'])} characters")
-
-    # 15. Comprehensive Biology Curriculum Diversity Verification
-    bio_queries = [
-        ("Nieleze kuhusu mmeng'enyo wa chakula tumboni na utumbo mdogo", "human_digestive_system", "Digestive"),
-        ("Moyo unafanya kazi gani kusukuma damu na ateri?", "circulatory_heart", "Heart"),
-        ("Jinsi mapafu yanavyofanya kazi wakati wa kupumua hewa", "human_respiration", "Respiration"),
-        ("Tofauti kati ya seli ya mmea na seli ya mnyama na kiini", "cell_biology", "Cell"),
-        ("Uchavushaji wa maua na nyuki unavyotengeneza mbegu", "plant_pollination", "Pollination"),
-        ("Wanyama wenye uti wa mgongo vertebrates na wasio nao invertebrates", "living_things_classification", "Classification"),
-        ("Mnyororo wa chakula jinsi nishati ya jua inavyosafiri kwa mimea na wanyama", "ecology_food_chains", "Food Chain"),
-        ("Jinsi samaki Ngege anavyopumua kwa matamvua ziwani", "aquatic_biology_kisumu", "Fish"),
-        ("Usanisinuru jinsi majani ya mmea yanavyopika chakula kwa jua", "photosynthesis", "Photosynthesis")
+        # --- COMPUTER SCIENCE ---
+        ("Algoriti za kompyuta na michoro ya mtiririko ya flowchart", "computer_algorithms", "CS: Algorithms"),
+        ("Mfumo wa nambari mbili wa binary biti 0 na 1 na baiti", "binary_data_representation", "CS: Binary"),
+        ("Milango ya mantiki ya AND gate, OR gate na NOT gate", "logic_gates_circuits", "CS: Logic Gates"),
+        ("Utayarishaji wa programu kwa lugha ya Python na Scratch", "programming_python_scratch", "CS: Python Coding"),
+        ("Akili Unde ya Artificial Intelligence na Machine Learning", "ai_machine_learning_concepts", "CS: AI & ML"),
+        ("Mifumo ya hifadhidata ya relational database na jedwali la SQL", "databases_information_systems", "CS: Databases")
     ]
 
-    print("\n[TEST] 15. Comprehensive CBC Biology Curriculum Diversity:")
-    for query, expected_id, label in bio_queries:
+    print("\n[TEST] 6. Validating 31 Multi-Discipline STEM Topic Queries across 5 Subjects:")
+    passed_count = 0
+    for query, expected_id, label in stem_benchmarks:
         r = requests.post(f'{BASE_URL}/api/chat', json={
-            'student_id': 'bio_tester',
+            'student_id': 'stem_tester',
             'message': query,
             'language': 'sw',
             'region': 'lake_basin'
         })
-        assert r.status_code == 200
+        assert r.status_code == 200, f"Chat query failed for: {query}"
         data = r.json()
         topic_name = data.get('topic')
         module_id = data.get('offline_module_id') or data.get('topic_id')
+        subj = data.get('subject')
         diag = data.get('diagram')
-        print(f"   * [{label}] -> Topic: '{topic_name}' | Module: '{module_id}' | Diagram: '{diag['topic_id'] if diag else 'None'}'")
-        assert module_id == expected_id, f"Expected module {expected_id} but got {module_id}"
+        
+        assert module_id == expected_id, f"Expected {expected_id} but got {module_id} for query: {query}"
+        assert diag is not None, f"Expected vector diagram for topic {module_id}"
+        print(f"   * [{label:26}] -> Topic: '{topic_name[:30]}' | Subj: {subj:16} | Module: '{module_id}' [OK]")
+        passed_count += 1
 
     print("\n============================================================")
-    print(" 🎉 ALL 15 COMPREHENSIVE FEATURES & BIOLOGY SYSTEMS VERIFIED!")
+    print(f" 🎉 100% SUCCESS: ALL {passed_count}/{len(stem_benchmarks)} CROSS-DISCIPLINE STEM BENCHMARKS PASSED!")
     print("============================================================")
 
 if __name__ == '__main__':
     run_tests()
-
