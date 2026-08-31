@@ -119,17 +119,21 @@ gcloud builds submit --config cloudbuild.yaml
 
 ---
 
-## 💻 Local Quick Start & Testing
+## 💻 Local Quick Start & Reproducible Testing Instructions
 
-### 1. Run the Local Server
+### 1. Install Dependencies
 ```bash
-# Run server
+pip install -r requirements.txt
+```
+
+### 2. Launch the Application Server
+```bash
 python run.py
 ```
-Open your browser at **`http://localhost:8000`**.
+Open your browser at **`http://localhost:8000`** to experience the full interactive PWA (works online and 100% offline).
 
-### 2. Run the Full Automated Test Suite
+### 3. Run the Full Automated Test Suite (14 Verification Suites)
 ```bash
 python test_suite.py
 ```
-*Executes all 9 end-to-end automated tests covering health checks, 16+ languages, 8 DPA legal frameworks, adaptive Socratic chat, tactile/sign cues, CBC teacher plans, parent SMS digests, and stakeholder feedback loops.*
+*Executes all **14 end-to-end automated test suites** covering health checks, 16+ living African languages (Masakhane/Lelapa grounding), 8 Pan-African DPA statutory frameworks, adaptive Socratic Gemini chat, multi-sensory accessibility (tactile audio for blind, KSL sign language for deaf), 100% offline vector SVG science diagrams, CBC teacher lesson plans, remote parent 2G SMS digests, community STEM clubs, multi-stakeholder feedback loops, ethical safety guardrails (ETHOS/OASIS), Maasai Elder multi-agent swarm orchestration (RANK/HUNT/TRAIL/CYCLE), and 8 African learning theories.*
