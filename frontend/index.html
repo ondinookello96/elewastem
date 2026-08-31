@@ -364,52 +364,14 @@
     <section id="chatSection" class="flex-1 flex flex-col h-full min-h-0 overflow-hidden">
       <!-- Spacious Message Stream with Smooth Auto-Scroll -->
       <div id="chatMessages" class="flex-1 overflow-y-auto p-2.5 sm:p-6 space-y-3 sm:space-y-4 max-w-5xl w-full mx-auto" aria-live="polite">
-        <!-- Clean, Friendly Welcome Hero with 3 Core Benefits -->
-        <div id="welcomeMessageContainer" class="bg-white border border-slate-200 rounded-3xl p-4 sm:p-6 shadow-sm max-w-4xl mx-auto space-y-4">
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-xl sm:text-2xl shadow-sm flex-shrink-0">
-              🌱
-            </div>
-            <div>
-              <h2 class="font-black text-slate-900 text-base sm:text-lg" id="welcomeTitle">Hujambo rafiki yangu! 🌟</h2>
-              <p class="text-slate-500 text-xs sm:text-sm">Mimi ni ElewaSTEM—mwalimu wako wa Sayansi na Hesabu. Usimeze, Elewa!</p>
-            </div>
+        <!-- Clean, Minimal Welcome Greeting (Only Shown on Landing) -->
+        <div id="welcomeMessageContainer" class="bg-white border border-slate-200 rounded-3xl p-4 sm:p-5 shadow-sm max-w-xl mx-auto flex items-center space-x-3.5 sm:space-x-4 my-2">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white text-xl sm:text-2xl shadow-sm flex-shrink-0">
+            🌱
           </div>
-
-          <!-- 3 Main Benefits Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
-            <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-3 space-y-1">
-              <div class="flex items-center space-x-1.5 text-emerald-900 font-bold text-xs">
-                <span>🗣️</span>
-                <span>Ongea kwa Sauti</span>
-              </div>
-              <p class="text-[11px] text-emerald-800 leading-snug">Bonyeza kipaza sauti kuuliza swali lolote kwa lugha yako.</p>
-            </div>
-
-            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-3 space-y-1">
-              <div class="flex items-center space-x-1.5 text-blue-900 font-bold text-xs">
-                <span>🌿</span>
-                <span>Mifano ya Nyumbani</span>
-              </div>
-              <p class="text-[11px] text-blue-800 leading-snug">Mifano halisi ya mimea, maji, na vitu unavyoviona kila siku.</p>
-            </div>
-
-            <div class="bg-purple-50 border border-purple-100 rounded-2xl p-3 space-y-1">
-              <div class="flex items-center space-x-1.5 text-purple-900 font-bold text-xs">
-                <span>📦</span>
-                <span>Bila Mtandao</span>
-              </div>
-              <p class="text-[11px] text-purple-800 leading-snug">Masomo makuu yanapatikana wakati wowote bila intaneti.</p>
-            </div>
-          </div>
-
-          <!-- Direct Starter Topic Chips -->
-          <div class="pt-2 border-t border-slate-100">
-            <p class="text-[11px] font-bold text-slate-500 mb-1.5 flex items-center space-x-1">
-              <span>💡</span>
-              <span>Mada za Kuanza (Chagua moja au andika swali lako):</span>
-            </p>
-            <div id="quickLocationChips" class="flex flex-wrap gap-1.5"></div>
+          <div>
+            <h2 class="font-black text-slate-900 text-base sm:text-lg" id="welcomeTitle">Hujambo rafiki yangu! 🌟</h2>
+            <p class="text-slate-600 text-xs sm:text-sm font-medium" id="welcomeText">Mimi ni ElewaSTEM—mwalimu wako wa Sayansi na Hesabu. Usimeze, Elewa!</p>
           </div>
         </div>
       </div>
