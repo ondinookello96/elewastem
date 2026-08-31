@@ -1824,6 +1824,35 @@ ${isSw ? exp.steps_sw : exp.steps_en}
   };
 }
 
+// Start a New Conversation (Gemini / Copilot Style)
+function startNewChat() {
+  switchTab('chat');
+
+  // Clear chat messages container, preserving the welcomeLandingBlock
+  const container = document.getElementById('chatMessages');
+  const landingBlock = document.getElementById('welcomeLandingBlock');
+  if (container) {
+    Array.from(container.children).forEach(child => {
+      if (child !== landingBlock) {
+        child.remove();
+      }
+    });
+  }
+
+  // Clear input field and set focus
+  const input = document.getElementById('userInput');
+  if (input) {
+    input.value = '';
+    input.focus();
+  }
+
+  // Reposition form to the center landing state
+  updateChatInputPosition(false);
+
+  // Announce notice
+  appendSystemNotice('✨ <b>Gumzo Jipya:</b> Unaweza kuuliza swali jipya la Sayansi au Hesabu.');
+}
+
 // Dynamic Chat Form Position (Centered on Landing vs Bottom Docked during Dialogue)
 function updateChatInputPosition(hasMessages) {
   const form = document.getElementById('chatForm');
