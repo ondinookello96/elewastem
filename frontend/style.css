@@ -1,5 +1,32 @@
 /* ElewaSTEM Universal Accessibility & UI Styles */
 
+/* Strict Mobile 100dvh Viewport Lock (Prevents Keyboard Collapse & Overflow on Phones) */
+html, body {
+  height: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  max-height: 100dvh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#chatSection, main {
+  height: 100%;
+  min-height: 0;
+  flex: 1;
+}
+
+#chatMessages {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
 @keyframes scaleUp {
   from {
     opacity: 0;
@@ -10,6 +37,7 @@
     transform: scale(1);
   }
 }
+
 
 @keyframes pulseWave {
   0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }

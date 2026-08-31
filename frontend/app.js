@@ -179,7 +179,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderCommunityActivities();
   renderJurisdictionDetails(STATE.jurisdiction);
   updateHeaderStatusPill();
+
+  const input = document.getElementById('userInput');
+  if (input) {
+    input.addEventListener('focus', () => {
+      setTimeout(() => {
+        const container = document.getElementById('chatMessages');
+        if (container) container.scrollTop = container.scrollHeight;
+      }, 300);
+    });
+  }
 });
+
 
 // Network Connectivity
 function initNetworkListeners() {
