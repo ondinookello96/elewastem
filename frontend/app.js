@@ -178,6 +178,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadTeacherLessonPlan('photosynthesis');
   renderCommunityActivities();
   renderJurisdictionDetails(STATE.jurisdiction);
+  updateHeaderStatusPill();
 });
 
 // Network Connectivity
@@ -1889,16 +1890,71 @@ function closeQuizModal() {
   if ('speechSynthesis' in window) window.speechSynthesis.cancel();
 }
 
-// About Dropdown Handlers
-function toggleAboutDropdown(e) {
+// Header Status Pill & Live Synchronization
+function updateHeaderStatusPill() {
+  const cEl = document.getElementById('statusCountryText');
+  const sEl = document.getElementById('statusSubjectText');
+  const gEl = document.getElementById('statusGradeText');
+  const rEl = document.getElementById('statusRegionText');
+  const lEl = document.getElementById('statusLangText');
+
+  const countryFlags = {
+    Kenya: '🇰🇪 Kenya',
+    Tanzania: '🇹🇿 Tanzania',
+    Uganda: '🇺🇬 Uganda',
+    Rwanda: '🇷🇼 Rwanda',
+    Nigeria: '🇳🇬 Nigeria',
+    Ghana: '🇬🇭 Ghana',
+    'South Africa': '🇿🇦 South Africa',
+    Ethiopia: '🇪🇹 Ethiopia'
+  };
+
+  const subjNames = {
+    all: '🌟 All STEM',
+    mathematics: '📐 Hesabu',
+    biology: '🔬 Biolojia',
+    physics: '⚡ Fizikia',
+    chemistry: '⚗️ Kemia',
+    computer_science: '💻 CS',
+    agriculture: '🌾 Kilimo'
+  };
+
+  const gradeShort = {
+    'Grade 1-3 (Lower Primary)': '🌱 G1–3',
+    'Grade 6 (Upper Primary)': '🌿 G4–6',
+    'Grade 7-9 (Junior Secondary)': '🔬 G7–9',
+    'Grade 10-12 (Senior High)': '⚡ G10–12'
+  };
+
+  const reg = STATE.regionsMeta[STATE.region] || STATE.regionsMeta.lake_basin;
+  const langMeta = STATE.languagesMeta[STATE.language] || { flag: '🇰🇪', native_name: 'Kiswahili' };
+
+  if (cEl) cEl.innerText = countryFlags[STATE.country] || `🌍 ${STATE.country}`;
+  if (sEl) sEl.innerText = subjNames[STATE.subject] || '🌟 All STEM';
+  if (gEl) gEl.innerText = gradeShort[STATE.gradeLevel] || '🌿 Grade 4–6';
+  if (rEl) rEl.innerText = `${reg.icon} ${reg.name_sw.split(' ')[0]}`;
+  if (lEl) lEl.innerText = `${langMeta.flag} ${langMeta.native_name.split(' ')[0]}`;
+  
+  // Also sync auto-speak menu button text/icon
+  const autoMenuText = document.getElementById('autoSpeakMenuText');
+  const autoMenuIcon = document.getElementById('autoSpeakMenuIcon');
+  if (autoMenuText && autoMenuIcon) {
+    autoMenuText.innerText = STATE.autoSpeak ? 'Sauti: Washa' : 'Sauti: Zima';
+    autoMenuIcon.innerText = STATE.autoSpeak ? '🔊' : '🔇';
+  }
+}
+
+// Unified App Menu Dropdown Handlers
+function toggleAppMenuDropdown(e) {
   if (e) e.stopPropagation();
-  const menu = document.getElementById('aboutDropdownMenu');
-  const chevron = document.getElementById('aboutChevron');
+  const menu = document.getElementById('appMenuDropdown');
+  const chevron = document.getElementById('appMenuChevron');
   if (menu) {
     const isHidden = menu.classList.contains('hidden');
     if (isHidden) {
       menu.classList.remove('hidden');
       if (chevron) chevron.classList.add('rotate-180');
+      updateHeaderStatusPill();
     } else {
       menu.classList.add('hidden');
       if (chevron) chevron.classList.remove('rotate-180');
@@ -1906,18 +1962,19 @@ function toggleAboutDropdown(e) {
   }
 }
 
-function closeAboutDropdown() {
-  const menu = document.getElementById('aboutDropdownMenu');
-  const chevron = document.getElementById('aboutChevron');
+function closeAppMenuDropdown() {
+  const menu = document.getElementById('appMenuDropdown');
+  const chevron = document.getElementById('appMenuChevron');
   if (menu) menu.classList.add('hidden');
   if (chevron) chevron.classList.remove('rotate-180');
 }
 
-// Close About dropdown when clicking anywhere outside
+// Close App Menu dropdown when clicking anywhere outside
 document.addEventListener('click', (e) => {
-  const container = document.getElementById('aboutDropdownContainer');
-  if (container && !container.contains(e.target)) {
-    closeAboutDropdown();
+  const container = document.getElementById('appMenuContainer');
+  const pill = document.getElementById('headerLiveStatusPill');
+  if (container && !container.contains(e.target) && (!pill || !pill.contains(e.target))) {
+    closeAppMenuDropdown();
   }
 });
 
