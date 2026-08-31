@@ -1824,8 +1824,157 @@ ${isSw ? exp.steps_sw : exp.steps_en}
   };
 }
 
+// --- CONVERSATION / CHAT HISTORY SYSTEM (Local-First Offline Storage) ---
+STATE.currentSessionId = null;
+
+function getChatSessions() {
+  try {
+    return JSON.parse(localStorage.getItem('elewa_chat_sessions') || '[]');
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveChatSessions(sessions) {
+  try {
+    localStorage.setItem('elewa_chat_sessions', JSON.stringify(sessions));
+  } catch (e) {
+    console.error('Failed to save chat sessions:', e);
+  }
+}
+
+function openChatHistoryModal() {
+  renderChatHistoryList();
+  const modal = document.getElementById('chatHistoryModal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeChatHistoryModal() {
+  const modal = document.getElementById('chatHistoryModal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function renderChatHistoryList() {
+  const list = document.getElementById('chatHistoryList');
+  if (!list) return;
+
+  const sessions = getChatSessions();
+  if (sessions.length === 0) {
+    list.innerHTML = `
+      <div class="text-center py-8 px-4 text-slate-400 space-y-2">
+        <span class="text-3xl">💬</span>
+        <p class="text-xs font-semibold text-slate-600">Hakuna historia ya mazungumzo bado.</p>
+        <p class="text-[11px]">Uliza swali lolote la Sayansi au Hesabu kuanza mazungumzo mapya!</p>
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = sessions.map(sess => {
+    const isActive = STATE.currentSessionId === sess.id;
+    const langMeta = STATE.languagesMeta[sess.language] || STATE.languagesMeta.sw || { flag: '🇰🇪', native_name: 'Kiswahili' };
+    const regMeta = STATE.regionsMeta[sess.region] || STATE.regionsMeta.lake_basin;
+    const msgCount = (sess.messages || []).length;
+    const dateStr = new Date(sess.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+    return `
+      <div class="p-3 rounded-2xl border transition-all flex items-center justify-between group ${isActive ? 'bg-emerald-50 border-emerald-300 ring-2 ring-emerald-500/20' : 'bg-slate-50 hover:bg-slate-100 border-slate-200'}">
+        <button type="button" onclick="loadChatSession('${sess.id}')" class="flex-1 text-left space-y-1 pr-2">
+          <div class="flex items-center space-x-1.5">
+            <span class="text-sm">💬</span>
+            <p class="font-bold text-xs text-slate-900 line-clamp-1">${escapeHtml(sess.title || 'Mazungumzo ya STEM')}</p>
+            ${isActive ? '<span class="text-[9px] bg-emerald-600 text-white font-bold px-1.5 py-0.2 rounded-full flex-shrink-0">Active</span>' : ''}
+          </div>
+          <div class="flex items-center space-x-2 text-[10px] text-slate-500">
+            <span>${langMeta.flag} ${langMeta.native_name}</span>
+            <span>•</span>
+            <span>${regMeta.icon} ${regMeta.name_sw}</span>
+            <span>•</span>
+            <span>${msgCount} ujumbe</span>
+            <span>•</span>
+            <span>${dateStr}</span>
+          </div>
+        </button>
+        <button type="button" onclick="deleteChatSession('${sess.id}', event)" title="Futa mazungumzo haya" class="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all flex-shrink-0">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+        </button>
+      </div>
+    `;
+  }).join('');
+}
+
+function loadChatSession(sessionId) {
+  const sessions = getChatSessions();
+  const session = sessions.find(s => s.id === sessionId);
+  if (!session) return;
+
+  STATE.currentSessionId = session.id;
+  if (session.language && STATE.languagesMeta[session.language]) {
+    STATE.language = session.language;
+  }
+  if (session.region && STATE.regionsMeta[session.region]) {
+    STATE.region = session.region;
+  }
+
+  // Clear current messages
+  const container = document.getElementById('chatMessages');
+  const landingBlock = document.getElementById('welcomeLandingBlock');
+  if (container) {
+    Array.from(container.children).forEach(child => {
+      if (child !== landingBlock) child.remove();
+    });
+  }
+
+  // Re-render past messages
+  if (session.messages && session.messages.length > 0) {
+    session.messages.forEach(msg => {
+      if (msg.role === 'user') {
+        const div = document.createElement('div');
+        div.className = 'flex justify-end animate-scale-up';
+        div.innerHTML = `
+          <div class="bg-brand-600 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-sm max-w-[88%] text-sm font-medium leading-relaxed">
+            ${escapeHtml(msg.text)}
+          </div>
+        `;
+        container.appendChild(div);
+      } else if (msg.role === 'assistant') {
+        appendAssistantMessage(msg.data || { text: msg.text, source: 'offline_knowledge_vault' }, false);
+      }
+    });
+    updateChatInputPosition(true);
+  } else {
+    updateChatInputPosition(false);
+  }
+
+  closeChatHistoryModal();
+  switchTab('chat');
+  if (container) container.scrollTop = container.scrollHeight;
+}
+
+function deleteChatSession(sessionId, event) {
+  if (event) event.stopPropagation();
+  let sessions = getChatSessions();
+  sessions = sessions.filter(s => s.id !== sessionId);
+  saveChatSessions(sessions);
+
+  if (STATE.currentSessionId === sessionId) {
+    startNewChat();
+  }
+  renderChatHistoryList();
+}
+
+function clearAllChatHistory() {
+  if (!confirm('Je, una uhakika unataka kufuta historia yote ya mazungumzo? Hatua hii haiwezi kurudishwa.')) {
+    return;
+  }
+  localStorage.removeItem('elewa_chat_sessions');
+  startNewChat();
+  renderChatHistoryList();
+}
+
 // Start a New Conversation (Gemini / Copilot Style)
 function startNewChat() {
+  STATE.currentSessionId = null;
   switchTab('chat');
 
   // Clear chat messages container, preserving the welcomeLandingBlock
@@ -1881,6 +2030,31 @@ function updateChatInputPosition(hasMessages) {
 function appendUserMessage(text) {
   updateChatInputPosition(true);
 
+  // Initialize or retrieve current chat session
+  let sessions = getChatSessions();
+  if (!STATE.currentSessionId) {
+    STATE.currentSessionId = 'session_' + Date.now();
+    const newSession = {
+      id: STATE.currentSessionId,
+      title: text.length > 35 ? text.slice(0, 35) + '...' : text,
+      timestamp: new Date().toISOString(),
+      language: STATE.language,
+      region: STATE.region,
+      messages: []
+    };
+    sessions.unshift(newSession);
+  }
+
+  const currentSession = sessions.find(s => s.id === STATE.currentSessionId);
+  if (currentSession) {
+    currentSession.messages.push({
+      role: 'user',
+      text: text,
+      timestamp: new Date().toISOString()
+    });
+    saveChatSessions(sessions);
+  }
+
   const container = document.getElementById('chatMessages');
   const div = document.createElement('div');
   div.className = 'flex justify-end animate-scale-up';
@@ -1893,10 +2067,24 @@ function appendUserMessage(text) {
   container.scrollTop = container.scrollHeight;
 }
 
-function appendAssistantMessage(data) {
+function appendAssistantMessage(data, shouldSave = true) {
+  if (shouldSave && STATE.currentSessionId) {
+    const sessions = getChatSessions();
+    const currentSession = sessions.find(s => s.id === STATE.currentSessionId);
+    if (currentSession) {
+      currentSession.messages.push({
+        role: 'assistant',
+        text: data.text,
+        data: data,
+        timestamp: new Date().toISOString()
+      });
+      saveChatSessions(sessions);
+    }
+  }
+
   const container = document.getElementById('chatMessages');
   const div = document.createElement('div');
-  div.className = 'flex items-start space-x-2.5 sm:space-x-3';
+  div.className = 'flex items-start space-x-2.5 sm:space-x-3 animate-scale-up';
 
   const isOffline = data.source === 'local_offline_vault' || data.source === 'offline_knowledge_vault';
   const formattedHtml = parseMarkdownToHtml(data.text);
